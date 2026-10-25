@@ -1,5 +1,5 @@
 {
-  "label": "DEMO synthetic fixture — not real data, not Cheezies",
+  "label": "DEMO synthetic fixture — not real restaurant data",
   "recipes": [
     {
       "id": "demo_soup",
