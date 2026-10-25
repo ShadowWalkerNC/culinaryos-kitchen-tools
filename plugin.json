@@ -3,6 +3,8 @@
   "name": "kitchen-tools",
   "version": "0.1.1",
   "license": "MIT",
+  "homepage": "https://culinaryos-kitchen-tools-production.up.railway.app",
+  "repository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools",
   "description": "Original kitchen workflows and deterministic recipe, cost, prep and purchasing tools.",
   "extensions": {
     "com.openai": {

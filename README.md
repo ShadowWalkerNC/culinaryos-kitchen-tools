@@ -2,6 +2,8 @@
 
 Original MIT toolkit for deterministic recipe costing, scaling, prep, and ordering. No Axomai or Cheezies content included.
 
+[Public source](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools) · [Release downloads](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases)
+
 Use the [public setup page](https://culinaryos-kitchen-tools-production.up.railway.app) or connect a compatible AI client to `https://culinaryos-kitchen-tools-production.up.railway.app/mcp` with no authentication. The toolkit needs no extra account; your AI client's account/plan requirements still apply. Public mode has nine stateless tools and twelve original workflows. Private records, tasks, approvals and scheduled rules use the separately installed local workspace.
 
 The created [personal plugin](https://chatgpt.com/plugins/plugins_6ade6883fbe48191b7d6651289203e6d) is private, not directory listed. Other users can use the public endpoint or a portable remote plugin package. See [connection instructions](docs/CONNECTIONS.md) and [acceptance evidence](docs/ACCEPTANCE.md).
