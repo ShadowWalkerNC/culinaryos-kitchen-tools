@@ -1,0 +1,24 @@
+{
+  "tenantId": "tenant_fixture_001",
+  "dataVersion": "v1",
+  "recipes": [
+    {
+      "id": "fx_broth",
+      "name": "Fixture Broth",
+      "currency": "USD",
+      "yieldQty": { "amount": "2", "unit": "l" },
+      "ingredients": [{ "ingredientId": "fx_water", "qty": { "amount": "2", "unit": "l" } }],
+      "subrecipes": []
+    }
+  ],
+  "purchases": [
+    {
+      "id": "fx_buy_water",
+      "ingredientId": "fx_water",
+      "currency": "USD",
+      "costCents": 50,
+      "usableQty": { "amount": "10", "unit": "l" },
+      "effectiveDate": "2026-02-01"
+    }
+  ]
+}

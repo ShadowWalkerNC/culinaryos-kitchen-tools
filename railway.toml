@@ -1,0 +1,10 @@
+# Railway: stateless public service. No volume mounts, no DB.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "node dist/cli/cli.js public-serve"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+numReplicas = 1

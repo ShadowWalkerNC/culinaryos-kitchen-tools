@@ -1,0 +1,1 @@
+{"version":3,"file":"culinaryosFile.d.ts","sourceRoot":"","sources":["../../src/adapter/culinaryosFile.ts"],"names":[],"mappings":"AAeA,MAAM,WAAW,aAAa;IAC5B,QAAQ,EAAE,MAAM,CAAC;IACjB,OAAO,EAAE,OAAO,EAAE,CAAC;IACnB,SAAS,EAAE,OAAO,EAAE,CAAC;CACtB;AAED;;;GAGG;AACH,wBAAgB,cAAc,CAAC,aAAa,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,EAAE,OAAO,EAAE,OAAO,GAAG,aAAa,CAgBzH"}

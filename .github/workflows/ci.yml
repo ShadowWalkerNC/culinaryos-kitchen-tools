@@ -1,0 +1,22 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24 }
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - run: npm run package
+      - name: license check
+        run: test -f LICENSE && grep -q "MIT License" LICENSE
+      - name: input safety checks
+        run: |
+          test -f dist/mcp/stdio.js
+          test -f dist/ui/index.html
+          node scripts/smoke-package.mjs package-out/dist/mcp/stdio.js
+          ! grep -ri "cheezies" dist skills fixtures || (echo "unexpected private-source reference" && exit 1)

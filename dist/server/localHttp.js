@@ -1,0 +1,250 @@
+// F14 local HTTP: 127.0.0.1, built UI, session-secret mutations, strict checks.
+import { createServer } from 'node:http';
+import { readFileSync, existsSync } from 'node:fs';
+import { join, extname, resolve, sep } from 'node:path';
+import { openDb } from '../data/db.js';
+import { previewImport, commitImport } from '../data/imports.js';
+import { createTask, listTasks, setTaskState, requestApproval, decideApproval, listApprovals } from '../data/tasks.js';
+import { getRecipe, listRecipes, latestPurchaseByIngredient, allRecipes } from '../data/queries.js';
+import { exportJson, exportRecipeCards, exportCostSheets } from '../data/exports.js';
+import { costRecipe } from '../core/costing.js';
+import { getWorkflowsConfig, setWorkflowsConfig } from '../mcp/localTools.js';
+import { forecastSchema } from '../mcp/schemas.js';
+import { saveForecast, workerTick } from '../jobs/worker.js';
+import { systemClock } from '../jobs/clocks.js';
+import { handleMcpStreamable } from '../mcp/httpStream.js';
+import { checkHost, checkOrigin, createSessionStore, readBodyCapped, createCalcRunner, logMeta } from './security.js';
+const VERSION = '0.1.1';
+const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
+function sendJson(res, status, body, type = 'application/json') {
+    const payload = typeof body === 'string' ? body : JSON.stringify(body);
+    res.writeHead(status, { 'content-type': type, 'content-length': Buffer.byteLength(payload), 'cache-control': 'no-store', 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'" });
+    res.end(payload);
+}
+/** Exported for handler-level tests (no TCP needed). */
+export function createLocalHandler(deps) {
+    const opts = deps;
+    const { db, sessions, runCalc } = deps;
+    const send = sendJson;
+    return (req, res) => {
+        const started = Date.now();
+        void (async () => {
+            try {
+                const url = new URL(req.url ?? '/', 'http://x');
+                const path = url.pathname;
+                if (!checkHost(req, opts.port)) {
+                    send(res, 403, { error: 'bad host' });
+                    return;
+                }
+                if (!checkOrigin(req, opts.port)) {
+                    send(res, 403, { error: 'bad origin' });
+                    return;
+                }
+                if (req.method === 'GET' && path === '/health') {
+                    send(res, 200, { ok: true });
+                    return;
+                }
+                if (req.method === 'GET' && path === '/version') {
+                    send(res, 200, { version: VERSION, dataVersion: 'v1', mode: 'local' });
+                    return;
+                }
+                if (req.method === 'GET' && path === '/api/session') {
+                    // Exact same-origin issuance: browser must send Origin + same-origin fetch metadata.
+                    const origin = req.headers.origin;
+                    const sfs = req.headers['sec-fetch-site'];
+                    if (typeof origin === 'string' && origin !== '') {
+                        // origin already validated above; require fetch metadata for browser flows
+                        if (sfs !== 'same-origin' && sfs !== 'none') {
+                            send(res, 403, { error: 'fetch metadata required' });
+                            return;
+                        }
+                    }
+                    send(res, 200, { token: sessions.token });
+                    return;
+                }
+                // Mutations require session token.
+                const needsToken = req.method !== 'GET' && req.method !== 'HEAD' && req.method !== 'OPTIONS' && (path.startsWith('/api/') || path === '/mcp');
+                if (needsToken && !sessions.verify(req.headers['x-session-token'])) {
+                    send(res, 401, { error: 'missing or invalid session token' });
+                    return;
+                }
+                if (path === '/mcp') {
+                    const raw = await readBodyCapped(req);
+                    const parsed = raw.length > 0 ? JSON.parse(raw.toString('utf8') || 'null') : undefined;
+                    await handleMcpStreamable(req, res, 'local', { db, workspaceRoot: opts.workspaceRoot }, parsed);
+                    return;
+                }
+                if (path.startsWith('/api/')) {
+                    await handleApi(req, res, path, db, opts.workspaceRoot, runCalc, send);
+                    return;
+                }
+                // Static UI
+                serveUi(req, res, path, opts.uiDir, send);
+            }
+            catch (e) {
+                const msg = e.message;
+                if (msg === 'BODY_TOO_LARGE')
+                    send(res, 413, { error: 'request too large (1MB max)' });
+                else if (msg === 'CALC_TIMEOUT')
+                    send(res, 503, { error: 'calculation timeout' });
+                else if (msg.startsWith('STALE_VERSION'))
+                    send(res, 409, { error: msg });
+                else
+                    send(res, 400, { error: msg });
+            }
+            finally {
+                logMeta(req.method, req.url, res.statusCode, Date.now() - started);
+            }
+        })();
+    };
+}
+export function startLocalServer(opts) {
+    const db = openDb(join(opts.workspaceRoot, 'kitchen-tools.sqlite'));
+    const sessions = createSessionStore(opts.workspaceRoot);
+    const runCalc = createCalcRunner();
+    const server = createServer(createLocalHandler({ db, workspaceRoot: opts.workspaceRoot, uiDir: opts.uiDir, port: opts.port, sessions, runCalc }));
+    server.on('error', (e) => {
+        process.stderr.write(`local server error: ${e.message}\n`);
+    });
+    const ready = new Promise((resolve) => {
+        server.once('listening', () => resolve(true));
+        server.once('error', () => resolve(false));
+    });
+    server.listen(opts.port, '127.0.0.1');
+    return {
+        port: opts.port,
+        ready,
+        close: () => new Promise((resolveClose) => {
+            server.close(() => {
+                db.close();
+                resolveClose();
+            });
+        }),
+    };
+}
+async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
+    const readJson = async () => {
+        const raw = await readBodyCapped(req);
+        if (raw.length === 0)
+            return {};
+        return JSON.parse(raw.toString('utf8'));
+    };
+    if (req.method === 'GET' && path === '/api/runs') {
+        send(res, 200, db.raw.prepare('SELECT schedule,occurrence,status,input,output,attempts,updated_at FROM runs ORDER BY updated_at DESC LIMIT 100').all());
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/workflows/run') {
+        send(res, 200, workerTick(db, systemClock()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/forecasts') {
+        const b = forecastSchema.parse(await readJson());
+        saveForecast(db, b.day, b.forecast, b.confirm, systemClock());
+        send(res, 200, { saved: b.day });
+        return;
+    }
+    // Recipes
+    if (req.method === 'GET' && path === '/api/recipes') {
+        send(res, 200, listRecipes(db));
+        return;
+    }
+    const recipeMatch = /^\/api\/recipes\/([^/]+)$/.exec(path);
+    if (req.method === 'GET' && recipeMatch) {
+        const r = getRecipe(db, decodeURIComponent(recipeMatch[1]));
+        if (!r)
+            send(res, 404, { error: 'not found' });
+        else
+            send(res, 200, r);
+        return;
+    }
+    const costMatch = /^\/api\/recipes\/([^/]+)\/cost$/.exec(path);
+    if (req.method === 'GET' && costMatch) {
+        const id = decodeURIComponent(costMatch[1]);
+        const url = new URL(req.url ?? '/', 'http://x');
+        const variantId = url.searchParams.get('variantId');
+        const out = await runCalc(() => costRecipe({ recipes: allRecipes(db), purchasesByIngredient: latestPurchaseByIngredient(db), targetRecipeId: id, ...(variantId ? { variantId } : {}) }));
+        send(res, 200, out);
+        return;
+    }
+    // Imports
+    if (req.method === 'POST' && path === '/api/imports/preview') {
+        const b = (await readJson());
+        send(res, 200, previewImport(db, b.kind, b.payloadText));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/imports/commit') {
+        const b = (await readJson());
+        send(res, 200, commitImport(db, b.token, b.confirm));
+        return;
+    }
+    // Tasks
+    if (req.method === 'GET' && path === '/api/tasks') {
+        send(res, 200, listTasks(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/tasks') {
+        const b = (await readJson());
+        send(res, 200, createTask(db, b.title));
+        return;
+    }
+    const taskMatch = /^\/api\/tasks\/([^/]+)\/state$/.exec(path);
+    if (req.method === 'POST' && taskMatch) {
+        const b = (await readJson());
+        send(res, 200, setTaskState(db, decodeURIComponent(taskMatch[1]), b.state, b));
+        return;
+    }
+    // Approvals
+    if (req.method === 'GET' && path === '/api/approvals') {
+        send(res, 200, listApprovals(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/approvals/request') {
+        const b = (await readJson());
+        send(res, 200, requestApproval(db, b.objectType, b.objectId));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/approvals/decide') {
+        const b = (await readJson());
+        send(res, 200, decideApproval(db, b.id, b.approve));
+        return;
+    }
+    // Exports
+    if (req.method === 'POST' && path === '/api/exports') {
+        const b = (await readJson());
+        const file = b.format === 'cost-sheets' ? exportCostSheets(db, workspaceRoot, b.file) : b.format === 'json' ? exportJson(db, workspaceRoot, b.file) : exportRecipeCards(db, workspaceRoot, b.file);
+        send(res, 200, { file });
+        return;
+    }
+    // Workflows config
+    if (req.method === 'GET' && path === '/api/workflows-config') {
+        send(res, 200, getWorkflowsConfig(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/workflows-config') {
+        const b = await readJson();
+        send(res, 200, setWorkflowsConfig(db, b));
+        return;
+    }
+    send(res, 404, { error: 'unknown api route' });
+}
+function serveUi(req, res, path, uiDir, send) {
+    if (req.method !== 'GET') {
+        send(res, 404, { error: 'not found' });
+        return;
+    }
+    const rel = path === '/' ? 'index.html' : path.slice(1);
+    const abs = resolve(uiDir, rel);
+    const root = resolve(uiDir);
+    if (abs !== root && !abs.startsWith(root + sep)) {
+        send(res, 403, { error: 'rejected' });
+        return;
+    }
+    const file = existsSync(abs) ? abs : join(root, 'index.html');
+    if (!existsSync(file)) {
+        send(res, 200, '<html><body><h1>Kitchen Tools</h1><p>UI not built. Run npm run build.</p></body></html>', 'text/html');
+        return;
+    }
+    const data = readFileSync(file);
+    send(res, 200, data.toString('utf8'), MIME[extname(file)] ?? 'text/plain');
+}
+//# sourceMappingURL=localHttp.js.map

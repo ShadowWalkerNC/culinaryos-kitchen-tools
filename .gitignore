@@ -1,0 +1,9 @@
+node_modules/
+package-out/
+workspace/
+*.sqlite
+*.sqlite-*
+.session
+.env
+.env.*
+!.env.example

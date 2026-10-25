@@ -1,0 +1,23 @@
+{
+  "label": "DEMO synthetic fixture — not real data, not Cheezies",
+  "recipes": [
+    {
+      "id": "demo_soup",
+      "name": "DEMO Soup (synthetic)",
+      "currency": "USD",
+      "yieldQty": { "amount": "4", "unit": "serving" },
+      "ingredients": [{ "ingredientId": "demo_carrot", "qty": { "amount": "0.5", "unit": "kg" } }],
+      "subrecipes": []
+    }
+  ],
+  "purchases": [
+    {
+      "id": "demo_buy_carrot",
+      "ingredientId": "demo_carrot",
+      "currency": "USD",
+      "costCents": 300,
+      "usableQty": { "amount": "1", "unit": "kg" },
+      "effectiveDate": "2026-01-01"
+    }
+  ]
+}

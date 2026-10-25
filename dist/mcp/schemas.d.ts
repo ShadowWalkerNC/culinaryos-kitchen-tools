@@ -1,0 +1,328 @@
+import { z } from 'zod';
+export declare const qtySchema: z.ZodObject<{
+    amount: z.ZodString;
+    unit: z.ZodString;
+}, z.core.$strip>;
+export declare const recipeRecordSchema: z.ZodObject<{
+    id: z.ZodString;
+    name: z.ZodString;
+    currency: z.ZodString;
+    yieldQty: z.ZodObject<{
+        amount: z.ZodString;
+        unit: z.ZodString;
+    }, z.core.$strip>;
+    ingredients: z.ZodArray<z.ZodObject<{
+        ingredientId: z.ZodString;
+        qty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+    }, z.core.$strip>>;
+    subrecipes: z.ZodDefault<z.ZodArray<z.ZodObject<{
+        recipeId: z.ZodString;
+        qty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+    }, z.core.$strip>>>;
+    version: z.ZodDefault<z.ZodNumber>;
+    provenance: z.ZodDefault<z.ZodObject<{
+        source: z.ZodString;
+        receivedAt: z.ZodString;
+        verified: z.ZodBoolean;
+    }, z.core.$strip>>;
+    packaging: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        label: z.ZodString;
+        costCents: z.ZodNumber;
+    }, z.core.$strip>>>;
+    variants: z.ZodOptional<z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        netPriceCents: z.ZodOptional<z.ZodNumber>;
+        confirmed: z.ZodBoolean;
+    }, z.core.$strip>>>;
+}, z.core.$strip>;
+export declare const purchaseRecordSchema: z.ZodObject<{
+    id: z.ZodString;
+    ingredientId: z.ZodString;
+    currency: z.ZodString;
+    costCents: z.ZodNumber;
+    usableQty: z.ZodObject<{
+        amount: z.ZodString;
+        unit: z.ZodString;
+    }, z.core.$strip>;
+    effectiveDate: z.ZodString;
+    version: z.ZodDefault<z.ZodNumber>;
+    provenance: z.ZodDefault<z.ZodObject<{
+        source: z.ZodString;
+        receivedAt: z.ZodString;
+        verified: z.ZodBoolean;
+    }, z.core.$strip>>;
+    packBasis: z.ZodOptional<z.ZodString>;
+    densityGPerMl: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+export declare const listCapabilitiesSchema: z.ZodObject<{}, z.core.$strict>;
+export declare const getWorkflowSchema: z.ZodObject<{
+    name: z.ZodString;
+}, z.core.$strict>;
+export declare const validateKitchenDataSchema: z.ZodObject<{
+    recipes: z.ZodDefault<z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        name: z.ZodString;
+        currency: z.ZodString;
+        yieldQty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+        ingredients: z.ZodArray<z.ZodObject<{
+            ingredientId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>;
+        subrecipes: z.ZodDefault<z.ZodArray<z.ZodObject<{
+            recipeId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>>;
+        version: z.ZodDefault<z.ZodNumber>;
+        provenance: z.ZodDefault<z.ZodObject<{
+            source: z.ZodString;
+            receivedAt: z.ZodString;
+            verified: z.ZodBoolean;
+        }, z.core.$strip>>;
+        packaging: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            label: z.ZodString;
+            costCents: z.ZodNumber;
+        }, z.core.$strip>>>;
+        variants: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            id: z.ZodString;
+            netPriceCents: z.ZodOptional<z.ZodNumber>;
+            confirmed: z.ZodBoolean;
+        }, z.core.$strip>>>;
+    }, z.core.$strip>>>;
+    purchases: z.ZodDefault<z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        ingredientId: z.ZodString;
+        currency: z.ZodString;
+        costCents: z.ZodNumber;
+        usableQty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+        effectiveDate: z.ZodString;
+        version: z.ZodDefault<z.ZodNumber>;
+        provenance: z.ZodDefault<z.ZodObject<{
+            source: z.ZodString;
+            receivedAt: z.ZodString;
+            verified: z.ZodBoolean;
+        }, z.core.$strip>>;
+        packBasis: z.ZodOptional<z.ZodString>;
+        densityGPerMl: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>>>;
+}, z.core.$strict>;
+export declare const scaleRecipeSchema: z.ZodObject<{
+    recipe: z.ZodObject<{
+        id: z.ZodString;
+        name: z.ZodString;
+        currency: z.ZodString;
+        yieldQty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+        ingredients: z.ZodArray<z.ZodObject<{
+            ingredientId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>;
+        subrecipes: z.ZodArray<z.ZodObject<{
+            recipeId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>;
+    }, z.core.$loose>;
+    targetYieldAmount: z.ZodString;
+}, z.core.$strict>;
+export declare const convertQuantitySchema: z.ZodObject<{
+    amount: z.ZodString;
+    fromUnit: z.ZodString;
+    toUnit: z.ZodString;
+    factor: z.ZodOptional<z.ZodString>;
+    factorBasis: z.ZodOptional<z.ZodString>;
+}, z.core.$strict>;
+export declare const costRecipeSchema: z.ZodObject<{
+    recipes: z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        name: z.ZodString;
+        currency: z.ZodString;
+        yieldQty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+        ingredients: z.ZodArray<z.ZodObject<{
+            ingredientId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>;
+        subrecipes: z.ZodDefault<z.ZodArray<z.ZodObject<{
+            recipeId: z.ZodString;
+            qty: z.ZodObject<{
+                amount: z.ZodString;
+                unit: z.ZodString;
+            }, z.core.$strip>;
+        }, z.core.$strip>>>;
+        version: z.ZodDefault<z.ZodNumber>;
+        provenance: z.ZodDefault<z.ZodObject<{
+            source: z.ZodString;
+            receivedAt: z.ZodString;
+            verified: z.ZodBoolean;
+        }, z.core.$strip>>;
+        packaging: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            label: z.ZodString;
+            costCents: z.ZodNumber;
+        }, z.core.$strip>>>;
+        variants: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            id: z.ZodString;
+            netPriceCents: z.ZodOptional<z.ZodNumber>;
+            confirmed: z.ZodBoolean;
+        }, z.core.$strip>>>;
+    }, z.core.$strip>>;
+    purchasesByIngredient: z.ZodArray<z.ZodObject<{
+        id: z.ZodString;
+        ingredientId: z.ZodString;
+        currency: z.ZodString;
+        costCents: z.ZodNumber;
+        usableQty: z.ZodObject<{
+            amount: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>;
+        effectiveDate: z.ZodString;
+        version: z.ZodDefault<z.ZodNumber>;
+        provenance: z.ZodDefault<z.ZodObject<{
+            source: z.ZodString;
+            receivedAt: z.ZodString;
+            verified: z.ZodBoolean;
+        }, z.core.$strip>>;
+        packBasis: z.ZodOptional<z.ZodString>;
+        densityGPerMl: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>>;
+    targetRecipeId: z.ZodString;
+    variantId: z.ZodOptional<z.ZodString>;
+}, z.core.$strict>;
+export declare const comparePurchaseCostsSchema: z.ZodObject<{
+    options: z.ZodArray<z.ZodObject<{
+        currency: z.ZodString;
+        id: z.ZodString;
+        costCents: z.ZodNumber;
+        qtyAmount: z.ZodString;
+        qtyUnit: z.ZodString;
+        effectiveDate: z.ZodString;
+    }, z.core.$strip>>;
+}, z.core.$strict>;
+export declare const buildPrepPlanSchema: z.ZodObject<{
+    demand: z.ZodArray<z.ZodObject<{
+        recipeId: z.ZodString;
+        servings: z.ZodString;
+        servingUnit: z.ZodString;
+        yieldPerBatch: z.ZodString;
+    }, z.core.$strip>>;
+    stock: z.ZodDefault<z.ZodArray<z.ZodObject<{
+        recipeId: z.ZodString;
+        onHand: z.ZodString;
+        unit: z.ZodString;
+    }, z.core.$strip>>>;
+}, z.core.$strict>;
+export declare const buildOrderProposalSchema: z.ZodObject<{
+    lines: z.ZodArray<z.ZodObject<{
+        ingredientId: z.ZodString;
+        par: z.ZodString;
+        onHand: z.ZodString;
+        onOrder: z.ZodString;
+        unit: z.ZodString;
+        packSize: z.ZodOptional<z.ZodString>;
+    }, z.core.$strip>>;
+}, z.core.$strict>;
+export declare const lookupRecipeSchema: z.ZodObject<{
+    id: z.ZodString;
+}, z.core.$strict>;
+export declare const listRecipesSchema: z.ZodObject<{}, z.core.$strict>;
+export declare const previewImportSchema: z.ZodObject<{
+    kind: z.ZodEnum<{
+        recipe_json: "recipe_json";
+        purchase_json: "purchase_json";
+        recipe_csv: "recipe_csv";
+        purchase_csv: "purchase_csv";
+        pasted_text: "pasted_text";
+    }>;
+    payloadText: z.ZodString;
+}, z.core.$strict>;
+export declare const commitImportSchema: z.ZodObject<{
+    token: z.ZodString;
+    confirm: z.ZodBoolean;
+}, z.core.$strict>;
+export declare const createTaskSchema: z.ZodObject<{
+    title: z.ZodString;
+}, z.core.$strict>;
+export declare const setTaskStateSchema: z.ZodObject<{
+    id: z.ZodString;
+    state: z.ZodEnum<{
+        open: "open";
+        in_progress: "in_progress";
+        awaiting_approval: "awaiting_approval";
+        completed: "completed";
+    }>;
+    blockedReason: z.ZodOptional<z.ZodString>;
+    cancellation: z.ZodOptional<z.ZodString>;
+}, z.core.$strict>;
+export declare const requestApprovalSchema: z.ZodObject<{
+    objectType: z.ZodEnum<{
+        recipe: "recipe";
+        purchase: "purchase";
+    }>;
+    objectId: z.ZodString;
+}, z.core.$strict>;
+export declare const decideApprovalSchema: z.ZodObject<{
+    id: z.ZodString;
+    approve: z.ZodBoolean;
+}, z.core.$strict>;
+export declare const exportSchema: z.ZodObject<{
+    format: z.ZodEnum<{
+        json: "json";
+        "recipe-cards": "recipe-cards";
+        "cost-sheets": "cost-sheets";
+    }>;
+    file: z.ZodString;
+}, z.core.$strict>;
+export declare const workflowsConfigSchema: z.ZodObject<{
+    timezone: z.ZodOptional<z.ZodString>;
+    dailyCutoff: z.ZodOptional<z.ZodString>;
+    dailyPrepEnabled: z.ZodOptional<z.ZodBoolean>;
+    costReviewEnabled: z.ZodOptional<z.ZodBoolean>;
+}, z.core.$strict>;
+export type PreviewImportInput = z.infer<typeof previewImportSchema>;
+export declare const forecastSchema: z.ZodObject<{
+    day: z.ZodString;
+    forecast: z.ZodObject<{
+        demands: z.ZodArray<z.ZodObject<{
+            recipeId: z.ZodString;
+            servings: z.ZodString;
+            servingUnit: z.ZodString;
+            yieldPerBatch: z.ZodString;
+        }, z.core.$strip>>;
+        stock: z.ZodArray<z.ZodObject<{
+            recipeId: z.ZodString;
+            onHand: z.ZodString;
+            unit: z.ZodString;
+        }, z.core.$strip>>;
+    }, z.core.$strip>;
+    confirm: z.ZodBoolean;
+}, z.core.$strip>;
+//# sourceMappingURL=schemas.d.ts.map

@@ -1,0 +1,49 @@
+{
+  "name": "@culinaryos/kitchen-tools",
+  "version": "0.1.1",
+  "private": false,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/compile-workflows.mjs && tsc -p tsconfig.json && vite build --config ui/vite.config.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p ui/tsconfig.json",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "dev": "tsx src/cli/cli.ts local-serve --dev",
+    "start": "node dist/cli/cli.js local-serve",
+    "start:local": "node dist/cli/cli.js local-serve",
+    "start:public": "node dist/cli/cli.js public-serve",
+    "mcp": "node dist/mcp/stdio.js --mode=public",
+    "mcp:public": "node dist/mcp/stdio.js --mode=public",
+    "mcp:local": "node dist/mcp/stdio.js --mode=local",
+    "cli": "node dist/cli/cli.js",
+    "package": "npm run build && node scripts/package.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsx": "^4.16.2",
+    "typescript": "~5.9.2",
+    "vite": "^7.0.4"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "docs",
+    "fixtures",
+    "plugin.json",
+    "mcp.json",
+    "LICENSE",
+    "README.md"
+  ]
+}
