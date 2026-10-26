@@ -176,7 +176,7 @@ async function handleApi(
   if(req.method==='POST'&&path==='/api/events/create'){send(res,200,createEventFromDraft(db,await readJson()));return;}
   if(req.method==='POST'&&path==='/api/profile'){send(res,200,setRestaurantProfile(db,await readJson()));return;}
   if(req.method==='GET'&&path==='/api/worker-status'){send(res,200,workerStatus(db));return;}
-  if(req.method==='GET'&&path==='/api/library'){send(res,200,listWorkflows({limit:100}));return;}
+  if(req.method==='GET'&&path==='/api/library'){send(res,200,listWorkflows({limit:100,offset:Number(new URL(req.url??'/', 'http://localhost').searchParams.get('offset')??0)}));return;}
   if(req.method==='POST'&&path==='/api/library/workflow'){send(res,200,workflowGuidance({...await readJson(),profile:getRestaurantProfile(db)}));return;}
   if(req.method==='GET'&&path==='/api/connected-flows'){send(res,200,listConnectedFlows(db));return;}
   if(req.method==='POST'&&path==='/api/connected-flows'){send(res,200,runConnectedFlow(db,await readJson()));return;}

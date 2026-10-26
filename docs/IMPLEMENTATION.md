@@ -9,7 +9,7 @@
 - `src/cli/` cli.ts (F09–F10, backup, worker)
 - `src/adapter/` culinaryosFile.ts (F13)
 - `ui/` React/Vite six views (F11)
-- `skills/*/` 73 original MIT workflows; searchable catalog in `src/workflows/catalog.ts` (F16)
+- `skills/*/` 105 original MIT workflows; searchable catalog in `src/workflows/catalog.ts` (F16)
 - `src/workflows/` connected runs, settings, discovery (F19–F22)
 - `src/core/operations.ts` yield, stock, event budget, capacity
 - `launchers/`, `clients/`, `src/distribution.ts` platform entry points/adapters (F23)

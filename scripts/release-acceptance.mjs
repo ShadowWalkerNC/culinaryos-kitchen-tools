@@ -4,13 +4,13 @@ import {tmpdir} from 'node:os';import {resolve,join} from 'node:path';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
 const cwd=mkdtempSync(join(tmpdir(),'open-kitchen-public-'));
-const client=new Client({name:'release-reference-client',version:'0.2.0'});
+const client=new Client({name:'release-reference-client',version:'0.2.2'});
 const transport=new StdioClientTransport({command:process.execPath,args:[resolve('dist/mcp/stdio.js'),'--mode=public'],cwd,stderr:'pipe'});
-const evidence={version:'0.2.0',host:'MCP SDK reference client; no generative model',checks:[],workflowRetrieval:[],calculations:{},limits:['Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark.']};
+const evidence={version:'0.2.2',host:'MCP SDK reference client; no generative model',checks:[],workflowRetrieval:[],calculations:{},limits:['Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark.']};
 const call=async(name,args={})=>{const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));return JSON.parse(r.content[0].text);};
 try{
  await client.connect(transport);const tools=(await client.listTools()).tools;assert.equal(tools.length,14);assert.ok(!tools.some(t=>t.name==='run_connected_flow'));evidence.checks.push('14 public tools; local operations absent');
- const catalog=await call('list_workflows',{limit:100});assert.equal(catalog.total,73);
+ const catalog=await call('list_workflows',{limit:100});assert.equal(catalog.total,105);const second=await call('list_workflows',{limit:100,offset:100});assert.equal(second.total,105);assert.equal(second.nextOffset,null);catalog.items.push(...second.items);assert.equal(new Set(catalog.items.map(w=>w.id)).size,105);
  for(const w of catalog.items){const out=await call('get_workflow',{name:w.id,profile:{country:'US',region:'Ohio',currency:'USD',unitSystem:'metric',timezone:'America/New_York',foodCostTargetPercent:30}});assert.equal(out.id,w.id);assert.ok(out.instructions.length>500);assert.equal(out.profile.foodCostTargetPercent,30);assert.equal(out.profile.currency,'USD');assert.ok(out.example.input&&out.example.output&&out.blockedExample.input&&out.blockedExample.output);evidence.workflowRetrieval.push({id:w.id,status:'PASS',hasWorkedAndBlockedExamples:true});}
  const invalid=await client.callTool({name:'get_workflow',arguments:{name:'not-a-workflow'}});assert.equal(invalid.isError,true);evidence.checks.push('Unknown workflow has machine-readable error flag');
  const provenance={source:'Synthetic held-out comparison',receivedAt:'2026-10-25T00:00:00Z',verified:true};

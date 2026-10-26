@@ -25,7 +25,7 @@ Standalone local-first toolkit. Original MIT content. No Axomai/Cheezies data in
 - F13 CulinaryOS adapter: authorized FILE exchange only; explicit workspace/tenant binding + confirmation; cross-tenant rejection; no repo changes.
 - F14 Local HTTP: 127.0.0.1 only, serves built UI, session-secret mutations, strict host/origin, fetch-metadata, 1MB limit, calc timeout/concurrency bounds, health/version, metadata-only logs.
 - F15 Public HTTP: stateless only; no DB/secrets/files/payload persistence/model calls.
-- F16 73 original canonical workflows: 61 baseline mappings, four retained utilities and eight additions; preserve all twelve original IDs.
+- F16 105 original canonical workflows: 61 baseline mappings, four retained utilities, eight initial additions and 32 specialty workflows; preserve all original identifiers.
 - F17 Distribution: MIT, plugin.json 1.0, mcp.json with ${PLUGIN_ROOT}/dist/..., Dockerfile public stateless, Railway config, CI checks, README run/backup/recovery + status matrix.
 - F18 Tests: golden costing/conversions, edge cases, concurrency, traversal, approvals, jobs (lease/restart/catch-up/DST), MCP both transports + public isolation, HTTP security.
 
@@ -36,6 +36,9 @@ Standalone local-first toolkit. Original MIT content. No Axomai/Cheezies data in
 - F22 Explicit location, currency, units, timezone and targets. Allergens distinguish contains, may contain, verified absent and unknown.
 - F23 Free source/runtime/plugin/playbook packages and separate client adapters. Untested installs stay visibly unverified.
 - F11 now includes Library and Settings, six views total. F12 uses an embedded workspace worker; a separate command is optional.
+
+## Specialty library
+F35 (0.2.2): add home/bakery/truck/shop/professional sections with original worked/blocked examples, real tool boundaries, full-page discovery and focused manual playbooks. No new calculator or live-integration capability is implied by a workflow title.
 
 ## Non-goals
 No live CulinaryOS API integration, background model dependency, physical kitchen certification or automatic external orders/messages/price changes. Publication is authorized; evidence is recorded separately.

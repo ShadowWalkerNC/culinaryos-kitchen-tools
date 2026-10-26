@@ -1,6 +1,6 @@
 # Historical 0.1.1 acceptance - 2026-10-25
 
-This section records the previous release. Latest evidence is in [ACCEPTANCE_021.md](ACCEPTANCE_021.md), with the 0.2.0 baseline in [ACCEPTANCE_020.md](ACCEPTANCE_020.md). These supersede counts and UI/worker status below.
+This section records the previous release. Latest evidence is in [ACCEPTANCE_022.md](ACCEPTANCE_022.md), with guided-workspace evidence in [ACCEPTANCE_021.md](ACCEPTANCE_021.md) and the original baseline in [ACCEPTANCE_020.md](ACCEPTANCE_020.md). These supersede counts and UI/worker status below.
 
 ## Verified
 - Server and UI typechecks; production TypeScript/Vite build.

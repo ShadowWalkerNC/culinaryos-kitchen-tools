@@ -2,6 +2,7 @@ import { WORKFLOW_CATALOG } from './workflows/catalog.js';
 import { WORKFLOW_TEXT } from './mcp/workflowText.js';
 import { VERSION } from './version.js';
 export const SOURCE_URL = 'https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools';
+export const SPECIALTY_PLAYBOOKS = { 'home-kitchen': 'Home Kitchen', 'bakery': 'Bakery', 'food-truck': 'Food Truck', 'small-shop': 'Small Shop', 'professional-kitchen': 'Professional Kitchen' };
 export function clientConfigurations(endpoint) {
     return {
         'generic.json': JSON.stringify({ mcpServers: { 'kitchen-tools': { type: 'streamable-http', url: endpoint } } }, null, 2),

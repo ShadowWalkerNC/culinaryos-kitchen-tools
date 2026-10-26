@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0",
-  "host": "Muse CLI reference-host editorial review; model identity not independently verified",
-  "scope": "Review of authored example outputs, not 387 executed AI conversations",
+  "version": "0.2.2",
+  "host": "Historical Muse editorial reviews plus root assistant review of new Muse-authored specialty examples; no model-host benchmark",
+  "scope": "Authored-example grounding and arithmetic review; new rows identify root corrections. Not 547 executed host conversations.",
   "reviews": [
     {
       "workflowId": "agency-chef-onboarding-generator",
@@ -1033,6 +1033,536 @@
       "corrections": [
         "Added coffee price to worked input",
         "Replaced invented age rule with licence TBC"
+      ]
+    },
+    {
+      "workflowId": "home-pantry-meal-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Explicitly scoped the oat breakfast request and removed an unsupported named approver. Author check retained: Checked every output fact against the input: sheet P-2026-10-20 quantities, dates 2026-10-26 to 2026-10-28, Sam vegetarian and no-pork notes, USD 40 budget, SP-14 prices with date, labels L-9 and O-2. Recomputed rice 900<=2000, lentils 400<=1000, tins 2<=4, oats 150<=500, top-up USD 3<=40; units consistent (g, tins, USD). Allergens use verified_absent, may_contain, and unknown with provenance; unlabelled rice and tins stay unknown."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown counts; unblock action names the count sheet ID, date, and units; no plan or top-up list issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added sheet ID, SP-14 date, and label refs to the worked input",
+        "Marked unlabelled rice and tins unknown instead of implying absent",
+        "Explicitly scoped the oat breakfast request and removed an unsupported named approver."
+      ]
+    },
+    {
+      "workflowId": "household-grocery-budget",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked all six lines against SP-14 prices and quantities in the input; recomputed 6+4+6+9+4+4=USD 33 and remaining USD 27; currency USD used throughout with no unit mixing. Allergen states carry label provenance (B-2, M-1); unlabelled items stay unknown. Budget, week, and SP-14 date all trace to the input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown prices; unblock action names the price list fields; no total or verdict issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added SP-14 date to the worked input",
+        "Kept budget in the blocked input to show one known fact does not unblock pricing"
+      ]
+    },
+    {
+      "workflowId": "leftover-reuse-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Removed safety approval inferred from log notes; quantities are candidate matching only pending verification. Author check retained: Checked weights, times, and writers against log L-2026-10-25 in the input; verified items (chicken, rice) match candidate quantities exactly with no unit mixing (g, ml). Unknown-handling fish curry is excluded with owner Mara and no assurance claimed; no storage times or temperatures appear. Allergens carry S-3 provenance or stay unknown."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves fully unknown handling; unblock action names the log and per-item notes; no reuse plan issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added writers and times to the handling notes in the worked input",
+        "Added the explicit no-storage-time sentence to the worked output",
+        "Removed safety approval inferred from log notes; quantities are candidate matching only pending verification."
+      ]
+    },
+    {
+      "workflowId": "freezer-inventory-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Kept unknown-dated bread outside the dated rotation; removed invented tonight/use-first instruction. Author check retained: Checked counts (2+1+1=4 items), label dates, rule H-1, and the no-shelf-life note against the input; rotation order follows oldest-label-first with peas before stew. Bread stays unknown-dated with owner Ben. Allergen states carry ST-4 and P-7 provenance or stay unknown; no shelf-life claim appears."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown contents; unblock action names the count sheet fields; no rotation issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the no-shelf-life-standard sentence to the worked input",
+        "Named Ben as the unknown-date owner in both input and output",
+        "Kept unknown-dated bread outside the dated rotation; removed invented tonight/use-first instruction."
+      ]
+    },
+    {
+      "workflowId": "household-meal-calendar",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Corrected whole-week demand to 24 plates; distinguished 12 named-meal plates from 12 unplanned plates. Author check retained: Checked members, nights, portions, and Mara's note for Sam against the input; recomputed 4+4+4=12 plates with the no-multiplier rule stated. Sam vegetarian noted without inventing fillings. Allergens carry PA-1 and SO-2 provenance; tacos stay unknown with recipe TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown schedules and portions; unblock action names both; explicitly refuses to apply a multiplier. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added Mara's note as the source of Sam's portion",
+        "Marked tacos unknown with recipe TBC instead of guessing fillings",
+        "Corrected whole-week demand to 24 plates; distinguished 12 named-meal plates from 12 unplanned plates."
+      ]
+    },
+    {
+      "workflowId": "recipe-troubleshooting-log",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked spec quantities, times, and settings plus observed deviations (rest 0 min, pan high) and Ben's result note against the input; differences stated without new facts. Hypotheses labeled unproven with retest owner Ben due 2026-11-01. Allergens carry F-5 and M-1 provenance. No fix claimed."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown method; unblock action names the recipe card fields; no hypotheses logged. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added Ben as the result-note source in the worked input",
+        "Labeled hypotheses unproven in both input and output"
+      ]
+    },
+    {
+      "workflowId": "cook-once-component-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Separated quantity allocation from storage/reuse approval across multiple days. Author check retained: Checked raw quantities, measured yields (2600 g, 900 g), and all four meal allocations against the input; recomputed rice 2200 with 400 leftover and chicken 800 with 100 leftover; units consistent (g). Each meal line traces to the input with no double assignment. Soy contains per S-3; unlabelled items stay unknown."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown cooked yields; unblock action names measured yields and reader; no allocation issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the scale-reading basis to the worked input",
+        "Stated leftovers explicitly instead of leaving them implied",
+        "Separated quantity allocation from storage/reuse approval across multiple days."
+      ]
+    },
+    {
+      "workflowId": "bakers-percentage-formula",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked all four weights against card BL-3; recomputed 65%, 2%, 1%, and total 1680 g; units consistent (g). Flour base explicit at 1000 g. Allergen wheat contains per FL-1. No fermentation or bake facts added."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown flour weight; unblock action names the card weight; no percentages issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the FL-1 label source to the worked input",
+        "Showed each percentage formula instead of bare numbers"
+      ]
+    },
+    {
+      "workflowId": "preferment-flour-accounting",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked starter split 100+100=200 against card S-9 and targets 1000/650 against the input; recomputed fresh additions 900/550 with the no-double-count check; units consistent (g). Wheat contains per FL-1. No readiness or timing facts added."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown composition; unblock action names the starter card split; no additions issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the composition-must-sum check to the steps",
+        "Showed the check lines in the worked output"
+      ]
+    },
+    {
+      "workflowId": "dough-production-yield-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked dough 1680 g, demand 8x200=1600, and measured loss 30 g with reader Ben against the input; recomputed usable 1650 g and surplus 50 g; units consistent (g). Fermentation left unspecified with no assumed time. Wheat contains per FL-1."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown demand; unblock action names count and weight; no verdict issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the reader name to the loss line in the worked input",
+        "Kept fermentation explicitly unspecified in the output"
+      ]
+    },
+    {
+      "workflowId": "bakery-preorder-consolidation",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked O-1, O-2, O-3 lines and cancellation C-1 with received date against book OB-7; recomputed 2026-10-28 sourdough 6 and croissants 0, 2026-10-29 croissants 6; dates and IDs consistent. Allergen states carry FL-1 and CR-2 provenance. No duplicate counting."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown lines; unblock action names the order book fields; no totals issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the C-1 received date to the worked input",
+        "Tied each total to its date in the output"
+      ]
+    },
+    {
+      "workflowId": "bakery-oven-load-sequence",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Made date, offset, compatibility and slot turnover explicit instead of inferring readiness. Author check retained: Checked slots, 10 min interval, tray times, and card durations (20/30 min) against the input; unload times 08:20/08:30/08:50 derived by addition only; concurrency never exceeds 2. No invented schedule beyond OP-2 and cards. Wheat contains per FL-1."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown trays and slots; unblock action names both; no sequence issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added product card durations to the worked input",
+        "Derived unload times in the output instead of leaving loads open-ended",
+        "Made date, offset, compatibility and slot turnover explicit instead of inferring readiness."
+      ]
+    },
+    {
+      "workflowId": "bakery-display-sellthrough",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked opening 12, added 24, sales 30 per Z-55, waste 2 per W-9, and closing 4 against the input; recomputed expected 4 with variance 0; units consistent (pieces). Waste is observed per W-9, not estimated. Dairy contains per CR-2."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown closing count; unblock action names the display sheet count; no variance issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added till and waste refs to the worked input",
+        "Stated sources in the worked output"
+      ]
+    },
+    {
+      "workflowId": "custom-cake-order-specification",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked servings, design, K-2 shared-line limit, USD 60/20/40 money, collection 2026-10-30 15:00, and shade TBC due 2026-10-28 against the input; recomputed balance USD 40. Nut stays unknown with owner Ana and no absence claim; egg and dairy carry recipe provenance. Currency USD consistent."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown servings and date; unblock action names both; no specification issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the K-2 limit and Ana's advisory task to the worked input",
+        "Kept diet and shade unresolved in the output instead of assuming them"
+      ]
+    },
+    {
+      "workflowId": "bakery-batch-traceability",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked batch B-102, lots FL-1-884 and BT-311, unknown sugar with owner Ben, and outputs 40/30/2/8 with refs Z-55, W-9, D-2026-10-25 against the input; recomputed 30+2+8=40; units consistent (rolls). Gap stays open. Allergens carry lot-label provenance."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown batch and lots; unblock action names both; no chain issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added output refs to the worked input",
+        "Left sugar unknown with owner Ben instead of dropping it"
+      ]
+    },
+    {
+      "workflowId": "food-truck-loadout",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Changed physical packing checks to unsigned checklist items; no weighing or buying claimed. Author check retained: Checked event E-77, 100-cover forecast with source, demand 120/8 kg/100, and counted stock 150/10 kg/90 per S-60 against the input; recomputed can shortfall 10 with owner Ben; units consistent (pieces, kg). Wheat contains per TO-6; unlabelled items stay unknown. Proposal-only, no order sent."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown demand and stock; unblock action names both sources; no pack list issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the forecast source and S-60 ref to the worked input",
+        "Named Ben as the shortfall owner",
+        "Changed physical packing checks to unsigned checklist items; no weighing or buying claimed."
+      ]
+    },
+    {
+      "workflowId": "food-truck-throughput-menu",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked rates 40/60 per OP-9, forecast 50 tickets, and 70/30 mix against the input; recomputed 35 taco and 15 drinks tickets with both fit checks; units consistent (tickets/hour). Bottleneck grill named. No guaranteed throughput claimed. Wheat contains per TO-6."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown rates; unblock action names the ops note rates; no verdict issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the hour and date to the worked input",
+        "Added the explicit no-guarantee sentence to the output"
+      ]
+    },
+    {
+      "workflowId": "food-truck-power-water-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reported projected demand without treating nominal tank capacity as operational clearance. Author check retained: Checked circuits C1/C2 16A per TS-4, warmer 8A per P-1, lights 2A per P-2, water 5 L/hour per M-3, tank 40 L, and 6 planned hours against the input; recomputed 30 L <= 40 L; units consistent (A, L). No wiring advice or certification; sign-off blank. No invented limits."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown ratings; unblock action names spec and plates; no plan issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added plate refs P-1 and P-2 to the worked input",
+        "Kept the sign-off blank in the output",
+        "Reported projected demand without treating nominal tank capacity as operational clearance."
+      ]
+    },
+    {
+      "workflowId": "mobile-service-contingency-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Kept the unverified cold-menu fallback blocked and marked missing allergen evidence unknown. Author check retained: Checked T1 threshold 40 km/h with rule source, T2 fault trigger, fallbacks, owners Mara and Ben, and contact Jo 555-0140 against the input. No forecast stated or implied. Cold menu allergens honestly TBC. Each row traces to the input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown triggers and owners; unblock action names thresholds, owners, and fallbacks; no plan issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the rule source to T1 in the worked input",
+        "Added the explicit no-forecast sentence to the output",
+        "Kept the unverified cold-menu fallback blocked and marked missing allergen evidence unknown."
+      ]
+    },
+    {
+      "workflowId": "food-truck-commissary-handoff",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Preserved receiving verification as pending instead of claiming a named verifier already performed it. Author check retained: Checked sheet H-31, date, plan CP-2, out figures 2 kg and 30, in figures 10 and 2 bags, and names Ben and Ana against the input; units consistent (kg, pieces, bags). Temperatures honestly unrecorded with no claim. Wheat contains per TO-6; chicken stays unknown."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown counts and names; unblock action names quantities and both roles; no handoff issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the CP-2 plan ref to the worked input",
+        "Left temperatures open instead of implying a check",
+        "Preserved receiving verification as pending instead of claiming a named verifier already performed it."
+      ]
+    },
+    {
+      "workflowId": "food-truck-event-settlement",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Labeled known-cost contribution as an upper bound and kept unlisted costs unresolved. Author check retained: Checked sales 1200 per Z-55, refunds 40, pitch fee 150 paid, food cost 300, and pending card fees against the input; recomputed 1200-40-150-300=710; currency USD consistent. Result labeled contribution, not profit; final profit blocked on card fees. No payments implied."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown sales and refunds; unblock action names the till report and refund log; no settlement issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Labeled the result contribution instead of profit in the output",
+        "Kept card fees pending instead of estimating them",
+        "Labeled known-cost contribution as an upper bound and kept unlisted costs unresolved."
+      ]
+    },
+    {
+      "workflowId": "small-shop-reorder-round",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Specified the receipt horizon and explicit zero intervening demand for the numerical example. Author check retained: Checked counts 6+10=16 per C-41, par 40 per SN-2, on-order 12 due 2026-10-29 with 2-day lead against the input; recomputed need 40-16-12=12; units consistent (loaves). Wheat contains per B-2. Proposal-only with no order sent."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown counts; unblock action names shelf and backroom counts; no proposal issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the due date and lead time to the worked input",
+        "Stated proposal-only status in the output",
+        "Specified the receipt horizon and explicit zero intervening demand for the numerical example."
+      ]
+    },
+    {
+      "workflowId": "deli-display-replenishment",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Removed an unsupported claim that the par sheet supplied holding controls. Author check retained: Checked pars 500/400 per DP-5, current 200/350 at 10:00, and batch 100 g against the input; recomputed ham 300 g = 3 batches and cheese 50 g short of a batch with over-par flagged to Ana; units consistent (g). Holding per DP-5 only. Allergens carry HA-3 and CH-8 provenance."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown pars and weights; unblock action names both; no top-up issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the check time to the worked input",
+        "Left the over-par cheese decision to Ana instead of auto-adding",
+        "Removed an unsupported claim that the par sheet supplied holding controls."
+      ]
+    },
+    {
+      "workflowId": "retail-markdown-review",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Distinguished the supplied price-cost spread from verified contribution or profit. Author check retained: Checked price 2.00, cost 1.20 per I-88, count 20 per C-41, date mark 2026-10-28, and proposal 1.50 from 2026-10-27 against the input; recomputed margin USD 0.30 and exposure USD 24; currency USD consistent. Approval blank; no price change. Dairy contains per Y-12 label."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown cost and count; unblock action names both with sources; no review issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added invoice and sheet refs to the worked input",
+        "Kept approval blank in the output with an explicit no-change sentence",
+        "Distinguished the supplied price-cost spread from verified contribution or profit."
+      ]
+    },
+    {
+      "workflowId": "retail-pack-size-pricing",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Grounded the proposed rounded selling price in an explicit manager proposal instead of inventing it. Author check retained: Checked measured 120 g, costs 0.25/0.30/0.05/0.50 with sources, rounding rule, and suggested 2.50 against the input; recomputed total USD 1.85 and margin USD 0.65; currency USD and weights g consistent. Allergens carry recipe provenance. Price suggested, not set."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown costs; unblock action names per-line costs with sources; no price suggested. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added a source to every cost line in the worked input",
+        "Stated the rounding rule explicitly in input and output",
+        "Grounded the proposed rounded selling price in an explicit manager proposal instead of inventing it."
+      ]
+    },
+    {
+      "workflowId": "counter-service-combo-costing",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Removed an unselected milk addition and kept tax/fee coverage explicit. Author check retained: Checked combo K-2 items, costs 1.80/0.60/0.50, price 5.00, and exact SKU eligibility against the input; recomputed cost USD 2.90 and margin USD 2.10; currency USD consistent. No substitutions mapped. Wheat contains per S-1; unlabelled items stay unknown with milk stated per serving."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown items and costs; unblock action names exact items with costs; no costing issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the exact-SKU eligibility sentence to the worked input",
+        "Stated milk per serving instead of a fixed coffee state",
+        "Removed an unselected milk addition and kept tax/fee coverage explicit."
+      ]
+    },
+    {
+      "workflowId": "small-shop-cash-close",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked float 50, sales 420 per Z-55, refunds 15, paid-outs 25 per R-7, counted 428, and card 600 per Z-55 against the input; recomputed expected 430 and variance -2 with owner Mara; currency USD consistent. Card isolated from cash. No payments implied."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown sales and count; unblock action names the till report and count; no close issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added receipt R-7 to the paid-out line in the worked input",
+        "Isolated card receipts explicitly in the output"
+      ]
+    },
+    {
+      "workflowId": "production-batch-record",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked batch PB-50, planned 40 per PP-18, measured 38 by Ben, method MC-6 v3, and checkpoint states against the input; recomputed variance -2; units consistent (portions). Chill stays blank; taste signed Ben as stated. Allergens carry SO-2 and M-1 provenance. No signature fabricated."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown plan and version; unblock action names both; no record issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the counter name to the measured line in the worked input",
+        "Kept the chill checkpoint blank in the output"
+      ]
+    },
+    {
+      "workflowId": "shift-handover-board",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked handover time 16:00, names Ben and Ana per rota R-12, and jobs J1/J2/J3 with owners, dues, and blockers against the input. No staff beyond R-12 named. J3 blocker honestly TBC. No food facts added or judged."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown jobs and owners; unblock action names jobs with owners and dues; no board issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the rota R-12 ref to the worked input",
+        "Marked J3 blocker TBC instead of assuming it clear"
+      ]
+    },
+    {
+      "workflowId": "service-bottleneck-review",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Reviewed quantities, sources, dates and boundaries against the explicit worked input. Author check retained: Checked sample size 10, window 19:00-20:00, log TL-8, segments 18 (12-26) and 6 (3-11), and follow-up owner Mara against the input; units consistent (min). Slowest segment named by average only. No causal claim; sample limits stated."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown times; unblock action names the ticket log with segments; no review issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added ranges to the segment lines in the worked input",
+        "Added the explicit no-causal-conclusion sentence to the output"
+      ]
+    },
+    {
+      "workflowId": "equipment-downtime-replan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Supplied durations and turnover to demonstrate actual fit in the alternative equipment window. Author check retained: Checked O-1 down per MT-3, affected 20 loaves per PP-18, and alternative O-2 14:00-16:00 confirmed by Ana against the input; recomputed 2x10=20; units consistent (loaves). No spare equipment inferred; failure fallback left unresolved. Wheat contains per FL-1."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown scope and alternative; unblock action names both; no replan issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added the confirmer Ana to the worked input",
+        "Left the O-2-failure case unresolved instead of assuming cover",
+        "Supplied durations and turnover to demonstrate actual fit in the alternative equipment window."
+      ]
+    },
+    {
+      "workflowId": "multi-station-pickup-plan",
+      "reviewer": "Root assistant independent grounding review of authored input/output pairs",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Corrected overlapping attended tasks by serializing the same cook and making dependencies/availability explicit. Author check retained: Checked order O-77, pickup 19:00, 20 covers, durations 15/10/20 per PP-19 and MC-6 v3, and owners Ben/Ana against the input; recomputed starts 18:50/18:35/18:40; units consistent (min). No invented cooking times. Dairy contains per M-1."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown pickup and durations; unblock action names both with refs; no plan issued. Root review confirmed the missing information stays unresolved and the output offers a concrete unblock action without claiming execution."
+      },
+      "corrections": [
+        "Added duration refs PP-19 and MC-6 v3 to the worked input",
+        "Chained carve to end at plate start in the output",
+        "Corrected overlapping attended tasks by serializing the same cook and making dependencies/availability explicit."
       ]
     }
   ],

@@ -19,7 +19,7 @@ writeFileSync(join(out,'.package-generated'),'kitchen-tools package output\n');
 const manifest=JSON.parse(readFileSync(join(out,'plugin.json'),'utf8'));
 if(manifest.$schema!=='https://agent-plugins.org/schemas/1.0.0/plugin.schema.json'||manifest.version!==JSON.parse(readFileSync(join(out,'package.json'),'utf8')).version)throw new Error('plugin metadata mismatch');
 const skills=readdirSync(join(out,'skills'));
-if(skills.length!==73)throw new Error('expected 73 original skills');
+if(skills.length!==105)throw new Error('expected 105 original skills');
 for(const name of skills){const text=readFileSync(join(out,'skills',name,'SKILL.md'),'utf8');if(!text.startsWith('---\n')&&!text.startsWith('---\r\n'))throw new Error('skill frontmatter missing');if(!/^description:\s*\S.+$/m.test(text))throw new Error('skill description missing: '+name);}
 // Explicitly excluded: *.sqlite, workspace/, .session, node_modules, package-out itself, Axomai references, Cheezies data, credentials.
 console.log(JSON.stringify({ packaged: out, note: 'run npm install inside package-out for portable node dependencies' }));

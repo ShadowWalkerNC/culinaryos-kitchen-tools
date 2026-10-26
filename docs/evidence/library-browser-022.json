@@ -1,0 +1,19 @@
+{
+  "scope": "Local workflow discovery and guide retrieval, not model execution",
+  "checks": [
+    "All105 workflows loaded across both actual API pages",
+    "Home Kitchen: 7 discoverable; selected worked/blocked examples rendered",
+    "Bakery: 8 discoverable; selected worked/blocked examples rendered",
+    "Food Truck: 6 discoverable; selected worked/blocked examples rendered",
+    "Small Shop: 6 discoverable; selected worked/blocked examples rendered",
+    "Professional Kitchen: 5 discoverable; selected worked/blocked examples rendered",
+    "Mom-and-pop phrase search finds all six small-shop additions",
+    "Original last-page wine workflow remains searchable and retrievable"
+  ],
+  "pageErrors": [],
+  "offsets": [
+    "0",
+    "100"
+  ],
+  "status": "PASS"
+}

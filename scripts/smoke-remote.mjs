@@ -15,7 +15,7 @@ try{
  const call=async(name,args)=>{const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));return JSON.parse(r.content[0].text);};
  assert.equal((await call('convert_quantity',{amount:'32',fromUnit:'oz',toUnit:'lb'})).amount,'2');
  assert.ok((await call('get_workflow',{name:'recipe-costing'})).instructions.includes('## Required inputs'));
- assert.equal((await call('list_workflows',{limit:100})).total,73);
+ assert.equal((await call('list_workflows',{limit:100})).total,105);
  const provenance={source:'synthetic release test',receivedAt:'2026-10-25T00:00:00Z',verified:true};
  const recipe={id:'synthetic',name:'Synthetic test',currency:'USD',yieldQty:{amount:'4',unit:'each'},ingredients:[{ingredientId:'flour',qty:{amount:'500',unit:'g'}}],subrecipes:[],version:1,provenance};
  const purchase={id:'test-flour',ingredientId:'flour',currency:'USD',costCents:200,usableQty:{amount:'1',unit:'kg'},effectiveDate:'2026-10-25',version:1,provenance};

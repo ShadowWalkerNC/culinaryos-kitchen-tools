@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.2",
   "host": "MCP SDK reference client; no generative model",
   "checks": [
     "14 public tools; local operations absent",
@@ -19,6 +19,31 @@
     },
     {
       "id": "apprenticeship-tracker",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bakers-percentage-formula",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bakery-batch-traceability",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bakery-display-sellthrough",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bakery-oven-load-sequence",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bakery-preorder-consolidation",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -68,12 +93,27 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "cook-once-component-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "corporate-event-menu-planner",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
     {
       "id": "coshh-chemical-safety",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "counter-service-combo-costing",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "custom-cake-order-specification",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -93,6 +133,11 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "deli-display-replenishment",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "dietary-requirements-tracker",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
@@ -104,6 +149,16 @@
     },
     {
       "id": "dish-development-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "dough-production-yield-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "equipment-downtime-replan",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -143,7 +198,37 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "food-truck-commissary-handoff",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "food-truck-event-profitability",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-event-settlement",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-loadout",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-power-water-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-throughput-menu",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "freezer-inventory-plan",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -154,6 +239,21 @@
     },
     {
       "id": "haccp-checklist-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "home-pantry-meal-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "household-grocery-budget",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "household-meal-calendar",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -178,12 +278,27 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "leftover-reuse-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "menu-description-writer",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
     {
       "id": "menu-margin-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "mobile-service-contingency-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "multi-station-pickup-plan",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -218,6 +333,11 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "preferment-flour-accounting",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "prep-planning",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
@@ -229,6 +349,11 @@
     },
     {
       "id": "private-dining-setup-guide",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "production-batch-record",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -263,12 +388,47 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "recipe-troubleshooting-log",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "retail-markdown-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "retail-pack-size-pricing",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "rota-builder",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
     {
       "id": "seasonal-menu-planner",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "service-bottleneck-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "shift-handover-board",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "small-shop-cash-close",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "small-shop-reorder-round",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -453,5 +613,5 @@
   "limits": [
     "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
   ],
-  "checkedAt": "2026-10-26T16:42:32.791Z"
+  "checkedAt": "2026-10-26T17:28:43.681Z"
 }

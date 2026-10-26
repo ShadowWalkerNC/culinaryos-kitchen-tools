@@ -1,4 +1,5 @@
 export declare const SOURCE_URL = "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools";
+export declare const SPECIALTY_PLAYBOOKS: Record<string, string>;
 export declare function clientConfigurations(endpoint: string): {
     'generic.json': string;
     'cursor.json': string;

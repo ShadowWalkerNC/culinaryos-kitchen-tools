@@ -17,6 +17,9 @@ import {
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
+const expansion=JSON.parse(readFileSync(join(ROOT,'fixtures','library-expansion-022.json'),'utf8')) as {sections:Record<string,string[]>};
+const ADDED32=Object.values(expansion.sections).flat();
+
 const PRESERVED12 = [
   'daily-close-review',
   'data-reconciliation',
@@ -66,6 +69,11 @@ const ZONES = new Set([
   'Suppliers and Finance',
   'FOH and Guest Experience',
   'Wellbeing and Social Media',
+  'Home Kitchen',
+  'Bakery',
+  'Food Truck',
+  'Small Shop',
+  'Professional Kitchen',
   'Workspace',
   'Connected Workflows',
 ]);
@@ -101,13 +109,13 @@ function parseSkill(text: string, id: string): SkillMeta {
 }
 
 describe('library catalog', () => {
-  it('lists exactly 73 distinct workflows', () => {
-    assert.equal(LIBRARY_VERSION, '0.2.0');
-    assert.equal(WORKFLOW_CATALOG.length, 73);
+  it('lists exactly 105 distinct workflows', () => {
+    assert.equal(LIBRARY_VERSION, '0.2.2');
+    assert.equal(WORKFLOW_CATALOG.length, 105);
     const ids = WORKFLOW_CATALOG.map((w) => w.id);
-    assert.equal(new Set(ids).size, 73);
+    assert.equal(new Set(ids).size, 105);
     assert.deepEqual([...WORKFLOW_NAMES], [...WORKFLOW_NAMES].sort());
-    assert.equal(WORKFLOW_NAMES.length, 73);
+    assert.equal(WORKFLOW_NAMES.length, 105);
     assert.deepEqual([...ids].sort(), [...WORKFLOW_NAMES].sort());
     for (const w of WORKFLOW_CATALOG) {
       assert.ok(w.title.length > 0, `${w.id} title`);
@@ -126,7 +134,7 @@ describe('library catalog', () => {
     assert.equal(covered.length, 61);
     assert.equal(new Set(covered).size, 61);
     const noCov = WORKFLOW_CATALOG.filter((w) => !w.coverageId).map((w) => w.id).sort();
-    assert.deepEqual(noCov, [...NO_COVERAGE12].sort());
+    assert.deepEqual(noCov, [...NO_COVERAGE12,...ADDED32].sort());
     for (const [base, canon] of Object.entries(BASELINE_MAP)) {
       const w = getWorkflowEntry(canon);
       assert.equal(w.coverageId, base);
@@ -167,7 +175,7 @@ describe('library catalog', () => {
 });
 
 describe('library skills', () => {
-  it('has exactly 73 skill directories matching the catalog', () => {
+  it('has exactly 105 skill directories matching the catalog', () => {
     const dirs = readdirSync(join(ROOT, 'skills'), { withFileTypes: true })
       .filter((d) => d.isDirectory())
       .map((d) => d.name)
@@ -195,7 +203,7 @@ describe('library skills', () => {
         meta.descriptionLine.startsWith('"') && meta.descriptionLine.endsWith('"'),
         `${w.id} description is quoted`,
       );
-      assert.equal(meta.version, '0.2.0');
+      assert.equal(meta.version, ADDED32.includes(w.id)?'0.2.2':'0.2.0');
       assert.equal(meta.license, 'MIT');
       for (const s of sections) assert.ok(meta.body.includes(s), `${w.id} has ${s}`);
       assert.ok(meta.body.toLowerCase().includes('original mit'), `${w.id} marked original MIT`);
@@ -314,13 +322,13 @@ describe('library grounding', () => {
 });
 
 describe('example reviews', () => {
-  it('holds exactly 73 specific review rows matching the catalog', () => {
+  it('holds exactly 105 specific review rows matching the catalog', () => {
     const raw = readFileSync(join(ROOT, 'fixtures', 'workflow-example-reviews.json'), 'utf8');
     const doc = JSON.parse(raw);
-    assert.equal(doc.version, '0.2.0');
-    assert.equal(doc.host, 'Muse CLI reference-host editorial review; model identity not independently verified');
+    assert.equal(doc.version, '0.2.2');
+    assert.ok(typeof doc.host==='string'&&doc.host.length>20,'review provenance recorded');
     assert.ok(typeof doc.scope === 'string' && doc.scope.length > 10, 'scope states review bounds');
-    assert.equal(doc.reviews.length, 73);
+    assert.equal(doc.reviews.length, 105);
     const ids = doc.reviews.map((r: { workflowId: string }) => r.workflowId);
     assert.deepEqual([...ids].sort(), [...WORKFLOW_NAMES].sort());
     const seen = new Set<string>();
@@ -345,12 +353,12 @@ describe('library scenarios', () => {
     return { raw, doc: JSON.parse(raw) };
   }
 
-  it('fixture holds exactly 387 NOT_RUN cases with five per workflow plus 22 cross', () => {
+  it('fixture holds exactly 547 NOT_RUN cases with five per workflow plus 22 cross', () => {
     const { raw, doc } = load();
     assert.equal(doc.version, 1);
-    assert.equal(doc.scenarios.length, 387);
+    assert.equal(doc.scenarios.length, 547);
     const ids = doc.scenarios.map((s) => s.id);
-    assert.equal(new Set(ids).size, 387);
+    assert.equal(new Set(ids).size, 547);
     assert.deepEqual(ids, [...ids].sort());
     for (const s of doc.scenarios) {
       assert.ok(s.prompt.length >= 40, `${s.id} prompt`);

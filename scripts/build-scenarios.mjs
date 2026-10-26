@@ -60,7 +60,7 @@ function loadCatalog() {
 }
 
 const CATALOG = loadCatalog();
-if (CATALOG.length !== 73) fail('expected 73 catalog entries got ' + CATALOG.length);
+if (CATALOG.length !== 105) fail('expected 105 catalog entries got ' + CATALOG.length);
 const WORKFLOW_IDS = CATALOG.map((w) => w.id).sort();
 
 function scenariosFor(w) {
@@ -446,7 +446,7 @@ function checkScenarios() {
     if (!Array.isArray(s.expectedChecks) || s.expectedChecks.length < 3) fail(s.id + ' needs 3+ expectedChecks');
     if (s.executionStatus !== 'NOT_RUN') fail(s.id + ' must be NOT_RUN');
   }
-  if (SCENARIOS.length !== 387) fail('expected 387 scenarios got ' + SCENARIOS.length);
+  if (SCENARIOS.length !== 547) fail('expected 547 scenarios got ' + SCENARIOS.length);
   for (const w of WORKFLOW_IDS) {
     const got = SCENARIOS.filter(s => s.workflowId === w).map(s => s.category).sort();
     const want = [...CATS].sort();

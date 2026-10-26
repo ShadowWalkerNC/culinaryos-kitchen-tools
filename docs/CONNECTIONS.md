@@ -6,7 +6,7 @@ Public hosted URL: https://culinaryos-kitchen-tools-production.up.railway.app/mc
 
 Client fragments live in clients/. Current official references: [ChatGPT](https://developers.openai.com/api/docs/guides/custom-mcp-server), [Claude](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp), [Cursor install links](https://prod.cursor.com/docs/mcp/install-links), [Gemini CLI](https://geminicli.com/docs/tools/mcp-server/). Checked2026-10-25; consult current host rules when installing. Gemini consumer website support is not inferred from Gemini CLI.
 
-The portable plugin ZIP contains the73 original skills and public remote connection. The full source/runtime ZIP adds the private local workspace, launchers and tests. Public directory approval is separate from downloadable installation. The existing creator plugin remains private with the same identity and is not a universal public install link.
+The portable plugin ZIP contains the 105 original skills and public remote connection. The full source/runtime ZIP adds the private local workspace, launchers and tests. Public directory approval is separate from downloadable installation. The existing creator plugin remains private with the same identity and is not a universal public install link.
 
 For local clients, set command to node and args to the absolute dist/mcp/stdio.js path, --mode=local, --workspace and an absolute selected workspace path. Default --mode=public has no private database. Use only supported local-host surfaces. Never expose local mode to the internet or assume a remote web client can reach files on your computer.
 

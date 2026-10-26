@@ -182,7 +182,7 @@ async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
         return;
     }
     if (req.method === 'GET' && path === '/api/library') {
-        send(res, 200, listWorkflows({ limit: 100 }));
+        send(res, 200, listWorkflows({ limit: 100, offset: Number(new URL(req.url ?? '/', 'http://localhost').searchParams.get('offset') ?? 0) }));
         return;
     }
     if (req.method === 'POST' && path === '/api/library/workflow') {

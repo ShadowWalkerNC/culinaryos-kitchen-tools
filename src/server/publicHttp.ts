@@ -4,7 +4,7 @@ import { handleMcpStreamable } from '../mcp/httpStream.js';
 import { readBodyCapped, logMeta, createCalcRunner } from './security.js';
 import {publicPage} from './publicPage.js';
 import {VERSION} from '../version.js';
-import {clientConfigurations,playbook} from '../distribution.js';
+import {clientConfigurations,playbook,SPECIALTY_PLAYBOOKS} from '../distribution.js';
 
 
 /** Exported for handler-level tests (no TCP needed). */
@@ -42,7 +42,7 @@ export function createPublicHandler(port: number): (req: IncomingMessage, res: S
         if(req.method==='GET'&&url.pathname.startsWith('/clients/')){
           const name=url.pathname.slice('/clients/'.length),host=req.headers.host!,local=/^(localhost|127\.0\.0\.1):\d+$/.test(host);const configs=clientConfigurations(`${local?'http':'https'}://${host}/mcp`);const value=Object.hasOwn(configs,name)?configs[name as keyof typeof configs]:undefined;if(value===undefined){send(res,404,{error:'unknown client configuration'});return;}res.writeHead(200,{'content-type':name.endsWith('.toml')?'text/plain; charset=utf-8':'application/json','content-disposition':`attachment; filename="${name}"`,'x-content-type-options':'nosniff'});res.end(value);return;
         }
-        if(req.method==='GET'&&url.pathname==='/playbooks/all.md'){const text=playbook();res.writeHead(200,{'content-type':'text/markdown; charset=utf-8','content-disposition':'attachment; filename="Open-Kitchen-Playbook.md"','x-content-type-options':'nosniff'});res.end(text);return;}
+        if(req.method==='GET'&&url.pathname.startsWith('/playbooks/')){const slug=/^\/playbooks\/([a-z-]+)\.md$/.exec(url.pathname)?.[1];if(!slug||(slug!=='all'&&!Object.hasOwn(SPECIALTY_PLAYBOOKS,slug))){send(res,404,{error:'unknown playbook'});return;}const text=playbook(slug==='all'?undefined:SPECIALTY_PLAYBOOKS[slug]);res.writeHead(200,{'content-type':'text/markdown; charset=utf-8','content-disposition':'attachment; filename="'+(slug==='all'?'Open-Kitchen-Playbook':slug)+'.md"','x-content-type-options':'nosniff'});res.end(text);return;}
         if (req.method === 'GET' && (url.pathname === '/health' || url.pathname === '/healthz')) {
           send(res, 200, { ok: true });
           return;

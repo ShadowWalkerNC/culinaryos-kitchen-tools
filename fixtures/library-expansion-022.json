@@ -1,0 +1,13 @@
+{
+  "version": "0.2.2",
+  "priorCount": 73,
+  "expectedCount": 105,
+  "sections": {
+    "Home Kitchen": ["home-pantry-meal-plan", "household-grocery-budget", "leftover-reuse-plan", "freezer-inventory-plan", "household-meal-calendar", "recipe-troubleshooting-log", "cook-once-component-plan"],
+    "Bakery": ["bakers-percentage-formula", "preferment-flour-accounting", "dough-production-yield-plan", "bakery-preorder-consolidation", "bakery-oven-load-sequence", "bakery-display-sellthrough", "custom-cake-order-specification", "bakery-batch-traceability"],
+    "Food Truck": ["food-truck-loadout", "food-truck-throughput-menu", "food-truck-power-water-plan", "mobile-service-contingency-plan", "food-truck-commissary-handoff", "food-truck-event-settlement"],
+    "Small Shop": ["small-shop-reorder-round", "deli-display-replenishment", "retail-markdown-review", "retail-pack-size-pricing", "counter-service-combo-costing", "small-shop-cash-close"],
+    "Professional Kitchen": ["production-batch-record", "shift-handover-board", "service-bottleneck-review", "equipment-downtime-replan", "multi-station-pickup-plan"]
+  },
+  "bounds": "Original workflow instructions and synthetic examples; no new physical kitchen, native AI-client or production acceptance implied."
+}

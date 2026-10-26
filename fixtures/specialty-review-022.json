@@ -1,0 +1,61 @@
+{
+  "version": "0.2.2",
+  "scope": "Root corrections to authored examples; not executed host conversations",
+  "reviewedExamples": 64,
+  "corrections": {
+    "home-pantry-meal-plan": [
+      "Explicitly scoped the oat breakfast request and removed an unsupported named approver."
+    ],
+    "leftover-reuse-plan": [
+      "Removed safety approval inferred from log notes; quantities are candidate matching only pending verification."
+    ],
+    "freezer-inventory-plan": [
+      "Kept unknown-dated bread outside the dated rotation; removed invented tonight/use-first instruction."
+    ],
+    "household-meal-calendar": [
+      "Corrected whole-week demand to 24 plates; distinguished 12 named-meal plates from 12 unplanned plates."
+    ],
+    "cook-once-component-plan": [
+      "Separated quantity allocation from storage/reuse approval across multiple days."
+    ],
+    "bakery-oven-load-sequence": [
+      "Made date, offset, compatibility and slot turnover explicit instead of inferring readiness."
+    ],
+    "food-truck-loadout": [
+      "Changed physical packing checks to unsigned checklist items; no weighing or buying claimed."
+    ],
+    "food-truck-power-water-plan": [
+      "Reported projected demand without treating nominal tank capacity as operational clearance."
+    ],
+    "mobile-service-contingency-plan": [
+      "Kept the unverified cold-menu fallback blocked and marked missing allergen evidence unknown."
+    ],
+    "food-truck-commissary-handoff": [
+      "Preserved receiving verification as pending instead of claiming a named verifier already performed it."
+    ],
+    "food-truck-event-settlement": [
+      "Labeled known-cost contribution as an upper bound and kept unlisted costs unresolved."
+    ],
+    "small-shop-reorder-round": [
+      "Specified the receipt horizon and explicit zero intervening demand for the numerical example."
+    ],
+    "deli-display-replenishment": [
+      "Removed an unsupported claim that the par sheet supplied holding controls."
+    ],
+    "retail-markdown-review": [
+      "Distinguished the supplied price-cost spread from verified contribution or profit."
+    ],
+    "retail-pack-size-pricing": [
+      "Grounded the proposed rounded selling price in an explicit manager proposal instead of inventing it."
+    ],
+    "counter-service-combo-costing": [
+      "Removed an unselected milk addition and kept tax/fee coverage explicit."
+    ],
+    "equipment-downtime-replan": [
+      "Supplied durations and turnover to demonstrate actual fit in the alternative equipment window."
+    ],
+    "multi-station-pickup-plan": [
+      "Corrected overlapping attended tasks by serializing the same cook and making dependencies/availability explicit."
+    ]
+  }
+}

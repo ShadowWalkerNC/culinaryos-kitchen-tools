@@ -1,8 +1,8 @@
-// Original MIT skill library catalog for Open Kitchen Toolkit 0.2.0.
-// 73 canonical workflows covering 61 public baseline use cases plus 12 utilities and new workflows.
+// Original MIT skill library catalog for Open Kitchen Toolkit 0.2.2.
+// 105 canonical workflows: original 73 plus 32 independently authored specialty workflows.
 // SKILL.md files are the prose source of truth; this array is the discovery contract.
 
-export const LIBRARY_VERSION = '0.2.0' as const;
+export const LIBRARY_VERSION = '0.2.2' as const;
 export const DATA_VERSION = 'v1' as const;
 export const LICENSE = 'MIT' as const;
 
@@ -118,6 +118,149 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Track apprenticeship. Program and hours missing.",
       "output": "TRACKER BLOCKED\nProgram unknown; hours unknown.\nSupply enrolment details before tracking."
+    }
+  },
+  {
+    "id": "bakers-percentage-formula",
+    "title": "Bakers percentage formula",
+    "zone": "Bakery",
+    "summary": "Express a bread formula with flour at 100 percent and total dough weight.",
+    "aliases": [
+      "baking-percentages",
+      "bread-formula"
+    ],
+    "inputs": [
+      "Formula card with ingredient weights",
+      "Flour weight in grams",
+      "Label sources for allergen states"
+    ],
+    "outputs": [
+      "Percentage table with flour at 100 percent",
+      "Total dough weight with formula shown"
+    ],
+    "tools": [
+      "convert_quantity",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Formula card BL-3: flour 1000 g, water 650 g, salt 20 g, yeast 10 g. Flour label FL-1 states wheat contains.",
+      "output": "BAKERS PERCENTAGE - BL-3\nFlour 1000 g = 100%.\nWater 650/1000x100=65%; salt 20/1000x100=2%; yeast 10/1000x100=1% (host arithmetic).\nTotal dough: 1000+650+20+10=1680 g.\nAllergens: wheat contains per FL-1.\nStatus: draft for baker to confirm."
+    },
+    "blockedExample": {
+      "input": "Write the formula in percentages. Flour weight missing.",
+      "output": "FORMULA BLOCKED\nFlour weight unknown; no percentage base exists.\nSupply the flour weight in grams from the formula card. No percentages issued."
+    }
+  },
+  {
+    "id": "bakery-batch-traceability",
+    "title": "Bakery batch traceability",
+    "zone": "Bakery",
+    "summary": "Chain ingredient lots to a batch and its measured outputs with gaps marked unknown.",
+    "aliases": [],
+    "inputs": [
+      "Batch ID with bake date",
+      "Ingredient lots with label refs",
+      "Outputs with till, waste, and count refs"
+    ],
+    "outputs": [
+      "Lot-to-batch-to-output chain",
+      "Gaps marked unknown with owners"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "lookup_recipe"
+    ],
+    "example": {
+      "input": "Batch B-102 baked 2026-10-25: flour lot FL-1-884 per flour label, butter lot BT-311 per butter label, sugar lot unknown (bag label missing, owner Ben). Output: 40 rolls; sold 30 per till Z-55; waste 2 per W-9; display remaining 8 per sheet D-2026-10-25. Flour lot FL-1-884 states wheat contains; butter lot BT-311 states dairy contains.",
+      "output": "BATCH TRACEABILITY - B-102 - 2026-10-25\nLots: flour FL-1-884; butter BT-311; sugar unknown (label missing, owner Ben).\nOutputs: 40 rolls; sold 30; waste 2; remaining 8; check 30+2+8=40 (host arithmetic).\nGap: sugar lot unknown - chain incomplete until Ben confirms.\nAllergens: wheat contains per FL-1-884; dairy contains per BT-311."
+    },
+    "blockedExample": {
+      "input": "Trace the batch. Batch ID and ingredient labels missing.",
+      "output": "TRACE BLOCKED\nBatch and lots unknown; no chain can be built.\nSupply the batch ID and the ingredient label lots. No chain issued."
+    }
+  },
+  {
+    "id": "bakery-display-sellthrough",
+    "title": "Bakery display sellthrough",
+    "zone": "Bakery",
+    "summary": "Reconcile display opening, production, sales, and observed waste against the count.",
+    "aliases": [],
+    "inputs": [
+      "Display sheet with opening and closing counts",
+      "Production added with source",
+      "Till sales and observed waste with refs"
+    ],
+    "outputs": [
+      "Expected-versus-counted comparison",
+      "Variance with source refs"
+    ],
+    "tools": [
+      "reconcile_stock",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Display sheet D-2026-10-25 croissants: opening 12, production added 24, till sales 30 per till Z-55, observed waste 2 per waste log W-9, closing count 4. Croissant label CR-2 states dairy contains.",
+      "output": "DISPLAY SELLTHROUGH - 2026-10-25\nExpected: 12+24-30-2=4 (host arithmetic).\nCounted: 4. Variance: 0 - matches.\nSources: Z-55 sales, W-9 waste, D-2026-10-25 counts.\nAllergens: dairy contains per CR-2."
+    },
+    "blockedExample": {
+      "input": "Reconcile the display. Closing count missing.",
+      "output": "SELLTHROUGH BLOCKED\nClosing count unknown; no comparison can be made.\nSupply the closing count on the display sheet. No variance issued."
+    }
+  },
+  {
+    "id": "bakery-oven-load-sequence",
+    "title": "Bakery oven load sequence",
+    "zone": "Bakery",
+    "summary": "Sequence tray loads into supplied oven slots at stated intervals.",
+    "aliases": [],
+    "inputs": [
+      "Oven plan with slots and interval",
+      "Tray list with load times and slots",
+      "Product bake durations with card refs"
+    ],
+    "outputs": [
+      "Load sequence with slot occupancy",
+      "Overload or fit verdict"
+    ],
+    "tools": [
+      "validate_prep_capacity",
+      "build_prep_plan"
+    ],
+    "example": {
+      "input": "Oven plan OP-2: 2 slots, load interval 10 min. Trays: T-1 rolls loads 08:00 slot A; T-2 rolls loads 08:10 slot B; T-3 loaves loads 08:20 slot A. Product cards: rolls bake 20 min, loaves bake 30 min. Flour label FL-1 states wheat contains. Planning date 2026-10-28, offset -04:00. OP-2 confirms compatible products and that loading/unloading is included in each interval; the slot releases exactly at the stated end. These are supplied timing inputs, not a safety clearance.",
+      "output": "OVEN LOAD SEQUENCE - OP-2\n08:00 T-1 rolls slot A (planned end 08:20). 08:10 T-2 rolls slot B (planned end 08:30). 08:20 T-3 loaves slot A (planned end 08:50).\nConcurrent loads never exceed 2 supplied slots; turnover is included per OP-2. Actual doneness and operational release are not verified by this timeline.\nTimes from OP-2 and product cards only; no other schedule assumed.\nAllergens: wheat contains per FL-1 for all trays."
+    },
+    "blockedExample": {
+      "input": "Sequence the oven loads. Tray list and slot count missing.",
+      "output": "SEQUENCE BLOCKED\nTrays and slots unknown; no sequence can be built.\nSupply the oven plan slots and the tray list. No sequence issued."
+    }
+  },
+  {
+    "id": "bakery-preorder-consolidation",
+    "title": "Bakery preorder consolidation",
+    "zone": "Bakery",
+    "summary": "Merge explicit preorder lines and cancellations by product and date.",
+    "aliases": [],
+    "inputs": [
+      "Order book with order IDs and dates",
+      "Cancellation notes with dates",
+      "Label sources for allergen states"
+    ],
+    "outputs": [
+      "Consolidated totals by product and date",
+      "Duplicate and cancellation audit note"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "build_prep_plan"
+    ],
+    "example": {
+      "input": "Order book OB-7: O-1 sourdough 4 for 2026-10-28; O-2 sourdough 2 plus croissants 6 for 2026-10-28; O-3 croissants 6 for 2026-10-29; cancellation C-1 received 2026-10-26 cancels the 6 croissants on O-2. Sourdough flour label FL-1 states wheat contains; croissant label CR-2 states dairy contains.",
+      "output": "PREORDER CONSOLIDATION - OB-7\n2026-10-28: sourdough 4+2=6 (host arithmetic); croissants 6-6=0 after C-1.\n2026-10-29: croissants 6.\nChecked by order ID; no duplicates.\nAllergens: sourdough wheat contains per FL-1; croissants dairy contains per CR-2."
+    },
+    "blockedExample": {
+      "input": "Consolidate preorders. Order book missing; lines unknown.",
+      "output": "CONSOLIDATION BLOCKED\nOrder lines unknown; no totals can be built.\nSupply the order book with IDs, products, and dates. No totals issued."
     }
   },
   {
@@ -414,6 +557,34 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "cook-once-component-plan",
+    "title": "Cook once component plan",
+    "zone": "Home Kitchen",
+    "summary": "Allocate shared cooked components across meals with measured yields and no double counting.",
+    "aliases": [],
+    "inputs": [
+      "Cook date with raw quantities",
+      "Measured cooked yields with reader",
+      "Meals with component quantities"
+    ],
+    "outputs": [
+      "Allocation per meal with leftovers",
+      "No-double-count check shown"
+    ],
+    "tools": [
+      "scale_recipe",
+      "build_prep_plan"
+    ],
+    "example": {
+      "input": "Sunday cook 2026-10-25 by Mara: rice 1000 g dry and chicken 1200 g raw; measured cooked yields rice 2600 g and chicken 900 g per scale reading. Meals: Mon bowls (rice 600 g, chicken 300 g), Tue soup (rice 400 g), Wed bowls (rice 600 g, chicken 300 g), Thu fried rice (rice 600 g, chicken 200 g). Soy sauce 20 ml per bowl meal per Mara's note. Soy label S-3 states soy contains.",
+      "output": "COMPONENT PLAN - week of 2026-10-25\nAvailable: rice 2600 g; chicken 900 g cooked (measured).\nAllocation (host arithmetic): rice 600+400+600+600=2200 g, leftover 2600-2200=400 g; chicken 300+300+200=800 g, leftover 900-800=100 g.\nEach gram assigned once; no double counting.\nSeasoning: soy 20 ml each for Mon and Wed bowls per Mara's note (host arithmetic: 2x20=40 ml total); not part of component allocation.\nAllergens: soy sauce soy contains per S-3; rice and chicken unknown, label evidence not supplied.\nStatus: draft for Mara to confirm.\nHandling/storage procedures for the multi-day allocation were not supplied. These are quantity allocations only; no storage period or reuse safety is approved."
+    },
+    "blockedExample": {
+      "input": "Allocate the components. Cooked yields unmeasured; only raw weights known.",
+      "output": "COMPONENT BLOCKED\nCooked yields unknown; raw weights cannot be converted by guess.\nSupply measured cooked yields with the reader name. No allocation issued."
+    }
+  },
+  {
     "id": "corporate-event-menu-planner",
     "title": "Corporate event menu planner",
     "zone": "Events and Banqueting",
@@ -476,6 +647,64 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Draft sheet for degreaser. SDS missing.",
       "output": "CHEMICAL BLOCKED\nSDS unknown for degreaser; supply supplier SDS version.\nNo handling sheet issued. No PPE guessed."
+    }
+  },
+  {
+    "id": "counter-service-combo-costing",
+    "title": "Counter service combo costing",
+    "zone": "Small Shop",
+    "summary": "Cost an explicitly selected combo and state eligible items with no invented mapping.",
+    "aliases": [
+      "mom-and-pop-counter-service-combo-costing"
+    ],
+    "inputs": [
+      "Combo ID with selected items",
+      "Item costs with sources",
+      "Price with menu ref"
+    ],
+    "outputs": [
+      "Combo cost with margin",
+      "Eligibility list with no substitutions"
+    ],
+    "tools": [
+      "cost_recipe",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Combo K-2 'lunch deal' per menu board: sandwich S-1 cost USD 1.80, apple AP-9 cost USD 0.60, small coffee CF-S cost USD 0.50 per cost sheets. Price USD 5.00. Eligible SKUs exactly S-1, AP-9, CF-S; no substitutions listed. Sandwich label S-1 states wheat contains.",
+      "output": "COMBO COSTING - K-2\nCost: 1.80+0.60+0.50=USD 2.90 (host arithmetic). Price USD 5.00; listed price less component cost 5.00-2.90=USD 2.10 before unconfirmed taxes, packaging, fees and operating costs.\nEligible: S-1, AP-9, CF-S exactly as listed; no substitutions mapped.\nAllergens: sandwich wheat contains per S-1; apple and coffee unknown, label evidence not supplied. No milk or other addition is mapped because none was supplied."
+    },
+    "blockedExample": {
+      "input": "Cost the combo. Selected items and costs missing.",
+      "output": "COMBO BLOCKED\nItems unknown; costs unknown.\nSupply the exact items with per-item costs. No costing issued."
+    }
+  },
+  {
+    "id": "custom-cake-order-specification",
+    "title": "Custom cake order specification",
+    "zone": "Bakery",
+    "summary": "Specify a custom cake order with servings, design, diet limits, deposit, and collection.",
+    "aliases": [],
+    "inputs": [
+      "Order ID with servings and design",
+      "Diet request with kitchen limits",
+      "Price, deposit, and collection details"
+    ],
+    "outputs": [
+      "Order specification with money shown",
+      "Unresolved items with owners"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "create_task"
+    ],
+    "example": {
+      "input": "Order Q-44: 20 servings, chocolate sponge, blue icing writing 'Maya 10'. Customer requests nut-free; bakery shares lines with nut products per kitchen note K-2, so nut-free cannot be verified - owner Ana to advise customer. Price USD 60, deposit USD 20 paid 2026-10-25, balance USD 40 due at collection 2026-10-30 15:00. Exact blue shade TBC by customer due 2026-10-28. Recipe labels state egg contains and dairy contains.",
+      "output": "CAKE ORDER SPEC - Q-44\n20 servings; chocolate sponge; blue icing 'Maya 10' (shade TBC by customer due 2026-10-28).\nDiet: nut-free requested but unverifiable on shared lines per K-2; owner Ana to advise; nut state unknown, no absence claim.\nMoney: USD 60 total; deposit USD 20 paid 2026-10-25; balance 60-20=USD 40 due 2026-10-30 15:00 (host arithmetic).\nAllergens: egg contains; dairy contains per recipe labels.\nStatus: specification draft; shade and diet advice unresolved."
+    },
+    "blockedExample": {
+      "input": "Specify the cake order. Servings and collection date missing.",
+      "output": "SPEC BLOCKED\nServings unknown; collection date unknown.\nSupply servings and the collection date and time. No specification issued."
     }
   },
   {
@@ -583,6 +812,36 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "deli-display-replenishment",
+    "title": "Deli display replenishment",
+    "zone": "Small Shop",
+    "summary": "Top up deli displays to stated pars under the actual holding plan.",
+    "aliases": [
+      "mom-and-pop-deli-display-replenishment"
+    ],
+    "inputs": [
+      "Display pars with plan ref",
+      "Current display weights with check time",
+      "Measured batch size with reader"
+    ],
+    "outputs": [
+      "Replenishment quantities in batches",
+      "Over-par decisions left to owner"
+    ],
+    "tools": [
+      "build_prep_plan",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Display plan DP-5: ham par 500 g, cheese par 400 g. Display check 10:00: ham 200 g, cheese 350 g. Measured slice batch 100 g per scale. Deli lead: Ana on shift. Ham label HA-3 states mustard may_contain; cheese label CH-8 states dairy contains.",
+      "output": "DELI REPLENISHMENT - 10:00\nHam: par 500 - 200 = 300 g needed = 3 batches of 100 g (host arithmetic).\nCheese: par 400 - 350 = 50 g needed; batches are 100 g, so 1 batch would reach 450 g (50 g over par) - owner Ana to confirm before adding.\nDP-5 supplies pars, not holding controls. This is a quantity proposal; the local holding/handling plan must be verified before replenishment.\nAllergens: ham mustard may_contain per HA-3; cheese dairy contains per CH-8."
+    },
+    "blockedExample": {
+      "input": "Replenish the display. Pars and current weights missing.",
+      "output": "REPLENISHMENT BLOCKED\nPars unknown; display weights unknown.\nSupply the display plan pars and current weights. No top-up issued."
+    }
+  },
+  {
     "id": "dietary-requirements-tracker",
     "title": "Dietary requirements tracker",
     "zone": "Events and Banqueting",
@@ -678,6 +937,62 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Brief new dish. Concept and guardrails missing.",
       "output": "BRIEF BLOCKED\nConcept unknown; guardrails unknown.\nSupply both before briefing."
+    }
+  },
+  {
+    "id": "dough-production-yield-plan",
+    "title": "Dough production yield plan",
+    "zone": "Bakery",
+    "summary": "Set piece counts and weights against measured dough with stated loss.",
+    "aliases": [],
+    "inputs": [
+      "Total dough weight with formula ref",
+      "Piece count and weight targets",
+      "Measured loss with reader"
+    ],
+    "outputs": [
+      "Yield verdict with surplus or shortfall",
+      "Unspecified items left open"
+    ],
+    "tools": [
+      "calculate_usable_yield",
+      "convert_quantity"
+    ],
+    "example": {
+      "input": "Batch per formula BL-3: total dough 1680 g. Target: 8 rolls x 200 g = 1600 g. Measured scaling loss 30 g per scale reading by Ben. Fermentation time not specified. Flour label FL-1 states wheat contains.",
+      "output": "DOUGH YIELD PLAN - BL-3 batch\nDough 1680 g; target 8x200=1600 g (host arithmetic).\nUsable: 1680-30=1650 g after measured 30 g loss; surplus 1650-1600=50 g.\nFermentation: unspecified - baker to confirm; no time assumed.\nAllergens: wheat contains per FL-1."
+    },
+    "blockedExample": {
+      "input": "Plan the dough yield. Piece count and piece weight missing.",
+      "output": "YIELD BLOCKED\nPiece demand unknown; no check can be made.\nSupply the piece count and piece weight. No verdict issued."
+    }
+  },
+  {
+    "id": "equipment-downtime-replan",
+    "title": "Equipment downtime replan",
+    "zone": "Professional Kitchen",
+    "summary": "Replan production around unavailable equipment using only supplied alternatives.",
+    "aliases": [],
+    "inputs": [
+      "Downtime scope with tag ref",
+      "Affected production with plan ref",
+      "Supplied alternative with confirmation"
+    ],
+    "outputs": [
+      "Replan on the confirmed alternative",
+      "Unresolved shortfall if none fits"
+    ],
+    "tools": [
+      "validate_prep_capacity",
+      "build_prep_plan"
+    ],
+    "example": {
+      "input": "Oven O-1 down on 2026-10-26 per maintenance tag MT-3. Affected: bread bake 20 loaves per prep plan PP-18. Supplied alternative per manager note: oven O-2 free 14:00-16:00 confirmed by Ana, fits 20 loaves in 2 loads of 10. Flour label FL-1 states wheat contains. Approved timing card TC-5 states each load occupies O-2 for 50 minutes including loading/unloading; date offset -04:00. No further loads share O-2 in that window per Ana.",
+      "output": "DOWNTIME REPLAN - 2026-10-26\nUnavailable: oven O-1 per MT-3; affected 20 loaves per PP-18.\nAlternative: O-2 14:00-16:00 confirmed by Ana; 2 loads x 10 loaves = 20 (host arithmetic).\nProposed O-2 intervals: 14:00-14:50 and 14:50-15:40; 2x50=100 minutes within the supplied 120-minute window, leaving 20 minutes. No other spare equipment assumed; if O-2 fails, shortfall unresolved.\nAllergens: wheat contains per FL-1."
+    },
+    "blockedExample": {
+      "input": "Replan the downtime. Downtime scope and alternative missing.",
+      "output": "REPLAN BLOCKED\nDowntime unknown; alternative unknown.\nSupply the down equipment scope and a confirmed alternative. No replan issued."
     }
   },
   {
@@ -911,6 +1226,34 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "food-truck-commissary-handoff",
+    "title": "Food truck commissary handoff",
+    "zone": "Food Truck",
+    "summary": "Record counted stock moving each way with named responsibilities.",
+    "aliases": [],
+    "inputs": [
+      "Handoff sheet with date and plan ref",
+      "Out and in quantities counted",
+      "Responsible names per direction"
+    ],
+    "outputs": [
+      "Out and in record with counters",
+      "Unrecorded items left open"
+    ],
+    "tools": [
+      "reconcile_stock",
+      "create_task"
+    ],
+    "example": {
+      "input": "Handoff sheet H-31 dated 2026-10-27 per commissary plan CP-2: truck to commissary - chicken 2 kg counted, tortillas 30 counted; commissary to truck - washed trays 10, ice 2 bags. Ben counts out; Ana verifies in. Temperature checks not recorded. Tortilla label TO-6 states wheat contains.",
+      "output": "COMMISSARY HANDOFF - H-31 - 2026-10-27\nOut: chicken 2 kg; tortillas 30 per recorded counts. Assigned outgoing counter: Ben.\nIn: washed trays 10; ice 2 bags recorded. Ana is the assigned receiving verifier; verification/signature remains pending.\nTemperatures: not recorded - check TBC, no claim made.\nAllergens: tortillas wheat contains per TO-6; chicken unknown, label evidence not supplied."
+    },
+    "blockedExample": {
+      "input": "Record the handoff. Quantities and responsible names missing.",
+      "output": "HANDOFF BLOCKED\nCounts unknown; counters unknown.\nSupply counted quantities with counter and verifier names. No handoff issued."
+    }
+  },
+  {
     "id": "food-truck-event-profitability",
     "title": "Food truck event profitability",
     "zone": "Events and Banqueting",
@@ -941,6 +1284,146 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Model truck event. Revenue and pitch fee missing.",
       "output": "TRUCK BLOCKED\nRevenue unknown; pitch fee unknown.\nSupply both before modelling."
+    }
+  },
+  {
+    "id": "food-truck-event-settlement",
+    "title": "Food truck event settlement",
+    "zone": "Food Truck",
+    "summary": "Settle actual event sales against refunds, fees, and known costs with pending items blocking profit.",
+    "aliases": [],
+    "inputs": [
+      "Till sales with till ref",
+      "Refunds, fees, and known costs with refs",
+      "Pending items with reason"
+    ],
+    "outputs": [
+      "Interim contribution after known costs",
+      "Blocked final profit with pending list"
+    ],
+    "tools": [
+      "calculate_event_budget",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Event E-77 in USD: till sales 1200 per Z-55, refunds 40 per refund log, pitch fee 150 per organizer invoice (paid), known food cost 300 per invoices. Card fees unknown pending statement.",
+      "output": "EVENT SETTLEMENT - E-77 - USD\nSales 1200 - refunds 40 - pitch fee 150 - food cost 300 = 710 (host arithmetic).\nUSD 710 is contribution after listed known costs and an upper bound before unknown card fees and other unconfirmed expenses; it is not profit.\nCard fees unknown pending statement - final settlement remains incomplete; knowing that fee alone would not establish net profit.\nStatus: interim settlement for operator review; no payments executed."
+    },
+    "blockedExample": {
+      "input": "Settle the event. Sales and refund records missing.",
+      "output": "SETTLEMENT BLOCKED\nSales unknown; refunds unknown.\nSupply the till report and refund log. No settlement issued."
+    }
+  },
+  {
+    "id": "food-truck-loadout",
+    "title": "Food truck loadout",
+    "zone": "Food Truck",
+    "summary": "Turn event demand into a pack list checked against counted stock.",
+    "aliases": [],
+    "inputs": [
+      "Event ID with date and cover forecast",
+      "Demand quantities with units",
+      "Counted stock sheet with source"
+    ],
+    "outputs": [
+      "Pack list with shortfalls flagged",
+      "Checklist for departure"
+    ],
+    "tools": [
+      "build_order_proposal",
+      "reconcile_stock"
+    ],
+    "example": {
+      "input": "Event E-77 on 2026-10-28 expects 100 covers per organizer email. Need: tortillas 120, chicken 8 kg, drink cans 100. Counted stock per sheet S-60: tortillas 150, chicken 10 kg, cans 90. Shortfall buyer: Ben on call. Tortilla label TO-6 states wheat contains.",
+      "output": "LOADOUT - E-77 - 2026-10-28\nPack: tortillas 120 of 150; chicken 8 kg of 10 kg; cans 90 on hand.\nShortfall: cans 100-90=10 (host arithmetic); proposed shortfall action for Ben to review before departure.\nPacking checklist, not yet performed: [ ] count packed tortillas; [ ] weigh packed chicken; [ ] count loaded cans; [ ] resolve the shortfall.\nAllergens: tortillas wheat contains per TO-6; chicken and cans unknown, label evidence not supplied.\nStatus: pack proposal; no order sent."
+    },
+    "blockedExample": {
+      "input": "Pack the loadout. Cover forecast and stock counts missing.",
+      "output": "LOADOUT BLOCKED\nDemand unknown; stock unknown.\nSupply the forecast with source and the counted stock sheet. No pack list issued."
+    }
+  },
+  {
+    "id": "food-truck-power-water-plan",
+    "title": "Food truck power water plan",
+    "zone": "Food Truck",
+    "summary": "Record verified power and water constraints with no wiring advice or certification.",
+    "aliases": [],
+    "inputs": [
+      "Truck spec with fitted circuits",
+      "Appliance ratings with nameplate refs",
+      "Measured water use with log ref"
+    ],
+    "outputs": [
+      "Recorded power and water constraints",
+      "Blank sign-off with no certification"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "get_workflow"
+    ],
+    "example": {
+      "input": "Truck spec sheet TS-4: fitted circuits C1 16A and C2 16A. Nameplates: warmer 8A per plate P-1, lights 2A per plate P-2. Meter log M-3: measured water use 5 L per hour. Tank 40 L full at departure. Planned service 6 hours. Electrician sign-off blank.",
+      "output": "POWER AND WATER PLAN - TS-4\nPower: C1 16A and C2 16A fitted per TS-4; warmer 8A per P-1; lights 2A per P-2.\nWater: 5 L/hour x 6 hours = 30 L projected against a stated 40 L starting tank (host arithmetic).\nProjection assumes the supplied measured rate continues. Usable supply, reserve, wastewater constraints and operational approval were not supplied; no readiness verdict is available.\nNo wiring or design advice given; no operational certification; electrician sign-off ____.\nStatus: recorded constraints for operator review."
+    },
+    "blockedExample": {
+      "input": "Record power and water constraints. Circuit and appliance ratings missing.",
+      "output": "POWER PLAN BLOCKED\nRatings unknown; no constraint can be recorded.\nSupply the truck spec circuits and nameplate ratings. No plan issued."
+    }
+  },
+  {
+    "id": "food-truck-throughput-menu",
+    "title": "Food truck throughput menu",
+    "zone": "Food Truck",
+    "summary": "Check a ticket forecast against supplied station rates and name the bottleneck.",
+    "aliases": [],
+    "inputs": [
+      "Station rates with ops note ref",
+      "Ticket forecast with ticket mix",
+      "Bottleneck hour with date"
+    ],
+    "outputs": [
+      "Demand-versus-capacity check per station",
+      "Bottleneck verdict with no guarantee"
+    ],
+    "tools": [
+      "validate_prep_capacity",
+      "build_prep_plan"
+    ],
+    "example": {
+      "input": "Ops note OP-9: grill 40 orders per hour, till 60 orders per hour. Forecast Fri 18:00-19:00: 50 tickets, mix 70 percent tacos (grill) and 30 percent drinks-only. Tortilla label TO-6 states wheat contains.",
+      "output": "THROUGHPUT MENU - Fri 18:00-19:00\nDemand: tacos 70% of 50 = 35 tickets; drinks 15 (host arithmetic).\nCapacity: grill 40/hour; till 60/hour. Bottleneck: grill.\nCheck: taco tickets 35 <= 40 fits; till 50 <= 60 fits.\nNo throughput guaranteed; actual depends on crew and conditions.\nAllergens: tacos wheat contains per TO-6."
+    },
+    "blockedExample": {
+      "input": "Check throughput. Station rates missing.",
+      "output": "THROUGHPUT BLOCKED\nStation rates unknown; no check can be made.\nSupply the ops note station rates per hour. No verdict issued."
+    }
+  },
+  {
+    "id": "freezer-inventory-plan",
+    "title": "Freezer inventory plan",
+    "zone": "Home Kitchen",
+    "summary": "Count, label-check, and rotate freezer stock against supplied dates with no invented shelf life.",
+    "aliases": [],
+    "inputs": [
+      "Freezer count sheet with items and label dates",
+      "Rotation rule from a named household note",
+      "Owner for labelling unknowns"
+    ],
+    "outputs": [
+      "Counted inventory with date states",
+      "Rotation order with unknown-date handling"
+    ],
+    "tools": [
+      "reconcile_stock",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Freezer count sheet F-2026-10-20: beef stew 2 boxes x 500 g labeled 2026-09-15, peas 1 bag 1000 g labeled 2026-08-01, bread 1 loaf with label date unknown. Household rotation rule per house note H-1: use oldest labeled item first; no shelf-life standard supplied. Labelling owner: Ben. Stew label ST-4 states gluten may_contain; pea label P-7 states gluten verified_absent.",
+      "output": "FREEZER PLAN - F-2026-10-20\nCount: 4 items (stew 2, peas 1, bread 1); 1 item with unknown date.\nRotation per H-1: 1st peas (labeled 2026-08-01, oldest); 2nd stew (labeled 2026-09-15); bread date unknown - owner Ben to verify its date; it cannot be ranked under H-1. Do not invent a date or shelf life.\nNo shelf life stated; dates are label dates only.\nAllergens: stew gluten may_contain per ST-4; peas gluten verified_absent per P-7; bread wheat unknown, label evidence not supplied.\nStatus: draft for Ben to confirm."
+    },
+    "blockedExample": {
+      "input": "Plan freezer rotation. Count sheet missing; contents unknown.",
+      "output": "FREEZER BLOCKED\nCounts and label dates unknown; no rotation can be set.\nSupply the count sheet ID, date, and items. No rotation issued."
     }
   },
   {
@@ -1006,6 +1489,94 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Generate checklist. Plan version missing.",
       "output": "HACCP BLOCKED\nVerified plan reference unknown; supply version and date.\nNo checklist issued. No limits invented."
+    }
+  },
+  {
+    "id": "home-pantry-meal-plan",
+    "title": "Home pantry meal plan",
+    "zone": "Home Kitchen",
+    "summary": "Choose home meals that fit counted pantry stock, declared diets, and a top-up budget.",
+    "aliases": [
+      "home-cooking",
+      "family-pantry-plan"
+    ],
+    "inputs": [
+      "Pantry count sheet with quantities and date",
+      "Household members with diets and week dates",
+      "Top-up budget and candidate meals with quantities"
+    ],
+    "outputs": [
+      "Meal plan using counted stock with arithmetic shown",
+      "Top-up shopping list within budget"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "lookup_recipe",
+      "create_task"
+    ],
+    "example": {
+      "input": "Plan three dinners and one oat breakfast for three people. Plan dinners Mon 2026-10-26 to Wed 2026-10-28 for Mara, Ben, and Sam per pantry count sheet P-2026-10-20: rice 2000 g, lentils 1000 g, tomato tins 4 x 400 g, oats 500 g. Diet: Sam vegetarian; no pork for the household. Top-up budget USD 40. Candidates: lentil curry (rice 300 g, lentils 200 g, tomato 1 tin), fried rice (rice 300 g), oat breakfast (oats 50 g per serving x 3). Top-up prices per corner shop list SP-14 dated 2026-10-24: onions 1 kg USD 2, carrots 500 g USD 1. Lentil pack label L-9 states gluten verified_absent; oat pack states gluten may_contain per label O-2.",
+      "output": "PANTRY MEAL PLAN - 2026-10-26 to 2026-10-28\nMeals: Mon lentil curry; Tue fried rice; Wed lentil curry; one oat breakfast: 3 servings.\nStock check (host arithmetic): rice 300+300+300=900 g <= 2000 g; lentils 200+200=400 g <= 1000 g; tins 2 <= 4; oats 50x3=150 g <= 500 g.\nTop-up: onions 1 kg USD 2; carrots 500 g USD 1; total 2+1=USD 3 <= USD 40.\nDiet: no pork used; lentil curry vegetarian per stated ingredients; fried rice extras beyond rice TBC - confirm vegetarian for Sam.\nAllergens: lentils gluten verified_absent per L-9; oats gluten may_contain per O-2; rice and tins unknown, label evidence not supplied.\nStatus: draft for household review; nothing ordered."
+    },
+    "blockedExample": {
+      "input": "Plan pantry dinners. Pantry count sheet missing; quantities unknown.",
+      "output": "MEAL PLAN BLOCKED\nCounted stock unknown; no meal can be matched to stock.\nSupply the count sheet ID, date, and quantities with units. No plan issued."
+    }
+  },
+  {
+    "id": "household-grocery-budget",
+    "title": "Household grocery budget",
+    "zone": "Home Kitchen",
+    "summary": "Build a shopping list that stays within a supplied budget using stated prices.",
+    "aliases": [],
+    "inputs": [
+      "Budget amount with currency and week",
+      "Item list with quantities and units",
+      "Price list with source ID and date"
+    ],
+    "outputs": [
+      "Priced list with line totals and grand total",
+      "Budget fit verdict with remaining or overage"
+    ],
+    "tools": [
+      "compare_purchase_costs",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Shop for week 2026-10-26, budget USD 60. Price list SP-14 dated 2026-10-24: milk 1 L USD 3, eggs dozen USD 4, bread loaf USD 3, chicken 1 kg USD 9, rice 1 kg USD 2, apples 1 kg USD 4. List: milk 2 L, eggs 1 dozen, bread 2 loaves, chicken 1 kg, rice 2 kg, apples 1 kg. Bread label B-2 states wheat contains; milk label M-1 states dairy contains.",
+      "output": "GROCERY BUDGET - week 2026-10-26 - USD\nLines (host arithmetic): milk 2x3=6; eggs 1x4=4; bread 2x3=6; chicken 1x9=9; rice 2x2=4; apples 1x4=4.\nTotal: 6+4+6+9+4+4=USD 33 <= USD 60. Remaining: 60-33=USD 27.\nPrices per SP-14 dated 2026-10-24; no other fees included.\nAllergens: bread wheat contains per B-2; milk dairy contains per M-1; other items unknown, label evidence not supplied.\nStatus: draft for household to confirm; nothing ordered or paid."
+    },
+    "blockedExample": {
+      "input": "Shop for the week. Budget USD 60 but item prices missing.",
+      "output": "BUDGET BLOCKED\nPrices unknown; no line can be priced.\nSupply the price list source, date, and unit prices. No total issued."
+    }
+  },
+  {
+    "id": "household-meal-calendar",
+    "title": "Household meal calendar",
+    "zone": "Home Kitchen",
+    "summary": "Lay out who eats what and when from declared portions and schedules.",
+    "aliases": [],
+    "inputs": [
+      "Members with declared portions and schedules",
+      "Plan week dates with meals per day",
+      "Diet notes per member"
+    ],
+    "outputs": [
+      "Night-by-night calendar with plate counts",
+      "Diet and portion notes as declared"
+    ],
+    "tools": [
+      "lookup_recipe",
+      "create_task"
+    ],
+    "example": {
+      "input": "Calendar week 2026-10-26 for Mara (dinner home Mon/Wed/Fri, 1 plate), Ben (dinner home daily, 2 plates), Sam age 9 (dinner home daily, 1 plate per Mara's note; declared portion, no multiplier applied). Diet: Sam vegetarian. Meals: Mon lentil soup, Wed pasta, Fri tacos. Pasta label PA-1 states wheat contains; soup label SO-2 states celery verified_absent.",
+      "output": "MEAL CALENDAR - week 2026-10-26\nMon soup: Mara 1 + Ben 2 + Sam 1 = 4 plates (host arithmetic).\nWed pasta: 1+2+1 = 4 plates. Fri tacos: 1+2+1 = 4 plates. Named Mon/Wed/Fri meals total 12 plates. Tue/Thu/Sat/Sun: Ben 2 + Sam 1 = 3 plates/day, 4x3=12 additional plates with meals TBC. Whole-week declared demand: 12+12=24 plates; the calendar remains incomplete for those four days.\nPortions as declared; no adult-child multiplier used.\nDiet: Sam vegetarian; confirm each night's meal suits Sam before cooking.\nAllergens: pasta wheat contains per PA-1; soup celery verified_absent per SO-2; tacos unknown, recipe TBC.\nStatus: draft for Mara to confirm."
+    },
+    "blockedExample": {
+      "input": "Build the meal calendar. Home nights and portions missing.",
+      "output": "CALENDAR BLOCKED\nSchedules unknown; portions unknown.\nSupply each member's home nights and declared portions. No calendar issued and no multiplier applied."
     }
   },
   {
@@ -1139,6 +1710,34 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "leftover-reuse-plan",
+    "title": "Leftover reuse plan",
+    "zone": "Home Kitchen",
+    "summary": "Turn logged leftovers into new meals only where handling evidence is verified.",
+    "aliases": [],
+    "inputs": [
+      "Leftover log with items, weights, and handling notes",
+      "Handling evidence per item with date and time",
+      "Candidate new meals with quantities"
+    ],
+    "outputs": [
+      "Reuse plan for verified items only",
+      "Excluded items with reason and owner"
+    ],
+    "tools": [
+      "lookup_recipe",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Leftovers in log L-2026-10-25 for Mara and Ben: roast chicken 400 g cooled and refrigerated 2026-10-25 19:30 per Mara's log note; cooked rice 300 g refrigerated 2026-10-25 19:30 per Mara's log note; fish curry 200 g with storage history unknown (no log entry). Candidate: chicken fried rice (chicken 400 g, rice 300 g) plus soy sauce 20 ml. Soy label S-3 states soy contains and wheat contains. Requested planning date: 2026-10-26. No verified handling standard, storage duration limit or reuse authorization supplied.",
+      "output": "LEFTOVER REUSE PLAN - 2026-10-26\nCandidate meal, not approved for reuse: chicken fried rice for 2 (chicken 400 g + rice 300 g + soy 20 ml); both items have logged handling notes in L-2026-10-25.\nExcluded: fish curry 200 g - storage unknown, reuse not assured; handling decision unresolved; no disposal or reuse action confirmed.\nLog notes alone do not establish safety. Verify handling against an appropriate authoritative procedure before deciding whether any item can be reused. No storage-time or clearance claim made.\nAllergens: soy sauce soy contains and wheat contains per S-3; chicken and rice unknown, label evidence not supplied.\nStatus: quantity draft only; reuse assurance blocked pending verified handling review."
+    },
+    "blockedExample": {
+      "input": "Plan leftover meals. No handling notes exist for any item.",
+      "output": "REUSE BLOCKED\nHandling evidence unknown for all items; no reuse can be assured.\nSupply the leftover log with handling notes per item. No reuse plan issued."
+    }
+  },
+  {
     "id": "menu-description-writer",
     "title": "Menu description writer",
     "zone": "Menu and Product Development",
@@ -1203,6 +1802,62 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Review tomato soup dinner variant. Known tomato cost 800c batch partial; onion unknown no purchase supplied. Net price 1000c confirmed false.",
       "output": "MARGIN BLOCKED - Tomato Soup Dinner\nKnown cost: 800c batch partial; unknown: syn_onion no purchase supplied.\nPer serving cost withheld; margin withheld.\nNet price 1000c is unconfirmed; supply confirmed true price to compute margin.\nNo margin invented. No target assumed."
+    }
+  },
+  {
+    "id": "mobile-service-contingency-plan",
+    "title": "Mobile service contingency plan",
+    "zone": "Food Truck",
+    "summary": "Set trigger, owner, and fallback actions for service disruptions from supplied rules.",
+    "aliases": [],
+    "inputs": [
+      "Triggers with thresholds and rule sources",
+      "Fallback action with owner per trigger",
+      "Event contact with source"
+    ],
+    "outputs": [
+      "Trigger-owner-fallback table",
+      "No-forecast honesty note"
+    ],
+    "tools": [
+      "get_workflow",
+      "create_task"
+    ],
+    "example": {
+      "input": "Event E-77: trigger T1 wind over 40 km/h per organizer rule - fallback close awning and serve at walk-up hatch, owner Mara; trigger T2 generator fault - fallback pre-packed cold menu, owner Ben. Organizer contact Jo 555-0140 per email. No weather forecast stated. Cold menu labels TBC.",
+      "output": "CONTINGENCY PLAN - E-77\nT1 wind over 40 km/h: close awning, walk-up hatch; owner Mara.\nT2 generator fault: pre-packed cold menu; owner Ben.\nContact: Jo 555-0140.\nTriggers only; no forecast stated or implied.\nAllergens: cold-menu records unknown; labels and verified handling controls must be supplied before the cold fallback is considered usable. These are recorded organizer triggers for review, not verified equipment suitability or permission to continue service."
+    },
+    "blockedExample": {
+      "input": "Set contingencies. Triggers and owners missing.",
+      "output": "CONTINGENCY BLOCKED\nTriggers unknown; owners unknown.\nSupply trigger thresholds with owners and fallbacks. No plan issued."
+    }
+  },
+  {
+    "id": "multi-station-pickup-plan",
+    "title": "Multi station pickup plan",
+    "zone": "Professional Kitchen",
+    "summary": "Time stations backwards from a supplied pickup using stated task durations.",
+    "aliases": [],
+    "inputs": [
+      "Order with pickup time and covers",
+      "Task durations with plan refs",
+      "Station owners per task"
+    ],
+    "outputs": [
+      "Backwards-timed station plan",
+      "Duration-source honesty note"
+    ],
+    "tools": [
+      "build_prep_plan",
+      "validate_prep_capacity"
+    ],
+    "example": {
+      "input": "Order O-77: pickup 19:00 on 2026-10-25, 20 covers. Task durations per prep plan PP-19 and method MC-6 v3: carve 15 min (Ben), plate 10 min (Ana), sauce reheat 20 min (Ben). Sauce milk label M-1 states dairy contains. Both carving and sauce must finish before plating starts. Ben is confirmed available 18:15-18:50 and must attend both tasks serially; Ana is confirmed available 18:50-19:00. Offset -04:00.",
+      "output": "PICKUP PLAN - O-77 - 19:00\nBackwards timing (host arithmetic): plate 18:50-19:00 (Ana); carve 18:35-18:50 (Ben); sauce 18:15-18:35 (Ben). Both prerequisites finish before plating; Ben has no overlapping attended tasks, and the supplied availability windows cover the proposal.\nStations: carve Ben, plate Ana, sauce Ben.\nDurations per PP-19 and MC-6 v3 only; no other cooking times assumed.\nAllergens: sauce dairy contains per M-1."
+    },
+    "blockedExample": {
+      "input": "Time the pickup. Pickup time and task durations missing.",
+      "output": "PICKUP BLOCKED\nPickup unknown; durations unknown.\nSupply the pickup time and task durations with refs. No plan issued."
     }
   },
   {
@@ -1404,6 +2059,36 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "preferment-flour-accounting",
+    "title": "Preferment flour accounting",
+    "zone": "Bakery",
+    "summary": "Account starter flour and water inside final dough targets without double counting.",
+    "aliases": [
+      "sourdough-starter-accounting"
+    ],
+    "inputs": [
+      "Starter card with total and composition",
+      "Final dough flour and water targets",
+      "Label sources for allergen states"
+    ],
+    "outputs": [
+      "Starter contribution breakdown",
+      "Fresh additions with no-double-count check"
+    ],
+    "tools": [
+      "convert_quantity",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Starter card S-9: starter 200 g total, made of flour 100 g plus water 100 g. Final dough targets: flour 1000 g total, water 650 g total. Flour label FL-1 states wheat contains.",
+      "output": "PREFERMENT ACCOUNTING - S-9\nStarter brings: flour 100 g + water 100 g = 200 g.\nAdd fresh: flour 1000-100=900 g; water 650-100=550 g (host arithmetic).\nCheck: 900+100=1000 g flour; 550+100=650 g water; starter counted once.\nAllergens: wheat contains per FL-1."
+    },
+    "blockedExample": {
+      "input": "Account the starter. Starter composition missing; only the 200 g total known.",
+      "output": "ACCOUNTING BLOCKED\nStarter flour and water split unknown; no subtraction can be made.\nSupply the starter card composition. No additions issued."
+    }
+  },
+  {
     "id": "prep-planning",
     "title": "Prep planning",
     "zone": "Kitchen Operations",
@@ -1502,6 +2187,34 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Guide private dining. Room, covers, menu missing.",
       "output": "GUIDE BLOCKED\nRoom unknown; covers unknown; menu unknown.\nSupply all three before setup."
+    }
+  },
+  {
+    "id": "production-batch-record",
+    "title": "Production batch record",
+    "zone": "Professional Kitchen",
+    "summary": "Record planned versus measured production with method version and blank checkpoints.",
+    "aliases": [],
+    "inputs": [
+      "Batch ID with date and planned portions",
+      "Measured portions with counter",
+      "Method card with version"
+    ],
+    "outputs": [
+      "Planned-versus-measured record",
+      "Checkpoints with blanks preserved"
+    ],
+    "tools": [
+      "calculate_usable_yield",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Batch PB-50 soup 2026-10-25: planned 40 portions per prep plan PP-18, measured 38 portions counted by Ben. Method card MC-6 v3. Checkpoints: taste signed Ben; chill unsigned. Soup label SO-2 states celery verified_absent; milk label M-1 states dairy contains.",
+      "output": "BATCH RECORD - PB-50 - 2026-10-25\nPlanned 40 portions per PP-18; measured 38; variance 38-40=-2 (host arithmetic).\nMethod: MC-6 v3.\nCheckpoints: taste signed Ben; chill ____ (blank until confirmed).\nAllergens: celery verified_absent per SO-2; dairy contains per M-1."
+    },
+    "blockedExample": {
+      "input": "Record the batch. Planned portions and method version missing.",
+      "output": "BATCH BLOCKED\nPlanned quantity unknown; method version unknown.\nSupply the prep plan portions and method card version. No record issued."
     }
   },
   {
@@ -1703,6 +2416,94 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     }
   },
   {
+    "id": "recipe-troubleshooting-log",
+    "title": "Recipe troubleshooting log",
+    "zone": "Home Kitchen",
+    "summary": "Compare an observed batch against the specified method and log unproven hypotheses.",
+    "aliases": [],
+    "inputs": [
+      "Specified recipe with quantities and method",
+      "Observed batch with quantities and result",
+      "Owner and date for the next test"
+    ],
+    "outputs": [
+      "Spec-versus-observed comparison",
+      "Hypotheses marked unproven with next test"
+    ],
+    "tools": [
+      "lookup_recipe",
+      "validate_kitchen_data"
+    ],
+    "example": {
+      "input": "Recipe card RC-12 pancakes: flour 200 g, milk 300 ml, rest batter 10 min, pan medium, 2 min per side. Observed batch 2026-10-25 by Ben: flour 200 g, milk 300 ml, rest 0 min, pan high, 2 min per side; result pale and soft inside per Ben's note. Hypotheses (unproven): skipped rest; excess heat. Next test: repeat with 10 min rest and medium heat, owner Ben due 2026-11-01. Flour label F-5 states wheat contains; milk label M-1 states dairy contains.",
+      "output": "TROUBLESHOOTING LOG - RC-12 - 2026-10-25\nSpec: 200 g flour, 300 ml milk, rest 10 min, medium, 2 min/side.\nObserved: same quantities; rest 0 min; pan high; result pale and soft inside per Ben.\nDifferences: rest -10 min; heat higher than spec.\nHypotheses (not proven fixes): skipped rest; excess heat.\nNext test: 10 min rest, medium heat; owner Ben due 2026-11-01.\nAllergens: flour wheat contains per F-5; milk dairy contains per M-1."
+    },
+    "blockedExample": {
+      "input": "Log the failed batch. Recipe card and specified method missing.",
+      "output": "LOG BLOCKED\nSpecified method unknown; no comparison can be made.\nSupply the recipe card with quantities and method. No hypotheses logged."
+    }
+  },
+  {
+    "id": "retail-markdown-review",
+    "title": "Retail markdown review",
+    "zone": "Small Shop",
+    "summary": "Review a proposed markdown against price, cost, count, and date evidence with no auto repricing.",
+    "aliases": [
+      "mom-and-pop-retail-markdown-review"
+    ],
+    "inputs": [
+      "SKU with current price and cost",
+      "Count with sheet ref and date mark",
+      "Proposed price with start date"
+    ],
+    "outputs": [
+      "Margin and exposure at proposed price",
+      "Blank approval with no price change"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "create_task"
+    ],
+    "example": {
+      "input": "SKU yogurt Y-12: current price USD 2.00, cost USD 1.20 per invoice I-88, count 20 units per C-41, date mark 2026-10-28 per pack. Proposed price USD 1.50 from 2026-10-27. Y-12 label states dairy contains.",
+      "output": "MARKDOWN REVIEW - Y-12\nProposed: USD 2.00 to USD 1.50 from 2026-10-27.\nListed price less unit cost: 1.50-1.20=USD 0.30 per unit (host arithmetic), before any unconfirmed tax, fees and operating costs.\nExposure: 20 units x USD 1.20 = USD 24 at cost; date mark 2026-10-28.\nManager approval: ____ (blank). No price changed by this draft.\nAllergens: dairy contains per Y-12 label."
+    },
+    "blockedExample": {
+      "input": "Review the markdown. Unit cost and count missing.",
+      "output": "MARKDOWN BLOCKED\nCost unknown; count unknown.\nSupply the unit cost with source and the counted stock. No review issued."
+    }
+  },
+  {
+    "id": "retail-pack-size-pricing",
+    "title": "Retail pack size pricing",
+    "zone": "Small Shop",
+    "summary": "Price a measured pack from portion, packaging, and fee costs with rounding explicit.",
+    "aliases": [
+      "mom-and-pop-retail-pack-size-pricing"
+    ],
+    "inputs": [
+      "Measured pack contents with weights",
+      "Component costs with sources",
+      "Rounding rule with note ref"
+    ],
+    "outputs": [
+      "Pack cost build with total",
+      "Suggested price with margin"
+    ],
+    "tools": [
+      "cost_recipe",
+      "convert_quantity"
+    ],
+    "example": {
+      "input": "Cookie pack: 4 cookies x 30 g = 120 g measured. Costs: cookies USD 0.25 each per recipe sheet, box USD 0.30 per invoice, label USD 0.05 per invoice, stall fee USD 0.50 per pack per stall agreement. Shop note: prices round to nearest USD 0.05. Recipe labels state wheat contains and egg contains. Manager proposes a net selling price of USD 2.48 before that stated rounding rule; no other operating costs are confirmed.",
+      "output": "PACK PRICING - cookie 4-pack\nCost (host arithmetic): cookies 4x0.25=1.00; box 0.30; label 0.05; stall fee 0.50; total 1.00+0.30+0.05+0.50=USD 1.85.\nManager proposal USD 2.48 rounds to USD 2.50 (nearest USD 0.05 per shop note); listed-cost spread 2.50-1.85=USD 0.65 before other unconfirmed expenses.\nPack: 120 g measured.\nAllergens: wheat contains; egg contains per recipe labels.\nStatus: draft for manager; no price set."
+    },
+    "blockedExample": {
+      "input": "Price the pack. Portion and packaging costs missing.",
+      "output": "PACK BLOCKED\nComponent costs unknown; no build can be made.\nSupply each component cost with its source. No price suggested."
+    }
+  },
+  {
     "id": "rota-builder",
     "title": "Rota builder",
     "zone": "Kitchen Operations",
@@ -1768,6 +2569,122 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "blockedExample": {
       "input": "Plan seasonal menu. Supplier quotes missing. Targets missing.",
       "output": "SEASONAL BLOCKED\nQuotes unknown; targets unknown.\nSupply quotes with dates and explicit target before drafting."
+    }
+  },
+  {
+    "id": "service-bottleneck-review",
+    "title": "Service bottleneck review",
+    "zone": "Professional Kitchen",
+    "summary": "Review observed ticket time segments from a limited sample with no causal claims.",
+    "aliases": [],
+    "inputs": [
+      "Ticket log with sample size and window",
+      "Time segments with averages and ranges",
+      "Follow-up sample with owner"
+    ],
+    "outputs": [
+      "Segment comparison with slowest named",
+      "Limited-sample honesty note"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "get_workflow"
+    ],
+    "example": {
+      "input": "Ticket log TL-8 sample: 10 tickets on 2026-10-25 19:00-20:00. Fired-to-pass average 18 min (range 12-26). Pass-to-table average 6 min (range 3-11). Follow-up sample Saturday, owner Mara.",
+      "output": "BOTTLENECK REVIEW - 2026-10-25 19:00-20:00\nSample: 10 tickets per TL-8 (limited sample).\nSegments: fired-to-pass avg 18 min (12-26); pass-to-table avg 6 min (3-11).\nSlowest segment: fired-to-pass at 18 min average.\nNo causal conclusion; hypotheses unproven on this sample.\nNext: repeat Saturday sample, owner Mara."
+    },
+    "blockedExample": {
+      "input": "Review the bottleneck. Ticket times missing.",
+      "output": "REVIEW BLOCKED\nTicket times unknown; no segment can be compared.\nSupply the ticket log with segment times. No review issued."
+    }
+  },
+  {
+    "id": "shift-handover-board",
+    "title": "Shift handover board",
+    "zone": "Professional Kitchen",
+    "summary": "Hand over incomplete jobs with owner, due time, and blocker to named staff.",
+    "aliases": [],
+    "inputs": [
+      "Handover time with from and to names",
+      "Jobs with owner, due, and blocker",
+      "Rota ref for named staff"
+    ],
+    "outputs": [
+      "Handover board with open jobs",
+      "Blockers with next steps"
+    ],
+    "tools": [
+      "create_task",
+      "get_workflow"
+    ],
+    "example": {
+      "input": "Handover 2026-10-25 16:00 from Ben to Ana, both on rota R-12. J1 stock count, owner Ana, due 18:00, blocker none. J2 oven clean, owner Ben carried over, due 2026-10-26 10:00, blocker oven in use till 20:00. J3 supplier call, owner Ana, due 17:00, blocker phone list TBC.",
+      "output": "HANDOVER - 2026-10-25 16:00 - Ben to Ana\nJ1 stock count: owner Ana, due 18:00, no blocker.\nJ2 oven clean: owner Ben (carry-over), due 2026-10-26 10:00, blocker oven in use till 20:00.\nJ3 supplier call: owner Ana, due 17:00, blocker phone list TBC.\nStaff per rota R-12 only; no other names added."
+    },
+    "blockedExample": {
+      "input": "Build the handover. Jobs and owners missing.",
+      "output": "HANDOVER BLOCKED\nJobs unknown; owners unknown.\nSupply the jobs with owners and due times. No board issued."
+    }
+  },
+  {
+    "id": "small-shop-cash-close",
+    "title": "Small shop cash close",
+    "zone": "Small Shop",
+    "summary": "Close cash against float, sales, refunds, and paid-outs with card isolated and variances unresolved.",
+    "aliases": [
+      "mom-and-pop-small-shop-cash-close"
+    ],
+    "inputs": [
+      "Close sheet with float and count",
+      "Till sales with till ref",
+      "Refunds and paid-outs with refs"
+    ],
+    "outputs": [
+      "Expected-versus-counted cash comparison",
+      "Variance with owner and isolated card"
+    ],
+    "tools": [
+      "validate_kitchen_data",
+      "create_task"
+    ],
+    "example": {
+      "input": "Close sheet X-2026-10-25: float USD 50, cash sales USD 420 per till Z-55, refunds USD 15 per refund log, paid-outs USD 25 for cleaning per receipt R-7, counted cash USD 428. Card receipts USD 600 per Z-55. Variance owner: Mara per rota.",
+      "output": "CASH CLOSE - 2026-10-25 - USD\nExpected: 50+420-15-25=430 (host arithmetic).\nCounted: 428. Variance: 428-430=-2, unresolved; owner Mara to review.\nCard receipts 600 isolated; excluded from cash count.\nStatus: draft close; no payments executed."
+    },
+    "blockedExample": {
+      "input": "Close the cash. Till report and counted cash missing.",
+      "output": "CLOSE BLOCKED\nSales unknown; count unknown.\nSupply the till report and the counted cash. No close issued."
+    }
+  },
+  {
+    "id": "small-shop-reorder-round",
+    "title": "Small shop reorder round",
+    "zone": "Small Shop",
+    "summary": "Propose reorders from counted stock, pars, lead times, and confirmed orders.",
+    "aliases": [
+      "mom-and-pop-small-shop-reorder-round"
+    ],
+    "inputs": [
+      "SKU count with shelf and backroom",
+      "Par with shop note ref",
+      "Confirmed on-order with due date"
+    ],
+    "outputs": [
+      "Reorder proposal with formula shown",
+      "Proposal-only status with no order sent"
+    ],
+    "tools": [
+      "build_order_proposal",
+      "reconcile_stock"
+    ],
+    "example": {
+      "input": "SKU bread per count sheet C-41: shelf 6 plus backroom 10 = 16 counted. Par 40 per shop note SN-2. Confirmed on order 12 due 2026-10-29 per supplier email; lead time 2 days. Bread label B-2 states wheat contains. SN-2 explicitly sets the planning horizon after the confirmed 12 arrive on 2026-10-29 and forecast intervening usage at zero for this synthetic example.",
+      "output": "REORDER ROUND - bread\nCounted: 6+10=16 (host arithmetic). Par 40 per SN-2.\nOn order: 12 confirmed, due 2026-10-29 (2-day lead).\nHorizon after the confirmed receipt with supplied zero intervening usage: 40-16-12=12 to propose. This does not prove availability before that receipt.\nAllergens: wheat contains per B-2.\nStatus: proposal only; no order sent."
+    },
+    "blockedExample": {
+      "input": "Propose the reorder. Shelf and backroom counts missing.",
+      "output": "REORDER BLOCKED\nCounts unknown; no need can be computed.\nSupply the counted shelf and backroom stock. No proposal issued."
     }
   },
   {
@@ -2424,92 +3341,129 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
 ];
 
 export const WORKFLOW_NAMES = [
-  'agency-chef-onboarding-generator',
-  'allergen-management-system',
-  'apprenticeship-tracker',
-  'banquet-event-order',
-  'bar-cocktail-recipe-builder',
-  'burnout-stress-risk-assessment',
-  'canape-reception-planner',
-  'capacity-aware-prep',
-  'catering-quotation',
-  'chef-personal-brand-builder',
-  'chef-wellbeing-check-in',
-  'complaint-handling-resolution-log',
-  'corporate-event-menu-planner',
-  'coshh-chemical-safety',
-  'daily-brief-generator',
-  'daily-close-review',
-  'data-reconciliation',
-  'dietary-requirements-tracker',
-  'disciplinary-documentation-helper',
-  'dish-development-brief',
-  'equipment-maintenance-log',
-  'event-catering-brief',
-  'event-equipment-kit-list',
-  'event-run-of-show',
-  'event-staffing-plan',
-  'foh-service-brief',
-  'food-safety-incident-report',
-  'food-truck-event-profitability',
-  'guest-feedback-analyser',
-  'haccp-checklist-generator',
-  'invoice-reconciliation',
-  'kitchen-budget-planner',
-  'kitchen-culture-health-check',
-  'kitchen-ethos-doc-generator',
-  'menu-description-writer',
-  'menu-margin-review',
-  'nutritional-information-calculator',
-  'onboarding',
-  'ordering-proposals',
-  'partnership-growth-finder',
-  'plate-photography-brief',
-  'post-event-report',
-  'prep-planning',
-  'price-increase-impact-calculator',
-  'private-dining-setup-guide',
-  'purchase-price-review',
-  'recipe-compliance-checker',
-  'recipe-costing',
-  'recipe-dependency-impact',
-  'recipe-documentation',
-  'recipe-scaling',
-  'rota-builder',
-  'seasonal-menu-planner',
-  'social-media-content-generator',
-  'sop-drafting',
-  'staff-performance-review',
-  'station-setup-checklist',
-  'stock-take-template-generator',
-  'stock-variance',
-  'supplier-performance-scorecard',
-  'supplier-substitution-review',
-  'table-turnover-pacing-plan',
-  'tasting-menu-builder',
-  'team-meeting-agenda-builder',
-  'tender-brief-new-suppliers',
-  'training-plan-generator',
-  'trial-shift-assessment',
-  'upselling-training-script',
-  'usable-yield-verification',
-  'vip-special-guest-brief',
-  'waste-review',
-  'wedding-catering-checklist',
-  'wine-beverage-pairing-guide',
+  "agency-chef-onboarding-generator",
+  "allergen-management-system",
+  "apprenticeship-tracker",
+  "bakers-percentage-formula",
+  "bakery-batch-traceability",
+  "bakery-display-sellthrough",
+  "bakery-oven-load-sequence",
+  "bakery-preorder-consolidation",
+  "banquet-event-order",
+  "bar-cocktail-recipe-builder",
+  "burnout-stress-risk-assessment",
+  "canape-reception-planner",
+  "capacity-aware-prep",
+  "catering-quotation",
+  "chef-personal-brand-builder",
+  "chef-wellbeing-check-in",
+  "complaint-handling-resolution-log",
+  "cook-once-component-plan",
+  "corporate-event-menu-planner",
+  "coshh-chemical-safety",
+  "counter-service-combo-costing",
+  "custom-cake-order-specification",
+  "daily-brief-generator",
+  "daily-close-review",
+  "data-reconciliation",
+  "deli-display-replenishment",
+  "dietary-requirements-tracker",
+  "disciplinary-documentation-helper",
+  "dish-development-brief",
+  "dough-production-yield-plan",
+  "equipment-downtime-replan",
+  "equipment-maintenance-log",
+  "event-catering-brief",
+  "event-equipment-kit-list",
+  "event-run-of-show",
+  "event-staffing-plan",
+  "foh-service-brief",
+  "food-safety-incident-report",
+  "food-truck-commissary-handoff",
+  "food-truck-event-profitability",
+  "food-truck-event-settlement",
+  "food-truck-loadout",
+  "food-truck-power-water-plan",
+  "food-truck-throughput-menu",
+  "freezer-inventory-plan",
+  "guest-feedback-analyser",
+  "haccp-checklist-generator",
+  "home-pantry-meal-plan",
+  "household-grocery-budget",
+  "household-meal-calendar",
+  "invoice-reconciliation",
+  "kitchen-budget-planner",
+  "kitchen-culture-health-check",
+  "kitchen-ethos-doc-generator",
+  "leftover-reuse-plan",
+  "menu-description-writer",
+  "menu-margin-review",
+  "mobile-service-contingency-plan",
+  "multi-station-pickup-plan",
+  "nutritional-information-calculator",
+  "onboarding",
+  "ordering-proposals",
+  "partnership-growth-finder",
+  "plate-photography-brief",
+  "post-event-report",
+  "preferment-flour-accounting",
+  "prep-planning",
+  "price-increase-impact-calculator",
+  "private-dining-setup-guide",
+  "production-batch-record",
+  "purchase-price-review",
+  "recipe-compliance-checker",
+  "recipe-costing",
+  "recipe-dependency-impact",
+  "recipe-documentation",
+  "recipe-scaling",
+  "recipe-troubleshooting-log",
+  "retail-markdown-review",
+  "retail-pack-size-pricing",
+  "rota-builder",
+  "seasonal-menu-planner",
+  "service-bottleneck-review",
+  "shift-handover-board",
+  "small-shop-cash-close",
+  "small-shop-reorder-round",
+  "social-media-content-generator",
+  "sop-drafting",
+  "staff-performance-review",
+  "station-setup-checklist",
+  "stock-take-template-generator",
+  "stock-variance",
+  "supplier-performance-scorecard",
+  "supplier-substitution-review",
+  "table-turnover-pacing-plan",
+  "tasting-menu-builder",
+  "team-meeting-agenda-builder",
+  "tender-brief-new-suppliers",
+  "training-plan-generator",
+  "trial-shift-assessment",
+  "upselling-training-script",
+  "usable-yield-verification",
+  "vip-special-guest-brief",
+  "waste-review",
+  "wedding-catering-checklist",
+  "wine-beverage-pairing-guide"
 ] as const;
 export type WorkflowName = (typeof WORKFLOW_NAMES)[number];
 
 export const WORKFLOW_ZONES = [
-  'Connected Workflows',
-  'Events and Banqueting',
-  'FOH and Guest Experience',
-  'Kitchen Operations',
-  'Menu and Product Development',
-  'People and Training',
-  'Suppliers and Finance',
-  'Wellbeing and Social Media',
-  'Workspace',
+  "Bakery",
+  "Connected Workflows",
+  "Events and Banqueting",
+  "FOH and Guest Experience",
+  "Food Truck",
+  "Home Kitchen",
+  "Kitchen Operations",
+  "Menu and Product Development",
+  "People and Training",
+  "Professional Kitchen",
+  "Small Shop",
+  "Suppliers and Finance",
+  "Wellbeing and Social Media",
+  "Workspace"
 ] as const;
 export type WorkflowZone = (typeof WORKFLOW_ZONES)[number];
 

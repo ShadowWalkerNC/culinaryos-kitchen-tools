@@ -1,8 +1,10 @@
 # Open Kitchen Toolkit
 
+Version **0.2.2** provides **105 original skills**, adding 32 workflows for home kitchens, bakeries, food trucks, independent shops and professional kitchens. The library loads all pages and filters by section. Five focused manual playbooks are available in `docs/playbooks/` and from the public setup page. See [specialty expansion evidence](docs/ACCEPTANCE_022.md).
+
 Version **0.2.1** adds guided setup, a public MCP diagnostic, a kitchen-job entry point, resumable event forms, reviewed AI handoff and printable documents. Start at the local workspace home page; “Setup and connection check” returns to the checklist. See [0.2.1 acceptance](docs/ACCEPTANCE_021.md) and the [expansion roadmap](docs/EXPANSION_ROADMAP.md).
 
-Free, original MIT kitchen workflows for your chosen AI, plus deterministic calculations and a private local workspace. Version0.2.0 expands the original toolkit to73 canonical workflows and five connected kitchen flows. No toolkit subscription, account or model API key is required. Your chosen AI service and hosting retain their own costs and account requirements.
+Free, original MIT kitchen workflows for your chosen AI, plus deterministic calculations and a private local workspace with five connected kitchen flows. No toolkit subscription, account or model API key is required. Your chosen AI service and hosting retain their own costs and account requirements.
 
 [Public setup](https://culinaryos-kitchen-tools-production.up.railway.app) · [Source](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools) · [Downloads](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases)
 
@@ -28,7 +30,7 @@ npm run build
 npm run start:local -- --workspace ./workspace
 ```
 
-In Settings, supply the kitchen values relevant to your work. Import reviewed recipe/purchase JSON or CSV through preview and confirmation. The Library provides73 original guides. Today shows scheduled rules and connected runs, blockers, source revisions, draft documents and exact-revision approvals.
+In Settings, supply the kitchen values relevant to your work. Import reviewed recipe/purchase JSON or CSV through preview and confirmation. The Library provides 105 original guides. Today shows scheduled rules and connected runs, blockers, source revisions, draft documents and exact-revision approvals.
 
 ## Connected flows
 
@@ -56,6 +58,6 @@ Opening a pre-v3 workspace creates a `.pre-v3-...sqlite` backup beside the origi
 
 `npm run typecheck`, `npm test`, `npm run check:scenarios`, `node scripts/release-acceptance.mjs`, `npm run package`.
 
-The387-case bank contains designed tests, not387 completed AI conversations. Protocol reference checks, deterministic tests, editorial example reviews, live-comparison scope, native client installation and production kitchen acceptance are separate in docs/ACCEPTANCE.md. See docs/CONNECTIONS.md for tool inputs and docs/PROVENANCE.md for original-content boundaries.
+The 547-case bank contains designed tests, not completed AI conversations. Protocol reference checks, deterministic tests, editorial example reviews, live-comparison scope, native client installation and production kitchen acceptance are separate in docs/ACCEPTANCE.md. See docs/CONNECTIONS.md for tool inputs and docs/PROVENANCE.md for original-content boundaries.
 
 CulinaryOS integration remains an optional explicitly authorized tenant-bound file exchange, not live API synchronization. Allergen data distinguishes contains, may_contain, verified_absent and unknown; missing labels never prove absence. Local safety/legal controls and supplier records need verified sources and human review.
