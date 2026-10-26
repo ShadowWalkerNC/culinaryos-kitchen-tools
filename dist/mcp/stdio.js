@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Compiled stdio entry. Usage: node dist/mcp/stdio.js --mode=public|local [--workspace <dir>]
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createMcpServer } from './server.js';

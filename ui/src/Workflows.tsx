@@ -1,15 +1,19 @@
 import React,{useEffect,useState} from 'react';
 import {api} from './api';
+import {ConnectedWork} from './KitchenWork';
 type Recipe={id:string;name:string;yieldQty:{amount:string;unit:string}};
 type Config={timezone:string;dailyCutoff:string;dailyPrepEnabled:boolean;costReviewEnabled:boolean};
 type Line={recipeId:string;servings:string;onHand:string};
+type Health={state:string;nextCheckAt?:string;lastCheckAt?:string;error?:string;message:string};
 type Run={schedule:string;occurrence:string;status:string;output:string};
 export default function Workflows():React.ReactElement{
+ const[health,setHealth]=useState<Health|null>(null);
  const[config,setConfig]=useState<Config|null>(null),[recipes,setRecipes]=useState<Recipe[]>([]),[runs,setRuns]=useState<Run[]>([]),[day,setDay]=useState(''),[lines,setLines]=useState<Line[]>([]),[selected,setSelected]=useState(''),[confirmed,setConfirmed]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);
- const refresh=()=>{api<Run[]>('/api/runs').then(setRuns).catch(e=>setError(e.message));};
- useEffect(()=>{api<Config>('/api/workflows-config').then(setConfig).catch(e=>setError(e.message));api<Recipe[]>('/api/recipes').then(setRecipes).catch(e=>setError(e.message));refresh();},[]);
+ const refresh=()=>{api<Health>('/api/worker-status').then(setHealth).catch(e=>setError(e.message));api<Run[]>('/api/runs').then(setRuns).catch(e=>setError(e.message));};
+ useEffect(()=>{api<Config>('/api/workflows-config').then(setConfig).catch(e=>setError(e.message));api<Recipe[]>('/api/recipes').then(setRecipes).catch(e=>setError(e.message));refresh();const timer=setInterval(refresh,15000);return()=>clearInterval(timer);},[]);
  const act=async(fn:()=>Promise<unknown>,text:string)=>{setBusy(true);setError('');setMessage('');try{await fn();setMessage(text);refresh();}catch(e){setError((e as Error).message);}finally{setBusy(false);}};
- return <section aria-label="Scheduled work"><h3>Scheduled work</h3><p>Schedules run only while the local worker is running. Enable them here, then start the worker using the setup instructions. Drafts never publish prices or place orders.</p>
+ return <section aria-label="Scheduled work"><h3>Scheduled work</h3><p>Enabled rules run automatically while this workspace is open. Closing it stops processing; reopening performs bounded catch-up. Drafts never publish prices or place orders.</p>
+ {health&&<p role="status">Worker: <strong>{health.state}</strong>{health.nextCheckAt?' · next check '+new Date(health.nextCheckAt).toLocaleString():''}{health.error?' · '+health.error:''}</p>}
  {error&&<p role="alert">{error}</p>}{message&&<p role="status">{message}</p>}
  {config?<fieldset><legend>Schedule settings</legend><label>Kitchen timezone<input value={config.timezone} onChange={e=>setConfig({...config,timezone:e.target.value})}/></label><label>Daily prep cutoff<input type="time" value={config.dailyCutoff} onChange={e=>setConfig({...config,dailyCutoff:e.target.value})}/></label><label><input type="checkbox" checked={config.dailyPrepEnabled} onChange={e=>setConfig({...config,dailyPrepEnabled:e.target.checked})}/> Draft next service day prep</label><label><input type="checkbox" checked={config.costReviewEnabled} onChange={e=>setConfig({...config,costReviewEnabled:e.target.checked})}/> Review recipes after confirmed purchase-cost imports</label><button disabled={busy} onClick={()=>act(()=>api('/api/workflows-config',{method:'POST',body:config}),'Schedule settings saved.')}>Save schedule settings</button></fieldset>:<p role="status">Loading schedule settings…</p>}
  <fieldset><legend>Confirmed service forecast</legend><p>Only currently approved recipe versions are used. Supply an explicit stock count, including zero when counted.</p><label>Service date<input type="date" value={day} onChange={e=>{setDay(e.target.value);setConfirmed(false);}}/></label>
@@ -19,5 +23,6 @@ export default function Workflows():React.ReactElement{
  <button disabled={busy||!day||!lines.length||!confirmed||lines.some(l=>!l.servings||!l.onHand)} onClick={()=>act(()=>api('/api/forecasts',{method:'POST',body:{day,confirm:true,forecast:{demands:lines.map(l=>{const r=recipes.find(r=>r.id===l.recipeId)!;return{recipeId:r.id,servings:l.servings,servingUnit:r.yieldQty.unit,yieldPerBatch:r.yieldQty.amount};}),stock:lines.map(l=>({recipeId:l.recipeId,onHand:l.onHand,unit:recipes.find(r=>r.id===l.recipeId)!.yieldQty.unit}))}}}),'Forecast saved for '+day)}>Save confirmed forecast</button></fieldset>
  <button disabled={busy} onClick={()=>act(()=>api('/api/workflows/run',{method:'POST'}),'Configured workflows checked.')}>{busy?'Working…':'Check workflows now'}</button><button disabled={busy} onClick={refresh}>Refresh run history</button>
  {!runs.length?<p>No workflow runs yet.</p>:runs.map((run,i)=>{let output:{plan?:Array<{recipeId:string;toMake:string;unit:string}>};try{output=JSON.parse(run.output);}catch{output={};}return <article key={i}><h4>{run.schedule==='daily-prep'?'Prep plan':'Cost review'} — {run.occurrence}</h4><p>{run.status}</p>{output.plan&&<ul>{output.plan.map(line=><li key={line.recipeId}>{recipes.find(r=>r.id===line.recipeId)?.name??line.recipeId}: prepare {line.toMake} {line.unit}</li>)}</ul>}</article>;})}
+ <ConnectedWork/>
  </section>;
 }

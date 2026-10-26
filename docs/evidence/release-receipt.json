@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "channel": "development prerelease",
+  "license": "MIT",
+  "tests": {"passed": 105, "failed": 0, "typecheck": "PASS", "build": "PASS", "scenarioFixture": "PASS", "compiledMcp": "PASS"},
+  "library": {"canonicalWorkflows": 73, "baselineMappings": 61, "preservedIds": 12, "editoriallyReviewedExamples": 146, "designedHostCases": 387, "designedCaseExecution": "NOT_RUN"},
+  "hosted": {"status": "SUCCESS", "deployment": "02606107-acbf-4581-bf00-26b7411da8db", "url": "https://culinaryos-kitchen-tools-production.up.railway.app", "mode": "public-stateless", "anonymousMcpSmoke": "PASS", "publicTools": 14, "workflows": 73},
+  "creatorPlugin": {"status": "updated and stored inventory verified", "pluginId": "plugins_6ade6883fbe48191b7d6651289203e6d", "releaseId": "pluginrel_6adead4f19808191b8841bf68275f6db", "skills": 73, "scope": "USER", "audience": "PRIVATE", "nativeInstallation": "UNVERIFIED"},
+  "distribution": {"sourceRepository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools", "releaseUrl": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/tag/v0.2.0", "publication": "See GitHub release and CI receipts; this source receipt precedes upload"},
+  "limits": ["Not production certification", "Native client trials recorded separately", "Full 387 host trials not executed", "Public directory submission deferred", "CulinaryOS integration is file-based"]
+}

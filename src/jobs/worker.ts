@@ -1,5 +1,9 @@
 // F12 durable workflow worker. Rules-only; no external sends; AI placeholder reports not configured.
-import { randomUUID } from 'node:crypto';
+import { randomUUID,createHash } from 'node:crypto';
+import {z} from 'zod';
+import {capacitySchema} from '../core/operations.js';
+import {buildOrderProposalSchema} from '../mcp/schemas.js';
+import {runConnectedFlow,listConnectedFlows} from '../workflows/connected.js';
 import { nowIso, transact, type Db } from '../data/db.js';
 import { createTask } from '../data/tasks.js';
 import { tryAcquireLease, releaseLease } from './leases.js';
@@ -67,6 +71,8 @@ export interface ForecastInput {
   demands: Array<{ recipeId: string; servings: string; servingUnit: string; yieldPerBatch: string }>;
   stock: Array<{ recipeId: string; onHand: string; unit: string }>;
   sourceVersions?: Array<{id:string;version:number}>;
+  capacity?:z.infer<typeof capacitySchema>|undefined;
+  orderLines?:z.infer<typeof buildOrderProposalSchema>['lines']|undefined;
 }
 
 /** Daily prep draft for tomorrow. Missing data -> action-required task. Bounded retries. */
@@ -137,6 +143,8 @@ export function todayOccurrence(clock: Clock): string {
 
 export function saveForecast(db:Db,day:string,forecast:ForecastInput,confirm:boolean,clock:Clock):void {
  if(confirm!==true)throw new Error('forecast and stock require explicit confirmation');
+ if(forecast.capacity!==undefined)capacitySchema.parse(forecast.capacity);
+ if(forecast.orderLines!==undefined)buildOrderProposalSchema.shape.lines.parse(forecast.orderLines);
  if(!/^\d{4}-\d{2}-\d{2}$/.test(day)||new Date(day).toISOString().slice(0,10)!==day)throw new Error('valid service date required');
  if(!Array.isArray(forecast.demands)||!Array.isArray(forecast.stock)||forecast.demands.length>500||forecast.stock.length>500)throw new Error('bounded forecast and explicit stock records required');
  if(new Set(forecast.demands.map(d=>d.recipeId)).size!==forecast.demands.length||new Set(forecast.stock.map(d=>d.recipeId)).size!==forecast.stock.length)throw new Error('duplicate forecast or stock record');
@@ -149,6 +157,7 @@ export function saveForecast(db:Db,day:string,forecast:ForecastInput,confirm:boo
 
 /** Durable scheduler tick; approvals and complete operational inputs are checked here. */
 export function workerTick(db:Db,clock:Clock):{events:number;prep:string;serviceDay:string}{
+ listConnectedFlows(db);
  const cfgRow=db.raw.prepare("SELECT data FROM workflows_config WHERE id='default'").get() as {data:string}|undefined;
  const config:WorkerConfig={...DEFAULT_WORKER_CONFIG,...(cfgRow?JSON.parse(cfgRow.data):{})};
  const localClock:Clock={now:()=>clock.now(),tz:config.timezone};
@@ -161,10 +170,15 @@ export function workerTick(db:Db,clock:Clock):{events:number;prep:string;service
   let events=0;
   if(config.costReviewEnabled){
    const pending=db.raw.prepare("SELECT id,kind,payload FROM events WHERE status='pending' ORDER BY created_at LIMIT 100").all() as Array<{id:string;kind:string;payload:string}>;
-   for(const event of pending){const p=JSON.parse(event.payload) as {ingredientIds:string[];versions:Array<{id:string;version:number}>};
-    if(event.kind==='cost-import')handleCostImport(db,event.id,p.ingredientIds,config,localClock);
-    else transact(db,()=>{const done=db.raw.prepare("SELECT id FROM runs WHERE schedule='recipe-change' AND occurrence=?").get(event.id);if(!done){const tasks=p.versions.map(v=>createTask(db,`Review recipe ${v.id} v${v.version}: recipe card, associated SOPs and training`,{now:()=>clock.now()}).id);recordRun(db,'recipe-change',event.id,'completed',p,{tasks},1,clock);}});
-    db.raw.prepare("UPDATE events SET status='completed' WHERE id=?").run(event.id);events++;}
+   for(const event of pending){
+    const previous=db.raw.prepare("SELECT attempts,updated_at FROM runs WHERE schedule='event-failure' AND occurrence=?").get(event.id) as {attempts:number;updated_at:string}|undefined;
+    if(previous&&clock.now().getTime()-Date.parse(previous.updated_at)<Math.min(60000,2**previous.attempts*1000))continue;
+    try{const p=JSON.parse(event.payload) as {ingredientIds:string[];versions:Array<{id:string;version:number}>};
+     if(event.kind==='cost-import'){handleCostImport(db,event.id,p.ingredientIds,config,localClock);runConnectedFlow(db,{kind:'supplier-price-change',key:event.id,ingredientIds:p.ingredientIds});}
+     else{transact(db,()=>{const done=db.raw.prepare("SELECT id FROM runs WHERE schedule='recipe-change' AND occurrence=?").get(event.id);if(!done){const tasks=p.versions.map(v=>createTask(db,`Review recipe ${v.id} v${v.version}: recipe card, associated SOPs and training`,{now:()=>clock.now()}).id);recordRun(db,'recipe-change',event.id,'completed',p,{tasks},1,clock);}});for(const v of p.versions)runConnectedFlow(db,{kind:'recipe-release',key:event.id+':'+v.id,recipeId:v.id});}
+     db.raw.prepare("UPDATE events SET status='completed' WHERE id=?").run(event.id);events++;
+    }catch(e){const attempts=(previous?.attempts??0)+1;recordRun(db,'event-failure',event.id,attempts>=3?'failed':'retrying',{kind:event.kind},{error:(e as Error).message},attempts,clock);if(attempts>=3){createTask(db,'Workflow event '+event.id+' failed after three attempts: '+(e as Error).message);db.raw.prepare("UPDATE events SET status='failed' WHERE id=?").run(event.id);}}
+   }
   }
   if(!config.dailyPrepEnabled)return{events,prep:'disabled',serviceDay};
   const prev=db.raw.prepare("SELECT status,attempts,updated_at FROM runs WHERE schedule='daily-prep' AND occurrence=?").get(serviceDay) as {status:string;attempts:number;updated_at:string}|undefined;
@@ -179,6 +193,8 @@ export function workerTick(db:Db,clock:Clock):{events:number;prep:string;service
    forecast.sourceVersions=versions;if(!valid)forecast=null;
   }
   const result=runDailyPrep(db,serviceDay,forecast,config,localClock);
+  const fingerprint=createHash('sha256').update(JSON.stringify(forecast??{missing:true})).digest('hex').slice(0,16);
+  runConnectedFlow(db,{kind:'daily-service',key:'scheduled:'+serviceDay+':'+fingerprint,day:serviceDay,...(forecast?.capacity?{capacity:forecast.capacity}:{}),...(forecast?.orderLines?{orderLines:forecast.orderLines}:{})});
   return{events,prep:result.status,serviceDay};
  }finally{releaseLease(db,'scheduler',owner);}
 }

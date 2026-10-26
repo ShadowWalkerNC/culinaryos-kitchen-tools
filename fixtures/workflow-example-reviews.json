@@ -1,0 +1,1040 @@
+{
+  "version": "0.2.0",
+  "host": "Muse CLI reference-host editorial review; model identity not independently verified",
+  "scope": "Review of authored example outputs, not 387 executed AI conversations",
+  "reviews": [
+    {
+      "workflowId": "agency-chef-onboarding-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked shift 14:00-22:00 saute, buddy Ana, sous Ben, dress and handwash rules, allergen flag to Ana per matrix v4 and HACCP v2.1, exits north plus rear, lot B, Cara, and task times; all now explicit in input. Sign-off blanks and right-to-work TBC preserved."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Preserves unknown shift times and station; unblock action supplies both before any pack; no generic pack issued."
+      },
+      "corrections": [
+        "Expanded worked input with Ben, house rules, matrix v4 and HACCP v2.1 refs, exits, lot B, Cara, task times"
+      ]
+    },
+    {
+      "workflowId": "allergen-management-system",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked labels v4, celery verified_absent, gluten unknown pending mill letter, tree_nut ticket table 8 per host note, owners Ben and Ana with dues; no absence claimed from missing labels. Nut clarified to tree_nut in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "All cells unknown without label versions; unblock action supplies versions; no matrix issued."
+      },
+      "corrections": [
+        "Expanded worked input with owners, dues, and tree_nut ticket date",
+        "Fixed output guest note to host note"
+      ]
+    },
+    {
+      "workflowId": "apprenticeship-tracker",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 120 of 300 equals 40 percent. Checked supervisor Ana, module percents 100/50/0/20/80, gaps with dues, and provider; Culinary L2 program now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Program and hours unknown preserved; unblock action supplies enrolment details."
+      },
+      "corrections": [
+        "Expanded worked input with program, supervisor, module percents, dues, provider"
+      ]
+    },
+    {
+      "workflowId": "banquet-event-order",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked hall, contact L Garcia 555-0100, timezone, menu allergen states per label v4, 2 nut guests, timeline owners, chafers 6 TBC hire, linen 10 confirmed; budget honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Date, covers, and menu unknown preserved; unblock action supplies all three."
+      },
+      "corrections": [
+        "Expanded worked input with contact, timezone, allergen states, timeline owners, equipment"
+      ]
+    },
+    {
+      "workflowId": "bar-cocktail-recipe-builder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked gin 171c plus tonic 30c plus syrup 8c equals 209c; margin 991c at 82.6 percent on confirmed 1200c. Glass and ice now in input; invented 1.4 units and 21-plus rule replaced with unknown ABV and licence-TBC note."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown volumes and costs preserved; unblock action supplies ml per part and bottle cost with volume."
+      },
+      "corrections": [
+        "Added glass and ice to worked input",
+        "Replaced invented units and age-limit with unknown plus licence TBC"
+      ]
+    },
+    {
+      "workflowId": "burnout-stress-risk-assessment",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked L3xI2 equals 6, L2xI2 equals 4, L2xI1 equals 2. Factors, ratings, controls, review date with Mara, and EAP verification now in input; no diagnosis given."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Hours and factors unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with factors, ratings, controls, review date and owner, EAP source"
+      ]
+    },
+    {
+      "workflowId": "canape-reception-planner",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 180 plus 120 equals 300 pieces; 14400 plus 14400 equals 28800c equals 288 dollars. Doors, passes, vegetarian per chef, and skewer gluten per v4 now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Covers and pieces per head unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with doors, pass times, vegetarian source, skewer allergen source"
+      ]
+    },
+    {
+      "workflowId": "capacity-aware-prep",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked oven 5h vs 4h equals overload 1h; labor 10h vs 16h fits. Labor demand, availability, and roast move option with Ben now in input; chill honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Intervals and units unknown preserved; unblock action supplies per-resource data."
+      },
+      "corrections": [
+        "Expanded worked input with labor demand, availability, roast move option and owner"
+      ]
+    },
+    {
+      "workflowId": "catering-quotation",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 2400 plus 800 plus 400 equals 3600; margin 720; total 4320; per head 54. Quote date with validity anchor, full exclusion list, and deposit terms now in input. Parent: clarified markup-on-cost versus margin-on-sales; 4320 total implies16.7percent sales margin."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Covers and costs unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with validity anchor, exclusions, payment terms",
+        "Parent: clarified markup-on-cost versus margin-on-sales; 4320 total implies16.7percent sales margin."
+      ]
+    },
+    {
+      "workflowId": "chef-personal-brand-builder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Removed false 50 and 150-word labels (actual bios far shorter) and cut the Dallas-CV fabrication. Bios now use only input facts: Ana R, sous since 2024, stocks lead, matrix v4, close downs, Tue cadence, no awards."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Facts and goals unknown preserved; unblock action supplies verified facts and goals."
+      },
+      "corrections": [
+        "Removed miscounted word-count labels and Dallas career invention",
+        "Expanded worked input with evidence, duties, cadence, awards-none"
+      ]
+    },
+    {
+      "workflowId": "chef-wellbeing-check-in",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked EAP verified, clinic TBC carried into Support, handbook v3, rota review, privacy rules, and Mara follow-up; no diagnosis or medical advice."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Lead and resources unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with handbook version, privacy rules, follow-up path",
+        "Carried clinic TBC into Support line"
+      ]
+    },
+    {
+      "workflowId": "complaint-handling-resolution-log",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked POS times 19:05 and 19:35, Ben pass note, soup temp unknown, FOH note 19:40, 900c comp approved Mara 19:45, and email follow-up with owner and due; stays open."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Date, order, and facts unknown preserved; unblock action supplies refs."
+      },
+      "corrections": [
+        "Expanded worked input with POS times, pass note, comp value with approver and times, follow-up owner"
+      ]
+    },
+    {
+      "workflowId": "corporate-event-menu-planner",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked option A under by 7 and option B over by 2. Vegan cover, 90-minute timings, Ben capacity, and dessert 3-dollar TBC now in input; recommends A for budget fit."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Budget and covers unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with vegan cover, timings, capacity source, dessert cost"
+      ]
+    },
+    {
+      "workflowId": "coshh-chemical-safety",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked SDS v5 sections 4, 6, 7, 8, 9, locked cage, PPE, safety plan v1.3, fire plan v1.2 assembly, and review date with Ben; no handling advice invented."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "SDS unknown preserved; unblock action supplies supplier SDS version; no PPE guessed."
+      },
+      "corrections": [
+        "Expanded worked input with SDS sections, plan refs, review date and owner"
+      ]
+    },
+    {
+      "workflowId": "daily-brief-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 90 covers with export timestamp, soup 8 done, sourdough 40 with Ben and 11:00 due, Ana and Cara, grill gap, table 8 nut per host note with plan v2.1, and timed actions."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Forecast and roster unknown preserved; unblock action supplies source with number and names per station."
+      },
+      "corrections": [
+        "Expanded worked input with export time, prep quantities, roster, table 8, plan ref, actions",
+        "Fixed guest note to host note"
+      ]
+    },
+    {
+      "workflowId": "daily-close-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 2 completed plus 1 blocked with owner and due, 1 decided approval, and tomorrow prep with owners. Removed false soup verified_absent claim and verified-roster claim; allergens now unknown pending labels."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown task states and decider preserved; unblock action confirms each; nothing auto-closed."
+      },
+      "corrections": [
+        "Expanded worked input with blocker owner and due plus tomorrow prep lines",
+        "Replaced false verified_absent and roster claims with unknown and unverified"
+      ]
+    },
+    {
+      "workflowId": "data-reconciliation",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 2-row CSV, tomato 800 v3 vs incoming 850, onion matches v2, validation, and commit plan to v4. Operator choice with supplier letter now in input; preview-only result kept."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Stale v2-vs-v3 and missing onion currency preserved; unblock action re-previews and supplies currency."
+      },
+      "corrections": [
+        "Expanded worked input with recorded operator choice and supplier letter"
+      ]
+    },
+    {
+      "workflowId": "dietary-requirements-tracker",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked Guest A fruit plate with Cara and may_contain, Guest B soup without bread with gluten unknown and no free claim, FOH-lead unresolved item, and 18:00 brief with matrix v4."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Guests and sources unknown preserved; unblock action supplies sourced list."
+      },
+      "corrections": [
+        "Expanded worked input with adaptations, owners, mill letter, unresolved item, brief time and matrix"
+      ]
+    },
+    {
+      "workflowId": "disciplinary-documentation-helper",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked clock times 09:12, 09:20, 09:15 vs 09:00 start, reporter Ben, attendance v3 section 2, and witnesses; process blanks left for HR; no sanction suggested."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Facts and policy unknown preserved; unblock action supplies dated facts and policy version."
+      },
+      "corrections": [
+        "Expanded worked input with exact times, start time, reporter, policy section"
+      ]
+    },
+    {
+      "workflowId": "dish-development-brief",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked brief date, romesco with hazelnut and 150 g concept, cost guardrail with price TBC, leek quote 350c GreenFarm, and test rounds with criteria; margin honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Concept and guardrails unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with concept detail, quotes, test criteria, brief date"
+      ]
+    },
+    {
+      "workflowId": "equipment-maintenance-log",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked F1 main-line fault, Ana report date, manual due 2026-04-01, RapidServe TBC, and Ben booking task; overdue-none derived from dates."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "IDs and dates unknown preserved; unblock action supplies both; no entries invented."
+      },
+      "corrections": [
+        "Expanded worked input with location and booking owner"
+      ]
+    },
+    {
+      "workflowId": "event-catering-brief",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 250 ml x 120 equals 30 L and 120 rolls. Batch size with owner and date, service window, chafers, hall with bay and power, and dietary 15 plus 5 with date now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Covers and menu unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with batch basis, service window, site, dietary counts"
+      ]
+    },
+    {
+      "workflowId": "event-equipment-kit-list",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 4, 2, 20 quantities, 120 plates from covers with 60-dollar TBC quote, van 09:00 Ben, return and clean times, power confirmed, water TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Venue and covers unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with quantities, transport times and owner, power and water states"
+      ]
+    },
+    {
+      "workflowId": "event-run-of-show",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked cue times with owners FOH, Ben, Mara, Cara, TBC contacts, overrun contingency, hall B rain plan, radios channel 2, and v1."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Cues and caller unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with owners, contacts, contingency, comms, version"
+      ]
+    },
+    {
+      "workflowId": "event-staffing-plan",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 300 plus 240 equals 540 dollars. Removed invented 1-server gap count; gap now honestly TBC with event-manager owner; agency fees TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Roles and rates unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Replaced invented gap headcount with TBC shortfall"
+      ]
+    },
+    {
+      "workflowId": "foh-service-brief",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked prices 1000, 2400, 900c, 86 variant, v4 states with soup gluten unknown, table 8 host note with time, allergy call to Ana, table sections, and 17:30 pre-shift."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Menu and allergen versions unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with prices, allergen states, VIP note time and action, sections, pre-shift time"
+      ]
+    },
+    {
+      "workflowId": "food-safety-incident-report",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked timezone, 30-minute exposure, 5 kg dairy, Ana plus Ben move at 19:50, Mara notified 20:00, HACCP v2.1 section 9, and follow-up tasks; EHO and cause honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Date, reporter, and facts unknown preserved; unblock action supplies observed facts."
+      },
+      "corrections": [
+        "Expanded worked input with timezone, actors, plan version, follow-up owners"
+      ]
+    },
+    {
+      "workflowId": "food-truck-event-profitability",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked revenue 3000, known costs 1950, margin 1050 at 35.0 percent, break-even 150 covers. Removed invented 3 percent card-fee estimate; napkins and card fees TBC with Ben; target verdict withheld until unknowns known. Parent: missing costs make known-cost contribution an upper bound and break-even a lower bound; final target remains unresolved."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Revenue and pitch fee unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Grounded napkin owner and unknown card fees in input",
+        "Removed card-fee estimate and premature target-met verdict",
+        "Labeled margin and break-even known-cost-only",
+        "Parent: missing costs make known-cost contribution an upper bound and break-even a lower bound; final target remains unresolved."
+      ]
+    },
+    {
+      "workflowId": "guest-feedback-analyser",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked avg 180 over 40 equals 4.5, theme counts 15 plus 8 plus 3 plus 14 equals 40, response 40 of 600 equals 6.7 percent. IDs, source split, covers, and owners with dues now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Exports and scale unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with IDs, source split, covers, scale, actions"
+      ]
+    },
+    {
+      "workflowId": "haccp-checklist-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked plan v2.1, check times with sections 4, 6, 7, roles Ana, Ben, TBC, corrective section 9, and matrix v4; readings and signatures blank; no limits invented."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Plan ref unknown preserved; unblock action supplies version and date; no limits invented."
+      },
+      "corrections": [
+        "Expanded worked input with check times, sections, and matrix ref",
+        "Added roles to checklist lines"
+      ]
+    },
+    {
+      "workflowId": "invoice-reconciliation",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked price var 10c per kg x 20 equals 200c over with qty var 0. PO-112, R-98, and zero tolerance with policy date now in input; recommends query, payment not approved."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Order and receipt unknown preserved; unblock action supplies both; no payment recommended."
+      },
+      "corrections": [
+        "Expanded worked input with order and receipt refs plus tolerance"
+      ]
+    },
+    {
+      "workflowId": "kitchen-budget-planner",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked cost 91000, margin 29000 at 24.2 percent, food 30.0 percent vs under-30 target. Forecast source with date, rota draft, finance owner, and target now in input. Parent: strict under30 excludes30; unconfirmed expenses make the forecast provisional."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Revenue and targets unknown preserved; unblock action supplies forecast source and targets."
+      },
+      "corrections": [
+        "Expanded worked input with forecast source and date, cost owners, explicit target",
+        "Parent: strict under30 excludes30; unconfirmed expenses make the forecast provisional."
+      ]
+    },
+    {
+      "workflowId": "kitchen-culture-health-check",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 50 over 12 equals 4.2, 37 over 12 equals 3.1, 46 over 12 equals 3.8 from input sums. Owners Ben and Ana, due date, and share meeting now in input; anonymous with no individuals."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Questions and responses unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Reversed input to sums so averages derive honestly",
+        "Added owners, due date, share meeting to input"
+      ]
+    },
+    {
+      "workflowId": "kitchen-ethos-doc-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 3 confirmed values with behaviors and examples, doc date, out-of-scope line, and Mara review 2026-06-01; no values invented."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Values unknown preserved; unblock action confirms 3 to 5 values; nothing drafted."
+      },
+      "corrections": [
+        "Expanded worked input with behaviors, examples, doc date, scope line"
+      ]
+    },
+    {
+      "workflowId": "menu-description-writer",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked confirmed ingredients, chef method keywords, GreenFarm invoice claim, and gluten unknown per matrix v4; no free-from claim."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Recipe and sources unknown preserved; unblock action confirms recipe and sources."
+      },
+      "corrections": [
+        "Expanded worked input with method keywords and matrix ref"
+      ]
+    },
+    {
+      "workflowId": "menu-margin-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 250c cost with 750c margin at 75 percent vs 70 percent target. Price sheet v7 and target date now in input; ingredient-gross-only caveat kept."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Known 800c partial plus unknown onion now in input; price unconfirmed; margin withheld with no target assumed."
+      },
+      "corrections": [
+        "Added price source and target date to worked input",
+        "Added known-partial figure to blocked input"
+      ]
+    },
+    {
+      "workflowId": "nutritional-information-calculator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Fixed batch inconsistency of 1500 g ingredients vs 1000 g batch: now 600 g tomato plus 400 g onion equals 1000 g; rechecked 108 plus 160 equals 268 with 67 kcal per 250 g serving, sources, and caveats."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Onion data and yield unknown preserved; unblock action supplies source and servings with grams."
+      },
+      "corrections": [
+        "Fixed ingredient and batch weights and recomputed energy to 67 kcal"
+      ]
+    },
+    {
+      "workflowId": "onboarding",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked path, USD with metric and timezone, setup date, 2-row plus 1-recipe imports with 0 conflicts committed v1, and validation true; no defaults assumed."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Currency and timezone unknown preserved; unblock action supplies explicit code and zone."
+      },
+      "corrections": [
+        "Added setup date, file row counts, conflict count to worked input"
+      ]
+    },
+    {
+      "workflowId": "ordering-proposals",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Verified clean with no changes: rechecked tomato 10 minus 3 minus 2 equals 5 kg rounded to 8 kg in 2 packs, onion 5 kg exact with no pack rounding; approval pending, order not sent."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown on-hand and negative par preserved with per-line unblock actions; no proposal issued."
+      },
+      "corrections": []
+    },
+    {
+      "workflowId": "partnership-growth-finder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked date, 3 ideas with fit, cost, effort, next steps, ranking order, 10 percent outreach draft with TBC contact, and 200 of 500 budget; draft for manager."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Goal and budget unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with date, ideas, outreach draft"
+      ]
+    },
+    {
+      "workflowId": "plate-photography-brief",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked tomato soup 250 g bowl, leek starter, 3 shots with props, as-served styling, 1-year rights with J Lee credit, and 14:00 to 16:00 schedule."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Shoot dishes and usage rights unknown preserved; unblock action supplies both before briefing."
+      },
+      "corrections": [
+        "Expanded worked input with dishes, shots, props, rights window, schedule"
+      ]
+    },
+    {
+      "workflowId": "post-event-report",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked costs 2640, margin 2360, variances plus 500, plus 140, plus 360. Expected-120 baseline, feedback themes, none-logged incidents, and Ben action now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Revenue and costs unknown preserved; unblock action supplies lines in explicit currency."
+      },
+      "corrections": [
+        "Expanded worked input with baseline, themes, incident state, action owner and due"
+      ]
+    },
+    {
+      "workflowId": "prep-planning",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Verified clean with no changes: rechecked soup net 7 to 2 batches to 8 servings; sourdough 40 to 2 batches to 40 portions; capacity honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown on-hand and unit mismatch preserved with recount and conversion actions; no batches planned."
+      },
+      "corrections": []
+    },
+    {
+      "workflowId": "price-increase-impact-calculator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked delta 120c per kg with 30c per serving; old 250c at 75 percent to new 280c at 72 percent above 70 target. Old-cost split 200c plus 50c now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "New prices and yields unknown preserved; unblock action supplies both with dates."
+      },
+      "corrections": [
+        "Added old-cost composition to worked input"
+      ]
+    },
+    {
+      "workflowId": "private-dining-setup-guide",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked PDR board 12, host seat, GF host-email note, presets, 18:00 with 19:00, 19:30, Ben, 21:30 service, and TBC FOH contact; draft pending FOH lead."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Room, covers, and menu unknown preserved; unblock action supplies all three."
+      },
+      "corrections": [
+        "Expanded worked input with seating, presets, service times, contacts"
+      ]
+    },
+    {
+      "workflowId": "purchase-price-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Verified clean with no changes: rechecked A 300c per kg rank 2 with B 250c per kg rank 1 cheapest; quality, lead time, and minimums honestly TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "kg-vs-liter mismatch without conversion preserved; unblock action supplies conversion or requote."
+      },
+      "corrections": []
+    },
+    {
+      "workflowId": "recipe-compliance-checker",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked v4 states, mill-letter expectation date, yield and hold evidence for passes, HACCP v2.1, and Ben remediation due 2026-03-12; verdict not compliant until gluten resolved."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Labels and plan unknown preserved; unblock action supplies per-ingredient versions and plan ref."
+      },
+      "corrections": [
+        "Expanded worked input with letter date, pass evidence, remediation owner and due"
+      ]
+    },
+    {
+      "workflowId": "recipe-costing",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 800 plus 200 equals 1000c with 250c per serving. Effective dates now in input; invented 0c packaging replaced with none-supplied."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown onion plus kg-vs-g conversion issue preserved; per-serving withheld until supplied."
+      },
+      "corrections": [
+        "Added effective dates to worked input",
+        "Replaced invented 0c packaging with none-supplied"
+      ]
+    },
+    {
+      "workflowId": "recipe-dependency-impact",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked soup plus sauce parents, salt 5 g saving at 40c per 100 g equals 2c, Ana re-cost, v4 allergens unchanged, no cycles, and reprint due; nothing edited."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Incomplete graph with possible cycle preserved; unblock action resolves graph first."
+      },
+      "corrections": [
+        "Added salt price, run date, owner, reprint due to worked input"
+      ]
+    },
+    {
+      "workflowId": "recipe-documentation",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked syn_tomato_soup yield, quantities, 4 confirmed steps with oil, water, times, HACCP v2.1 hold, and v4 states with letter date; no negative claims."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unknown recipe ID preserved; unblock action supplies correct ID or confirmed record."
+      },
+      "corrections": [
+        "Expanded worked input with confirmed steps, hold ref, letter date"
+      ]
+    },
+    {
+      "workflowId": "recipe-scaling",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Verified clean with no changes: rechecked factor 2 with tomato 2 kg and onion 1 kg, units unchanged; seasoning left to chef."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Target yield unknown preserved; unblock action supplies servings amount."
+      },
+      "corrections": []
+    },
+    {
+      "workflowId": "rota-builder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rebuilt grid so totals reconcile: full Mon-Sat shifts in input; rechecked Ana 38h, Ben 44h, Cara 24h within max; fixed wrong Sun-Thu label to week totals; grill gap TBC."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Availability and labor rules unknown preserved; unblock action supplies per-person data and local ref."
+      },
+      "corrections": [
+        "Rebuilt full-week grid with reconciling hours",
+        "Fixed totals label",
+        "Added availability and gap owner to input"
+      ]
+    },
+    {
+      "workflowId": "seasonal-menu-planner",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked soup 75 percent vs 68 target from input cost and price. Asparagus quote with supplier, TBC cost, season end, and capacity notes now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Quotes and targets unknown preserved; unblock action supplies quotes with dates and target."
+      },
+      "corrections": [
+        "Expanded worked input with soup cost and price, supplier, season, capacity"
+      ]
+    },
+    {
+      "workflowId": "social-media-content-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked Tue soup post with J Lee rights, Thu TechConf 120 post with house rights, alt texts, and no award or price claims; drafts for manager."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Post dishes and photo rights unknown preserved; unblock action supplies both before drafting."
+      },
+      "corrections": [
+        "Expanded worked input with schedule, caption detail, photo rights"
+      ]
+    },
+    {
+      "workflowId": "sop-drafting",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked scope, Ana-confirmed steps, equipment, HACCP v2.1 dated controls, blank sign-off, and Ben calibration TBC; limits not restated."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Unconfirmed steps and plan unknown preserved; unblock action interviews operator and supplies plan."
+      },
+      "corrections": [
+        "Expanded worked input with scope, steps, equipment, plan date, calibration owner"
+      ]
+    },
+    {
+      "workflowId": "staff-performance-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 2.1 percent waste evidence, 42 of 42 calls, sous-log strengths, grill gap with Ana and Q2, Ben sign-off shifts, and TBC course; rating and pay blank for manager and HR."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Goals and evidence unknown preserved; unblock action agrees goals and gathers evidence."
+      },
+      "corrections": [
+        "Expanded worked input with evidence counts, strengths, gap, actions (Root-flagged fix)"
+      ]
+    },
+    {
+      "workflowId": "station-setup-checklist",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked mise quantities with Ana and Cara owners, 16:00 due, 15:00 herb delivery TBC, equipment checks blank, and sous sign-off blank."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Mise quantities unknown preserved; unblock action supplies qty and unit per item."
+      },
+      "corrections": [
+        "Expanded worked input with owners, dues, delivery time"
+      ]
+    },
+    {
+      "workflowId": "stock-take-template-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Removed invented oil line and 0.2 kg tare; added missing freezer sheet as TBC; sheets now cover exactly the input items with blank counts and TBC scale and tare."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Areas and units unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Removed invented oil item and tare figure",
+        "Added freezer sheet",
+        "Expanded input with area mapping and count order"
+      ]
+    },
+    {
+      "workflowId": "stock-variance",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked expected 7 kg with variance minus 0.5 kg at minus 7.1 percent. Recount owner with due and waste-log owner now in input; no adjustment posted."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Mixed units with missing waste preserved; unblock action supplies one unit and waste qty."
+      },
+      "corrections": [
+        "Added recount owner and due plus waste-log owner to worked input"
+      ]
+    },
+    {
+      "workflowId": "supplier-performance-scorecard",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked GreenFarm 8.0 vs FreshCo 7.3 weighted math. All scores with complaint, delivery, and price evidence now in input; draft for buyer."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Criteria and evidence unknown preserved; unblock action sets weights and gathers evidence."
+      },
+      "corrections": [
+        "Expanded worked input with all scores and evidence"
+      ]
+    },
+    {
+      "workflowId": "supplier-substitution-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 20c per kg saving. Run date, v4 and v5 states with basil-contains diff, and Ana test batch now in input; no swap made."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Label and cost unknown preserved; unblock action supplies both; no approval given."
+      },
+      "corrections": [
+        "Added run date and test owner with date to worked input"
+      ]
+    },
+    {
+      "workflowId": "table-turnover-pacing-plan",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 10 plus 10 tables with 40 plus 40 covers, fire times, Ben grill cap, 15-minute intervals, 2-table buffer, and wash overlap TBC; draft for FOH and chef."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Tables and timings unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with fires, grill cap, intervals, buffer"
+      ]
+    },
+    {
+      "workflowId": "tasting-menu-builder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 1150c cost with 2850c margin at 71.25 percent on confirmed 4000c. Per-course allergens and fire with gap timings now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Partial cost with unconfirmed price preserved; margin withheld until supplied."
+      },
+      "corrections": [
+        "Expanded worked input with allergens and timings"
+      ]
+    },
+    {
+      "workflowId": "team-meeting-agenda-builder",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 10 plus 10 plus 10 plus 15 equals 45 min with consistent clock times. Chair, attendees, and pre-reads now in input; actions template blank."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Date and topics unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with chair, attendees, pre-reads"
+      ]
+    },
+    {
+      "workflowId": "tender-brief-new-suppliers",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked weights 40 plus 40 plus 20 equals 100. Delivery with site, spec bars, samples, full timeline, and Mara contact now in input; draft for legal."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Volumes and criteria unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with logistics, specs, timeline, contact"
+      ]
+    },
+    {
+      "workflowId": "training-plan-generator",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked weeks with Ana and Mara, 5 kg and FIFO criteria, soup observation, Ben reviews, and TBC certificate; sign-offs blank after demo."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Role and skills unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with buddies, criteria, reviews, certificate state"
+      ]
+    },
+    {
+      "workflowId": "trial-shift-assessment",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 14:00 to 18:00 hours, 5 kg dice pass, FIFO pass, knife conduct, 3 questions, traffic lateness as candidate-stated, and HR-2026-02 payroll ref; decision blank."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Candidate and hours unknown preserved; unblock action supplies both; nothing invented."
+      },
+      "corrections": [
+        "Expanded worked input with hours, task detail, conduct notes, rules ref"
+      ]
+    },
+    {
+      "workflowId": "upselling-training-script",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 3 triggers with phrases, sourdough 300c, house limits incl intoxicated-guest ban, and Fri drills; draft for FOH lead."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Menu and limits unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with triggers, sourdough price, limits, drills"
+      ]
+    },
+    {
+      "workflowId": "usable-yield-verification",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Rechecked 8 over 10 equals 80.0 percent with 1000 over 8 equals 125c per kg and 2 kg trim. Observer Ana and test T-2026-0310 now in input."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Usable qty with unit mismatch preserved; unblock action supplies usable in kg or conversion."
+      },
+      "corrections": [
+        "Added observer and test ref to worked input"
+      ]
+    },
+    {
+      "workflowId": "vip-special-guest-brief",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked table 12 per dated host email, candle, shellfish flag to Ben with soup-matrix verify, privacy rules, and FOH with amuse and bill actions; draft for manager."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Guest and preferences unknown preserved; unblock action supplies sourced details."
+      },
+      "corrections": [
+        "Expanded worked input with table, email date, allergy routing, privacy, actions"
+      ]
+    },
+    {
+      "workflowId": "waste-review",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Verified clean with no changes: rechecked 2 of 8 equals 25 percent overprep; observers with causes on every line; follow-up tasks assigned; no unobserved waste."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Zero-vs-missing honestly distinguished; unblock action confirms with shift lead."
+      },
+      "corrections": []
+    },
+    {
+      "workflowId": "wedding-catering-checklist",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked as-of date, Mara tasting, menu sign, BEO with staffing and kit owners and statuses, L Garcia plus TBC vendors; none overdue derived from dates."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Date and covers unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Expanded worked input with as-of date, owners, statuses, contacts"
+      ]
+    },
+    {
+      "workflowId": "wine-beverage-pairing-guide",
+      "worked": {
+        "status": "PASS",
+        "evidence": "Checked 900c, 1400c, 400c prices, weight reasons, and TBC stock with dessert-wine notes; invented 21-plus rule replaced with licence-TBC service note."
+      },
+      "blocked": {
+        "status": "PASS",
+        "evidence": "Menu and drinks unknown preserved; unblock action supplies both."
+      },
+      "corrections": [
+        "Added coffee price to worked input",
+        "Replaced invented age rule with licence TBC"
+      ]
+    }
+  ],
+  "parentReview": "Parent reviewed the complete correction ledger and financial/high-risk examples, adding clarifications for margin basis, strict thresholds and partial-cost bounds."
+}

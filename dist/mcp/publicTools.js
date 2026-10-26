@@ -6,7 +6,8 @@ import { costRecipe } from '../core/costing.js';
 import { comparePurchaseCosts } from '../core/purchase.js';
 import { buildPrepPlan } from '../core/prep.js';
 import { buildOrderProposal } from '../core/ordering.js';
-import { WORKFLOW_TEXT } from './workflowText.js';
+import { listWorkflows, workflowGuidance } from '../workflows/discovery.js';
+import { calculateUsableYield, reconcileStock, calculateEventBudget, validatePrepCapacity } from '../core/operations.js';
 export const PUBLIC_TOOL_NAMES = [
     'list_capabilities',
     'get_workflow',
@@ -17,78 +18,13 @@ export const PUBLIC_TOOL_NAMES = [
     'compare_purchase_costs',
     'build_prep_plan',
     'build_order_proposal',
+    'list_workflows', 'calculate_usable_yield', 'reconcile_stock', 'calculate_event_budget', 'validate_prep_capacity',
 ];
-// Original workflow guidance (host writes narrative drafts; F16 skills expand these).
-const WORKFLOWS = {
-    onboarding: {
-        title: 'Onboarding: set up a workspace',
-        steps: ['Create workspace dir', 'Import recipes/purchases via preview then commit', 'Review validation issues', 'Approve records', 'Run first costing'],
-        approvals: 'Commits require preview review; approvals bind exact versions.',
-    },
-    'data-reconciliation': {
-        title: 'Data reconciliation: resolve conflicts',
-        steps: ['List conflicts from preview', 'Compare current vs incoming versions', 'Correct source data', 'Re-preview and commit'],
-        approvals: 'Stale versions fail; re-preview required.',
-    },
-    'recipe-documentation': {
-        title: 'Recipe documentation: draft cards',
-        steps: ['Confirm recipe + yield', 'List ingredients with units', 'Export recipe cards (draft)', 'Human review before use'],
-        approvals: 'Documents are drafts; approval required before kitchen use.',
-    },
-    'recipe-scaling': {
-        title: 'Recipe scaling',
-        steps: ['Confirm current yield', 'Supply target yield', 'Scale via tool', 'Verify units unchanged'],
-        approvals: 'Scaled output is a draft until reviewed.',
-    },
-    'recipe-costing': {
-        title: 'Recipe costing',
-        steps: ['Supply purchases with usable qty/unit', 'Run cost_recipe', 'Resolve unknown inputs', 'Margin only on confirmed price'],
-        approvals: 'Packaging reported separately; margin never labeled net profit.',
-    },
-    'purchase-price-review': {
-        title: 'Purchase price review',
-        steps: ['Collect options in same unit', 'Compare unit costs', 'Record effective dates', 'Commit confirmed purchase'],
-        approvals: 'Commit requires preview review.',
-    },
-    'menu-margin-review': {
-        title: 'Menu margin review',
-        steps: ['Cost recipe fully (no unknowns)', 'Confirm variant net price', 'Compute ingredient gross margin', 'Export cost sheet draft'],
-        approvals: 'Margin needs confirmed price; drafts only.',
-    },
-    'prep-planning': {
-        title: 'Prep planning',
-        steps: ['Supply demand servings + yield per batch', 'Supply on-hand stock', 'Build plan', 'Review batches'],
-        approvals: 'Plan is deterministic draft from supplied inputs.',
-    },
-    'ordering-proposals': {
-        title: 'Ordering proposals',
-        steps: ['Supply par, on-hand, on-order', 'Build proposal', 'Round only to supplied pack size', 'Review before ordering'],
-        approvals: 'Proposal is a draft; human places orders.',
-    },
-    'waste-review': {
-        title: 'Waste review',
-        steps: ['Record observed waste with units', 'Compare vs prep plan', 'Note causes', 'Adjust pars manually'],
-        approvals: 'No invented waste; observations only.',
-    },
-    'sop-drafting': {
-        title: 'SOP drafting',
-        steps: ['List steps from confirmed practice', 'Mark checks requiring readings', 'Export draft', 'Human approves'],
-        approvals: 'Never fabricate safety limits, allergens, readings, or signatures.',
-    },
-    'daily-close-review': {
-        title: 'Daily close review',
-        steps: ['Review tasks states', 'Resolve awaiting approvals', 'Record run history', 'Plan tomorrow prep'],
-        approvals: 'Close requires completed or explicitly blocked/cancelled tasks.',
-    },
-};
 export function listCapabilities() {
     return { tools: [...PUBLIC_TOOL_NAMES], dataVersion: 'v1', mode: 'public-stateless' };
 }
 export function getWorkflow(name) {
-    const w = WORKFLOWS[name];
-    if (!w)
-        throw new Error(`unknown workflow ${name}; available: ${Object.keys(WORKFLOWS).join(', ')}`);
-    return { ...w, instructions: WORKFLOW_TEXT[name] ?? '' };
+    return workflowGuidance({ name });
 }
 export function validateKitchenData(recipes, purchases) {
     const issues = [];
@@ -108,7 +44,12 @@ export function validateKitchenData(recipes, purchases) {
 }
 export const publicHandlers = {
     list_capabilities: (() => listCapabilities()),
-    get_workflow: ((args) => getWorkflow(args.name)),
+    get_workflow: workflowGuidance,
+    list_workflows: listWorkflows,
+    calculate_usable_yield: calculateUsableYield,
+    reconcile_stock: reconcileStock,
+    calculate_event_budget: calculateEventBudget,
+    validate_prep_capacity: validatePrepCapacity,
     validate_kitchen_data: ((args) => validateKitchenData(args.recipes, args.purchases)),
     scale_recipe: ((args) => scaleRecipe(args.recipe, args.targetYieldAmount)),
     convert_quantity: ((args) => convertQuantity(args)),

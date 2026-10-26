@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kitchen-tools": {
+      "url": "https://culinaryos-kitchen-tools-production.up.railway.app/mcp"
+    }
+  }
+}

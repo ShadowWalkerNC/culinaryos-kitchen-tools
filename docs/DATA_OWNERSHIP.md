@@ -8,5 +8,7 @@
 - Approvals bind exact object id + version; stale approvals fail.
 - Exports/backup write only inside workspace; traversal rejected.
 - Public mode persists nothing and reads no workspace.
+- Schema v2 adds settings and connected-flow records after a consistent pre-migration backup. Runs link exact source versions, calculations, appended document revisions, approvals and tasks.
+- JSON exports preserve original recipe/purchase fields and add workspace metadata. SQLite backup remains the full-fidelity recovery format. Do not publish exports or local private connection settings.
 - CulinaryOS exchange is FILE-based: operator explicitly copies an export file; adapter requires matching tenant binding + explicit confirm. No network, no service credentials, no default tenant.
 - Local Cheezies pilot (if any) runs at repo root against private files; excluded from package.

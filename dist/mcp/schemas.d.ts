@@ -63,6 +63,18 @@ export declare const purchaseRecordSchema: z.ZodObject<{
 export declare const listCapabilitiesSchema: z.ZodObject<{}, z.core.$strict>;
 export declare const getWorkflowSchema: z.ZodObject<{
     name: z.ZodString;
+    profile: z.ZodOptional<z.ZodObject<{
+        country: z.ZodOptional<z.ZodString>;
+        region: z.ZodOptional<z.ZodString>;
+        currency: z.ZodOptional<z.ZodString>;
+        unitSystem: z.ZodOptional<z.ZodEnum<{
+            metric: "metric";
+            "us-customary": "us-customary";
+            mixed: "mixed";
+        }>>;
+        timezone: z.ZodOptional<z.ZodString>;
+        foodCostTargetPercent: z.ZodOptional<z.ZodNumber>;
+    }, z.core.$strict>>;
 }, z.core.$strict>;
 export declare const validateKitchenDataSchema: z.ZodObject<{
     recipes: z.ZodDefault<z.ZodArray<z.ZodObject<{
@@ -295,8 +307,8 @@ export declare const decideApprovalSchema: z.ZodObject<{
 }, z.core.$strict>;
 export declare const exportSchema: z.ZodObject<{
     format: z.ZodEnum<{
-        json: "json";
         "recipe-cards": "recipe-cards";
+        json: "json";
         "cost-sheets": "cost-sheets";
     }>;
     file: z.ZodString;
@@ -322,6 +334,29 @@ export declare const forecastSchema: z.ZodObject<{
             onHand: z.ZodString;
             unit: z.ZodString;
         }, z.core.$strip>>;
+        capacity: z.ZodOptional<z.ZodObject<{
+            resources: z.ZodArray<z.ZodObject<{
+                id: z.ZodString;
+                capacity: z.ZodNumber;
+                unit: z.ZodString;
+            }, z.core.$strict>>;
+            tasks: z.ZodArray<z.ZodObject<{
+                id: z.ZodString;
+                resourceId: z.ZodString;
+                start: z.ZodISODateTime;
+                end: z.ZodISODateTime;
+                units: z.ZodNumber;
+                unit: z.ZodString;
+            }, z.core.$strict>>;
+        }, z.core.$strict>>;
+        orderLines: z.ZodOptional<z.ZodArray<z.ZodObject<{
+            ingredientId: z.ZodString;
+            par: z.ZodString;
+            onHand: z.ZodString;
+            onOrder: z.ZodString;
+            unit: z.ZodString;
+            packSize: z.ZodOptional<z.ZodString>;
+        }, z.core.$strip>>>;
     }, z.core.$strip>;
     confirm: z.ZodBoolean;
 }, z.core.$strip>;

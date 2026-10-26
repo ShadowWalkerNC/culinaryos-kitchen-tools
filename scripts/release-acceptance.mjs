@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {mkdtempSync,readdirSync,readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {tmpdir} from 'node:os';import {resolve,join} from 'node:path';
+import {Client} from '@modelcontextprotocol/sdk/client/index.js';
+import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
+const cwd=mkdtempSync(join(tmpdir(),'open-kitchen-public-'));
+const client=new Client({name:'release-reference-client',version:'0.2.0'});
+const transport=new StdioClientTransport({command:process.execPath,args:[resolve('dist/mcp/stdio.js'),'--mode=public'],cwd,stderr:'pipe'});
+const evidence={version:'0.2.0',host:'MCP SDK reference client; no generative model',checks:[],workflowRetrieval:[],calculations:{},limits:['Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark.']};
+const call=async(name,args={})=>{const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));return JSON.parse(r.content[0].text);};
+try{
+ await client.connect(transport);const tools=(await client.listTools()).tools;assert.equal(tools.length,14);assert.ok(!tools.some(t=>t.name==='run_connected_flow'));evidence.checks.push('14 public tools; local operations absent');
+ const catalog=await call('list_workflows',{limit:100});assert.equal(catalog.total,73);
+ for(const w of catalog.items){const out=await call('get_workflow',{name:w.id,profile:{country:'US',region:'Ohio',currency:'USD',unitSystem:'metric',timezone:'America/New_York',foodCostTargetPercent:30}});assert.equal(out.id,w.id);assert.ok(out.instructions.length>500);assert.equal(out.profile.foodCostTargetPercent,30);assert.equal(out.profile.currency,'USD');assert.ok(out.example.input&&out.example.output&&out.blockedExample.input&&out.blockedExample.output);evidence.workflowRetrieval.push({id:w.id,status:'PASS',hasWorkedAndBlockedExamples:true});}
+ const invalid=await client.callTool({name:'get_workflow',arguments:{name:'not-a-workflow'}});assert.equal(invalid.isError,true);evidence.checks.push('Unknown workflow has machine-readable error flag');
+ const provenance={source:'Synthetic held-out comparison',receivedAt:'2026-10-25T00:00:00Z',verified:true};
+ const recipe={id:'b01',name:'Synthetic chicken',currency:'GBP',yieldQty:{amount:'10',unit:'portion'},ingredients:[{ingredientId:'chicken',qty:{amount:'2',unit:'kg'}},{ingredientId:'carrot',qty:{amount:'1.2',unit:'kg'}},{ingredientId:'sauce',qty:{amount:'1',unit:'batch'}}],subrecipes:[],version:1,provenance,variants:[{id:'net',netPriceCents:850,confirmed:true}]};
+ const purchase=(id,costCents,amount,unit)=>({id,ingredientId:id,currency:'GBP',costCents,usableQty:{amount,unit},effectiveDate:'2026-10-25',version:1,provenance});
+ const complete=await call('cost_recipe',{recipes:[recipe],purchasesByIngredient:[purchase('chicken',725,'1','kg'),purchase('carrot',250,'1','kg'),purchase('sauce',160,'1','batch')],targetRecipeId:'b01',variantId:'net'});assert.equal(complete.knownCents,1910);assert.equal(complete.perUnitCents,191);assert.equal(complete.ingredientGrossMarginCents,659);evidence.calculations.B01=complete;
+ const incomplete=await call('cost_recipe',{recipes:[recipe],purchasesByIngredient:[purchase('chicken',725,'1','kg'),purchase('carrot',250,'1','kg')],targetRecipeId:'b01',variantId:'net'});assert.equal(incomplete.knownCents,1750);assert.equal(incomplete.perUnitCents,undefined);assert.equal(incomplete.ingredientGrossMarginCents,undefined);evidence.calculations.partial=incomplete;
+ const prep=await call('build_prep_plan',{demand:[{recipeId:'r',servings:'137',servingUnit:'portion',yieldPerBatch:'24'}],stock:[{recipeId:'r',onHand:'18',unit:'portion'}]});assert.equal(prep[0].batches,5);assert.equal(prep[0].toMake,'120');evidence.calculations.B03=prep;
+ const yieldResult=await call('calculate_usable_yield',{gross:{amount:'5',unit:'kg'},usable:{amount:'4',unit:'kg'},currency:'USD',purchaseCostCents:5000});assert.equal(yieldResult.yieldPercent,'80');evidence.calculations.yield=yieldResult;
+ const budget=await call('calculate_event_budget',{currency:'USD',revenueCents:300000,costs:[{label:'food',currency:'USD',amountCents:90000},{label:'labor',currency:'USD',amountCents:60000},{label:'fuel',currency:'USD',amountCents:15000},{label:'pitch',currency:'USD',amountCents:30000},{label:'napkins',currency:'USD',amountCents:null}]});assert.equal(budget.complete,false);assert.equal(budget.contributionCents,undefined);evidence.calculations.partialEvent=budget;
+ assert.deepEqual(readdirSync(cwd),[]);evidence.checks.push('No workspace, database or files created by public package');
+ evidence.checkedAt=new Date().toISOString();mkdirSync('docs/evidence',{recursive:true});writeFileSync('docs/evidence/reference-protocol.json',JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify({status:'PASS',workflows:evidence.workflowRetrieval.length,publicTools:tools.length,checks:evidence.checks}));
+}finally{await client.close();}

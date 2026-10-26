@@ -5,6 +5,9 @@ import { exportJson, exportRecipeCards, exportCostSheets } from '../data/exports
 import { costRecipe } from '../core/costing.js';
 import { DEFAULT_WORKER_CONFIG, saveForecast, workerTick } from '../jobs/worker.js';
 import { systemClock } from '../jobs/clocks.js';
+import { runConnectedFlow, listConnectedFlows, attachFlowDocument, approveFlow } from '../workflows/connected.js';
+import { getRestaurantProfile, setRestaurantProfile } from '../workflows/profile.js';
+import { workerStatus } from '../jobs/workspaceWorker.js';
 export const LOCAL_TOOL_NAMES = [
     'lookup_recipe',
     'list_recipes',
@@ -23,6 +26,7 @@ export const LOCAL_TOOL_NAMES = [
     'set_forecast',
     'run_workflows',
     'list_runs',
+    'run_connected_flow', 'list_connected_flows', 'attach_flow_document', 'approve_flow', 'get_restaurant_profile', 'set_restaurant_profile', 'worker_status',
 ];
 export function getWorkflowsConfig(db) {
     const row = db.raw.prepare('SELECT data FROM workflows_config WHERE id = ?').get('default');
@@ -46,6 +50,13 @@ export function setWorkflowsConfig(db, patch) {
 export function localHandlers(ctx) {
     const { db, workspaceRoot } = ctx;
     return {
+        run_connected_flow: ((args) => runConnectedFlow(db, args.request)),
+        list_connected_flows: (() => listConnectedFlows(db)),
+        attach_flow_document: ((args) => attachFlowDocument(db, args)),
+        approve_flow: ((args) => approveFlow(db, args)),
+        get_restaurant_profile: (() => getRestaurantProfile(db)),
+        set_restaurant_profile: ((args) => setRestaurantProfile(db, args)),
+        worker_status: (() => workerStatus(db)),
         lookup_recipe: ((args) => getRecipe(db, args.id)),
         list_recipes: (() => listRecipes(db)),
         cost_stored_recipe: ((args) => {

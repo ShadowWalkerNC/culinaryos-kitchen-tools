@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "kitchen-tools": {
+      "command": "node",
+      "args": [
+        "REPLACE_WITH_ABSOLUTE_TOOLKIT_PATH/dist/mcp/stdio.js",
+        "--mode=local",
+        "--workspace",
+        "REPLACE_WITH_PRIVATE_WORKSPACE_PATH"
+      ]
+    }
+  }
+}

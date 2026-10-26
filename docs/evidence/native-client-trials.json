@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-25 America/New_York",
+  "inputs": "Synthetic recipes only; full local transcripts preserved outside public package",
+  "codex": {
+    "version": "0.161.0",
+    "configuration": "Per-invocation remote MCP override; existing user settings preserved",
+    "discovery": "Server/tool definitions discoverable",
+    "toolExecution": "BLOCKED",
+    "error": "MCP tool call requires approval, but approval policy is never",
+    "attemptedTools": ["list_workflows", "get_workflow", "convert_quantity", "cost_recipe"],
+    "conclusion": "Native installation acceptance incomplete; policy was not bypassed"
+  },
+  "geminiCli": {
+    "version": "0.63.0",
+    "configuration": "Isolated project directory; gemini mcp add --scope project --transport http",
+    "connection": "gemini mcp list reported Connected",
+    "modelTrial": "Read-only plan mode; model reported kitchen-tools unavailable",
+    "conclusion": "Native connectivity verified; native workflow and calculation execution unverified"
+  },
+  "otherClients": "ChatGPT, Claude and Cursor native installation NOT_RUN"
+}

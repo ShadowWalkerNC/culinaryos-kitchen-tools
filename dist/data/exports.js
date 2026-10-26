@@ -4,6 +4,8 @@ import { DatabaseSync } from 'node:sqlite';
 import { join, resolve, sep, isAbsolute, relative } from 'node:path';
 import { allRecipes, latestPurchaseByIngredient } from './queries.js';
 import { costRecipe } from '../core/costing.js';
+import { listConnectedFlows } from '../workflows/connected.js';
+import { getRestaurantProfile } from '../workflows/profile.js';
 export function assertInside(workspaceRoot, rel) {
     if (rel === '' || rel.includes('\0') || isAbsolute(rel) || rel.split(/[\\/]/).includes('..') || rel.includes(':'))
         throw new Error('path traversal rejected');
@@ -24,7 +26,7 @@ export function exportJson(db, workspaceRoot, rel) {
     const abs = assertInside(workspaceRoot, rel);
     const recipes = db.raw.prepare('SELECT data FROM recipes ORDER BY id').all();
     const purchases = db.raw.prepare('SELECT data FROM purchases ORDER BY id').all();
-    const payload = JSON.stringify({ dataVersion: 'v1', exportedAt: new Date().toISOString(), recipes: recipes.map((r) => JSON.parse(r.data)), purchases: purchases.map((p) => JSON.parse(p.data)) }, null, 2);
+    const payload = JSON.stringify({ dataVersion: 'v1', workspaceVersion: 2, exportedAt: new Date().toISOString(), recipes: recipes.map((r) => JSON.parse(r.data)), purchases: purchases.map((p) => JSON.parse(p.data)), profile: getRestaurantProfile(db), connectedFlows: listConnectedFlows(db), tasks: db.raw.prepare('SELECT * FROM tasks').all(), approvals: db.raw.prepare('SELECT * FROM approvals').all(), schedules: db.raw.prepare("SELECT * FROM workflows_config WHERE id='default'").all() }, null, 2);
     mkdirSync(join(abs, '..'), { recursive: true });
     if (!abs.endsWith('.json'))
         throw new Error('JSON exports require .json extension');

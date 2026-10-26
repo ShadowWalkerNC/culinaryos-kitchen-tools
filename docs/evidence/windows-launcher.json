@@ -1,0 +1,23 @@
+{
+  "health": {
+    "ok": true
+  },
+  "version": {
+    "version": "0.2.0",
+    "dataVersion": "v1",
+    "mode": "local"
+  },
+  "worker": {
+    "state": "idle",
+    "lastCheckAt": "2026-10-26T01:35:25.817Z",
+    "nextCheckAt": "2026-10-26T01:35:35.824Z",
+    "lastResult": {
+      "events": 0,
+      "prep": "disabled",
+      "serviceDay": "2026-10-26"
+    },
+    "error": null,
+    "message": "Rules run while the local workspace is open. No background AI service is used."
+  },
+  "scope": "Windows launcher; fresh synthetic workspace; runtime dependencies already installed"
+}

@@ -1,0 +1,457 @@
+{
+  "version": "0.2.0",
+  "host": "MCP SDK reference client; no generative model",
+  "checks": [
+    "14 public tools; local operations absent",
+    "Unknown workflow has machine-readable error flag",
+    "No workspace, database or files created by public package"
+  ],
+  "workflowRetrieval": [
+    {
+      "id": "agency-chef-onboarding-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "allergen-management-system",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "apprenticeship-tracker",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "banquet-event-order",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "bar-cocktail-recipe-builder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "burnout-stress-risk-assessment",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "canape-reception-planner",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "capacity-aware-prep",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "catering-quotation",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "chef-personal-brand-builder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "chef-wellbeing-check-in",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "complaint-handling-resolution-log",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "corporate-event-menu-planner",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "coshh-chemical-safety",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "daily-brief-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "daily-close-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "data-reconciliation",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "dietary-requirements-tracker",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "disciplinary-documentation-helper",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "dish-development-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "equipment-maintenance-log",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "event-catering-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "event-equipment-kit-list",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "event-run-of-show",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "event-staffing-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "foh-service-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-safety-incident-report",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-event-profitability",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "guest-feedback-analyser",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "haccp-checklist-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "invoice-reconciliation",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "kitchen-budget-planner",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "kitchen-culture-health-check",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "kitchen-ethos-doc-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "menu-description-writer",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "menu-margin-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "nutritional-information-calculator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "onboarding",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "ordering-proposals",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "partnership-growth-finder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "plate-photography-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "post-event-report",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "prep-planning",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "price-increase-impact-calculator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "private-dining-setup-guide",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "purchase-price-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-compliance-checker",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-costing",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-dependency-impact",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-documentation",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-scaling",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "rota-builder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "seasonal-menu-planner",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "social-media-content-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "sop-drafting",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "staff-performance-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "station-setup-checklist",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "stock-take-template-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "stock-variance",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "supplier-performance-scorecard",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "supplier-substitution-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "table-turnover-pacing-plan",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "tasting-menu-builder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "team-meeting-agenda-builder",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "tender-brief-new-suppliers",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "training-plan-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "trial-shift-assessment",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "upselling-training-script",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "usable-yield-verification",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "vip-special-guest-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "waste-review",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "wedding-catering-checklist",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "wine-beverage-pairing-guide",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    }
+  ],
+  "calculations": {
+    "B01": {
+      "recipeId": "b01",
+      "currency": "GBP",
+      "knownCents": 1910,
+      "packagingCents": 0,
+      "unknown": [],
+      "coverage": {
+        "known": 3,
+        "total": 3
+      },
+      "rounding": "half_up",
+      "perUnitCents": 191,
+      "ingredientGrossMarginCents": 659,
+      "variantId": "net"
+    },
+    "partial": {
+      "recipeId": "b01",
+      "currency": "GBP",
+      "knownCents": 1750,
+      "packagingCents": 0,
+      "unknown": [
+        {
+          "path": "b01.sauce",
+          "reason": "no purchase cost supplied"
+        }
+      ],
+      "coverage": {
+        "known": 2,
+        "total": 3
+      },
+      "rounding": "half_up"
+    },
+    "B03": [
+      {
+        "recipeId": "r",
+        "batches": 5,
+        "toMake": "120",
+        "unit": "portion"
+      }
+    ],
+    "yield": {
+      "gross": {
+        "amount": "5",
+        "unit": "kg"
+      },
+      "usable": {
+        "amount": "4",
+        "unit": "kg"
+      },
+      "yieldPercent": "80",
+      "usableInGrossUnit": {
+        "amount": "4",
+        "unit": "kg"
+      },
+      "basis": "supplied measured usable yield",
+      "rounding": "half_up",
+      "currency": "USD",
+      "costCentsPerUsableUnit": 1250,
+      "usableCostBasis": {
+        "numeratorCents": "5000000000",
+        "denominator": "4000000",
+        "unit": "kg"
+      }
+    },
+    "partialEvent": {
+      "currency": "USD",
+      "knownCostCents": 195000,
+      "unknown": [
+        "napkins"
+      ],
+      "complete": false,
+      "costCoverage": "supplied categories only; omitted costs are not verified zero",
+      "revenueCents": 300000,
+      "label": "contribution against supplied costs, not verified net profit"
+    }
+  },
+  "limits": [
+    "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
+  ],
+  "checkedAt": "2026-10-26T01:32:24.241Z"
+}

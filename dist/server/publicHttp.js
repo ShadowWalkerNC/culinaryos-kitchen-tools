@@ -3,7 +3,8 @@ import { createServer } from 'node:http';
 import { handleMcpStreamable } from '../mcp/httpStream.js';
 import { readBodyCapped, logMeta, createCalcRunner } from './security.js';
 import { publicPage } from './publicPage.js';
-const VERSION = '0.1.1';
+import { VERSION } from '../version.js';
+import { clientConfigurations, playbook } from '../distribution.js';
 /** Exported for handler-level tests (no TCP needed). */
 export function createPublicHandler(port) {
     const hosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, ...(process.env.PUBLIC_HOSTS ?? '').split(','), process.env.RAILWAY_PUBLIC_DOMAIN ?? ''].map(x => x.trim().toLowerCase()).filter(Boolean));
@@ -38,6 +39,24 @@ export function createPublicHandler(port) {
                     const host = req.headers.host;
                     const local = /^(localhost|127\.0\.0\.1):\d+$/.test(host);
                     send(res, 200, { $schema: 'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json', mcpServers: { 'kitchen-tools': { type: 'streamable-http', url: `${local ? 'http' : 'https'}://${host}/mcp`, extensions: { 'com.openai': { auth: { type: 'none' } } } } } });
+                    return;
+                }
+                if (req.method === 'GET' && url.pathname.startsWith('/clients/')) {
+                    const name = url.pathname.slice('/clients/'.length), host = req.headers.host, local = /^(localhost|127\.0\.0\.1):\d+$/.test(host);
+                    const configs = clientConfigurations(`${local ? 'http' : 'https'}://${host}/mcp`);
+                    const value = Object.hasOwn(configs, name) ? configs[name] : undefined;
+                    if (value === undefined) {
+                        send(res, 404, { error: 'unknown client configuration' });
+                        return;
+                    }
+                    res.writeHead(200, { 'content-type': name.endsWith('.toml') ? 'text/plain; charset=utf-8' : 'application/json', 'content-disposition': `attachment; filename="${name}"`, 'x-content-type-options': 'nosniff' });
+                    res.end(value);
+                    return;
+                }
+                if (req.method === 'GET' && url.pathname === '/playbooks/all.md') {
+                    const text = playbook();
+                    res.writeHead(200, { 'content-type': 'text/markdown; charset=utf-8', 'content-disposition': 'attachment; filename="Open-Kitchen-Playbook.md"', 'x-content-type-options': 'nosniff' });
+                    res.end(text);
                     return;
                 }
                 if (req.method === 'GET' && (url.pathname === '/health' || url.pathname === '/healthz')) {

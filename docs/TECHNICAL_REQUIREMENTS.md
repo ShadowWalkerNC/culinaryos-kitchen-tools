@@ -21,7 +21,7 @@ Stack: Node >=24 (node:sqlite), strict TypeScript, MCP SDK, Zod, React/Vite UI. 
 
 ## MCP (F08–F09, F15)
 - Zod schemas per tool; no URL fetch / arbitrary paths / code exec tools.
-- Public registration: exactly 9 tools. Local registration adds 17 private tools, including confirmed forecasts and run history. `mcp.json` defaults to public stdio only.
+- Public registration: exactly 14 tools. Local registration adds private records, forecasts, flows, profile, drafts, approvals and run history. `mcp.json` defaults to public stdio only.
 - Transports: stdio + Streamable HTTP, compiled to dist/. Separate launch commands.
 
 ## HTTP (F14–F15)
@@ -29,13 +29,13 @@ Stack: Node >=24 (node:sqlite), strict TypeScript, MCP SDK, Zod, React/Vite UI. 
 - Public: stateless handler, same 1MB/timeout/concurrency bounds, no token, no static UI.
 
 ## Jobs (F12)
-- Worker starts only via explicit command; schedules enabled explicitly in workflows_config.
+- Workspace server starts/stops the embedded worker; schedules are explicitly enabled. Standalone worker remains an advanced option. Durable heartbeat exposes failures and next check.
 - Lease: `INSERT ... ON CONFLICT` per (schedule, occurrence) / (event id); multi-worker safe.
 - Clocks injectable (`{now(): Date, tz: string}`); DST tests use America/New_York spring/fall.
 - Bounded retries (max 3, backoff), run history table, failure visible via tasks.
 
 ## UI (F11)
-- Vite + React, 4 views, no router dep (hash tabs). Fetch same-origin `/api/*` + `/mcp` local tools via thin JSON bridge calling same domain functions.
+- Vite + React, six views, no router dependency (hash tabs). Same-origin `/api/*` calls share domain functions with local MCP.
 - Touch targets >=48px, labels on all inputs, keyboard focus visible, aria-live status.
 
 ## Adapter (F13)

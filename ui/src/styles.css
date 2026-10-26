@@ -31,3 +31,8 @@ td {overflow-wrap:anywhere;}
 @media(max-width:600px){main{padding:12px;}nav.tabs{position:sticky;top:0;background:white;z-index:2;padding:8px;}nav.tabs a{flex:1;justify-content:center;padding:0 8px;}button{margin:4px 4px 4px 0;}fieldset{padding:12px;}}
 label:has(input[type="checkbox"]){min-height:48px;display:flex;align-items:center;gap:8px;}
 @media(max-width:600px){main{padding-bottom:96px;}nav.tabs{position:fixed;top:auto;bottom:0;left:0;right:0;flex-wrap:nowrap;border-top:1px solid var(--line);}}
+
+.library-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}.library-list button{text-align:left;padding:12px}.library-list small{display:block;font-weight:400}.draft-text{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;border-left:3px solid var(--accent);padding:12px}.flow-run{margin-top:20px}.flow-run details{margin:12px 0}.flow-run dt{font-weight:600}.flow-run dd{margin:0 0 8px 16px}input:not([type=checkbox]),select{width:100%;padding:10px}pre,dd{overflow-wrap:anywhere;max-width:100%}@media(max-width:600px){nav.tabs{overflow-x:auto;justify-content:flex-start}nav.tabs a{flex:0 0 auto;min-width:76px}main{padding-bottom:100px}}
+
+body{font-family:Arial,Helvetica,sans-serif}table th,table td{min-width:90px}table td:first-child{min-width:130px}table button,.demo-badge{white-space:nowrap}table button{min-width:72px}details summary{cursor:pointer;min-height:48px;padding:10px 0}input[type=checkbox]{min-width:24px;min-height:24px}
+@media(max-width:600px){nav.tabs{gap:2px;overflow-x:visible}nav.tabs a{flex:1 1 0;min-width:0;padding:0 2px;white-space:nowrap;font-size:12px}}

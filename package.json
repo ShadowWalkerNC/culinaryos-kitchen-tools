@@ -1,6 +1,6 @@
 {
-  "name": "@culinaryos/kitchen-tools",
-  "version": "0.1.1",
+  "name": "open-kitchen-toolkit",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "node scripts/compile-workflows.mjs && tsc -p tsconfig.json && vite build --config ui/vite.config.js",
+    "build": "node scripts/compile-workflows.mjs && tsc -p tsconfig.json && vite build --config ui/vite.config.js && node scripts/build-distribution.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p ui/tsconfig.json",
     "test": "node --import tsx --test tests/*.test.ts",
     "dev": "tsx src/cli/cli.ts local-serve --dev",
@@ -19,10 +19,12 @@
     "mcp:public": "node dist/mcp/stdio.js --mode=public",
     "mcp:local": "node dist/mcp/stdio.js --mode=local",
     "cli": "node dist/cli/cli.js",
-    "package": "npm run build && node scripts/package.mjs"
+    "package": "npm run build && node scripts/package.mjs",
+    "check:scenarios": "node scripts/build-scenarios.mjs --check",
+    "test:release": "node scripts/release-acceptance.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
     "zod": "4.6.7"
   },
   "devDependencies": {
@@ -41,9 +43,15 @@
     "skills",
     "docs",
     "fixtures",
+    "clients",
+    "launchers",
     "plugin.json",
     "mcp.json",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "bin": {
+    "kitchen-tools": "dist/cli/cli.js",
+    "kitchen-tools-mcp": "dist/mcp/stdio.js"
+  }
 }

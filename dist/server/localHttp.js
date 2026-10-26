@@ -14,7 +14,11 @@ import { saveForecast, workerTick } from '../jobs/worker.js';
 import { systemClock } from '../jobs/clocks.js';
 import { handleMcpStreamable } from '../mcp/httpStream.js';
 import { checkHost, checkOrigin, createSessionStore, readBodyCapped, createCalcRunner, logMeta } from './security.js';
-const VERSION = '0.1.1';
+import { VERSION } from '../version.js';
+import { startWorkspaceWorker, workerStatus } from '../jobs/workspaceWorker.js';
+import { runConnectedFlow, listConnectedFlows, attachFlowDocument, approveFlow } from '../workflows/connected.js';
+import { getRestaurantProfile, setRestaurantProfile } from '../workflows/profile.js';
+import { listWorkflows, workflowGuidance } from '../workflows/discovery.js';
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 function sendJson(res, status, body, type = 'application/json') {
     const payload = typeof body === 'string' ? body : JSON.stringify(body);
@@ -111,10 +115,13 @@ export function startLocalServer(opts) {
         server.once('error', () => resolve(false));
     });
     server.listen(opts.port, '127.0.0.1');
+    let stopWorker = () => { };
+    server.once('listening', () => { stopWorker = startWorkspaceWorker(db); });
     return {
         port: opts.port,
         ready,
         close: () => new Promise((resolveClose) => {
+            stopWorker();
             server.close(() => {
                 db.close();
                 resolveClose();
@@ -129,6 +136,42 @@ async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
             return {};
         return JSON.parse(raw.toString('utf8'));
     };
+    if (req.method === 'GET' && path === '/api/profile') {
+        send(res, 200, getRestaurantProfile(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/profile') {
+        send(res, 200, setRestaurantProfile(db, await readJson()));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/worker-status') {
+        send(res, 200, workerStatus(db));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/library') {
+        send(res, 200, listWorkflows({ limit: 100 }));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/library/workflow') {
+        send(res, 200, workflowGuidance({ ...await readJson(), profile: getRestaurantProfile(db) }));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/connected-flows') {
+        send(res, 200, listConnectedFlows(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/connected-flows') {
+        send(res, 200, runConnectedFlow(db, await readJson()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/connected-flows/document') {
+        send(res, 200, attachFlowDocument(db, await readJson()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/connected-flows/approve') {
+        send(res, 200, approveFlow(db, await readJson()));
+        return;
+    }
     if (req.method === 'GET' && path === '/api/runs') {
         send(res, 200, db.raw.prepare('SELECT schedule,occurrence,status,input,output,attempts,updated_at FROM runs ORDER BY updated_at DESC LIMIT 100').all());
         return;

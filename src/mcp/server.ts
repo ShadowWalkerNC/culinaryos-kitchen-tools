@@ -11,6 +11,12 @@ import {
 import { publicHandlers } from './publicTools.js';
 import { localHandlers, type LocalContext } from './localTools.js';
 import { z } from 'zod';
+import {VERSION} from '../version.js';
+import {listWorkflowsSchema} from '../workflows/discovery.js';
+import {usableYieldSchema,stockSchema,budgetSchema,capacitySchema} from '../core/operations.js';
+import {connectedFlowSchema,attachFlowDocumentSchema,approveFlowSchema,runConnectedFlow,listConnectedFlows,attachFlowDocument,approveFlow} from '../workflows/connected.js';
+import {getRestaurantProfile,setRestaurantProfile,restaurantProfileSchema} from '../workflows/profile.js';
+import {workerStatus} from '../jobs/workspaceWorker.js';
 
 export type McpMode = 'public' | 'local';
 
@@ -23,10 +29,13 @@ function textResult(value: unknown): { content: Array<{ type: 'text'; text: stri
 }
 
 export function createMcpServer(mode: McpMode, ctx?: LocalContext): McpServer {
-  const server = new McpServer({ name: mode === 'public' ? 'kitchen-tools-public' : 'kitchen-tools-local', version: '0.1.1' });
+  const server = new McpServer({ name: mode === 'public' ? 'kitchen-tools-public' : 'kitchen-tools-local', version: VERSION });
+  for(const [name,schema] of Object.entries({list_workflows:listWorkflowsSchema,calculate_usable_yield:usableYieldSchema,reconcile_stock:stockSchema,calculate_event_budget:budgetSchema,validate_prep_capacity:capacitySchema})){
+    server.tool(name,'Use this for original workflow discovery or deterministic kitchen operations; missing inputs stay unknown',schema.shape,(args:Record<string,unknown>)=>textResult(publicHandlers[name as keyof typeof publicHandlers](args as never)));
+  }
 
   server.tool('list_capabilities', 'List stateless public capabilities', toShape(listCapabilitiesSchema), () => textResult((publicHandlers.list_capabilities as (a: Record<string, never>) => unknown)({})));
-  server.tool('get_workflow', 'Get original workflow guidance', toShape(getWorkflowSchema), (args) => textResult((publicHandlers.get_workflow as (a: unknown) => unknown)(args)));
+  server.tool('get_workflow', 'Get original workflow guidance', toShape(getWorkflowSchema), (args) => textResult((publicHandlers.get_workflow as (a: unknown) => unknown)({...args,...(mode==='local'&&ctx?{profile:{...getRestaurantProfile(ctx.db),...args.profile}}:{})})));
   server.tool('validate_kitchen_data', 'Validate recipes and purchases', toShape(validateKitchenDataSchema), (args) => textResult((publicHandlers.validate_kitchen_data as (a: unknown) => unknown)(args)));
   server.tool('scale_recipe', 'Scale a recipe to a target yield', toShape(scaleRecipeSchema), (args) => textResult((publicHandlers.scale_recipe as (a: unknown) => unknown)(args)));
   server.tool('convert_quantity', 'Convert quantity with explicit factor', toShape(convertQuantitySchema), (args) => textResult((publicHandlers.convert_quantity as (a: unknown) => unknown)(args)));
@@ -37,6 +46,14 @@ export function createMcpServer(mode: McpMode, ctx?: LocalContext): McpServer {
 
   if (mode === 'local') {
     if (!ctx) throw new Error('local mode requires context');
+    const database=ctx.db;
+    server.tool('run_connected_flow','Create a local version-bound draft and review tasks; no external actions',{request:connectedFlowSchema},args=>textResult(runConnectedFlow(database,args.request)));
+    server.tool('list_connected_flows','List local runs, blockers, drafts and stale source versions',{},()=>textResult(listConnectedFlows(database)));
+    server.tool('attach_flow_document','Attach an AI/client-written draft to exact source versions',attachFlowDocumentSchema.shape,args=>textResult(attachFlowDocument(database,args)));
+    server.tool('approve_flow','Confirm human review of the exact flow revision',approveFlowSchema.shape,args=>textResult(approveFlow(database,args)));
+    server.tool('get_restaurant_profile','Get explicitly supplied kitchen settings',{},()=>textResult(getRestaurantProfile(database)));
+    server.tool('set_restaurant_profile','Save explicit kitchen settings without guessing location or targets',restaurantProfileSchema.shape,args=>textResult(setRestaurantProfile(database,args)));
+    server.tool('worker_status','Check actual local schedule heartbeat and errors',{},()=>textResult(workerStatus(database)));
     const h = localHandlers(ctx);
     server.tool('lookup_recipe', 'Look up a stored recipe', toShape(lookupRecipeSchema), (args) => textResult((h.lookup_recipe as (a: unknown) => unknown)(args)));
     server.tool('list_recipes', 'List stored recipes', toShape(listRecipesSchema), () => textResult((h.list_recipes as (a: Record<string, never>) => unknown)({})));

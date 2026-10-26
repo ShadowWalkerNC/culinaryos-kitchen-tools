@@ -1,91 +1,59 @@
-# Kitchen Tools (standalone, local-first)
+# Open Kitchen Toolkit
 
-Original MIT toolkit for deterministic recipe costing, scaling, prep, and ordering. No Axomai or Cheezies content included.
+Free, original MIT kitchen workflows for your chosen AI, plus deterministic calculations and a private local workspace. Version0.2.0 expands the original toolkit to73 canonical workflows and five connected kitchen flows. No toolkit subscription, account or model API key is required. Your chosen AI service and hosting retain their own costs and account requirements.
 
-[Public source](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools) · [Release downloads](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases)
+[Public setup](https://culinaryos-kitchen-tools-production.up.railway.app) · [Source](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools) · [Downloads](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases)
 
-Use the [public setup page](https://culinaryos-kitchen-tools-production.up.railway.app) or connect a compatible AI client to `https://culinaryos-kitchen-tools-production.up.railway.app/mcp` with no authentication. The toolkit needs no extra account; your AI client's account/plan requirements still apply. Public mode has nine stateless tools and twelve original workflows. Private records, tasks, approvals and scheduled rules use the separately installed local workspace.
+## Start with your AI
 
-The created [personal plugin](https://chatgpt.com/plugins/plugins_6ade6883fbe48191b7d6651289203e6d) is private, not directory listed. Other users can use the public endpoint or a portable remote plugin package. See [connection instructions](docs/CONNECTIONS.md) and [acceptance evidence](docs/ACCEPTANCE.md).
+Public MCP URL: `https://culinaryos-kitchen-tools-production.up.railway.app/mcp` (no authentication).
 
-## Install
+Choose the configuration in `clients/` for ChatGPT, Claude Code, Cursor, Gemini CLI, Codex or generic MCP. Merge fragments; do not overwrite existing client settings. Gemini CLI is distinct from the Gemini consumer website. `docs/playbooks/Open-Kitchen-Playbook.md` works as manual guidance in other clients without implying live tools. Client installation status is explicit in docs/COMPATIBILITY.md.
 
-Requires Node >= 24.
+Try: “Find recipe costing in the workflow library, then convert32ounces to pounds.” Public mode is stateless and cannot read your files or create private tasks.
+
+## Start a private kitchen workspace
+
+Requires Node24 or later. Extract the full toolkit ZIP and open `launchers/Start-Kitchen-Workspace.cmd` on Windows, `Start-Kitchen-Workspace.command` on macOS, or run `sh launchers/start-kitchen-workspace.sh` on Linux. The launcher checks Node, installs locked runtime dependencies when absent and starts http://127.0.0.1:3101. macOS may require `chmod +x` on the supplied launchers depending on extraction permissions. No elevated install is required by the toolkit itself.
+
+Records default to your local application-data directory. Set `KITCHEN_WORKSPACE` to deliberately select another folder. Keep the workspace running for enabled schedules. Closing it stops processing; reopening performs bounded catch-up. No background model service runs.
+
+From source:
 
 ```sh
-cd kitchen-tools
 npm ci
 npm run build
-```
-
-Portable packaging (`npm run package`) copies shippable files to `package-out/` (excludes DB, workspace, credentials, node_modules). Run `npm ci` inside `package-out` for locked dependencies.
-
-## Run
-
-Local UI + API (binds 127.0.0.1:3101, serves built React UI):
-
-```sh
 npm run start:local -- --workspace ./workspace
 ```
 
-Open http://127.0.0.1:3101 in a browser. The UI fetches a session token from the same-origin `/api/session` endpoint automatically.
+In Settings, supply the kitchen values relevant to your work. Import reviewed recipe/purchase JSON or CSV through preview and confirmation. The Library provides73 original guides. Today shows scheduled rules and connected runs, blockers, source revisions, draft documents and exact-revision approvals.
 
-Public stateless server (setup page and MCP; no restaurant DB):
+## Connected flows
 
-```sh
-npm run start:public
-```
+- Recipe release: reviewed records → costs → supplied card/SOP drafts → human package approval. Recipe release approval also approves the exact underlying recipe revision for prep.
+- Supplier price change: confirmed purchase import → recursively affected recipes → revised costs → stale-source flags → review tasks.
+- Daily service: confirmed demand and counted stock → current approved recipe yields → capacity/ordering checks → service-brief draft → review.
+- Event planning: supplied quote/budget, resource intervals and guest-level evidence → capacity/dietary checks → event-plan draft → review.
+- Service close: actual stock and observed waste → variance → follow-up review task.
 
-MCP stdio (separate registrations):
+For event/close inputs or more detailed daily capacity/ordering records, use the explicit local MCP tools. The local UI can inspect, attach drafts and approve these runs. Draft creation never places an order, sends a message or changes a menu.
 
-```sh
-npm run mcp:public
-npm run mcp:local -- --workspace ./workspace
-```
+## Local MCP and portable CLI
 
-CLI: `npm run cli -- version|local-serve|public-serve|worker|worker-run|worker-recover|backup|tool|read-culinaryos`
+`npm run mcp:public` exposes14 stateless tools. `npm run mcp:local -- --workspace /absolute/private/workspace` adds24 local tools. Local mode deliberately grants your local AI client access to selected private records; do not publish that connection. The public9 original tools and all12 original workflow IDs remain compatible.
 
-Start continuous rules execution with `npm run cli -- worker --workspace ./workspace`. It checks every ten seconds. Configure timezone, cutoff, enable switches and confirmed service forecasts in Today. Recipe approval must match the current version. Missing data creates an action-required task. Schedules do not run merely because the UI is open.
+Package executables: `kitchen-tools` (CLI) and `kitchen-tools-mcp` (stdio). `kitchen-tools-mcp --mode=public` is the no-workspace default. A version-pinned .tgz is included in releases for npm-compatible installation without an npm-registry publication requirement.
 
-`npm run cli -- tool list_runs --workspace ./workspace --json '{}'` reads recent runs. Every local tool is also callable through this CLI command. To read an explicitly authorized tenant-bound export, use `read-culinaryos --workspace ./workspace --tenant YOUR_TENANT --file export.json --confirm`; it does not contact a live CulinaryOS server.
+## Backup, exports and migrations
 
-Dev: run `npm run build` then `npm run dev` to execute server source with the built UI.
+`npm run cli -- backup --workspace ./workspace --out backup/kitchen-tools.sqlite` makes a consistent SQLite backup. Stop the workspace before restoring a full backup. JSON exports retain the original v1 recipe/purchase fields and add profile, workflow records, tasks, approvals and schedules for portability. Backup is the full-fidelity restore format.
 
-## Backup / recovery
+Opening a pre-v2 workspace creates a `.pre-v2-...sqlite` backup beside the original before migration. A failed backup stops migration. Existing rows are preserved; future schema versions are refused.
 
-```sh
-npm run cli -- backup --workspace ./workspace --out backup/kitchen-tools.sqlite
-```
+## Development and evidence
 
-Restore by copying the backup file back to `<workspace>/kitchen-tools.sqlite` while the server is stopped. Exports stay inside the workspace (`exports/`).
+`npm run typecheck`, `npm test`, `npm run check:scenarios`, `node scripts/release-acceptance.mjs`, `npm run package`.
 
-## Self-host (public mode)
+The387-case bank contains designed tests, not387 completed AI conversations. Protocol reference checks, deterministic tests, editorial example reviews, live-comparison scope, native client installation and production kitchen acceptance are separate in docs/ACCEPTANCE.md. See docs/CONNECTIONS.md for tool inputs and docs/PROVENANCE.md for original-content boundaries.
 
-Stateless Docker image + Railway config included. No DB mount, health check on `/health`:
-
-```sh
-docker build -t kitchen-tools-public .
-docker run -p 3102:3102 kitchen-tools-public
-```
-
-## Protocol / client status
-
-| Check | Result |
-|---|---|
-| MCP stdio public (list + call) | Tested (automated) |
-| MCP Streamable HTTP public (list + call) | Tested (automated) |
-| MCP local tools via stdio | Tested (automated, in-memory) |
-| Local HTTP API + session flow | Tested (automated) |
-| Desktop/mobile visual and interaction acceptance | NOT RUN (browser automation unavailable) |
-| Host/origin/size rejections | Tested (automated) |
-| Public cannot list/call local tools | Tested (automated) |
-| Live hosted deployment | PASS: anonymous HTTPS and actual MCP calls, 2026-10-25 |
-| Personal plugin creation | PASS: twelve skills and remote configuration retained; client installation separate |
-| Third-party AI clients (Claude/Cursor/etc.) | NOT RUN |
-| Kitchen trials / publication | NOT RUN |
-| Live CulinaryOS integration | NOT RUN (file-exchange adapter only, fixture-tested) |
-
-## Docs
-
-- `docs/PRODUCT_REQUIREMENTS.md`, `TECHNICAL_REQUIREMENTS.md`, `FLOWS.md`, `DATA_OWNERSHIP.md`, `IMPLEMENTATION.md`, `SECURITY.md`, `PROVENANCE.md`
-- `skills/*/SKILL.md` — twelve original MIT skills.
+CulinaryOS integration remains an optional explicitly authorized tenant-bound file exchange, not live API synchronization. Allergen data distinguishes contains, may_contain, verified_absent and unknown; missing labels never prove absence. Local safety/legal controls and supplier records need verified sources and human review.

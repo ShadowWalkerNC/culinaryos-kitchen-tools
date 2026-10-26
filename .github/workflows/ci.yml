@@ -11,6 +11,9 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: npm test
+      - run: npm run check:scenarios
+      - run: npm run test:release
+      - run: sh -n launchers/start-kitchen-workspace.sh && sh -n launchers/Start-Kitchen-Workspace.command
       - run: npm run package
       - name: license check
         run: test -f LICENSE && grep -q "MIT License" LICENSE

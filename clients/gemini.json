@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "kitchen-tools": {
+      "httpUrl": "https://culinaryos-kitchen-tools-production.up.railway.app/mcp",
+      "timeout": 15000
+    }
+  }
+}

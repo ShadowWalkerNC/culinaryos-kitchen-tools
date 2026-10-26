@@ -21,5 +21,6 @@ export async function api<T>(path: string, opts: { method?: string; body?: unkno
   });
   const j = (await r.json().catch(() => ({ error: `http ${r.status}` }))) as T & { error?: string };
   if (!r.ok) throw new Error((j as { error?: string }).error ?? `http ${r.status}`);
+  if((opts.method??'GET')!=='GET')window.dispatchEvent(new Event('kitchen-records-changed'));
   return j as T;
 }

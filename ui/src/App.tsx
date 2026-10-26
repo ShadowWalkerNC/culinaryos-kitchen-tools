@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { api } from './api';
 import Workflows from './Workflows';
+import {KitchenSettings,WorkflowLibrary} from './KitchenWork';
 
 type Recipe = { id: string; name: string; currency: string; yieldQty: { amount: string; unit: string }; ingredients: Array<{ ingredientId: string; qty: { amount: string; unit: string } }>; version: number };
 type Task = { id: string; title: string; state: string; blockedReason?: string; cancellation?: string };
@@ -124,7 +125,7 @@ function Today(): React.ReactElement {
   const load = (): void => {
     api<Task[]>('/api/tasks').then(setTasks).catch((e: Error) => setErr(e.message));
   };
-  useEffect(load, []);
+  useEffect(()=>{load();const timer=setInterval(load,15000);window.addEventListener('kitchen-records-changed',load);return()=>{clearInterval(timer);window.removeEventListener('kitchen-records-changed',load);};}, []);
   return (
     <section aria-label="Today">
       <h2>Today — tasks</h2>
@@ -201,18 +202,20 @@ function Approvals(): React.ReactElement {
 
 export default function App(): React.ReactElement {
   const h = useHash();
-  const tab = h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
+  const tab = h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
   return (
     <>
-      <header className="top"><h1>Kitchen Tools — local workspace</h1></header>
+      <header className="top"><h1>Open Kitchen Toolkit</h1></header>
       <nav className="tabs" aria-label="Views">
         <a href="#/recipes" aria-current={tab === 'recipes' ? 'page' : undefined}>Recipes</a>
         <a href="#/imports" aria-current={tab === 'imports' ? 'page' : undefined}>Imports</a>
         <a href="#/today" aria-current={tab === 'today' ? 'page' : undefined}>Today</a>
         <a href="#/approvals" aria-current={tab === 'approvals' ? 'page' : undefined}>Approvals</a>
+        <a href="#/library" aria-current={tab === 'library' ? 'page' : undefined}>Library</a>
+        <a href="#/settings" aria-current={tab === 'settings' ? 'page' : undefined}>Settings</a>
       </nav>
       <main>
-        {tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
+        {tab === 'settings' ? <KitchenSettings /> : tab === 'library' ? <WorkflowLibrary /> : tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
       </main>
     </>
   );

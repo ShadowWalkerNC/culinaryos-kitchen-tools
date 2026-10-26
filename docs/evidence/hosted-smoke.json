@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-10-26T01:34:41.929Z",
+  "base": "https://culinaryos-kitchen-tools-production.up.railway.app",
+  "version": {
+    "version": "0.2.0",
+    "dataVersion": "v1",
+    "mode": "public-stateless"
+  },
+  "toolCount": 14,
+  "checks": [
+    "anonymous HTTPS health/version/setup",
+    "MCP initialize/discovery",
+    "original workflow text",
+    "conversion",
+    "complete and partial costing",
+    "private-tool rejection"
+  ],
+  "inputs": "synthetic only"
+}

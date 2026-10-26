@@ -8,11 +8,14 @@
 - `src/server/` localHttp, publicHttp, security (F14–F15)
 - `src/cli/` cli.ts (F09–F10, backup, worker)
 - `src/adapter/` culinaryosFile.ts (F13)
-- `ui/` React/Vite 4 views (F11)
-- `skills/*/` 12 original MIT skills (F16)
+- `ui/` React/Vite six views (F11)
+- `skills/*/` 73 original MIT workflows; searchable catalog in `src/workflows/catalog.ts` (F16)
+- `src/workflows/` connected runs, settings, discovery (F19–F22)
+- `src/core/operations.ts` yield, stock, event budget, capacity
+- `launchers/`, `clients/`, `src/distribution.ts` platform entry points/adapters (F23)
 - `tests/` node:test suites (F18)
 
-## Skills (F16)
+## Preserved identifiers (F16)
 onboarding, data-reconciliation, recipe-documentation, recipe-scaling, recipe-costing, purchase-price-review, menu-margin-review, prep-planning, ordering-proposals, waste-review, sop-drafting, daily-close-review.
 
 ## Stage acceptance (honest)
@@ -26,4 +29,4 @@ onboarding, data-reconciliation, recipe-documentation, recipe-scaling, recipe-co
 - [x] Adapter fixture + cross-tenant rejection
 - [x] `npm run build`, `typecheck`, `test` pass
 - [x] Anonymous hosted HTTPS/MCP release checks; private personal plugin created and stored components inspected.
-- NOT RUN: AI client installation, browser visual acceptance, kitchen trials, directory publication, live CulinaryOS integration.
+- Current evidence: ACCEPTANCE_020.md. Native AI-client installation, kitchen trials, directory publication and live CulinaryOS integration remain unverified; browser acceptance has now been performed.

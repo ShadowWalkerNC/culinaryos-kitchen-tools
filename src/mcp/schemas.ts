@@ -1,5 +1,7 @@
 // F08-F09 explicit Zod schemas for every MCP tool. No URL fetch / paths / exec tools.
 import { z } from 'zod';
+import {restaurantProfileSchema} from '../workflows/profile.js';
+import {capacitySchema} from '../core/operations.js';
 
 export const qtySchema = z.object({ amount: z.string().max(32), unit: z.string().min(1).max(32) });
 const provenance=z.object({source:z.string().max(500),receivedAt:z.string().max(40),verified:z.boolean()}).default({source:'supplied data',receivedAt:'unrecorded',verified:false});
@@ -7,7 +9,7 @@ export const recipeRecordSchema=z.object({id:z.string().min(1).max(200),name:z.s
 export const purchaseRecordSchema=z.object({id:z.string().min(1).max(200),ingredientId:z.string().min(1).max(200),currency:z.string().regex(/^[A-Z]{3}$/),costCents:z.number().int().nonnegative().safe(),usableQty:qtySchema,effectiveDate:z.string().max(10),version:z.number().int().positive().default(1),provenance,packBasis:z.string().max(500).optional(),densityGPerMl:z.string().max(32).optional()});
 
 export const listCapabilitiesSchema = z.object({}).strict();
-export const getWorkflowSchema = z.object({ name: z.string().min(1) }).strict();
+export const getWorkflowSchema = z.object({ name: z.string().min(1).max(200),profile:restaurantProfileSchema.optional() }).strict();
 
 export const validateKitchenDataSchema = z.object({
   recipes: z.array(recipeRecordSchema).max(500).default([]),
@@ -94,4 +96,4 @@ export const workflowsConfigSchema = z.object({
 }).strict();
 
 export type PreviewImportInput = z.infer<typeof previewImportSchema>;
-export const forecastSchema=z.object({day:z.string().max(10),forecast:z.object({demands:z.array(z.object({recipeId:z.string().max(200),servings:z.string().max(32),servingUnit:z.string().max(32),yieldPerBatch:z.string().max(32)})).max(500),stock:z.array(z.object({recipeId:z.string().max(200),onHand:z.string().max(32),unit:z.string().max(32)})).max(500)}),confirm:z.boolean()});
+export const forecastSchema=z.object({day:z.string().max(10),forecast:z.object({demands:z.array(z.object({recipeId:z.string().max(200),servings:z.string().max(32),servingUnit:z.string().max(32),yieldPerBatch:z.string().max(32)})).max(500),stock:z.array(z.object({recipeId:z.string().max(200),onHand:z.string().max(32),unit:z.string().max(32)})).max(500),capacity:capacitySchema.optional(),orderLines:buildOrderProposalSchema.shape.lines.optional()}),confirm:z.boolean()});

@@ -1,6 +1,7 @@
 // F09-F10 SQLite store via node:sqlite. Transactions + optimistic version checks.
 import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
+import { existsSync } from 'node:fs';
 const SCHEMA = `
 PRAGMA journal_mode = WAL;
 PRAGMA busy_timeout = 5000;
@@ -21,8 +22,41 @@ CREATE TABLE IF NOT EXISTS leases (k TEXT PRIMARY KEY, owner TEXT NOT NULL, expi
 CREATE TABLE IF NOT EXISTS workflows_config (id TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT NOT NULL);
 `;
 export function openDb(path) {
+    const existed = path !== ':memory:' && existsSync(path);
     const raw = new DatabaseSync(path);
+    raw.exec('PRAGMA busy_timeout = 5000');
+    const version = raw.prepare('PRAGMA user_version').get().user_version;
+    if (version > 2) {
+        raw.close();
+        throw new Error('Workspace schema is newer than this toolkit; use a newer release');
+    }
+    if (existed && version < 2 && raw.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='recipes'").get()) {
+        const backup = path + '.pre-v2-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + randomUUID().slice(0, 6) + '.sqlite';
+        try {
+            raw.exec("VACUUM INTO '" + backup.replaceAll("'", "''") + "'");
+        }
+        catch (e) {
+            raw.close();
+            throw new Error('Pre-migration backup failed; workspace was not migrated: ' + e.message);
+        }
+    }
     raw.exec(SCHEMA);
+    if (version < 2) {
+        try {
+            raw.exec(`BEGIN IMMEDIATE;
+    CREATE TABLE IF NOT EXISTS restaurant_profile (id TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS connected_flows (id TEXT PRIMARY KEY, kind TEXT NOT NULL, occurrence TEXT NOT NULL, status TEXT NOT NULL, version INTEGER NOT NULL, source_versions TEXT NOT NULL, input TEXT NOT NULL, output TEXT NOT NULL, documents TEXT NOT NULL, task_ids TEXT NOT NULL, history TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL, UNIQUE(kind,occurrence));
+    PRAGMA user_version=2; COMMIT;`);
+        }
+        catch (e) {
+            try {
+                raw.exec('ROLLBACK');
+            }
+            catch { }
+            raw.close();
+            throw e;
+        }
+    }
     return {
         raw,
         close() {

@@ -1,0 +1,90 @@
+{
+  "checkedAt": "2026-10-26T01:04:57.640Z",
+  "target": "Live connected Axomai instructions compared with Open Kitchen Toolkit0.2.0",
+  "method": "Vendor instruction hashes refreshed live. Prior isolated Codex held-out drafts reused only where hashes match. Toolkit calculations executed through its compiled MCP transport. This compares an instruction-guided host with deterministic tools, not two vendor inference endpoints or a blinded model ranking.",
+  "observations": [
+    {
+      "skillId": "dish-costing-calculator",
+      "liveInstructionSha256": "754ef59fec4c08f63e6aba1d3edbad88a86c0f956bb9fab3d2590f7157448b90",
+      "capturedAt": "2026-10-26T00:59:13.323Z",
+      "unchangedForPriorCases": true
+    },
+    {
+      "skillId": "allergen-management-system",
+      "liveInstructionSha256": "a445a4e9207b54c5329f753a3d6e46f204124f396fb70c0f8367db0647be8ff9",
+      "capturedAt": "2026-10-26T00:59:13.328Z",
+      "unchangedForPriorCases": true
+    },
+    {
+      "skillId": "prep-list-generator",
+      "liveInstructionSha256": "d98e87c5ea212790963082858da98cf2604c7675d2d19264cf1b23b09f4c791e",
+      "capturedAt": "2026-10-26T00:59:13.328Z",
+      "unchangedForPriorCases": true
+    },
+    {
+      "skillId": "menu-engineering-analyser",
+      "liveInstructionSha256": "9190677294bf17b759d3deb2f9ef4545074a436afdff64eabd3711ccd621730b",
+      "capturedAt": "2026-10-26T00:59:13.328Z",
+      "unchangedForPriorCases": true
+    },
+    {
+      "skillId": "daily-brief-generator",
+      "liveInstructionSha256": "c12c17f68b794cac5980a693d5dc6d306c5828320c0f2cf21ec52031217f87bc",
+      "capturedAt": "2026-10-26T00:59:13.328Z",
+      "unchangedForPriorCases": true
+    }
+  ],
+  "comparisons": [
+    {
+      "case": "B01 cost",
+      "axomaiHost": {
+        "batchCost": 19.1,
+        "portionCost": 1.9100000000000001
+      },
+      "toolkit": {
+        "batchCostCents": 1910,
+        "portionCostCents": 191
+      },
+      "result": "MATCH on supplied arithmetic"
+    },
+    {
+      "case": "B03 prep",
+      "axomaiHost": {
+        "batches": 5,
+        "production": 120,
+        "surplus": 1
+      },
+      "toolkit": {
+        "batches": 5,
+        "production": 120,
+        "derivedSurplus": 1
+      },
+      "result": "MATCH on supplied arithmetic"
+    },
+    {
+      "case": "Missing costs",
+      "result": "Toolkit actual MCP output omitted complete serving cost/margin with missing sauce; both the earlier Axomai host trial and toolkit guidance keep incomplete inputs explicit."
+    },
+    {
+      "case": "Unknown workflow",
+      "axomaiLive": {
+        "message": "Unknown skill",
+        "isError": false
+      },
+      "toolkitActual": {
+        "message": "UNKNOWN_WORKFLOW",
+        "isError": true
+      },
+      "result": "Different machine-readable signaling; vendor does not expose additional skill content."
+    },
+    {
+      "case": "Locale and allergen design",
+      "result": "Live connected vendor set is UK-oriented; its separately offered US edition remains untested. Original toolkit profile is explicit and its four-state allergen model retains unknowns. This is a contract difference, not a production safety certification."
+    }
+  ],
+  "limits": [
+    "No independent Axomai model endpoint is exposed by this connection.",
+    "Narrative quality, editing time, subscription ROI and full client installation are not established by arithmetic matches.",
+    "No vendor instruction body or proprietary output is redistributed in the public toolkit."
+  ]
+}

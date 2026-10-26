@@ -7,6 +7,9 @@ import { exportJson, exportRecipeCards, exportCostSheets } from '../data/exports
 import { costRecipe } from '../core/costing.js';
 import { DEFAULT_WORKER_CONFIG, saveForecast, workerTick, type ForecastInput, type WorkerConfig } from '../jobs/worker.js';
 import { systemClock } from '../jobs/clocks.js';
+import {runConnectedFlow,listConnectedFlows,attachFlowDocument,approveFlow} from '../workflows/connected.js';
+import {getRestaurantProfile,setRestaurantProfile} from '../workflows/profile.js';
+import {workerStatus} from '../jobs/workspaceWorker.js';
 
 export const LOCAL_TOOL_NAMES = [
   'lookup_recipe',
@@ -26,6 +29,7 @@ export const LOCAL_TOOL_NAMES = [
   'set_forecast',
   'run_workflows',
   'list_runs',
+  'run_connected_flow','list_connected_flows','attach_flow_document','approve_flow','get_restaurant_profile','set_restaurant_profile','worker_status',
 ] as const;
 
 export type LocalToolName = (typeof LOCAL_TOOL_NAMES)[number];
@@ -56,6 +60,13 @@ export function setWorkflowsConfig(db: Db, patch: Partial<WorkerConfig>): Worker
 export function localHandlers(ctx: LocalContext): Record<LocalToolName, (args: never) => unknown> {
   const { db, workspaceRoot } = ctx;
   return {
+    run_connected_flow:((args:{request:unknown})=>runConnectedFlow(db,args.request)) as (args:never)=>unknown,
+    list_connected_flows:(()=>listConnectedFlows(db)) as (args:never)=>unknown,
+    attach_flow_document:((args:unknown)=>attachFlowDocument(db,args)) as (args:never)=>unknown,
+    approve_flow:((args:unknown)=>approveFlow(db,args)) as (args:never)=>unknown,
+    get_restaurant_profile:(()=>getRestaurantProfile(db)) as (args:never)=>unknown,
+    set_restaurant_profile:((args:unknown)=>setRestaurantProfile(db,args)) as (args:never)=>unknown,
+    worker_status:(()=>workerStatus(db)) as (args:never)=>unknown,
     lookup_recipe: ((args: { id: string }) => getRecipe(db, args.id)) as unknown as (args: never) => unknown,
     list_recipes: (() => listRecipes(db)) as (args: never) => unknown,
     cost_stored_recipe: ((args: { id: string; variantId?: string }) => {

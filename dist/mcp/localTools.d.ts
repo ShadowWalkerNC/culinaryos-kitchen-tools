@@ -1,6 +1,6 @@
 import type { Db } from '../data/db.js';
 import { type WorkerConfig } from '../jobs/worker.js';
-export declare const LOCAL_TOOL_NAMES: readonly ["lookup_recipe", "list_recipes", "cost_stored_recipe", "preview_import", "commit_import", "create_task", "list_tasks", "set_task_state", "request_approval", "decide_approval", "list_approvals", "export_data", "get_workflows_config", "set_workflows_config", "set_forecast", "run_workflows", "list_runs"];
+export declare const LOCAL_TOOL_NAMES: readonly ["lookup_recipe", "list_recipes", "cost_stored_recipe", "preview_import", "commit_import", "create_task", "list_tasks", "set_task_state", "request_approval", "decide_approval", "list_approvals", "export_data", "get_workflows_config", "set_workflows_config", "set_forecast", "run_workflows", "list_runs", "run_connected_flow", "list_connected_flows", "attach_flow_document", "approve_flow", "get_restaurant_profile", "set_restaurant_profile", "worker_status"];
 export type LocalToolName = (typeof LOCAL_TOOL_NAMES)[number];
 export interface LocalContext {
     db: Db;

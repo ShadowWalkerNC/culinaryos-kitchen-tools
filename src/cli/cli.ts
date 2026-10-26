@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 // CLI entry: local-serve | public-serve | worker-run | worker-recover | backup | version
+import {VERSION} from '../version.js';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,7 +28,7 @@ function here(rel: string): string {
 async function main(): Promise<void> {
   const cmd = process.argv[2] ?? 'version';
   if (cmd === 'version') {
-    console.log(JSON.stringify({ version: '0.1.1', dataVersion: 'v1' }));
+    console.log(JSON.stringify({ version: VERSION, dataVersion: 'v1' }));
     return;
   }
   if (cmd === 'local-serve') {
@@ -34,14 +36,18 @@ async function main(): Promise<void> {
     const workspace = arg('--workspace', './workspace') as string;
     const uiDir = arg('--ui', here('dist/ui')) as string;
     mkdirSync(workspace, { recursive: true });
-    startLocalServer({ port, workspaceRoot: workspace, uiDir, dev: process.argv.includes('--dev') });
+    const localServer=startLocalServer({ port, workspaceRoot: workspace, uiDir, dev: process.argv.includes('--dev') });
+    process.once('SIGINT',()=>{void localServer.close().then(()=>process.exit(0));});
+    process.once('SIGTERM',()=>{void localServer.close().then(()=>process.exit(0));});
+    if(!await localServer.ready){await localServer.close();throw new Error('Workspace could not start; check the port and workspace permissions');}
     console.log(`local server on http://127.0.0.1:${port} workspace=${workspace}`);
     await new Promise(() => undefined);
     return;
   }
   if (cmd === 'public-serve') {
     const port = Number(arg('--port', process.env.PORT ?? '3102'));
-    startPublicServer({ port, host:arg('--host','0.0.0.0')! });
+    const publicServer=startPublicServer({ port, host:arg('--host','0.0.0.0')! });
+    if(!await publicServer.ready)throw new Error('Public service could not start');
     console.log(`public stateless server on :${port}`);
     await new Promise(() => undefined);
     return;

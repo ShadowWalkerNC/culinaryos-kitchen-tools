@@ -17,7 +17,7 @@ Standalone local-first toolkit. Original MIT content. No Axomai/Cheezies data in
 - F05 Validation: reject negative/NaN/zero yields, detect cycles, never missing cost=0.
 - F06 Costing: separates known/unknown/coverage; margin only on confirmed variant net price; packaging separate; never label ingredient margin as net profit.
 - F07 Public calculations: scale, convert, cost, compare purchases, prep plan, order proposal.
-- F08 Public MCP: 9 stateless tools only (list_capabilities, get_workflow, validate_kitchen_data, scale_recipe, convert_quantity, cost_recipe, compare_purchase_costs, build_prep_plan, build_order_proposal).
+- F08 Public MCP: 14 stateless tools: the original nine plus workflow search and deterministic yield, stock, event-budget and capacity calculations.
 - F09 Local MCP: adds recipe lookup, preview_import, commit_import, tasks, version-bound approvals, workflows config, export.
 - F10 Imports: JSON + CSV + pasted text (unverified until structured); preview then atomic commit; optimistic concurrency; no partial writes.
 - F11 UI views: Recipes / Imports / Today / Approvals; accessible, mobile 48px targets, empty/loading/error/success, print/export; synthetic demo fixture labeled; empty app honest.
@@ -25,9 +25,17 @@ Standalone local-first toolkit. Original MIT content. No Axomai/Cheezies data in
 - F13 CulinaryOS adapter: authorized FILE exchange only; explicit workspace/tenant binding + confirmation; cross-tenant rejection; no repo changes.
 - F14 Local HTTP: 127.0.0.1 only, serves built UI, session-secret mutations, strict host/origin, fetch-metadata, 1MB limit, calc timeout/concurrency bounds, health/version, metadata-only logs.
 - F15 Public HTTP: stateless only; no DB/secrets/files/payload persistence/model calls.
-- F16 Twelve original skills (see docs/IMPLEMENTATION.md list).
+- F16 73 original canonical workflows: 61 baseline mappings, four retained utilities and eight additions; preserve all twelve original IDs.
 - F17 Distribution: MIT, plugin.json 1.0, mcp.json with ${PLUGIN_ROOT}/dist/..., Dockerfile public stateless, Railway config, CI checks, README run/backup/recovery + status matrix.
 - F18 Tests: golden costing/conversions, edge cases, concurrency, traversal, approvals, jobs (lease/restart/catch-up/DST), MCP both transports + public isolation, HTTP security.
 
+## 0.2.0 extensions
+- F19 Five connected flows link source versions, calculations, draft revisions, exact-revision approvals and tasks. Missing evidence visibly blocks progress.
+- F20 Additive workspace migration with consistent pre-migration backup; public mode remains stateless.
+- F21 Enabled rules run automatically with the workspace, with health, next check, failures/history and bounded catch-up. No background model provider.
+- F22 Explicit location, currency, units, timezone and targets. Allergens distinguish contains, may contain, verified absent and unknown.
+- F23 Free source/runtime/plugin/playbook packages and separate client adapters. Untested installs stay visibly unverified.
+- F11 now includes Library and Settings, six views total. F12 uses an embedded workspace worker; a separate command is optional.
+
 ## Non-goals
-- No deployment/push/upload, no production calls, no AI generation dependency, no live CulinaryOS API integration (NOT RUN), no kitchen trials/publication (NOT RUN).
+No live CulinaryOS API integration, background model dependency, physical kitchen certification or automatic external orders/messages/price changes. Publication is authorized; evidence is recorded separately.

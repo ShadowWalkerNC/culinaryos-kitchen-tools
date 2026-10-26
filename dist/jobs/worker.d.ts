@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import { capacitySchema } from '../core/operations.js';
+import { buildOrderProposalSchema } from '../mcp/schemas.js';
 import { type Db } from '../data/db.js';
 import { type Clock } from './clocks.js';
 export interface WorkerConfig {
@@ -35,6 +38,8 @@ export interface ForecastInput {
         id: string;
         version: number;
     }>;
+    capacity?: z.infer<typeof capacitySchema> | undefined;
+    orderLines?: z.infer<typeof buildOrderProposalSchema>['lines'] | undefined;
 }
 /** Daily prep draft for tomorrow. Missing data -> action-required task. Bounded retries. */
 export declare function runDailyPrep(db: Db, occurrence: string, forecast: ForecastInput | null, config: WorkerConfig, clock: Clock, attempt?: number): {

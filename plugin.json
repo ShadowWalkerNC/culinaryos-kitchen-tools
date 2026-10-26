@@ -1,17 +1,17 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kitchen-tools",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "homepage": "https://culinaryos-kitchen-tools-production.up.railway.app",
   "repository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools",
-  "description": "Original kitchen workflows and deterministic recipe, cost, prep and purchasing tools.",
+  "description": "Free original kitchen workflows, transparent calculations and local review tasks.",
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "CulinaryOS Kitchen Tools",
+        "displayName": "Open Kitchen Toolkit",
         "shortDescription": "Recipes, costs and prep",
-        "longDescription": "Original kitchen workflows with deterministic calculations. Public mode is stateless. Private records and schedules stay local.",
+        "longDescription": "Free MIT kitchen workflows for your chosen AI. Public calculations are stateless; private records, approvals and enabled rules stay in your local workspace.",
         "category": "Business & Operations",
         "capabilities": [],
         "defaultPrompt": "Help me cost a recipe and prepare a kitchen workflow."
