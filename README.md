@@ -1,5 +1,7 @@
 # Open Kitchen Toolkit
 
+Version **0.2.1** adds guided setup, a public MCP diagnostic, a kitchen-job entry point, resumable event forms, reviewed AI handoff and printable documents. Start at the local workspace home page; “Setup and connection check” returns to the checklist. See [0.2.1 acceptance](docs/ACCEPTANCE_021.md) and the [expansion roadmap](docs/EXPANSION_ROADMAP.md).
+
 Free, original MIT kitchen workflows for your chosen AI, plus deterministic calculations and a private local workspace. Version0.2.0 expands the original toolkit to73 canonical workflows and five connected kitchen flows. No toolkit subscription, account or model API key is required. Your chosen AI service and hosting retain their own costs and account requirements.
 
 [Public setup](https://culinaryos-kitchen-tools-production.up.railway.app) · [Source](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools) · [Downloads](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases)
@@ -36,7 +38,7 @@ In Settings, supply the kitchen values relevant to your work. Import reviewed re
 - Event planning: supplied quote/budget, resource intervals and guest-level evidence → capacity/dietary checks → event-plan draft → review.
 - Service close: actual stock and observed waste → variance → follow-up review task.
 
-For event/close inputs or more detailed daily capacity/ordering records, use the explicit local MCP tools. The local UI can inspect, attach drafts and approve these runs. Draft creation never places an order, sends a message or changes a menu.
+Event planning now has guided local forms for budget, equipment intervals and guest evidence, with local save/resume and server preview. Service-close inputs and more detailed daily capacity/ordering records use local MCP tools. The UI can inspect, attach drafts and approve these runs. Draft creation never places an order, sends a message or changes a menu.
 
 ## Local MCP and portable CLI
 
@@ -48,7 +50,7 @@ Package executables: `kitchen-tools` (CLI) and `kitchen-tools-mcp` (stdio). `kit
 
 `npm run cli -- backup --workspace ./workspace --out backup/kitchen-tools.sqlite` makes a consistent SQLite backup. Stop the workspace before restoring a full backup. JSON exports retain the original v1 recipe/purchase fields and add profile, workflow records, tasks, approvals and schedules for portability. Backup is the full-fidelity restore format.
 
-Opening a pre-v2 workspace creates a `.pre-v2-...sqlite` backup beside the original before migration. A failed backup stops migration. Existing rows are preserved; future schema versions are refused.
+Opening a pre-v3 workspace creates a `.pre-v3-...sqlite` backup beside the original before migration. Schema v3 adds local unfinished event drafts. A failed backup stops migration. Existing rows are preserved; future schema versions are refused. JSON exports retain the v1 recipe/purchase interchange and include workspaceVersion 3 metadata.
 
 ## Development and evidence
 

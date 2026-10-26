@@ -19,6 +19,10 @@ import { startWorkspaceWorker, workerStatus } from '../jobs/workspaceWorker.js';
 import { runConnectedFlow, listConnectedFlows, attachFlowDocument, approveFlow } from '../workflows/connected.js';
 import { getRestaurantProfile, setRestaurantProfile } from '../workflows/profile.js';
 import { listWorkflows, workflowGuidance } from '../workflows/discovery.js';
+import { loadEventDraft, saveEventDraft, previewEventDraft, createEventFromDraft } from '../workflows/eventDraft.js';
+import { setupStatus, checkHostedConnection } from '../workflows/setup.js';
+import { ZodError } from 'zod';
+import { printableFlowDocument } from '../workflows/printDocument.js';
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 function sendJson(res, status, body, type = 'application/json') {
     const payload = typeof body === 'string' ? body : JSON.stringify(body);
@@ -94,7 +98,7 @@ export function createLocalHandler(deps) {
                 else if (msg.startsWith('STALE_VERSION'))
                     send(res, 409, { error: msg });
                 else
-                    send(res, 400, { error: msg });
+                    send(res, 400, { error: e instanceof ZodError ? e.issues.map(i => i.path.join('.') + ': ' + i.message).join('; ') : msg });
             }
             finally {
                 logMeta(req.method, req.url, res.statusCode, Date.now() - started);
@@ -136,8 +140,37 @@ async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
             return {};
         return JSON.parse(raw.toString('utf8'));
     };
+    const printMatch = /^\/api\/flow-document\/([^/]+)\/([^/]+)$/.exec(path);
+    if (req.method === 'GET' && printMatch) {
+        send(res, 200, printableFlowDocument(db, decodeURIComponent(printMatch[1]), decodeURIComponent(printMatch[2])), 'text/html; charset=utf-8');
+        return;
+    }
     if (req.method === 'GET' && path === '/api/profile') {
         send(res, 200, getRestaurantProfile(db));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/setup') {
+        send(res, 200, setupStatus(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/setup/check-hosted') {
+        send(res, 200, await runCalc(() => checkHostedConnection()));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/job-drafts/event') {
+        send(res, 200, loadEventDraft(db));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/job-drafts/event') {
+        send(res, 200, saveEventDraft(db, await readJson()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/events/preview') {
+        send(res, 200, previewEventDraft(await readJson()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/events/create') {
+        send(res, 200, createEventFromDraft(db, await readJson()));
         return;
     }
     if (req.method === 'POST' && path === '/api/profile') {

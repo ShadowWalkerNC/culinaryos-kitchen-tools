@@ -15,11 +15,34 @@ export const connectedFlowSchema = z.discriminatedUnion('kind', [
     z.object({ ...base, kind: z.literal('recipe-release'), recipeId: key }).strict(),
     z.object({ ...base, kind: z.literal('supplier-price-change'), ingredientIds: z.array(key).min(1).max(1000) }).strict(),
     z.object({ ...base, kind: z.literal('daily-service'), day: z.iso.date(), capacity: capacitySchema.optional(), orderLines: buildOrderProposalSchema.shape.lines.optional() }).strict(),
-    z.object({ ...base, kind: z.literal('event-planning'), budget: budgetSchema, capacity: capacitySchema, dietary: z.object({ totalGuests: z.number().int().positive().max(100000), guests: z.array(z.object({ id: key, requirements: z.array(key).max(30), allergenStatus: z.enum(ALLERGEN_STATES), evidence: z.object({ source: key, version: key, reviewer: key }).strict().optional() }).strict().refine(g => g.allergenStatus === 'unknown' || g.evidence !== undefined, 'Verified allergen states require source, version and reviewer')).max(100000) }).strict() }).strict(),
+    z.object({ ...base, kind: z.literal('event-planning'), budget: budgetSchema, capacity: capacitySchema.optional(), capacityConfirmed: z.boolean().optional(), dietary: z.object({ totalGuests: z.number().int().positive().max(100000), guests: z.array(z.object({ id: key, requirements: z.array(key).max(30), allergenStatus: z.enum(ALLERGEN_STATES), evidence: z.object({ source: key, version: key, reviewer: key }).strict().optional() }).strict().refine(g => g.allergenStatus === 'unknown' || g.evidence !== undefined, 'Verified allergen states require source, version and reviewer')).max(100000) }).strict() }).strict(),
     z.object({ ...base, kind: z.literal('service-close'), day: z.iso.date(), stock: stockSchema, wasteConfirmed: z.boolean(), waste: z.array(z.object({ ingredientId: key, amount: z.string().max(32), unit: z.string().min(1).max(32) }).strict()).max(1000) }).strict()
 ]);
 export const attachFlowDocumentSchema = z.object({ id: key, expectedVersion: z.number().int().positive(), kind: z.enum(['recipe-card', 'sop', 'service-brief', 'event-plan', 'supporting-note']), title: z.string().min(1).max(200), body: z.string().min(1).max(100000) }).strict();
 export const approveFlowSchema = z.object({ id: key, expectedVersion: z.number().int().positive(), confirm: z.literal(true), reviewer: z.string().trim().min(1).max(200) }).strict();
+export function evaluateEventPlan(p) {
+    const blockers = [];
+    const budget = calculateEventBudget(p.budget);
+    const capacity = p.capacity ? validatePrepCapacity(p.capacity) : { feasible: false, conflicts: [], checkedTasks: 0, basis: 'Resource capacities and intervals not supplied' };
+    const ids = p.dietary.guests.map(g => g.id);
+    if (new Set(ids).size !== ids.length)
+        throw new Error('duplicate guest identifiers');
+    if (ids.length > p.dietary.totalGuests)
+        throw new Error('guest count exceeds total');
+    if (ids.length !== p.dietary.totalGuests)
+        blockers.push('Guest-level dietary confirmations incomplete');
+    if (p.dietary.guests.some(g => g.allergenStatus === 'unknown'))
+        blockers.push('Unverified guest/dish allergen status');
+    if (!budget.complete || budget.revenueCents === null)
+        blockers.push('Event budget incomplete; confirm revenue and each named cost');
+    if (!p.capacity || !p.capacity.tasks.length)
+        blockers.push('Missing event workload: supply resource capacities and task intervals');
+    if (p.capacityConfirmed !== true)
+        blockers.push('Confirm the listed capacities and tasks cover the supplied event workload');
+    if (p.capacity && !capacity.feasible)
+        blockers.push('Event capacity conflict');
+    return { blockers, calculations: { budget, capacity, dietary: { totalGuests: p.dietary.totalGuests, confirmedGuestRecords: ids.length, uniqueGuestsWithRequirements: p.dietary.guests.filter(g => g.requirements.length).length } } };
+}
 const digest = (text) => createHash('sha256').update(text).digest('hex');
 function decode(r) { return { id: r.id, kind: r.kind, key: r.occurrence, status: r.status, version: r.version, sourceVersions: JSON.parse(r.source_versions), input: JSON.parse(r.input), output: JSON.parse(r.output), documents: JSON.parse(r.documents), taskIds: JSON.parse(r.task_ids), history: JSON.parse(r.history), createdAt: r.created_at, updatedAt: r.updated_at }; }
 function stale(db, f) {
@@ -33,7 +56,8 @@ function stale(db, f) {
     });
 }
 function status(f) { return f.output.blockers.length ? 'blocked' : f.output.requiredDocuments.some(k => !f.documents.some(d => d.kind === k)) ? 'awaiting_document' : 'awaiting_approval'; }
-function save(db, f) { db.raw.prepare('UPDATE connected_flows SET status=?,version=?,documents=?,output=?,history=?,updated_at=? WHERE id=?').run(f.status, f.version, JSON.stringify(f.documents), JSON.stringify(f.output), JSON.stringify(f.history), f.updatedAt, f.id); }
+function save(db, f) { db.raw.prepare('UPDATE connected_flows SET status=?,version=?,documents=?,output=?,history=?,updated_at=? WHERE id=?').run(f.status, f.version, JSON.stringify(f.documents), JSON.stringify(f.output), JSON.stringify(f.history), f.updatedAt, f.id); for (const taskId of f.taskIds)
+    db.raw.prepare('UPDATE tasks SET title=?,blocked_reason=? WHERE id=?').run(f.kind + ': ' + f.key + ' — ' + f.status, f.output.blockers.length ? f.output.blockers.join('; ') : null, taskId); }
 export function listConnectedFlows(db) { return db.raw.prepare('SELECT * FROM connected_flows ORDER BY updated_at DESC LIMIT 200').all().map(row => { const f = decode(row); if (f.status !== 'stale' && stale(db, f)) {
     f.status = 'stale';
     f.version++;
@@ -45,6 +69,7 @@ function current(db, id) { const row = db.raw.prepare('SELECT * FROM connected_f
     throw new Error('unknown workflow run'); const flow = decode(row); if (stale(db, flow)) {
     flow.status = 'stale';
 } return flow; }
+export { current as getConnectedFlow };
 export function runConnectedFlow(db, input) {
     const p = connectedFlowSchema.parse(input);
     const existing = db.raw.prepare('SELECT id FROM connected_flows WHERE kind=? AND occurrence=?').get(p.kind, p.key);
@@ -117,21 +142,9 @@ export function runConnectedFlow(db, input) {
     }
     if (p.kind === 'event-planning') {
         requiredDocuments = ['event-plan'];
-        const budget = calculateEventBudget(p.budget), capacity = validatePrepCapacity(p.capacity);
-        const ids = p.dietary.guests.map(g => g.id);
-        if (new Set(ids).size !== ids.length)
-            throw new Error('duplicate guest identifiers');
-        if (ids.length > p.dietary.totalGuests)
-            throw new Error('guest count exceeds total');
-        if (ids.length !== p.dietary.totalGuests)
-            blockers.push('Guest-level dietary confirmations incomplete');
-        if (p.dietary.guests.some(g => g.allergenStatus === 'unknown'))
-            blockers.push('Unverified guest/dish allergen status');
-        if (!budget.complete || budget.revenueCents === null)
-            blockers.push('Event budget incomplete');
-        if (!capacity.feasible)
-            blockers.push('Event capacity conflict');
-        calculations = { budget, capacity, dietary: { totalGuests: p.dietary.totalGuests, confirmedGuestRecords: ids.length, uniqueGuestsWithRequirements: p.dietary.guests.filter(g => g.requirements.length).length } };
+        const result = evaluateEventPlan(p);
+        blockers.push(...result.blockers);
+        calculations = result.calculations;
     }
     if (p.kind === 'service-close') {
         const variance = reconcileStock(p.stock);

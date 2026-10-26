@@ -1,0 +1,12 @@
+{
+  "status": "pass",
+  "checkedAt": "2026-10-26T16:30:33.215Z",
+  "checks": [
+    "Public tools discovered; private operations absent",
+    "Recipe costing workflow retrieved",
+    "32 oz converted to 2 lb",
+    "Synthetic recipe costs USD 1.00 per batch and USD 0.25 per portion"
+  ],
+  "scope": "Public MCP service only. Your native AI client installation and execution remain unverified.",
+  "inputs": "Synthetic only; no workspace records sent"
+}

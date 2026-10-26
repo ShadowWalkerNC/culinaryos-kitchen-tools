@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StreamableHTTPClientTransport} from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+import {VERSION} from '../dist/version.js';
 const base=process.argv[2]??'https://culinaryos-kitchen-tools-production.up.railway.app';
 const read=async path=>{const r=await fetch(base+path);assert.equal(r.status,200);return r.json();};
 assert.equal((await read('/health')).ok,true);
-const version=await read('/version');assert.equal(version.mode,'public-stateless');assert.equal(version.version,'0.2.0');
+const version=await read('/version');assert.equal(version.mode,'public-stateless');assert.equal(version.version,VERSION);
 assert.equal((await read('/connection.json')).mcpServers['kitchen-tools'].url,base+'/mcp');
 assert.equal((await fetch(base)).status,200);
 const client=new Client({name:'kitchen-tools-release-check',version:'0.2.0'});

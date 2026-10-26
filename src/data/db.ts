@@ -33,9 +33,9 @@ export function openDb(path: string): Db {
   const raw = new DatabaseSync(path);
   raw.exec('PRAGMA busy_timeout = 5000');
   const version=(raw.prepare('PRAGMA user_version').get() as {user_version:number}).user_version;
-  if(version>2){raw.close();throw new Error('Workspace schema is newer than this toolkit; use a newer release');}
-  if(existed&&version<2&&raw.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='recipes'").get()){
-    const backup=path+'.pre-v2-'+new Date().toISOString().replace(/[:.]/g,'-')+'-'+randomUUID().slice(0,6)+'.sqlite';
+  if(version>3){raw.close();throw new Error('Workspace schema is newer than this toolkit; use a newer release');}
+  if(existed&&version<3&&raw.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='recipes'").get()){
+    const backup=path+'.pre-v3-'+new Date().toISOString().replace(/[:.]/g,'-')+'-'+randomUUID().slice(0,6)+'.sqlite';
     try{raw.exec("VACUUM INTO '"+backup.replaceAll("'","''")+"'");}catch(e){raw.close();throw new Error('Pre-migration backup failed; workspace was not migrated: '+(e as Error).message);}
   }
   raw.exec(SCHEMA);
@@ -43,6 +43,9 @@ export function openDb(path: string): Db {
     CREATE TABLE IF NOT EXISTS restaurant_profile (id TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS connected_flows (id TEXT PRIMARY KEY, kind TEXT NOT NULL, occurrence TEXT NOT NULL, status TEXT NOT NULL, version INTEGER NOT NULL, source_versions TEXT NOT NULL, input TEXT NOT NULL, output TEXT NOT NULL, documents TEXT NOT NULL, task_ids TEXT NOT NULL, history TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL, UNIQUE(kind,occurrence));
     PRAGMA user_version=2; COMMIT;`);}catch(e){try{raw.exec('ROLLBACK');}catch{}raw.close();throw e;}}
+  if(version<3){try{raw.exec(`BEGIN IMMEDIATE;
+    CREATE TABLE IF NOT EXISTS job_drafts (id TEXT PRIMARY KEY, version INTEGER NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL);
+    PRAGMA user_version=3; COMMIT;`);}catch(e){try{raw.exec('ROLLBACK');}catch{}raw.close();throw e;}}
   return {
     raw,
     close(): void {

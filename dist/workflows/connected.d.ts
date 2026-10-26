@@ -47,7 +47,7 @@ export declare const connectedFlowSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
         }, z.core.$strict>>;
         targetContributionPercent: z.ZodOptional<z.ZodString>;
     }, z.core.$strict>;
-    capacity: z.ZodObject<{
+    capacity: z.ZodOptional<z.ZodObject<{
         resources: z.ZodArray<z.ZodObject<{
             id: z.ZodString;
             capacity: z.ZodNumber;
@@ -61,7 +61,8 @@ export declare const connectedFlowSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
             units: z.ZodNumber;
             unit: z.ZodString;
         }, z.core.$strict>>;
-    }, z.core.$strict>;
+    }, z.core.$strict>>;
+    capacityConfirmed: z.ZodOptional<z.ZodBoolean>;
     dietary: z.ZodObject<{
         totalGuests: z.ZodNumber;
         guests: z.ZodArray<z.ZodObject<{
@@ -137,6 +138,42 @@ export declare const approveFlowSchema: z.ZodObject<{
     confirm: z.ZodLiteral<true>;
     reviewer: z.ZodString;
 }, z.core.$strict>;
+export declare function evaluateEventPlan(p: Extract<z.infer<typeof connectedFlowSchema>, {
+    kind: 'event-planning';
+}>): {
+    blockers: string[];
+    calculations: {
+        budget: {
+            label: string;
+            minimumRevenueCents?: number;
+            minimumPriceRounding?: string;
+            contributionCents?: number;
+            currency: string;
+            knownCostCents: number;
+            unknown: string[];
+            complete: boolean;
+            costCoverage: string;
+            revenueCents: number | null;
+        };
+        capacity: {
+            feasible: boolean;
+            conflicts: {
+                resourceId: string;
+                start?: string;
+                end?: string;
+                taskIds: string[];
+                reason: string;
+            }[];
+            checkedTasks: number;
+            basis: string;
+        };
+        dietary: {
+            totalGuests: number;
+            confirmedGuestRecords: number;
+            uniqueGuestsWithRequirements: number;
+        };
+    };
+};
 type Source = {
     kind: 'recipe' | 'purchase' | 'forecast';
     id: string;
@@ -175,8 +212,9 @@ export interface ConnectedFlow {
     updatedAt: string;
 }
 export declare function listConnectedFlows(db: Db): ConnectedFlow[];
+declare function current(db: Db, id: string): ConnectedFlow;
+export { current as getConnectedFlow };
 export declare function runConnectedFlow(db: Db, input: unknown): ConnectedFlow;
 export declare function attachFlowDocument(db: Db, input: unknown): ConnectedFlow;
 export declare function approveFlow(db: Db, input: unknown): ConnectedFlow;
-export {};
 //# sourceMappingURL=connected.d.ts.map

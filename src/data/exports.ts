@@ -24,7 +24,7 @@ export function exportJson(db: Db, workspaceRoot: string, rel: string): string {
   const recipes = db.raw.prepare('SELECT data FROM recipes ORDER BY id').all() as Array<{ data: string }>;
   const purchases = db.raw.prepare('SELECT data FROM purchases ORDER BY id').all() as Array<{ data: string }>;
   const payload = JSON.stringify(
-    { dataVersion: 'v1', workspaceVersion:2,exportedAt: new Date().toISOString(), recipes: recipes.map((r) => JSON.parse(r.data)), purchases: purchases.map((p) => JSON.parse(p.data)),profile:getRestaurantProfile(db),connectedFlows:listConnectedFlows(db),tasks:db.raw.prepare('SELECT * FROM tasks').all(),approvals:db.raw.prepare('SELECT * FROM approvals').all(),schedules:db.raw.prepare("SELECT * FROM workflows_config WHERE id='default'").all() },
+    { dataVersion: 'v1', workspaceVersion:3,exportedAt: new Date().toISOString(), recipes: recipes.map((r) => JSON.parse(r.data)), purchases: purchases.map((p) => JSON.parse(p.data)),profile:getRestaurantProfile(db),jobDrafts:db.raw.prepare('SELECT * FROM job_drafts').all(),connectedFlows:listConnectedFlows(db),tasks:db.raw.prepare('SELECT * FROM tasks').all(),approvals:db.raw.prepare('SELECT * FROM approvals').all(),schedules:db.raw.prepare("SELECT * FROM workflows_config WHERE id='default'").all() },
     null,
     2,
   );

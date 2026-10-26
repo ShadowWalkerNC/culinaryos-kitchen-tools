@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {api} from './api';
-import {ConnectedWork} from './KitchenWork';
+
 type Recipe={id:string;name:string;yieldQty:{amount:string;unit:string}};
 type Config={timezone:string;dailyCutoff:string;dailyPrepEnabled:boolean;costReviewEnabled:boolean};
 type Line={recipeId:string;servings:string;onHand:string};
@@ -23,6 +23,6 @@ export default function Workflows():React.ReactElement{
  <button disabled={busy||!day||!lines.length||!confirmed||lines.some(l=>!l.servings||!l.onHand)} onClick={()=>act(()=>api('/api/forecasts',{method:'POST',body:{day,confirm:true,forecast:{demands:lines.map(l=>{const r=recipes.find(r=>r.id===l.recipeId)!;return{recipeId:r.id,servings:l.servings,servingUnit:r.yieldQty.unit,yieldPerBatch:r.yieldQty.amount};}),stock:lines.map(l=>({recipeId:l.recipeId,onHand:l.onHand,unit:recipes.find(r=>r.id===l.recipeId)!.yieldQty.unit}))}}}),'Forecast saved for '+day)}>Save confirmed forecast</button></fieldset>
  <button disabled={busy} onClick={()=>act(()=>api('/api/workflows/run',{method:'POST'}),'Configured workflows checked.')}>{busy?'Working…':'Check workflows now'}</button><button disabled={busy} onClick={refresh}>Refresh run history</button>
  {!runs.length?<p>No workflow runs yet.</p>:runs.map((run,i)=>{let output:{plan?:Array<{recipeId:string;toMake:string;unit:string}>};try{output=JSON.parse(run.output);}catch{output={};}return <article key={i}><h4>{run.schedule==='daily-prep'?'Prep plan':'Cost review'} — {run.occurrence}</h4><p>{run.status}</p>{output.plan&&<ul>{output.plan.map(line=><li key={line.recipeId}>{recipes.find(r=>r.id===line.recipeId)?.name??line.recipeId}: prepare {line.toMake} {line.unit}</li>)}</ul>}</article>;})}
- <ConnectedWork/>
+
  </section>;
 }

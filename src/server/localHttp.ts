@@ -19,6 +19,10 @@ import {startWorkspaceWorker,workerStatus} from '../jobs/workspaceWorker.js';
 import {runConnectedFlow,listConnectedFlows,attachFlowDocument,approveFlow} from '../workflows/connected.js';
 import {getRestaurantProfile,setRestaurantProfile} from '../workflows/profile.js';
 import {listWorkflows,workflowGuidance} from '../workflows/discovery.js';
+import {loadEventDraft,saveEventDraft,previewEventDraft,createEventFromDraft} from '../workflows/eventDraft.js';
+import {setupStatus,checkHostedConnection} from '../workflows/setup.js';
+import {ZodError} from 'zod';
+import {printableFlowDocument} from '../workflows/printDocument.js';
 
 const MIME: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 
@@ -108,7 +112,7 @@ export function createLocalHandler(deps: LocalHandlerDeps): (req: IncomingMessag
         if (msg === 'BODY_TOO_LARGE') send(res, 413, { error: 'request too large (1MB max)' });
         else if (msg === 'CALC_TIMEOUT') send(res, 503, { error: 'calculation timeout' });
         else if (msg.startsWith('STALE_VERSION')) send(res, 409, { error: msg });
-        else send(res, 400, { error: msg });
+        else send(res, 400, { error: e instanceof ZodError?e.issues.map(i=>i.path.join('.')+': '+i.message).join('; '):msg });
       } finally {
         logMeta(req.method, req.url, res.statusCode, Date.now() - started);
       }
@@ -161,7 +165,15 @@ async function handleApi(
     if (raw.length === 0) return {};
     return JSON.parse(raw.toString('utf8')) as Record<string, never>;
   };
+  const printMatch=/^\/api\/flow-document\/([^/]+)\/([^/]+)$/.exec(path);
+  if(req.method==='GET'&&printMatch){send(res,200,printableFlowDocument(db,decodeURIComponent(printMatch[1]!),decodeURIComponent(printMatch[2]!)),'text/html; charset=utf-8');return;}
   if(req.method==='GET'&&path==='/api/profile'){send(res,200,getRestaurantProfile(db));return;}
+  if(req.method==='GET'&&path==='/api/setup'){send(res,200,setupStatus(db));return;}
+  if(req.method==='POST'&&path==='/api/setup/check-hosted'){send(res,200,await runCalc(()=>checkHostedConnection()));return;}
+  if(req.method==='GET'&&path==='/api/job-drafts/event'){send(res,200,loadEventDraft(db));return;}
+  if(req.method==='POST'&&path==='/api/job-drafts/event'){send(res,200,saveEventDraft(db,await readJson()));return;}
+  if(req.method==='POST'&&path==='/api/events/preview'){send(res,200,previewEventDraft(await readJson()));return;}
+  if(req.method==='POST'&&path==='/api/events/create'){send(res,200,createEventFromDraft(db,await readJson()));return;}
   if(req.method==='POST'&&path==='/api/profile'){send(res,200,setRestaurantProfile(db,await readJson()));return;}
   if(req.method==='GET'&&path==='/api/worker-status'){send(res,200,workerStatus(db));return;}
   if(req.method==='GET'&&path==='/api/library'){send(res,200,listWorkflows({limit:100}));return;}

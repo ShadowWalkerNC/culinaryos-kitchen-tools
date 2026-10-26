@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { api } from './api';
 import Workflows from './Workflows';
-import {KitchenSettings,WorkflowLibrary} from './KitchenWork';
+import {KitchenSetup} from './KitchenSetup';
+import {KitchenSettings,WorkflowLibrary,ConnectedWork} from './KitchenWork';
 
 type Recipe = { id: string; name: string; currency: string; yieldQty: { amount: string; unit: string }; ingredients: Array<{ ingredientId: string; qty: { amount: string; unit: string } }>; version: number };
 type Task = { id: string; title: string; state: string; blockedReason?: string; cancellation?: string };
@@ -17,9 +18,9 @@ export const DEMO_PURCHASE_JSON = JSON.stringify([
 ]);
 
 function useHash(): string {
-  const [h, setH] = useState(window.location.hash || '#/recipes');
+  const [h, setH] = useState(window.location.hash || '#/setup');
   useEffect(() => {
-    const fn = (): void => setH(window.location.hash || '#/recipes');
+    const fn = (): void => setH(window.location.hash || '#/setup');
     window.addEventListener('hashchange', fn);
     return () => window.removeEventListener('hashchange', fn);
   }, []);
@@ -129,7 +130,7 @@ function Today(): React.ReactElement {
   return (
     <section aria-label="Today">
       <h2>Today — tasks</h2>
-      <Workflows />
+      <ConnectedWork/><details><summary>Scheduled rules and service forecast</summary><Workflows /></details>
       {err !== '' ? <div className="status error" role="alert">{err}</div> : null}
       <label htmlFor="task">New task</label>
       <input id="task" type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Task title" />
@@ -202,10 +203,10 @@ function Approvals(): React.ReactElement {
 
 export default function App(): React.ReactElement {
   const h = useHash();
-  const tab = h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
+  const tab = h === '#/setup' ? 'setup' : h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
   return (
     <>
-      <header className="top"><h1>Open Kitchen Toolkit</h1></header>
+      <header className="top"><h1>Open Kitchen Toolkit</h1><a href="#/setup">Setup and connection check</a></header>
       <nav className="tabs" aria-label="Views">
         <a href="#/recipes" aria-current={tab === 'recipes' ? 'page' : undefined}>Recipes</a>
         <a href="#/imports" aria-current={tab === 'imports' ? 'page' : undefined}>Imports</a>
@@ -215,7 +216,7 @@ export default function App(): React.ReactElement {
         <a href="#/settings" aria-current={tab === 'settings' ? 'page' : undefined}>Settings</a>
       </nav>
       <main>
-        {tab === 'settings' ? <KitchenSettings /> : tab === 'library' ? <WorkflowLibrary /> : tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
+        {tab === 'setup' ? <KitchenSetup/> : tab === 'settings' ? <KitchenSettings /> : tab === 'library' ? <WorkflowLibrary /> : tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
       </main>
     </>
   );

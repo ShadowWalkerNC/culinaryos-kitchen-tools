@@ -1,0 +1,41 @@
+{
+  "scope": "Synthetic local UI only",
+  "checks": [
+    {
+      "name": "Setup checklist and unresolved settings",
+      "status": "PASS"
+    },
+    {
+      "name": "Unfinished event persists through navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "Server preview matches independent cost key",
+      "status": "PASS"
+    },
+    {
+      "name": "Event run awaits document",
+      "status": "PASS"
+    },
+    {
+      "name": "Exact-revision document approval",
+      "status": "PASS"
+    },
+    {
+      "name": "Printable reviewed event document",
+      "status": "PASS"
+    },
+    {
+      "name": "Changed inputs invalidate preview and capacity confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "Phone unknown inputs stay blocked",
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "provider": "Installed Playwright Core, owned headless Chrome",
+  "status": "PASS",
+  "dom": "Today — tasks\nScheduled work\n\nEnabled rules run automatically while this workspace is open. Closing it stops processing; reopening performs bounded catch-up. Drafts never publish prices or place orders.\n\nWorker: idle · next check 10/26/2026, 12:41:06 PM\n\nSchedule settings\nKitchen timezone\nDaily prep cutoff\nDraft next service day prep\nReview recipes after confirmed purchase-cost imports\nSave schedule settings\nConfirmed service forecast\n\nOnly currently approved recipe versions are used. Supply an explicit stock count, including zero when counted.\n\nService date\nRecipe\nChoose a recipe\nAdd recipe to forecast\nI confirm the service demand and counted stock\nSave confirmed forecast\nCheck workflows nowRefresh run history\n\nNo workflow runs yet.\n\nStart a kitchen job\n\nThese runs link your source revisions, calculations, documents and approvals. Confirmed imports also create review work when cost-review schedules are enabled. No message, order or menu change is sent.\n\nChoose your kitchen job\nWorkflow\nRecipe release\nSupplier price review\nDaily service\nPlan an event\nPlan an event\n\nRecord the supplied budget, capacity intervals, and guest evidence. Leave unknown costs and revenue blank — never enter 0 for an unknown amount, and never invent guest confirmations or resource capacities.\n\nEvent review created (flow_fe2ee31c89d7, blocked). No order or message was sent.\nBudget\nCurrency\nExpected revenue (leave blank when unknown)\nTotal guests\nCost rows\n\nUnknown costs stay blank. Add or remove rows explicitly.\n\nCost 1\nLabel\nAmount (leave blank when unknown)\nRemove cost 1\nAdd cost row\nCapacity: resources\n\nLeave capacity blank when unknown. Only supplied capacities are recorded.\n\nResource 1\nResource ID\nCapacity (blank when unknown)\nUnit\nRemove resource 1\nAdd resource row\nCapacity: task intervals\n\nStart and end are text with an explicit offset, for example 2026-12-01T18:00:00-05:00 or 2026-12-02T01:00:00+00:00. Do not guess a timezone; include the offset supplied for the event.\n\nTask interval 1\nTask ID\nResource ID\nStart (ISO with explicit offset)\nEnd (ISO with explicit offset)\nUnits (blank when unknown)\nUnit\nRemove task interval 1\nAdd task interval row\nCapacity confirmation\nListed tasks and resources cover the supplied event workload\n\nConfirmation means the listed tasks and resources cover the supplied event workload. Empty or unconfirmed capacity stays blocked on the server; the blocked run can still be saved for review tasks.\n\nGuests and dietary evidence\n\nRequirements are comma separated supplied requirements, for example nut allergy, halal. Each guest row keeps its own allergen evidence status; one row is never a restaurant-wide allergen claim.\n\nGuest 1\nGuest ID\nRequirements (comma separated)\nGuest allergen evidence status (this guest row only)\nunknown\ncontains\nmay contain\nverified absent\n\nUnknown rows can still create a blocked event. Any other status requires source, version, and reviewer below.\n\nSource\nSource version\nReviewer\nRemove guest 1\nAdd guest row\nSave unfinished event Reload saved draft Review event inputs\nPreview\n\nServer conversion and numerical validation only. Previewing never creates a run or tasks.\n\nBlockers (3)\nUnverified guest/dish allergen status\nEvent budget incomplete; confirm revenue and each named cost\nConfirm the listed capacities and tasks cover the supplied event workload\n\nBlocked inputs can still be saved as a review run after this preview succeeds.\n\nBudget and capacity summary\nbudget\ncurrency\nUSD\nknown Cost Cents\n$0.00\nunknown\nFood\ncomplete\nfalse\ncost Coverage\nsupplied categories only; omitted costs are not verified zero\nrevenue Cents\nNot supplied\nlabel\ncontribution against supplied costs, not verified net profit\ncapacity\nfeasible\ntrue\nconflicts\nNone\nchecked Tasks\n1\nbasis\nsupplied intervals and capacity; no extra equipment, staff, time or permissions inferred\ndietary\ntotal Guests\n1\nconfirmed Guest Records\n1\nunique Guests With Requirements\n1\nTechnical preview details\nCreate event review\n\nBlocked but structurally valid runs can be created so review tasks are saved. Preview must succeed first, and blockers do not auto-approve anything. No order or message is sent.\n\nI reviewed these event inputs\nCreate event review\nCreated review\n\nflow_fe2ee31c89d7 · blocked\n\nUnverified guest/dish allergen status\nEvent budget incomplete; confirm revenue and each named cost\nConfirm the listed capacities and tasks cover the supplied event workload\n\nDraft revision: 1. This unfinished event is saved in your local workspace. Attach AI-written narratives to the resulting review run.\n\nFor service close and detailed daily inputs, your locally connected AI can supply the structured budget, capacity, dietary and counted-stock inputs using the same connected-flow tools. The library lists the required inputs; missing evidence stays blocked.\n\nRefresh connected work\nevent planning — event-1793032865866-54k9me5j\n\nblocked · revision 1\n\nWhat needs your attention\nUnverified guest/dish allergen status\nEvent budget incomplete; confirm revenue and each named cost\nConfirm the listed capacities and tasks cover the supplied event workload\n\nResolve these items in the relevant record or job form, then create a renewed run. This earlier record stays inspectable.\n\nReview imported records · Check kitchen settings\n\nCalculations and supplied inputs\nSources and history\nPrepare a draft in my AI\nAdd or revise a draft from your AI\nevent planning — event-1793032861921-0srovg6i\n\ncompleted · revision 3\n\nCalculations and supplied inputs\nSources and history\nSynthetic event plan (event plan)\nSynthetic test only. One guest, supplied oven capacity and interval, supplier evidence version1. Revenue USD100.01, supplied cost USD33.33. Review operational methods before use.\nOpen printable document\nPrepare a draft in my AI\nAdd or revise a draft from your AI\nNew task\nAdd task Refresh\nTitle\tState\tAdvance\nevent-planning: event-1793032861921-0srovg6i — awaiting_document\tcompleted\t\nopen\nin_progress\nawaiting_approval\ncompleted\n\nevent-planning: event-1793032865866-54k9me5j — blocked\topen (blocked: Unverified guest/dish allergen status; Event budget incomplete; confirm revenue and each named cost; Confirm the listed capacities and tasks cover the supplied event workload)\t\nopen\nin_progress\nawaiting_approval\ncompleted"
+}
