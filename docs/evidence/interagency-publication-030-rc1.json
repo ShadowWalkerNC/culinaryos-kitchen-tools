@@ -1,0 +1,25 @@
+{
+  "version": "0.3.0-rc.1",
+  "release": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/tag/v0.3.0-rc.1",
+  "sourceCommit": "7446d97326721553dffd3fc45e0428e1217f201c",
+  "hostedDeployment": "df06afcd-a33e-4bd1-ab5d-69f670a1b671",
+  "hostedStatus": "SUCCESS",
+  "ciRun": 40569782914,
+  "assets": [
+    {
+      "asset": "open-kitchen-toolkit-0.3.0-rc.1.zip",
+      "sha256": "955342ba6928333b308a06aa613523be8464bb5f90ae2a07f5485addc5275ecd",
+      "anonymousDownload": "PASS"
+    },
+    {
+      "asset": "kitchen-tools-remote-plugin-0.3.0-rc.1.zip",
+      "sha256": "9d4fe41d3aff09c8a4e58a928a1251e4bf8c85d2adaa60cebf237b98951a7d8f",
+      "anonymousDownload": "PASS"
+    }
+  ],
+  "limits": [
+    "Release candidate; 624 designed host/model trials NOT_RUN",
+    "Native client installation/model execution unverified for this candidate",
+    "Live CulinaryOS integration deferred and disabled"
+  ]
+}
