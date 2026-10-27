@@ -1,0 +1,17 @@
+name: Workflow or command problem
+description: Report a reproducible problem using synthetic data
+title: "[Workflow problem] "
+body:
+  - type: input
+    id: client
+    attributes:
+      label: AI client, version and workflow
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Prompt, steps, expected result and actual result
+      description: Remove private restaurant/resident records and all credentials.
+    validations:
+      required: true

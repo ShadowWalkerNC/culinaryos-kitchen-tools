@@ -1,4 +1,4 @@
-# Open Kitchen Toolkit 0.2.2
+# Open Kitchen Toolkit 0.2.3
 
 Original MIT workflow playbook. Manual use supplies guidance only: no live calculation, saving or scheduling connection is implied. Your AI account and policies apply. Unknown inputs stay unknown.
 

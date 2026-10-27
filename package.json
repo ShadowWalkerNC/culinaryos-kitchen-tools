@@ -1,6 +1,6 @@
 {
   "name": "open-kitchen-toolkit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -48,6 +48,7 @@
     "plugin.json",
     "mcp.json",
     "LICENSE",
+    "CONTRIBUTING.md",
     "README.md"
   ],
   "bin": {

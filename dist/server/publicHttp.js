@@ -5,6 +5,8 @@ import { readBodyCapped, logMeta, createCalcRunner } from './security.js';
 import { publicPage } from './publicPage.js';
 import { VERSION } from '../version.js';
 import { clientConfigurations, playbook, SPECIALTY_PLAYBOOKS } from '../distribution.js';
+import { getStarted } from '../workflows/getStarted.js';
+import { STARTER_SCRIPT } from './startPage.js';
 /** Exported for handler-level tests (no TCP needed). */
 export function createPublicHandler(port) {
     const hosts = new Set([`127.0.0.1:${port}`, `localhost:${port}`, ...(process.env.PUBLIC_HOSTS ?? '').split(','), process.env.RAILWAY_PUBLIC_DOMAIN ?? ''].map(x => x.trim().toLowerCase()).filter(Boolean));
@@ -31,8 +33,17 @@ export function createPublicHandler(port) {
                 }
                 if (req.method === 'GET' && url.pathname === '/') {
                     const html = publicPage(req.headers.host);
-                    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'content-length': Buffer.byteLength(html), 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'" });
+                    res.writeHead(200, { 'content-type': 'text/html; charset=utf-8', 'content-length': Buffer.byteLength(html), 'x-content-type-options': 'nosniff', 'content-security-policy': "default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'" });
                     res.end(html);
+                    return;
+                }
+                if (req.method === 'GET' && url.pathname === '/getting-started.json') {
+                    send(res, 200, getStarted());
+                    return;
+                }
+                if (req.method === 'GET' && url.pathname === '/starter-prompts.js') {
+                    res.writeHead(200, { 'content-type': 'text/javascript; charset=utf-8', 'x-content-type-options': 'nosniff' });
+                    res.end(STARTER_SCRIPT);
                     return;
                 }
                 if (req.method === 'GET' && url.pathname === '/connection.json') {

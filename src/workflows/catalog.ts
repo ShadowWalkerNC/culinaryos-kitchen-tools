@@ -2,7 +2,7 @@
 // 105 canonical workflows: original 73 plus 32 independently authored specialty workflows.
 // SKILL.md files are the prose source of truth; this array is the discovery contract.
 
-export const LIBRARY_VERSION = '0.2.2' as const;
+export const LIBRARY_VERSION = '0.2.3' as const;
 export const DATA_VERSION = 'v1' as const;
 export const LICENSE = 'MIT' as const;
 
@@ -1897,10 +1897,10 @@ export const WORKFLOW_CATALOG: WorkflowDefinition[] = [
     "id": "onboarding",
     "title": "Onboarding: set up a workspace",
     "zone": "Workspace",
-    "summary": "Set up a new local workspace from explicit data with no assumed defaults.",
+    "summary": "Get started in ordinary language, choose a guided kitchen or restaurant job, or set up a local workspace.",
     "aliases": [
       "setup",
-      "getting-started"
+      "getting-started", "help", "show me how to use open kitchen toolkit"
     ],
     "inputs": [
       "Workspace directory path operator selected",

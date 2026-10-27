@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-10-27T12:59:53.253Z",
+  "version": "0.2.3",
+  "method": "Four fresh live vendor instruction loads; local deterministic unit trial and original guide review. No vendor inference endpoint used.",
+  "vendor": [
+    {
+      "name": "costing",
+      "instructionBytes": 13782,
+      "sha256": "754ef59fec4c08f63e6aba1d3edbad88a86c0f956bb9fab3d2590f7157448b90",
+      "status": "instruction_load_pass",
+      "mentions28Percent": true,
+      "usesPoundSymbol": true
+    },
+    {
+      "name": "allergens",
+      "instructionBytes": 11158,
+      "sha256": "a445a4e9207b54c5329f753a3d6e46f204124f396fb70c0f8367db0647be8ff9",
+      "status": "instruction_load_pass"
+    },
+    {
+      "name": "dietary",
+      "instructionBytes": 8234,
+      "sha256": "eea84b35de3ecdf2b951a5d048d838d030eba053da88b5c6146fbe12ab1fad2b",
+      "status": "instruction_load_pass"
+    },
+    {
+      "name": "nutrition",
+      "instructionBytes": 9014,
+      "sha256": "b51e2dd3f3c4a07a91cb5d6de3ae443010e6833d90d511910b647ac709ff73b5",
+      "status": "instruction_load_pass"
+    }
+  ],
+  "toolkit": {
+    "localization": {
+      "recipeName": "Synthetic localization trial",
+      "complete": false,
+      "lines": [
+        {
+          "line": 1,
+          "ingredient": "milk",
+          "original": {
+            "amount": "1",
+            "unit": "imperial pint"
+          },
+          "status": "converted",
+          "converted": {
+            "amount": "568.26125",
+            "unit": "ml",
+            "basis": "defined dimensional conversion"
+          }
+        },
+        {
+          "line": 2,
+          "ingredient": "milk",
+          "original": {
+            "amount": "1",
+            "unit": "us pint"
+          },
+          "status": "converted",
+          "converted": {
+            "amount": "473.176473",
+            "unit": "ml",
+            "basis": "defined dimensional conversion"
+          }
+        },
+        {
+          "line": 3,
+          "ingredient": "flour",
+          "original": {
+            "amount": "2",
+            "unit": "cup"
+          },
+          "status": "blocked",
+          "reason": "Specify the measurement standard, for example us cup, metric cup, us fl oz or imperial fl oz"
+        }
+      ],
+      "rounding": "Nearest 0.000001 target unit, half up; original quantities retained.",
+      "saved": false,
+      "review": "Review measured ingredient-specific factors and culinary practicality before replacing a recipe. No density, packing method, pack size or cup standard is inferred."
+    },
+    "careMenuRequiresApprovedRequirements": true,
+    "defaultCommercialTarget": null
+  },
+  "findings": [
+    "The sampled vendor costing instructions specify a 28 percent target and use GBP examples. This is a sample observation, not a claim about all editions.",
+    "Toolkit prompts request the operators own targets and preserve unresolved settings.",
+    "Explicit US/imperial conversions return different measured volumes; ambiguous flour cups remain blocked."
+  ],
+  "limits": [
+    "Instruction loading is not an AI response or a vendor calculation.",
+    "No claim of output equivalence, superiority, production reliability, clinical suitability or measured ROI.",
+    "The 547 designed host scenarios remain NOT_RUN; these bounded checks do not execute that bank."
+  ]
+}

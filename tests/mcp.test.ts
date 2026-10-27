@@ -27,7 +27,7 @@ function textOf(result: unknown): string {
 }
 
 describe('mcp public (in-memory protocol)', () => {
-  it('discovers exactly the 14 public tools and calls scale_recipe', async () => {
+  it('discovers exactly the 16 public tools and calls scale_recipe', async () => {
     const server = createMcpServer('public');
     const client = new Client({ name: 't', version: '1' });
     const [ct, st] = InMemoryTransport.createLinkedPair();

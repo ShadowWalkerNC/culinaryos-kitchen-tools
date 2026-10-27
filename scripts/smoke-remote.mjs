@@ -11,11 +11,15 @@ assert.equal((await fetch(base)).status,200);
 const client=new Client({name:'kitchen-tools-release-check',version:'0.2.0'});
 try{
  await client.connect(new StreamableHTTPClientTransport(new URL(base+'/mcp')));
- const names=(await client.listTools()).tools.map(t=>t.name);assert.equal(names.length,14);assert.ok(!names.includes('commit_import'));
+ const names=(await client.listTools()).tools.map(t=>t.name);assert.equal(names.length,16);assert.ok(!names.includes('commit_import'));
  const call=async(name,args)=>{const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));return JSON.parse(r.content[0].text);};
  assert.equal((await call('convert_quantity',{amount:'32',fromUnit:'oz',toUnit:'lb'})).amount,'2');
  assert.ok((await call('get_workflow',{name:'recipe-costing'})).instructions.includes('## Required inputs'));
  assert.equal((await call('list_workflows',{limit:100})).total,105);
+ assert.equal((await read('/getting-started.json')).starters.length,12);
+ assert.equal((await fetch(base+'/starter-prompts.js')).status,200);
+ assert.equal((await call('get_started',{starterId:'recipe-library',completedSteps:[1]})).progress.nextStep,2);
+ const unitDraft=await call('standardize_recipe_units',{recipeName:'Synthetic units',lines:[{ingredient:'milk',amount:'1',fromUnit:'imperial pint',toUnit:'ml'},{ingredient:'flour',amount:'2',fromUnit:'cup',toUnit:'g'}]});assert.equal(unitDraft.complete,false);assert.equal(unitDraft.lines[0].converted.amount,'568.26125');assert.equal(unitDraft.lines[1].status,'blocked');
  const provenance={source:'synthetic release test',receivedAt:'2026-10-25T00:00:00Z',verified:true};
  const recipe={id:'synthetic',name:'Synthetic test',currency:'USD',yieldQty:{amount:'4',unit:'each'},ingredients:[{ingredientId:'flour',qty:{amount:'500',unit:'g'}}],subrecipes:[],version:1,provenance};
  const purchase={id:'test-flour',ingredientId:'flour',currency:'USD',costCents:200,usableQty:{amount:'1',unit:'kg'},effectiveDate:'2026-10-25',version:1,provenance};

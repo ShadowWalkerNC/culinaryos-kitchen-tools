@@ -10,6 +10,8 @@ import { usableYieldSchema, stockSchema, budgetSchema, capacitySchema } from '..
 import { connectedFlowSchema, attachFlowDocumentSchema, approveFlowSchema, runConnectedFlow, listConnectedFlows, attachFlowDocument, approveFlow } from '../workflows/connected.js';
 import { getRestaurantProfile, setRestaurantProfile, restaurantProfileSchema } from '../workflows/profile.js';
 import { workerStatus } from '../jobs/workspaceWorker.js';
+import { getStartedSchema } from '../workflows/getStarted.js';
+import { standardizeRecipeSchema } from '../core/standardize.js';
 function toShape(s) {
     return s.shape;
 }
@@ -18,6 +20,8 @@ function textResult(value) {
 }
 export function createMcpServer(mode, ctx) {
     const server = new McpServer({ name: mode === 'public' ? 'kitchen-tools-public' : 'kitchen-tools-local', version: VERSION });
+    server.tool('get_started', 'Show kitchen and restaurant starter prompts and a step-by-step guide. No special keywords required; no tasks executed.', getStartedSchema.shape, args => textResult(publicHandlers.get_started(args)));
+    server.tool('standardize_recipe_units', 'Convert recipe lines into explicitly chosen units. Preserve originals and block ambiguous standards or missing ingredient density.', standardizeRecipeSchema.shape, args => textResult(publicHandlers.standardize_recipe_units(args)));
     for (const [name, schema] of Object.entries({ list_workflows: listWorkflowsSchema, calculate_usable_yield: usableYieldSchema, reconcile_stock: stockSchema, calculate_event_budget: budgetSchema, validate_prep_capacity: capacitySchema })) {
         server.tool(name, 'Use this for original workflow discovery or deterministic kitchen operations; missing inputs stay unknown', schema.shape, (args) => textResult(publicHandlers[name](args)));
     }

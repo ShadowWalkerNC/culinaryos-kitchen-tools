@@ -1,0 +1,27 @@
+name: Skill or prompt proposal
+description: Propose an original restaurant or home-kitchen workflow
+title: "[Skill proposal] "
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Who needs this and what would they ask?
+      description: Include audience, inputs, numbered steps, output and tool/approval boundaries.
+    validations:
+      required: true
+  - type: textarea
+    id: examples
+    attributes:
+      label: Worked example and missing-data example
+      description: Synthetic data only. Include units, sources, calculations and unresolved facts.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Submission review
+      options:
+        - label: This is original or authorized MIT material with no vendor instructions, personal records or secrets.
+          required: true
+        - label: This is a proposal requiring maintainer review, not an installed skill.
+          required: true

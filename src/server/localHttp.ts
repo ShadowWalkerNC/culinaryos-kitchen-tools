@@ -19,6 +19,7 @@ import {startWorkspaceWorker,workerStatus} from '../jobs/workspaceWorker.js';
 import {runConnectedFlow,listConnectedFlows,attachFlowDocument,approveFlow} from '../workflows/connected.js';
 import {getRestaurantProfile,setRestaurantProfile} from '../workflows/profile.js';
 import {listWorkflows,workflowGuidance} from '../workflows/discovery.js';
+import {getStarted} from '../workflows/getStarted.js';
 import {loadEventDraft,saveEventDraft,previewEventDraft,createEventFromDraft} from '../workflows/eventDraft.js';
 import {setupStatus,checkHostedConnection} from '../workflows/setup.js';
 import {ZodError} from 'zod';
@@ -176,6 +177,7 @@ async function handleApi(
   if(req.method==='POST'&&path==='/api/events/create'){send(res,200,createEventFromDraft(db,await readJson()));return;}
   if(req.method==='POST'&&path==='/api/profile'){send(res,200,setRestaurantProfile(db,await readJson()));return;}
   if(req.method==='GET'&&path==='/api/worker-status'){send(res,200,workerStatus(db));return;}
+  if(req.method==='GET'&&path==='/api/get-started'){send(res,200,getStarted());return;}
   if(req.method==='GET'&&path==='/api/library'){send(res,200,listWorkflows({limit:100,offset:Number(new URL(req.url??'/', 'http://localhost').searchParams.get('offset')??0)}));return;}
   if(req.method==='POST'&&path==='/api/library/workflow'){send(res,200,workflowGuidance({...await readJson(),profile:getRestaurantProfile(db)}));return;}
   if(req.method==='GET'&&path==='/api/connected-flows'){send(res,200,listConnectedFlows(db));return;}

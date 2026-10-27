@@ -1,9 +1,10 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "host": "MCP SDK reference client; no generative model",
   "checks": [
-    "14 public tools; local operations absent",
+    "16 public tools; local operations absent",
     "Unknown workflow has machine-readable error flag",
+    "12 starter prompts, reported-step progression and partially blocked recipe conversion",
     "No workspace, database or files created by public package"
   ],
   "workflowRetrieval": [
@@ -534,6 +535,39 @@
     }
   ],
   "calculations": {
+    "recipeUnits": {
+      "recipeName": "Synthetic mixed-unit recipe",
+      "complete": false,
+      "lines": [
+        {
+          "line": 1,
+          "ingredient": "milk",
+          "original": {
+            "amount": "1",
+            "unit": "imperial pint"
+          },
+          "status": "converted",
+          "converted": {
+            "amount": "568.26125",
+            "unit": "ml",
+            "basis": "defined dimensional conversion"
+          }
+        },
+        {
+          "line": 2,
+          "ingredient": "flour",
+          "original": {
+            "amount": "2",
+            "unit": "cup"
+          },
+          "status": "blocked",
+          "reason": "Specify the measurement standard, for example us cup, metric cup, us fl oz or imperial fl oz"
+        }
+      ],
+      "rounding": "Nearest 0.000001 target unit, half up; original quantities retained.",
+      "saved": false,
+      "review": "Review measured ingredient-specific factors and culinary practicality before replacing a recipe. No density, packing method, pack size or cup standard is inferred."
+    },
     "B01": {
       "recipeId": "b01",
       "currency": "GBP",
@@ -613,5 +647,5 @@
   "limits": [
     "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
   ],
-  "checkedAt": "2026-10-26T17:28:43.681Z"
+  "checkedAt": "2026-10-27T13:01:15.280Z"
 }

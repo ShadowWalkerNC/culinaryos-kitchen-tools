@@ -9,3 +9,5 @@ Private vendor snapshots, original vendor outputs, authenticated connector detai
 All included restaurant names, people, figures and incidents are synthetic illustrative inputs, not endorsements or verified facility facts. Worked-example reviews and automated validation do not certify food safety, employment decisions, tax treatment or real supplier prices.
 
 Native AI-client acceptance, hosted checks, local tests and real kitchen trials are recorded separately. MIT does not change an external AI provider's fees or account terms.
+
+For 0.2.3 the maintainer inspected four fresh live vendor instruction contracts for evaluation, then wrote the guided entry, conversion behavior and care-review additions from user requirements and independent sources. The earlier isolated library-author process describes the baseline library, not every later maintenance edit. The new public comparison contains hashes and original observations only; no vendor instruction text is released. No separate vendor inference endpoint was available in this connection.

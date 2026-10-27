@@ -1,5 +1,7 @@
 # Open Kitchen Toolkit
 
+Version **0.2.3** adds a welcome guide with 12 step-by-step starting points, three plugin prompt suggestions, recipe unit standardization, and reviewed GitHub contribution intake. Activate the plugin and say **“Show me how to use Open Kitchen Toolkit.”** No special keyword is required for ordinary kitchen questions. [Starter prompts](docs/GETTING_STARTED.md) · [Unit conventions](docs/UNIT_CONVENTIONS.md) · [Contribute](CONTRIBUTING.md) · [Acceptance](docs/ACCEPTANCE_023.md).
+
 Version **0.2.2** provides **105 original skills**, adding 32 workflows for home kitchens, bakeries, food trucks, independent shops and professional kitchens. The library loads all pages and filters by section. Five focused manual playbooks are available in `docs/playbooks/` and from the public setup page. See [specialty expansion evidence](docs/ACCEPTANCE_022.md).
 
 Version **0.2.1** adds guided setup, a public MCP diagnostic, a kitchen-job entry point, resumable event forms, reviewed AI handoff and printable documents. Start at the local workspace home page; “Setup and connection check” returns to the checklist. See [0.2.1 acceptance](docs/ACCEPTANCE_021.md) and the [expansion roadmap](docs/EXPANSION_ROADMAP.md).

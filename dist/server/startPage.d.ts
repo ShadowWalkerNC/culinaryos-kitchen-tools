@@ -1,0 +1,3 @@
+export declare function startSection(): string;
+export declare const STARTER_SCRIPT = "document.addEventListener('click',async event=>{const button=event.target.closest('[data-copy]');if(!button)return;const field=document.getElementById(button.dataset.copy);const status=document.getElementById('copy-status');if(!field||!status)return;try{await navigator.clipboard.writeText(field.value);status.textContent='Copied. Paste it into your chosen AI.';}catch{field.focus();field.select();status.textContent='Select and copy the prompt manually; automatic clipboard access is unavailable.';}});";
+//# sourceMappingURL=startPage.d.ts.map

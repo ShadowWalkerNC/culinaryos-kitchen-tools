@@ -19,6 +19,7 @@ import { startWorkspaceWorker, workerStatus } from '../jobs/workspaceWorker.js';
 import { runConnectedFlow, listConnectedFlows, attachFlowDocument, approveFlow } from '../workflows/connected.js';
 import { getRestaurantProfile, setRestaurantProfile } from '../workflows/profile.js';
 import { listWorkflows, workflowGuidance } from '../workflows/discovery.js';
+import { getStarted } from '../workflows/getStarted.js';
 import { loadEventDraft, saveEventDraft, previewEventDraft, createEventFromDraft } from '../workflows/eventDraft.js';
 import { setupStatus, checkHostedConnection } from '../workflows/setup.js';
 import { ZodError } from 'zod';
@@ -179,6 +180,10 @@ async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
     }
     if (req.method === 'GET' && path === '/api/worker-status') {
         send(res, 200, workerStatus(db));
+        return;
+    }
+    if (req.method === 'GET' && path === '/api/get-started') {
+        send(res, 200, getStarted());
         return;
     }
     if (req.method === 'GET' && path === '/api/library') {

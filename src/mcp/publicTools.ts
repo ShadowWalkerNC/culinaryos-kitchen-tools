@@ -9,8 +9,11 @@ import { buildOrderProposal } from '../core/ordering.js';
 import type { Purchase, Recipe } from '../core/types.js';
 import {listWorkflows,workflowGuidance} from '../workflows/discovery.js';
 import {calculateUsableYield,reconcileStock,calculateEventBudget,validatePrepCapacity} from '../core/operations.js';
+import {getStarted} from '../workflows/getStarted.js';
+import {standardizeRecipeUnits} from '../core/standardize.js';
 
 export const PUBLIC_TOOL_NAMES = [
+  'get_started','standardize_recipe_units',
   'list_capabilities',
   'get_workflow',
   'validate_kitchen_data',
@@ -48,6 +51,8 @@ export function validateKitchenData(recipes: Recipe[], purchases: Purchase[]): {
 }
 
 export const publicHandlers: Record<PublicToolName, (args: never) => unknown> = {
+  get_started:getStarted as (args:never)=>unknown,
+  standardize_recipe_units:standardizeRecipeUnits as (args:never)=>unknown,
   list_capabilities: (() => listCapabilities()) as (args: never) => unknown,
   get_workflow: workflowGuidance as (args: never) => unknown,
   list_workflows:listWorkflows as (args:never)=>unknown,

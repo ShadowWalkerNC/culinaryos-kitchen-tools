@@ -5,6 +5,8 @@ import { readBodyCapped, logMeta, createCalcRunner } from './security.js';
 import {publicPage} from './publicPage.js';
 import {VERSION} from '../version.js';
 import {clientConfigurations,playbook,SPECIALTY_PLAYBOOKS} from '../distribution.js';
+import {getStarted} from '../workflows/getStarted.js';
+import {STARTER_SCRIPT} from './startPage.js';
 
 
 /** Exported for handler-level tests (no TCP needed). */
@@ -33,8 +35,10 @@ export function createPublicHandler(port: number): (req: IncomingMessage, res: S
         }
         if(req.method==='GET'&&url.pathname==='/'){
           const html=publicPage(req.headers.host!);
-          res.writeHead(200,{'content-type':'text/html; charset=utf-8','content-length':Buffer.byteLength(html),'x-content-type-options':'nosniff','content-security-policy':"default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'"});res.end(html);return;
+          res.writeHead(200,{'content-type':'text/html; charset=utf-8','content-length':Buffer.byteLength(html),'x-content-type-options':'nosniff','content-security-policy':"default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'"});res.end(html);return;
         }
+        if(req.method==='GET'&&url.pathname==='/getting-started.json'){send(res,200,getStarted());return;}
+        if(req.method==='GET'&&url.pathname==='/starter-prompts.js'){res.writeHead(200,{'content-type':'text/javascript; charset=utf-8','x-content-type-options':'nosniff'});res.end(STARTER_SCRIPT);return;}
         if(req.method==='GET'&&url.pathname==='/connection.json'){
           const host=req.headers.host!;const local=/^(localhost|127\.0\.0\.1):\d+$/.test(host);
           send(res,200,{$schema:'https://agent-plugins.org/schemas/1.0.0/mcp.schema.json',mcpServers:{'kitchen-tools':{type:'streamable-http',url:`${local?'http':'https'}://${host}/mcp`,extensions:{'com.openai':{auth:{type:'none'}}}}}});return;
