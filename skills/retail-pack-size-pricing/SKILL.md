@@ -1,7 +1,7 @@
 ---
 name: retail-pack-size-pricing
 description: "Use when pricing a measured retail pack from portion, packaging, and fees."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [cost_recipe, convert_quantity]
@@ -9,10 +9,10 @@ tools: [cost_recipe, convert_quantity]
 
 # Retail pack size pricing (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Small Shop use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Small Shop use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Build a pack price from measured contents and stated component costs (portion, packaging, label, allocated fees) with the rounding rule explicit. Every cost carries its source; the price is suggested for the manager, never set. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Build a pack price from measured contents and stated component costs (portion, packaging, label, allocated fees) with the rounding rule explicit. Every cost carries its source; the price is suggested for the manager, never set. No tax or currency conversion is assumed; unconfirmed costs stay out of the build and are named. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Pack contents with measured weights

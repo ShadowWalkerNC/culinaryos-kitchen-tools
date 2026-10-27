@@ -1,7 +1,7 @@
 ---
 name: training-plan-generator
 description: "Use when you need to build a skills training plan with modules, buddies, and sign offs."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [get_workflow, create_task, list_tasks]
@@ -9,10 +9,10 @@ tools: [get_workflow, create_task, list_tasks]
 
 # Training plan generator (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as training-plan-generator without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as training-plan-generator without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Plan training from current level to sign off for each skill. Owners, dates, and criteria are explicit. Sign offs stay human. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Plan training from current level to sign off for each skill. Owners, dates, and criteria are explicit. Sign offs stay human. Competence is observed and signed by a named person; it is never assumed from attendance. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Trainee name, role, start date

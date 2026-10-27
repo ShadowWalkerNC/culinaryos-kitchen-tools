@@ -26,12 +26,12 @@ export function openDb(path) {
     const raw = new DatabaseSync(path);
     raw.exec('PRAGMA busy_timeout = 5000');
     const version = raw.prepare('PRAGMA user_version').get().user_version;
-    if (version > 3) {
+    if (version > 4) {
         raw.close();
         throw new Error('Workspace schema is newer than this toolkit; use a newer release');
     }
-    if (existed && version < 3 && raw.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='recipes'").get()) {
-        const backup = path + '.pre-v3-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + randomUUID().slice(0, 6) + '.sqlite';
+    if (existed && version < 4 && raw.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='recipes'").get()) {
+        const backup = path + '.pre-v4-' + new Date().toISOString().replace(/[:.]/g, '-') + '-' + randomUUID().slice(0, 6) + '.sqlite';
         try {
             raw.exec("VACUUM INTO '" + backup.replaceAll("'", "''") + "'");
         }
@@ -62,6 +62,25 @@ export function openDb(path) {
             raw.exec(`BEGIN IMMEDIATE;
     CREATE TABLE IF NOT EXISTS job_drafts (id TEXT PRIMARY KEY, version INTEGER NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL);
     PRAGMA user_version=3; COMMIT;`);
+        }
+        catch (e) {
+            try {
+                raw.exec('ROLLBACK');
+            }
+            catch { }
+            raw.close();
+            throw e;
+        }
+    }
+    if (version < 4) {
+        try {
+            raw.exec(`BEGIN IMMEDIATE;
+    CREATE TABLE IF NOT EXISTS kitchen_jobs(id TEXT PRIMARY KEY,version INTEGER NOT NULL,data TEXT NOT NULL,updated_at TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS job_receipts(id TEXT PRIMARY KEY,job_id TEXT NOT NULL,data TEXT NOT NULL,created_at TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS job_rules(id TEXT PRIMARY KEY,data TEXT NOT NULL,updated_at TEXT NOT NULL);
+    CREATE TABLE IF NOT EXISTS rule_occurrences(rule_id TEXT NOT NULL,occurrence TEXT NOT NULL,data TEXT NOT NULL,created_at TEXT NOT NULL,PRIMARY KEY(rule_id,occurrence));
+    CREATE TABLE IF NOT EXISTS connection_snapshots(id TEXT PRIMARY KEY,tenant_id TEXT NOT NULL,resource TEXT NOT NULL,data TEXT NOT NULL,confirmed INTEGER NOT NULL DEFAULT 0,created_at TEXT NOT NULL);
+    PRAGMA user_version=4; COMMIT;`);
         }
         catch (e) {
             try {

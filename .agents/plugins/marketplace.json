@@ -1,6 +1,6 @@
 {
   "name": "open-kitchen-toolkit",
-  "interface": { "displayName": "Open Kitchen Toolkit" },
+  "interface": { "displayName": "CulinaryOS Interagency" },
   "plugins": [
     {
       "name": "kitchen-tools",

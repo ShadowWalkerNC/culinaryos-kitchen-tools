@@ -9,7 +9,7 @@ import {publicPage} from '../src/server/publicPage.js';
 describe('Guided kitchen entry points',()=>{
  it('routes every starter to existing canonical workflows',()=>{
   const ids=new Set(WORKFLOW_CATALOG.map(w=>w.id));
-  assert.equal(STARTERS.length,12);assert.equal(new Set(STARTERS.map(s=>s.id)).size,12);
+  assert.equal(STARTERS.length,24);assert.equal(new Set(STARTERS.map(s=>s.id)).size,24);
   for(const starter of STARTERS){assert.equal(starter.steps.length,4);for(const id of starter.workflowIds)assert.ok(ids.has(id),id);}
  });
  it('advances reported steps without persisting or asserting execution',()=>{

@@ -14,6 +14,7 @@ server = json.loads((stage / 'mcp.json').read_text())['mcpServers']['kitchen-too
 assert server == {'type': 'streamable-http', 'url': 'https://culinaryos-kitchen-tools-production.up.railway.app/mcp'}
 remote_files = [stage / n for n in ['plugin.json', 'mcp.json', 'LICENSE', 'CONTRIBUTING.md', 'docs/INSTALL.md', 'docs/GETTING_STARTED.md', 'docs/ROSS_MANOR_INTEGRATION.md']]
 remote_files += [p for p in (stage / 'skills').rglob('*') if p.is_file()]
+remote_files += [stage / 'docs' / name for name in ['PRODUCT.md','OPERATIONAL_REPORTS.md','MENU_TEMPLATES.md','KITCHEN_COVERAGE.json']]
 receipts = []
 for filename, files, prefix in [('open-kitchen-toolkit-' + version + '.zip', [p for p in stage.rglob('*') if p.is_file()], 'kitchen-tools/'), ('kitchen-tools-remote-plugin-' + version + '.zip', remote_files, '')]:
     output = destination / filename
@@ -27,8 +28,8 @@ for filename, files, prefix in [('open-kitchen-toolkit-' + version + '.zip', [p 
     with ZipFile(output) as archive:
         names = archive.namelist()
         assert all('\\' not in name and not name.startswith('/') and '..' not in name.split('/') for name in names)
-        assert len([name for name in names if name.endswith('/SKILL.md')]) == 105
+        assert len([name for name in names if name.endswith('/SKILL.md')]) == 118
         assert archive.testzip() is None
-    receipts.append({'name': filename, 'bytes': output.stat().st_size, 'sha256': hashlib.sha256(output.read_bytes()).hexdigest(), 'skills': 105, 'portablePaths': 'PASS', 'remoteManifest': 'hosted'})
+    receipts.append({'name': filename, 'bytes': output.stat().st_size, 'sha256': hashlib.sha256(output.read_bytes()).hexdigest(), 'skills': 118, 'portablePaths': 'PASS', 'remoteManifest': 'hosted'})
 (destination / ('archive-check-' + version + '.json')).write_text(json.dumps(receipts, indent=2) + '\n')
 print(json.dumps(receipts, indent=2))

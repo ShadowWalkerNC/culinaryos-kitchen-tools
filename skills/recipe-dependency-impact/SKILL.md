@@ -1,7 +1,7 @@
 ---
 name: recipe-dependency-impact
 description: "Use when you need to map recipe sub recipe links and assess change impact before editing."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, lookup_recipe, cost_recipe]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, lookup_recipe, cost_recipe]
 
 # Recipe dependency impact (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Show what breaks when a base recipe changes: which dishes use it, what costs shift, what labels need updates. Cycles block edits. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Show what breaks when a base recipe changes: which dishes use it, what costs shift, what labels need updates. Cycles block edits. Impact stays a review draft; no recipe is edited by this workflow. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Recipe graph with subrecipes

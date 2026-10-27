@@ -1,7 +1,7 @@
 ---
 name: invoice-reconciliation
 description: "Use when you need to match supplier invoices to orders and receipts with variances flagged."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [compare_purchase_costs, validate_kitchen_data, preview_import]
@@ -9,10 +9,10 @@ tools: [compare_purchase_costs, validate_kitchen_data, preview_import]
 
 # Invoice reconciliation (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Verify every invoice line against what was ordered and what arrived. Price and quantity variances are computed explicitly. Queries go back to the supplier with evidence. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Verify every invoice line against what was ordered and what arrived. Price and quantity variances are computed explicitly. Queries go back to the supplier with evidence. Currency and units stay explicit per line; payment is never approved on unknown variances. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Invoice lines with qty, unit, price, currency

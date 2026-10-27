@@ -1,4 +1,4 @@
-# Connect Open Kitchen Toolkit
+# Connect CulinaryOS Interagency
 
 Public endpoint: https://culinaryos-kitchen-tools-production.up.railway.app/mcp
 

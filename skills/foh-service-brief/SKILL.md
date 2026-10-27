@@ -1,7 +1,7 @@
 ---
 name: foh-service-brief
 description: "Use when you need to brief front of house with menu, allergens, VIPs, and timings."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [get_workflow, list_tasks, create_task]
@@ -9,10 +9,10 @@ tools: [get_workflow, list_tasks, create_task]
 
 # FOH service brief (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as foh-service-brief without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as foh-service-brief without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Align floor and kitchen on menu, allergens, VIPs, and timings. 86s and allergen states are explicit. Calls are scripted simply. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Align floor and kitchen on menu, allergens, VIPs, and timings. 86s and allergen states are explicit. Calls are scripted simply. Briefs in other languages need supplied translations with a translator and date; safety lines are never reworded by guess. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Service date and covers

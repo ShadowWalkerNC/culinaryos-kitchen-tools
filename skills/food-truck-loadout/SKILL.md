@@ -1,7 +1,7 @@
 ---
 name: food-truck-loadout
 description: "Use when packing a food truck loadout against event demand and counted stock."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [build_order_proposal, reconcile_stock]
@@ -9,10 +9,10 @@ tools: [build_order_proposal, reconcile_stock]
 
 # Food truck loadout (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Food Truck use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Food Truck use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Convert an event's cover forecast into pack quantities and check each against the counted stock sheet, flagging shortfalls with an owner. The result is a pack proposal and checklist; no purchase order is sent. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Convert an event's cover forecast into pack quantities and check each against the counted stock sheet, flagging shortfalls with an owner. The result is a pack proposal and checklist; no purchase order is sent. Demand and stock stay counted facts from stated sources; shortfalls always carry an owner and a due time. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Event ID, date, and cover forecast with source

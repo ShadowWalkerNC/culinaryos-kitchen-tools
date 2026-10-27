@@ -1,7 +1,7 @@
 ---
 name: household-meal-calendar
 description: "Use when laying out a household meal calendar from declared portions, schedules, and diets."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [lookup_recipe, create_task]
@@ -9,10 +9,10 @@ tools: [lookup_recipe, create_task]
 
 # Household meal calendar (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Home Kitchen use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Home Kitchen use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Build a night-by-night calendar from each member's declared home nights and declared portions, with no adult-child multiplier applied. Portions are used exactly as stated by the household; any change to a portion needs a new declaration. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Build a night-by-night calendar from each member's declared home nights and declared portions, with no adult-child multiplier applied. Portions are used exactly as stated by the household; any change to a portion needs a new declaration. Schedules and portions stay as declared; nothing is inferred for absent members or blank nights. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Members with home nights and declared portions

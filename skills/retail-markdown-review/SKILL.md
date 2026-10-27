@@ -1,7 +1,7 @@
 ---
 name: retail-markdown-review
 description: "Use when reviewing a proposed retail markdown against cost and count evidence."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, create_task]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, create_task]
 
 # Retail markdown review (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Small Shop use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Small Shop use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Test a proposed markdown against the current price, unit cost, counted stock, and date mark, showing margin and exposure. The review never changes the price; approval stays blank for the manager. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Test a proposed markdown against the current price, unit cost, counted stock, and date mark, showing margin and exposure. The review never changes the price; approval stays blank for the manager. Margin math excludes unconfirmed tax and fees, named as excluded rather than assumed. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - SKU with current price and unit cost plus sources

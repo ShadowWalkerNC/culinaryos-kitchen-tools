@@ -1,7 +1,7 @@
 ---
 name: table-turnover-pacing-plan
 description: "Use when you need to pace seatings and courses to hit turnover without rushing guests."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_prep_capacity, get_workflow]
@@ -9,10 +9,10 @@ tools: [validate_prep_capacity, get_workflow]
 
 # Table turnover pacing plan (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as table-turnover-pacing-plan without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as table-turnover-pacing-plan without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Plan seating waves and fire times so the kitchen stays smooth. Timings come from the kitchen, not guesses. Bottlenecks are flagged. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Plan seating waves and fire times so the kitchen stays smooth. Timings come from the kitchen, not guesses. Bottlenecks are flagged. Fire times use the kitchen's stated timings only, and buffers stay explicit rather than absorbed. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Covers, tables, seatings

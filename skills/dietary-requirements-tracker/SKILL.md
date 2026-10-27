@@ -1,7 +1,7 @@
 ---
 name: dietary-requirements-tracker
 description: "Use when you need to track per guest dietary needs with sources and kitchen actions."
-version: 0.2.3
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, get_workflow, create_task]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, get_workflow, create_task]
 
 # Dietary requirements tracker (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as dietary-requirements-tracker without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as dietary-requirements-tracker without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Ensure every dietary need has a sourced requirement, a mapped dish, and a kitchen action. Unverified notes stay flagged. No guest need is guessed. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Ensure every dietary need has a sourced requirement, a mapped dish, and a kitchen action. Unverified notes stay flagged. No guest need is guessed. In care settings only facility-approved specs set requirements; diet names alone never set limits, and no resident records are used. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Guest list with requirements and sources

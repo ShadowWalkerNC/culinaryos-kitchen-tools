@@ -14,6 +14,8 @@ import { backupDb, assertInside } from '../data/exports.js';
 import { workerTick, saveForecast } from '../jobs/worker.js';
 import { localHandlers } from '../mcp/localTools.js';
 import { readExportFile } from '../adapter/culinaryosFile.js';
+import { formatMenu } from '../core/menus.js';
+import { findKitchenHelp } from '../workflows/help.js';
 function arg(name, def) {
     const i = process.argv.indexOf(name);
     if (i >= 0 && process.argv[i + 1])
@@ -25,6 +27,14 @@ function here(rel) {
 }
 async function main() {
     const cmd = process.argv[2] ?? 'version';
+    if (cmd === 'help-kitchen') {
+        console.log(JSON.stringify(findKitchenHelp(JSON.parse(arg('--json', '{}')))));
+        return;
+    }
+    if (cmd === 'menu') {
+        console.log(JSON.stringify(formatMenu(JSON.parse(arg('--json', '{}')))));
+        return;
+    }
     if (cmd === 'version') {
         console.log(JSON.stringify({ version: VERSION, dataVersion: 'v1' }));
         return;

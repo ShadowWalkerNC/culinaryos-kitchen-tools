@@ -1,7 +1,7 @@
 ---
 name: stock-variance
 description: "Use when you need to reconcile stock counts to expected with variance causes and actions."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [reconcile_stock, validate_kitchen_data, create_task]
@@ -9,10 +9,10 @@ tools: [reconcile_stock, validate_kitchen_data, create_task]
 
 # Stock variance (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Explain stock gaps with math: expected closing from movements vs counted closing. Variances carry causes or unknown. Actions have owners. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Explain stock gaps with math: expected closing from movements vs counted closing. Variances carry causes or unknown. Actions have owners. Expected and counted stay in one stated unit; every variance keeps a cause or an owner. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Opening, received, used, waste, closing in same unit

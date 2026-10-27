@@ -24,6 +24,8 @@ import { loadEventDraft, saveEventDraft, previewEventDraft, createEventFromDraft
 import { setupStatus, checkHostedConnection } from '../workflows/setup.js';
 import { ZodError } from 'zod';
 import { printableFlowDocument } from '../workflows/printDocument.js';
+import { formatMenu, MENU_TEMPLATES } from '../core/menus.js';
+import { findKitchenHelp } from '../workflows/help.js';
 const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 function sendJson(res, status, body, type = 'application/json') {
     const payload = typeof body === 'string' ? body : JSON.stringify(body);
@@ -142,6 +144,18 @@ async function handleApi(req, res, path, db, workspaceRoot, runCalc, send) {
         return JSON.parse(raw.toString('utf8'));
     };
     const printMatch = /^\/api\/flow-document\/([^/]+)\/([^/]+)$/.exec(path);
+    if (req.method === 'GET' && path === '/api/menu/templates') {
+        send(res, 200, MENU_TEMPLATES);
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/help') {
+        send(res, 200, findKitchenHelp(await readJson()));
+        return;
+    }
+    if (req.method === 'POST' && path === '/api/menu/preview') {
+        send(res, 200, formatMenu(await readJson()));
+        return;
+    }
     if (req.method === 'GET' && printMatch) {
         send(res, 200, printableFlowDocument(db, decodeURIComponent(printMatch[1]), decodeURIComponent(printMatch[2])), 'text/html; charset=utf-8');
         return;

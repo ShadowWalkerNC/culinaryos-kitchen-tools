@@ -19,6 +19,9 @@ import {getRestaurantProfile,setRestaurantProfile,restaurantProfileSchema} from 
 import {workerStatus} from '../jobs/workspaceWorker.js';
 import {getStartedSchema} from '../workflows/getStarted.js';
 import {standardizeRecipeSchema} from '../core/standardize.js';
+import {menuMarginsSchema,staffingBudgetSchema,bakeryFormulaSchema} from '../core/business.js';
+import {menuSchema} from '../core/menus.js';
+import {findKitchenHelp,helpSchema} from '../workflows/help.js';
 
 // These tools only read their supplied arguments/catalog; no filesystem, DB, network or external writes.
 const PUBLIC_READ_ONLY={readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false};
@@ -35,6 +38,9 @@ function textResult(value: unknown): { content: Array<{ type: 'text'; text: stri
 
 export function createMcpServer(mode: McpMode, ctx?: LocalContext): McpServer {
   const server = new McpServer({ name: mode === 'public' ? 'kitchen-tools-public' : 'kitchen-tools-local', version: VERSION });
+  server.tool('find_kitchen_help','Find role-aware kitchen tasks, references, example questions, honest capability limits and five modes: explain, guide, calculate, create, review.',helpSchema.shape,PUBLIC_READ_ONLY,args=>textResult(findKitchenHelp(args)));
+  server.tool('format_menu','Format supplied menu content with clean restaurant, counter, bakery or prix-fixe templates. No emoji, generated imagery, invented prices or publishing.',menuSchema.shape,PUBLIC_READ_ONLY,args=>textResult(publicHandlers.format_menu(args as never)));
+  for(const [name,schema]of Object.entries({calculate_menu_margins:menuMarginsSchema,calculate_staffing_budget:staffingBudgetSchema,calculate_bakery_formula:bakeryFormulaSchema}))server.tool(name,'Deterministic calculation from explicit inputs; missing values remain unknown and no action is saved',schema.shape,PUBLIC_READ_ONLY,(args:Record<string,unknown>)=>textResult(publicHandlers[name as keyof typeof publicHandlers](args as never)));
   server.tool('get_started','Show kitchen and restaurant starter prompts and a step-by-step guide. No special keywords required; no tasks executed.',getStartedSchema.shape, PUBLIC_READ_ONLY,args=>textResult(publicHandlers.get_started(args as never)));
   server.tool('standardize_recipe_units','Convert recipe lines into explicitly chosen units. Preserve originals and block ambiguous standards or missing ingredient density.',standardizeRecipeSchema.shape, PUBLIC_READ_ONLY,args=>textResult(publicHandlers.standardize_recipe_units(args as never)));
   for(const [name,schema] of Object.entries({list_workflows:listWorkflowsSchema,calculate_usable_yield:usableYieldSchema,reconcile_stock:stockSchema,calculate_event_budget:budgetSchema,validate_prep_capacity:capacitySchema})){

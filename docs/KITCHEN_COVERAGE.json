@@ -1,0 +1,4644 @@
+{
+  "scope": "Original research-derived task coverage, not a frequency survey or executed model benchmark",
+  "roles": [
+    "cook",
+    "baker",
+    "dishwasher",
+    "server",
+    "bartender",
+    "supervisor",
+    "manager",
+    "owner",
+    "home-cook"
+  ],
+  "establishments": [
+    "restaurant",
+    "food-truck",
+    "bakery",
+    "cafe",
+    "catering",
+    "bar",
+    "institution",
+    "home"
+  ],
+  "actions": [
+    "explain",
+    "guide",
+    "calculate",
+    "create",
+    "review"
+  ],
+  "references": [
+    {
+      "id": "bc-kitchen",
+      "title": "Basic Kitchen and Food Service Management",
+      "publisher": "BC Cook Articulation Committee / BCcampus",
+      "url": "https://opentextbc.ca/basickitchenandfoodservicemanagement/",
+      "jurisdiction": "Canadian culinary education; local rules require separate verification",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "CC BY; inspect linked license and attribution requirements before adapting",
+      "use": "Reference links and original summaries; no manual bundled"
+    },
+    {
+      "id": "fsa-catering",
+      "title": "Safer food, better business for caterers",
+      "publisher": "Food Standards Agency",
+      "url": "https://www.gov.uk/government/publications/safer-food-better-business-for-caterers",
+      "jurisdiction": "England, Northern Ireland and Wales",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "Verify document-specific reuse terms before copying",
+      "use": "Jurisdiction-specific management guidance; no manual bundled"
+    },
+    {
+      "id": "fsa-diary",
+      "title": "Safer food, better business diary introduction",
+      "publisher": "Food Standards Agency",
+      "url": "https://www.food.gov.uk/sites/default/files/media/document/sfbb-diary-02-introduction_4.pdf",
+      "jurisdiction": "Use with the applicable FSA catering pack",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "Verify document-specific reuse terms before copying",
+      "use": "Original recordkeeping workflow requirements; no PDF bundled"
+    },
+    {
+      "id": "sba-management",
+      "title": "Manage your business",
+      "publisher": "US Small Business Administration",
+      "url": "https://www.sba.gov/counseling/manage-your-business/",
+      "jurisdiction": "United States; business guidance",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "Check page and third-party material terms before copying",
+      "use": "Business records and marketing review requirements"
+    },
+    {
+      "id": "illinois-substitutions",
+      "title": "Recipe substitutions",
+      "publisher": "University of Illinois Extension",
+      "url": "https://extension.illinois.edu/food/recipe-substitutions",
+      "jurisdiction": "Home cooking education; not clinical or preservation validation",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "Reference only; no redistribution permission assumed",
+      "use": "Ingredient-function questions and original guidance"
+    },
+    {
+      "id": "fda-health",
+      "title": "Employee Health and Personal Hygiene Handbook",
+      "publisher": "US Food and Drug Administration",
+      "url": "https://www.fda.gov/food/retail-food-industryregulatory-assistance-training/retail-food-protection-employee-health-and-personal-hygiene-handbook",
+      "jurisdiction": "United States; confirm adopted local requirements",
+      "revision": null,
+      "retrievedAt": "2026-10-27",
+      "license": "Check document-specific and third-party terms before redistribution",
+      "use": "Employee health and hygiene source routing"
+    }
+  ],
+  "areas": [
+    {
+      "id": "cooking",
+      "title": "Cooking and troubleshooting",
+      "roles": [
+        "cook",
+        "baker",
+        "home-cook"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "questions": [
+        "Why did my sauce split?",
+        "What can replace an ingredient without changing its function?",
+        "How do I cook this with different equipment?"
+      ],
+      "workflowIds": [
+        "recipe-troubleshooting-log",
+        "recipe-equipment-adaptation",
+        "supplier-substitution-review"
+      ],
+      "outputs": [
+        "explanation",
+        "recovery plan",
+        "trial recipe"
+      ],
+      "references": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "calculators": [
+        "convert_quantity",
+        "scale_recipe"
+      ],
+      "gap": "Recovery and substitution suggestions require host reasoning and recipe-specific review; no outcome guarantee.",
+      "status": "partial"
+    },
+    {
+      "id": "home",
+      "title": "Home kitchens",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "questions": [
+        "What can I cook with my pantry?",
+        "How can I coordinate dinner using one oven?",
+        "How do I make a grocery list within my budget?"
+      ],
+      "workflowIds": [
+        "home-pantry-meal-plan",
+        "household-grocery-budget",
+        "home-cooking-timeline",
+        "household-meal-calendar"
+      ],
+      "outputs": [
+        "meal plan",
+        "shopping list",
+        "cooking timeline"
+      ],
+      "references": [
+        "illinois-substitutions"
+      ],
+      "calculators": [
+        "scale_recipe",
+        "convert_quantity"
+      ],
+      "gap": "No live pantry, grocery price or appliance integration.",
+      "status": "partial"
+    },
+    {
+      "id": "baking",
+      "title": "Baking and production",
+      "roles": [
+        "baker",
+        "cook",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "catering",
+        "home"
+      ],
+      "questions": [
+        "How much preferment flour belongs in hydration?",
+        "Why is my dough inconsistent?",
+        "How do I schedule proofing and oven loads?"
+      ],
+      "workflowIds": [
+        "preferment-flour-accounting",
+        "dough-temperature-trial-log",
+        "proofing-oven-calendar",
+        "bakery-preorder-consolidation"
+      ],
+      "outputs": [
+        "formula worksheet",
+        "trial log",
+        "oven calendar"
+      ],
+      "references": [
+        "bc-kitchen"
+      ],
+      "calculators": [
+        "calculate_bakery_formula",
+        "validate_prep_capacity"
+      ],
+      "gap": "Fermentation times and equipment capacity must be supplied or labeled experimental.",
+      "status": "partial"
+    },
+    {
+      "id": "menus",
+      "title": "Menu creation",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "questions": [
+        "Help me create a menu with fewer overlapping ingredients.",
+        "Format my menu without emojis or fake food images.",
+        "How do I write accurate dish descriptions?"
+      ],
+      "workflowIds": [
+        "seasonal-menu-planner",
+        "dish-development-brief",
+        "menu-description-writer",
+        "menu-margin-review"
+      ],
+      "outputs": [
+        "dish proposals",
+        "ingredient-overlap review",
+        "clean printable menu"
+      ],
+      "references": [
+        "bc-kitchen"
+      ],
+      "calculators": [
+        "format_menu",
+        "calculate_menu_margins"
+      ],
+      "gap": "New dish ideas are proposals. Pricing and dietary claims need confirmation before formatting or publishing.",
+      "status": "partial"
+    },
+    {
+      "id": "purchasing",
+      "title": "Purchasing and receiving",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "Which supplier pack is cheaper?",
+        "My delivery and invoice disagree; what do I record?",
+        "Can I accept this supplier substitution?"
+      ],
+      "workflowIds": [
+        "purchase-price-review",
+        "invoice-reconciliation",
+        "supplier-substitution-review",
+        "supplier-performance-scorecard"
+      ],
+      "outputs": [
+        "pack comparison",
+        "receiving checklist",
+        "discrepancy report"
+      ],
+      "references": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "calculators": [
+        "compare_purchase_costs",
+        "calculate_usable_yield"
+      ],
+      "gap": "No order submission, supplier message or inventory posting is performed.",
+      "status": "partial"
+    },
+    {
+      "id": "inventory",
+      "title": "Inventory and waste",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "questions": [
+        "How do I count stock consistently?",
+        "Why does counted stock differ from expected stock?",
+        "How do I investigate food waste?"
+      ],
+      "workflowIds": [
+        "stock-take-template-generator",
+        "stock-variance",
+        "waste-review",
+        "freezer-inventory-plan"
+      ],
+      "outputs": [
+        "count sheet",
+        "stock reconciliation",
+        "waste investigation"
+      ],
+      "references": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "calculators": [
+        "reconcile_stock"
+      ],
+      "gap": "Counts, opening balances and movements must be supplied; no automatic physical counting.",
+      "status": "partial"
+    },
+    {
+      "id": "finance",
+      "title": "Costing and business performance",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "What does this dish cost per portion?",
+        "Are delivery-platform sales profitable?",
+        "What sales do I need to cover these costs?"
+      ],
+      "workflowIds": [
+        "recipe-costing",
+        "delivery-platform-net-margin",
+        "kitchen-budget-planner",
+        "menu-margin-review"
+      ],
+      "outputs": [
+        "cost sheet",
+        "channel comparison",
+        "budget scenario"
+      ],
+      "references": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "calculators": [
+        "cost_recipe",
+        "calculate_menu_margins",
+        "calculate_staffing_budget",
+        "calculate_event_budget"
+      ],
+      "gap": "Ingredient margin is not net profit. Missing overhead, tax, labor and fee assumptions remain unresolved.",
+      "status": "partial"
+    },
+    {
+      "id": "daily-operations",
+      "title": "Daily operations and reports",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "What should I check before opening?",
+        "How do I write a shift handover?",
+        "Help me prepare a manager closing report."
+      ],
+      "workflowIds": [
+        "station-setup-checklist",
+        "shift-handover-board",
+        "daily-close-review",
+        "daily-brief-generator"
+      ],
+      "outputs": [
+        "opening checklist",
+        "shift handover",
+        "manager report"
+      ],
+      "references": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "calculators": [
+        "reconcile_stock"
+      ],
+      "gap": "The host drafts narrative sections. Observations, counts, signatures and completed checks are never generated as facts.",
+      "status": "partial"
+    },
+    {
+      "id": "service",
+      "title": "Front of house and bar",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "How should I brief the service team?",
+        "How do I handle a guest complaint?",
+        "How much dilution belongs in a batched drink?"
+      ],
+      "workflowIds": [
+        "foh-service-brief",
+        "complaint-handling-resolution-log",
+        "beverage-batch-dilution",
+        "draft-beer-yield-loss",
+        "table-turnover-pacing-plan"
+      ],
+      "outputs": [
+        "service brief",
+        "response draft",
+        "beverage worksheet"
+      ],
+      "references": [
+        "bc-kitchen"
+      ],
+      "calculators": [
+        "scale_recipe",
+        "convert_quantity"
+      ],
+      "gap": "No guest communication, refund or reservation change is executed; alcohol rules require local sources.",
+      "status": "partial"
+    },
+    {
+      "id": "people",
+      "title": "People and training",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "How do I teach a new dishwasher the approved routine?",
+        "Make a station competency checklist.",
+        "How can I make this brief understandable in another language?"
+      ],
+      "workflowIds": [
+        "training-plan-generator",
+        "sop-drafting",
+        "multilingual-service-brief",
+        "apprenticeship-tracker"
+      ],
+      "outputs": [
+        "training plan",
+        "text SOP",
+        "assessment",
+        "blank sign-off record"
+      ],
+      "references": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "calculators": [
+        "calculate_staffing_budget"
+      ],
+      "gap": "Language and competency require human verification. No fabricated signatures or staffing/legal decisions.",
+      "status": "partial"
+    },
+    {
+      "id": "safety",
+      "title": "Safety, cleaning and equipment",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "questions": [
+        "How do I document a food safety incident?",
+        "How do I trace a recalled ingredient?",
+        "What do I do when equipment breaks or a cleaning check fails?"
+      ],
+      "workflowIds": [
+        "food-safety-incident-report",
+        "product-recall-trace-drill",
+        "equipment-downtime-replan",
+        "equipment-maintenance-log",
+        "haccp-checklist-generator"
+      ],
+      "outputs": [
+        "incident draft",
+        "recall trace record",
+        "cleaning checklist",
+        "contingency plan"
+      ],
+      "references": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "calculators": [],
+      "gap": "Confirm jurisdiction, approved safety plan and manufacturer instructions. No invented chemical concentrations or safety clearance.",
+      "status": "partial"
+    },
+    {
+      "id": "events",
+      "title": "Catering and events",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "questions": [
+        "Can we deliver this event with our capacity?",
+        "Help me create a catering quotation.",
+        "What equipment and settlement records do I need?"
+      ],
+      "workflowIds": [
+        "catering-quotation",
+        "capacity-aware-prep",
+        "food-truck-loadout",
+        "event-run-of-show",
+        "food-truck-event-settlement"
+      ],
+      "outputs": [
+        "quotation",
+        "production plan",
+        "loadout",
+        "service schedule",
+        "settlement review"
+      ],
+      "references": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "calculators": [
+        "calculate_event_budget",
+        "calculate_staffing_budget",
+        "validate_prep_capacity"
+      ],
+      "gap": "No booking, quotation acceptance or purchasing commitment is made.",
+      "status": "partial"
+    },
+    {
+      "id": "marketing",
+      "title": "Marketing and growth",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "questions": [
+        "What should we promote this month?",
+        "Did our campaign improve sales?",
+        "How do I plan a truthful content calendar?"
+      ],
+      "workflowIds": [
+        "social-media-content-generator",
+        "campaign-sales-review",
+        "chef-personal-brand-builder",
+        "partnership-growth-finder"
+      ],
+      "outputs": [
+        "reviewed content calendar",
+        "campaign brief",
+        "sales comparison"
+      ],
+      "references": [
+        "sba-management"
+      ],
+      "calculators": [
+        "calculate_menu_margins"
+      ],
+      "gap": "Sales association does not prove campaign causation. No automatic social publishing or outreach.",
+      "status": "partial"
+    },
+    {
+      "id": "care",
+      "title": "Care and institutional kitchens",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution",
+        "catering"
+      ],
+      "questions": [
+        "Does this menu match our approved diet specification?",
+        "Which dietary requirements are unresolved?",
+        "How do I prepare a Ross Manor paperwork handoff?"
+      ],
+      "workflowIds": [
+        "approved-diet-menu-screen",
+        "dietary-requirements-tracker",
+        "recipe-compliance-checker",
+        "onboarding"
+      ],
+      "outputs": [
+        "screening worksheet",
+        "unresolved-item list",
+        "authorized specialist handoff"
+      ],
+      "references": [
+        "fda-health"
+      ],
+      "calculators": [
+        "scale_recipe"
+      ],
+      "gap": "These general references do not establish clinical suitability. Supplied facility specifications and authorized review are required; no resident-data transfer is implied.",
+      "status": "partial"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "agency-chef-onboarding-generator",
+      "title": "Agency chef onboarding generator",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "allergen-management-system",
+      "title": "Allergen management system",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "apprenticeship-tracker",
+      "title": "Apprenticeship tracker",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "people"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "approved-diet-menu-screen",
+      "title": "Approved diet menu screen",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution",
+        "catering"
+      ],
+      "areas": [
+        "care"
+      ],
+      "referenceIds": [
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bakers-percentage-formula",
+      "title": "Bakers percentage formula",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bakery-batch-traceability",
+      "title": "Bakery batch traceability",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bakery-display-sellthrough",
+      "title": "Bakery display sellthrough",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bakery-oven-load-sequence",
+      "title": "Bakery oven load sequence",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bakery-preorder-consolidation",
+      "title": "Bakery preorder consolidation",
+      "roles": [
+        "baker",
+        "cook",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "catering",
+        "home"
+      ],
+      "areas": [
+        "baking"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "banquet-event-order",
+      "title": "Banquet event order",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "bar-cocktail-recipe-builder",
+      "title": "Bar cocktail recipe builder",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "beverage-batch-dilution",
+      "title": "Beverage batch dilution",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "service"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "burnout-stress-risk-assessment",
+      "title": "Burnout stress risk assessment",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "campaign-sales-review",
+      "title": "Campaign sales review",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "marketing"
+      ],
+      "referenceIds": [
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "canape-reception-planner",
+      "title": "Canape reception planner",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "capacity-aware-prep",
+      "title": "Capacity aware prep",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "events"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "catering-quotation",
+      "title": "Catering quotation",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "events"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "chef-personal-brand-builder",
+      "title": "Chef personal brand builder",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "marketing"
+      ],
+      "referenceIds": [
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "chef-wellbeing-check-in",
+      "title": "Chef wellbeing check in",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "complaint-handling-resolution-log",
+      "title": "Complaint handling resolution log",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "service"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "cook-once-component-plan",
+      "title": "Cook once component plan",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "corporate-event-menu-planner",
+      "title": "Corporate event menu planner",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "coshh-chemical-safety",
+      "title": "COSHH chemical safety",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "counter-service-combo-costing",
+      "title": "Counter service combo costing",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "custom-cake-order-specification",
+      "title": "Custom cake order specification",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "daily-brief-generator",
+      "title": "Daily brief generator",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "daily-operations"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "daily-close-review",
+      "title": "Daily close review",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "daily-operations"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "data-reconciliation",
+      "title": "Data reconciliation: resolve conflicts",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "deli-display-replenishment",
+      "title": "Deli display replenishment",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "delivery-platform-net-margin",
+      "title": "Delivery platform net margin",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "finance"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "dietary-requirements-tracker",
+      "title": "Dietary requirements tracker",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution",
+        "catering"
+      ],
+      "areas": [
+        "care"
+      ],
+      "referenceIds": [
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "disciplinary-documentation-helper",
+      "title": "Disciplinary documentation helper",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "dish-development-brief",
+      "title": "Dish development brief",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "menus"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "dough-production-yield-plan",
+      "title": "Dough production yield plan",
+      "roles": [
+        "baker",
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "dough-temperature-trial-log",
+      "title": "Dough temperature trial log",
+      "roles": [
+        "baker",
+        "cook",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "catering",
+        "home"
+      ],
+      "areas": [
+        "baking"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "draft-beer-yield-loss",
+      "title": "Draft beer yield loss",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "service"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "equipment-downtime-replan",
+      "title": "Equipment downtime replan",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "safety"
+      ],
+      "referenceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "equipment-maintenance-log",
+      "title": "Equipment maintenance log",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "safety"
+      ],
+      "referenceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "event-application-readiness",
+      "title": "Event application readiness",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "event-catering-brief",
+      "title": "Event catering brief",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "event-equipment-kit-list",
+      "title": "Event equipment kit list",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "event-run-of-show",
+      "title": "Event run of show",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "events"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "event-staffing-plan",
+      "title": "Event staffing plan",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "foh-service-brief",
+      "title": "FOH service brief",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "service"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-safety-incident-report",
+      "title": "Food safety incident report",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "safety"
+      ],
+      "referenceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-commissary-handoff",
+      "title": "Food truck commissary handoff",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-event-go-no-go",
+      "title": "Food truck event go no-go",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-event-profitability",
+      "title": "Food truck event profitability",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-event-settlement",
+      "title": "Food truck event settlement",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "events"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-loadout",
+      "title": "Food truck loadout",
+      "roles": [
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "food-truck",
+        "catering",
+        "restaurant",
+        "bakery",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "events"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-power-water-plan",
+      "title": "Food truck power water plan",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "food-truck-throughput-menu",
+      "title": "Food truck throughput menu",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "freezer-inventory-plan",
+      "title": "Freezer inventory plan",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "inventory"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "guest-feedback-analyser",
+      "title": "Guest feedback analyser",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "haccp-checklist-generator",
+      "title": "HACCP checklist generator",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "safety"
+      ],
+      "referenceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "home-cooking-timeline",
+      "title": "Home cooking timeline",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [
+        "home"
+      ],
+      "referenceIds": [
+        "illinois-substitutions"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "home-pantry-meal-plan",
+      "title": "Home pantry meal plan",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [
+        "home"
+      ],
+      "referenceIds": [
+        "illinois-substitutions"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "household-grocery-budget",
+      "title": "Household grocery budget",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [
+        "home"
+      ],
+      "referenceIds": [
+        "illinois-substitutions"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "household-meal-calendar",
+      "title": "Household meal calendar",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [
+        "home"
+      ],
+      "referenceIds": [
+        "illinois-substitutions"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "invoice-reconciliation",
+      "title": "Invoice reconciliation",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "purchasing"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "kitchen-budget-planner",
+      "title": "Kitchen budget planner",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "finance"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "kitchen-culture-health-check",
+      "title": "Kitchen culture health check",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "kitchen-ethos-doc-generator",
+      "title": "Kitchen ethos doc generator",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "leftover-reuse-plan",
+      "title": "Leftover reuse plan",
+      "roles": [
+        "home-cook"
+      ],
+      "establishments": [
+        "home"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "menu-description-writer",
+      "title": "Menu description writer",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "menus"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "menu-margin-review",
+      "title": "Menu margin review",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "menus",
+        "finance"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "mobile-service-contingency-plan",
+      "title": "Mobile service contingency plan",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "multi-station-pickup-plan",
+      "title": "Multi station pickup plan",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "multilingual-service-brief",
+      "title": "Multilingual service brief",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "people"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "nutritional-information-calculator",
+      "title": "Nutritional information calculator",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "onboarding",
+      "title": "Onboarding: set up a workspace",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution",
+        "catering"
+      ],
+      "areas": [
+        "care"
+      ],
+      "referenceIds": [
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "ordering-proposals",
+      "title": "Ordering proposals",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "partnership-growth-finder",
+      "title": "Partnership growth finder",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "marketing"
+      ],
+      "referenceIds": [
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "plate-photography-brief",
+      "title": "Plate photography brief",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "post-event-report",
+      "title": "Post event report",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "preferment-flour-accounting",
+      "title": "Preferment flour accounting",
+      "roles": [
+        "baker",
+        "cook",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "catering",
+        "home"
+      ],
+      "areas": [
+        "baking"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "prep-planning",
+      "title": "Prep planning",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "price-increase-impact-calculator",
+      "title": "Price increase impact calculator",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "private-dining-setup-guide",
+      "title": "Private dining setup guide",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "product-recall-trace-drill",
+      "title": "Product recall trace drill",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "safety"
+      ],
+      "referenceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "production-batch-record",
+      "title": "Production batch record",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "proofing-oven-calendar",
+      "title": "Proofing oven calendar",
+      "roles": [
+        "baker",
+        "cook",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "bakery",
+        "cafe",
+        "restaurant",
+        "catering",
+        "home"
+      ],
+      "areas": [
+        "baking"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "purchase-price-review",
+      "title": "Purchase price review",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "purchasing"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-compliance-checker",
+      "title": "Recipe compliance checker",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "institution",
+        "catering"
+      ],
+      "areas": [
+        "care"
+      ],
+      "referenceIds": [
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-costing",
+      "title": "Recipe costing",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "finance"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-dependency-impact",
+      "title": "Recipe dependency impact",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-documentation",
+      "title": "Recipe documentation: draft cards",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-equipment-adaptation",
+      "title": "Recipe equipment adaptation",
+      "roles": [
+        "cook",
+        "baker",
+        "home-cook"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "cooking"
+      ],
+      "referenceIds": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-scaling",
+      "title": "Recipe scaling",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "recipe-troubleshooting-log",
+      "title": "Recipe troubleshooting log",
+      "roles": [
+        "cook",
+        "baker",
+        "home-cook"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "cooking"
+      ],
+      "referenceIds": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "retail-markdown-review",
+      "title": "Retail markdown review",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "retail-pack-size-pricing",
+      "title": "Retail pack size pricing",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "rota-builder",
+      "title": "Rota builder",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "seasonal-menu-planner",
+      "title": "Seasonal menu planner",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "menus"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "service-bottleneck-review",
+      "title": "Service bottleneck review",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "shift-handover-board",
+      "title": "Shift handover board",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "daily-operations"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "small-shop-cash-close",
+      "title": "Small shop cash close",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "small-shop-reorder-round",
+      "title": "Small shop reorder round",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "social-media-content-generator",
+      "title": "Social media content generator",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "marketing"
+      ],
+      "referenceIds": [
+        "sba-management"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "sop-drafting",
+      "title": "SOP drafting",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "people"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "staff-performance-review",
+      "title": "Staff performance review",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "station-setup-checklist",
+      "title": "Station setup checklist",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "daily-operations"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "stock-take-template-generator",
+      "title": "Stock take template generator",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "inventory"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "stock-variance",
+      "title": "Stock variance",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "inventory"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "supplier-performance-scorecard",
+      "title": "Supplier performance scorecard",
+      "roles": [
+        "cook",
+        "baker",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "purchasing"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "supplier-substitution-review",
+      "title": "Supplier substitution review",
+      "roles": [
+        "cook",
+        "baker",
+        "home-cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "cooking",
+        "purchasing"
+      ],
+      "referenceIds": [
+        "illinois-substitutions",
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "table-turnover-pacing-plan",
+      "title": "Table turnover pacing plan",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "service"
+      ],
+      "referenceIds": [
+        "bc-kitchen"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "tasting-menu-builder",
+      "title": "Tasting menu builder",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "team-meeting-agenda-builder",
+      "title": "Team meeting agenda builder",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "tender-brief-new-suppliers",
+      "title": "Tender brief new suppliers",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "training-plan-generator",
+      "title": "Training plan generator",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [
+        "people"
+      ],
+      "referenceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "trial-shift-assessment",
+      "title": "Trial shift assessment",
+      "roles": [
+        "dishwasher",
+        "cook",
+        "baker",
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "upselling-training-script",
+      "title": "Upselling training script",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "usable-yield-verification",
+      "title": "Usable yield verification",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "vip-special-guest-brief",
+      "title": "VIP special guest brief",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "waste-review",
+      "title": "Waste review",
+      "roles": [
+        "cook",
+        "baker",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution",
+        "home"
+      ],
+      "areas": [
+        "inventory"
+      ],
+      "referenceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "referenceMapping": "topic references linked; not individual answer verification",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "wedding-catering-checklist",
+      "title": "Wedding catering checklist",
+      "roles": [
+        "cook",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    },
+    {
+      "id": "wine-beverage-pairing-guide",
+      "title": "Wine beverage pairing guide",
+      "roles": [
+        "server",
+        "bartender",
+        "supervisor",
+        "manager",
+        "owner"
+      ],
+      "establishments": [
+        "restaurant",
+        "food-truck",
+        "bakery",
+        "cafe",
+        "catering",
+        "bar",
+        "institution"
+      ],
+      "areas": [],
+      "referenceIds": [],
+      "referenceMapping": "not mapped; source review needed",
+      "status": "guidance-only",
+      "execution": "Instructions and examples are available; this label is not model-output or production acceptance."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cooking/1",
+      "area": "cooking",
+      "question": "Why did my sauce split?",
+      "workflowIds": [
+        "recipe-troubleshooting-log",
+        "recipe-equipment-adaptation",
+        "supplier-substitution-review"
+      ],
+      "sourceIds": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "cooking/2",
+      "area": "cooking",
+      "question": "What can replace an ingredient without changing its function?",
+      "workflowIds": [
+        "recipe-troubleshooting-log",
+        "recipe-equipment-adaptation",
+        "supplier-substitution-review"
+      ],
+      "sourceIds": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "cooking/3",
+      "area": "cooking",
+      "question": "How do I cook this with different equipment?",
+      "workflowIds": [
+        "recipe-troubleshooting-log",
+        "recipe-equipment-adaptation",
+        "supplier-substitution-review"
+      ],
+      "sourceIds": [
+        "illinois-substitutions",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "home/1",
+      "area": "home",
+      "question": "What can I cook with my pantry?",
+      "workflowIds": [
+        "home-pantry-meal-plan",
+        "household-grocery-budget",
+        "home-cooking-timeline",
+        "household-meal-calendar"
+      ],
+      "sourceIds": [
+        "illinois-substitutions"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "home/2",
+      "area": "home",
+      "question": "How can I coordinate dinner using one oven?",
+      "workflowIds": [
+        "home-pantry-meal-plan",
+        "household-grocery-budget",
+        "home-cooking-timeline",
+        "household-meal-calendar"
+      ],
+      "sourceIds": [
+        "illinois-substitutions"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "home/3",
+      "area": "home",
+      "question": "How do I make a grocery list within my budget?",
+      "workflowIds": [
+        "home-pantry-meal-plan",
+        "household-grocery-budget",
+        "home-cooking-timeline",
+        "household-meal-calendar"
+      ],
+      "sourceIds": [
+        "illinois-substitutions"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "baking/1",
+      "area": "baking",
+      "question": "How much preferment flour belongs in hydration?",
+      "workflowIds": [
+        "preferment-flour-accounting",
+        "dough-temperature-trial-log",
+        "proofing-oven-calendar",
+        "bakery-preorder-consolidation"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "baking/2",
+      "area": "baking",
+      "question": "Why is my dough inconsistent?",
+      "workflowIds": [
+        "preferment-flour-accounting",
+        "dough-temperature-trial-log",
+        "proofing-oven-calendar",
+        "bakery-preorder-consolidation"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "baking/3",
+      "area": "baking",
+      "question": "How do I schedule proofing and oven loads?",
+      "workflowIds": [
+        "preferment-flour-accounting",
+        "dough-temperature-trial-log",
+        "proofing-oven-calendar",
+        "bakery-preorder-consolidation"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "menus/1",
+      "area": "menus",
+      "question": "Help me create a menu with fewer overlapping ingredients.",
+      "workflowIds": [
+        "seasonal-menu-planner",
+        "dish-development-brief",
+        "menu-description-writer",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "menus/2",
+      "area": "menus",
+      "question": "Format my menu without emojis or fake food images.",
+      "workflowIds": [
+        "seasonal-menu-planner",
+        "dish-development-brief",
+        "menu-description-writer",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "menus/3",
+      "area": "menus",
+      "question": "How do I write accurate dish descriptions?",
+      "workflowIds": [
+        "seasonal-menu-planner",
+        "dish-development-brief",
+        "menu-description-writer",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "purchasing/1",
+      "area": "purchasing",
+      "question": "Which supplier pack is cheaper?",
+      "workflowIds": [
+        "purchase-price-review",
+        "invoice-reconciliation",
+        "supplier-substitution-review",
+        "supplier-performance-scorecard"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "purchasing/2",
+      "area": "purchasing",
+      "question": "My delivery and invoice disagree; what do I record?",
+      "workflowIds": [
+        "purchase-price-review",
+        "invoice-reconciliation",
+        "supplier-substitution-review",
+        "supplier-performance-scorecard"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "purchasing/3",
+      "area": "purchasing",
+      "question": "Can I accept this supplier substitution?",
+      "workflowIds": [
+        "purchase-price-review",
+        "invoice-reconciliation",
+        "supplier-substitution-review",
+        "supplier-performance-scorecard"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "inventory/1",
+      "area": "inventory",
+      "question": "How do I count stock consistently?",
+      "workflowIds": [
+        "stock-take-template-generator",
+        "stock-variance",
+        "waste-review",
+        "freezer-inventory-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "inventory/2",
+      "area": "inventory",
+      "question": "Why does counted stock differ from expected stock?",
+      "workflowIds": [
+        "stock-take-template-generator",
+        "stock-variance",
+        "waste-review",
+        "freezer-inventory-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "inventory/3",
+      "area": "inventory",
+      "question": "How do I investigate food waste?",
+      "workflowIds": [
+        "stock-take-template-generator",
+        "stock-variance",
+        "waste-review",
+        "freezer-inventory-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "finance/1",
+      "area": "finance",
+      "question": "What does this dish cost per portion?",
+      "workflowIds": [
+        "recipe-costing",
+        "delivery-platform-net-margin",
+        "kitchen-budget-planner",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "finance/2",
+      "area": "finance",
+      "question": "Are delivery-platform sales profitable?",
+      "workflowIds": [
+        "recipe-costing",
+        "delivery-platform-net-margin",
+        "kitchen-budget-planner",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "finance/3",
+      "area": "finance",
+      "question": "What sales do I need to cover these costs?",
+      "workflowIds": [
+        "recipe-costing",
+        "delivery-platform-net-margin",
+        "kitchen-budget-planner",
+        "menu-margin-review"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "daily-operations/1",
+      "area": "daily-operations",
+      "question": "What should I check before opening?",
+      "workflowIds": [
+        "station-setup-checklist",
+        "shift-handover-board",
+        "daily-close-review",
+        "daily-brief-generator"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "daily-operations/2",
+      "area": "daily-operations",
+      "question": "How do I write a shift handover?",
+      "workflowIds": [
+        "station-setup-checklist",
+        "shift-handover-board",
+        "daily-close-review",
+        "daily-brief-generator"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "daily-operations/3",
+      "area": "daily-operations",
+      "question": "Help me prepare a manager closing report.",
+      "workflowIds": [
+        "station-setup-checklist",
+        "shift-handover-board",
+        "daily-close-review",
+        "daily-brief-generator"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fsa-catering",
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "service/1",
+      "area": "service",
+      "question": "How should I brief the service team?",
+      "workflowIds": [
+        "foh-service-brief",
+        "complaint-handling-resolution-log",
+        "beverage-batch-dilution",
+        "draft-beer-yield-loss",
+        "table-turnover-pacing-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "service/2",
+      "area": "service",
+      "question": "How do I handle a guest complaint?",
+      "workflowIds": [
+        "foh-service-brief",
+        "complaint-handling-resolution-log",
+        "beverage-batch-dilution",
+        "draft-beer-yield-loss",
+        "table-turnover-pacing-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "service/3",
+      "area": "service",
+      "question": "How much dilution belongs in a batched drink?",
+      "workflowIds": [
+        "foh-service-brief",
+        "complaint-handling-resolution-log",
+        "beverage-batch-dilution",
+        "draft-beer-yield-loss",
+        "table-turnover-pacing-plan"
+      ],
+      "sourceIds": [
+        "bc-kitchen"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "people/1",
+      "area": "people",
+      "question": "How do I teach a new dishwasher the approved routine?",
+      "workflowIds": [
+        "training-plan-generator",
+        "sop-drafting",
+        "multilingual-service-brief",
+        "apprenticeship-tracker"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "people/2",
+      "area": "people",
+      "question": "Make a station competency checklist.",
+      "workflowIds": [
+        "training-plan-generator",
+        "sop-drafting",
+        "multilingual-service-brief",
+        "apprenticeship-tracker"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "people/3",
+      "area": "people",
+      "question": "How can I make this brief understandable in another language?",
+      "workflowIds": [
+        "training-plan-generator",
+        "sop-drafting",
+        "multilingual-service-brief",
+        "apprenticeship-tracker"
+      ],
+      "sourceIds": [
+        "fsa-diary",
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "safety/1",
+      "area": "safety",
+      "question": "How do I document a food safety incident?",
+      "workflowIds": [
+        "food-safety-incident-report",
+        "product-recall-trace-drill",
+        "equipment-downtime-replan",
+        "equipment-maintenance-log",
+        "haccp-checklist-generator"
+      ],
+      "sourceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "safety/2",
+      "area": "safety",
+      "question": "How do I trace a recalled ingredient?",
+      "workflowIds": [
+        "food-safety-incident-report",
+        "product-recall-trace-drill",
+        "equipment-downtime-replan",
+        "equipment-maintenance-log",
+        "haccp-checklist-generator"
+      ],
+      "sourceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "safety/3",
+      "area": "safety",
+      "question": "What do I do when equipment breaks or a cleaning check fails?",
+      "workflowIds": [
+        "food-safety-incident-report",
+        "product-recall-trace-drill",
+        "equipment-downtime-replan",
+        "equipment-maintenance-log",
+        "haccp-checklist-generator"
+      ],
+      "sourceIds": [
+        "fda-health",
+        "fsa-catering",
+        "fsa-diary"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "events/1",
+      "area": "events",
+      "question": "Can we deliver this event with our capacity?",
+      "workflowIds": [
+        "catering-quotation",
+        "capacity-aware-prep",
+        "food-truck-loadout",
+        "event-run-of-show",
+        "food-truck-event-settlement"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "events/2",
+      "area": "events",
+      "question": "Help me create a catering quotation.",
+      "workflowIds": [
+        "catering-quotation",
+        "capacity-aware-prep",
+        "food-truck-loadout",
+        "event-run-of-show",
+        "food-truck-event-settlement"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "events/3",
+      "area": "events",
+      "question": "What equipment and settlement records do I need?",
+      "workflowIds": [
+        "catering-quotation",
+        "capacity-aware-prep",
+        "food-truck-loadout",
+        "event-run-of-show",
+        "food-truck-event-settlement"
+      ],
+      "sourceIds": [
+        "bc-kitchen",
+        "fsa-catering"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "marketing/1",
+      "area": "marketing",
+      "question": "What should we promote this month?",
+      "workflowIds": [
+        "social-media-content-generator",
+        "campaign-sales-review",
+        "chef-personal-brand-builder",
+        "partnership-growth-finder"
+      ],
+      "sourceIds": [
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "marketing/2",
+      "area": "marketing",
+      "question": "Did our campaign improve sales?",
+      "workflowIds": [
+        "social-media-content-generator",
+        "campaign-sales-review",
+        "chef-personal-brand-builder",
+        "partnership-growth-finder"
+      ],
+      "sourceIds": [
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "marketing/3",
+      "area": "marketing",
+      "question": "How do I plan a truthful content calendar?",
+      "workflowIds": [
+        "social-media-content-generator",
+        "campaign-sales-review",
+        "chef-personal-brand-builder",
+        "partnership-growth-finder"
+      ],
+      "sourceIds": [
+        "sba-management"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "care/1",
+      "area": "care",
+      "question": "Does this menu match our approved diet specification?",
+      "workflowIds": [
+        "approved-diet-menu-screen",
+        "dietary-requirements-tracker",
+        "recipe-compliance-checker",
+        "onboarding"
+      ],
+      "sourceIds": [
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "care/2",
+      "area": "care",
+      "question": "Which dietary requirements are unresolved?",
+      "workflowIds": [
+        "approved-diet-menu-screen",
+        "dietary-requirements-tracker",
+        "recipe-compliance-checker",
+        "onboarding"
+      ],
+      "sourceIds": [
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    },
+    {
+      "id": "care/3",
+      "area": "care",
+      "question": "How do I prepare a Ross Manor paperwork handoff?",
+      "workflowIds": [
+        "approved-diet-menu-screen",
+        "dietary-requirements-tracker",
+        "recipe-compliance-checker",
+        "onboarding"
+      ],
+      "sourceIds": [
+        "fda-health"
+      ],
+      "basis": "Original question informed by reference topics; no statistical popularity claim",
+      "executionStatus": "NOT_RUN"
+    }
+  ]
+}

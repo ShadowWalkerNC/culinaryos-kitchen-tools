@@ -1,7 +1,7 @@
 ---
 name: bakery-preorder-consolidation
 description: "Use when consolidating bakery preorders and cancellations by product and date."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, build_prep_plan]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, build_prep_plan]
 
 # Bakery preorder consolidation (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Bakery use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Bakery use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Merge explicit preorder lines into per-product per-date totals, applying cancellations by order ID with no duplicates. Only lines and cancellations stated in the order book are used; nothing is inferred from past weeks. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Merge explicit preorder lines into per-product per-date totals, applying cancellations by order ID with no duplicates. Only lines and cancellations stated in the order book are used; nothing is inferred from past weeks. Totals stay tied to stated lines and cancellations; partial books produce partial totals, never filled ones. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Order book ID with order IDs, products, quantities, dates

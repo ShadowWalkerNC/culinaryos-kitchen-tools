@@ -1,0 +1,184 @@
+{
+  "version": "0.3.0",
+  "priorCount": 105,
+  "expectedCount": 118,
+  "packs": [
+    {
+      "label": "Home",
+      "audience": "Home cooks and households planning meals from counted stock and stated equipment.",
+      "useCases": [
+        {
+          "id": "home-cooking-timeline",
+          "classification": "new"
+        },
+        {
+          "id": "recipe-equipment-adaptation",
+          "classification": "new"
+        },
+        {
+          "id": "home-pantry-meal-plan",
+          "classification": "extended"
+        },
+        {
+          "id": "household-meal-calendar",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Bakery",
+      "audience": "Bakers scheduling batches, proofing, ovens, and preorders from stated cards and plans.",
+      "useCases": [
+        {
+          "id": "dough-temperature-trial-log",
+          "classification": "new"
+        },
+        {
+          "id": "proofing-oven-calendar",
+          "classification": "new"
+        },
+        {
+          "id": "preferment-flour-accounting",
+          "classification": "extended"
+        },
+        {
+          "id": "bakery-preorder-consolidation",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Food truck/catering",
+      "audience": "Mobile food operators and caterers deciding, packing, applying for, and settling events.",
+      "useCases": [
+        {
+          "id": "food-truck-event-go-no-go",
+          "classification": "new"
+        },
+        {
+          "id": "event-application-readiness",
+          "classification": "new"
+        },
+        {
+          "id": "food-truck-loadout",
+          "classification": "extended"
+        },
+        {
+          "id": "food-truck-event-settlement",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Bar/FOH",
+      "audience": "Bar and front-of-house teams batching drinks, reconciling kegs, briefing, and pacing service.",
+      "useCases": [
+        {
+          "id": "beverage-batch-dilution",
+          "classification": "new"
+        },
+        {
+          "id": "draft-beer-yield-loss",
+          "classification": "new"
+        },
+        {
+          "id": "foh-service-brief",
+          "classification": "extended"
+        },
+        {
+          "id": "table-turnover-pacing-plan",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Shops",
+      "audience": "Small shops pricing packs, reconciling invoices, reviewing markdowns and delivery orders.",
+      "useCases": [
+        {
+          "id": "delivery-platform-net-margin",
+          "classification": "new"
+        },
+        {
+          "id": "retail-pack-size-pricing",
+          "classification": "extended"
+        },
+        {
+          "id": "invoice-reconciliation",
+          "classification": "extended"
+        },
+        {
+          "id": "retail-markdown-review",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Operations",
+      "audience": "Kitchen managers tracing recalls, mapping recipe impact, reconciling stock, and reviewing margins.",
+      "useCases": [
+        {
+          "id": "product-recall-trace-drill",
+          "classification": "new"
+        },
+        {
+          "id": "recipe-dependency-impact",
+          "classification": "extended"
+        },
+        {
+          "id": "stock-variance",
+          "classification": "extended"
+        },
+        {
+          "id": "menu-margin-review",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "People/marketing",
+      "audience": "Operators training staff, briefing multilingual teams, drafting posts, and reviewing campaigns.",
+      "useCases": [
+        {
+          "id": "multilingual-service-brief",
+          "classification": "new"
+        },
+        {
+          "id": "campaign-sales-review",
+          "classification": "new"
+        },
+        {
+          "id": "training-plan-generator",
+          "classification": "extended"
+        },
+        {
+          "id": "social-media-content-generator",
+          "classification": "extended"
+        }
+      ]
+    },
+    {
+      "label": "Care",
+      "audience": "Care-facility menu reviewers working from approved diet specs with clinician review; no resident data.",
+      "useCases": [
+        {
+          "id": "approved-diet-menu-screen",
+          "classification": "new"
+        },
+        {
+          "id": "dietary-requirements-tracker",
+          "classification": "extended"
+        },
+        {
+          "id": "recipe-compliance-checker",
+          "classification": "extended"
+        },
+        {
+          "id": "onboarding",
+          "classification": "extended"
+        }
+      ]
+    }
+  ],
+  "bounds": "Original workflow instructions and synthetic examples; no new physical kitchen, native AI-client or production acceptance implied."
+}

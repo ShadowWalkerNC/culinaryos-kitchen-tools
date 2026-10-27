@@ -1,7 +1,7 @@
-// Original MIT skill library catalog for Open Kitchen Toolkit 0.2.2.
-// 105 canonical workflows: original 73 plus 32 independently authored specialty workflows.
+// Original MIT skill library catalog for Open Kitchen Toolkit 0.3.0.
+// 118 canonical workflows: original 73 plus 32 specialty plus 13 interagency workflows.
 // SKILL.md files are the prose source of truth; this array is the discovery contract.
-export const LIBRARY_VERSION = '0.2.4';
+export const LIBRARY_VERSION = '0.3.0-rc.1';
 export const DATA_VERSION = 'v1';
 export const LICENSE = 'MIT';
 export const WORKFLOW_CATALOG = [
@@ -102,6 +102,35 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Track apprenticeship. Program and hours missing.",
             "output": "TRACKER BLOCKED\nProgram unknown; hours unknown.\nSupply enrolment details before tracking."
+        }
+    },
+    {
+        "id": "approved-diet-menu-screen",
+        "title": "Approved diet menu screen",
+        "zone": "Kitchen Operations",
+        "summary": "Screen menu lines against facility-approved diet specs with clinician review.",
+        "aliases": [],
+        "inputs": [
+            "Menu ID with lines, recipes, and service dates",
+            "Approved diet spec ID with version and date",
+            "Texture codes and portion or nutrient limits as stated",
+            "Named clinician reviewer with review due date"
+        ],
+        "outputs": [
+            "Per-line pass, fail, or unknown screen with spec clauses",
+            "Clinician routing with due date and no resident data"
+        ],
+        "tools": [
+            "validate_kitchen_data",
+            "lookup_recipe"
+        ],
+        "example": {
+            "input": "Screen lunch menu WM-11 (5 lines, week of 2026-11-02) against approved diet spec DS-7 v3 dated 2026-09-15: allowed list AL-2, texture codes soft and minced only, sodium limit 400 mg per lunch stated in DS-7 clause 4. Lines: chicken soup, minced beef, soft fish, fried potatoes, gravy. Gravy sodium figure missing. Reviewer dietitian R. Osei, review due 2026-11-05. Milk label MK-3 states dairy contains.",
+            "output": "DIET SCREEN - WM-11 vs DS-7 v3\nChicken soup: pass, AL-2 listed, texture soft per recipe.\nMinced beef: pass, AL-2 listed, texture minced per recipe.\nSoft fish: pass, AL-2 listed, texture soft per recipe.\nFried potatoes: fail, texture crisp against DS-7 soft-or-minced clause 3.\nGravy: unknown, sodium figure missing against 400 mg clause 4; owner dietitian R. Osei.\nReviewer: dietitian R. Osei due 2026-11-05; resident data: none used.\nAllergens: dairy contains per MK-3 where milk is used; other lines per recipe labels, unknowns stay unknown.\nStatus: screen draft; no line production-ready before clinician review."
+        },
+        "blockedExample": {
+            "input": "Screen the menu. Approved diet spec and clinician reviewer missing.",
+            "output": "DIET SCREEN BLOCKED\nApproved spec unknown; reviewer unknown.\nSupply the facility-approved spec ID with version and the named clinician reviewer. Diet names alone cannot screen a menu. No screen issued."
         }
     },
     {
@@ -314,6 +343,35 @@ export const WORKFLOW_CATALOG = [
         }
     },
     {
+        "id": "beverage-batch-dilution",
+        "title": "Beverage batch dilution",
+        "zone": "Menu and Product Development",
+        "summary": "Batch concentrate to target volume at the stated spec ratio.",
+        "aliases": [],
+        "inputs": [
+            "Concentrate ID with spec ratio and spec ref",
+            "Target batch volume with unit",
+            "Measured concentrate and diluent stock",
+            "Container sizes the batch must fit"
+        ],
+        "outputs": [
+            "Concentrate and diluent volumes with arithmetic shown",
+            "Stock and container fit check"
+        ],
+        "tools": [
+            "convert_quantity",
+            "scale_recipe"
+        ],
+        "example": {
+            "input": "Lemonade concentrate LC-2 per spec sheet SP-LC: ratio 1+5 (1 part concentrate, 5 parts water). Target batch 12 L for 2026-11-02 service. Measured stock per Ben: concentrate 3 L, water ample. Containers: two 6 L jugs. LC-2 label states sulphites contains.",
+            "output": "BATCH DILUTION - LC-2 - 12 L\nRatio 1+5: 6 parts total; concentrate 12/6=2 L; water 12-2=10 L (host arithmetic).\nStock: concentrate 2 L <= 3 L on hand; water ample; fits two 6 L jugs.\nServe: dilution per SP-LC only; ice melt and glass size not modeled.\nAllergens: sulphites contains per LC-2 label; batch carries the same declaration.\nStatus: draft for bar lead to confirm."
+        },
+        "blockedExample": {
+            "input": "Batch the lemonade. Spec ratio and target volume missing.",
+            "output": "DILUTION BLOCKED\nRatio unknown; target volume unknown.\nSupply the spec ratio with its ref and the target batch volume. No batch issued."
+        }
+    },
+    {
         "id": "burnout-stress-risk-assessment",
         "title": "Burnout stress risk assessment",
         "zone": "Wellbeing and Social Media",
@@ -343,6 +401,35 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Assess stress risk. Hours and factors missing.",
             "output": "RISK BLOCKED\nHours unknown; factors unknown.\nSupply both before scoring."
+        }
+    },
+    {
+        "id": "campaign-sales-review",
+        "title": "Campaign sales review",
+        "zone": "Suppliers and Finance",
+        "summary": "Review a promo campaign from reported sales and known food cost.",
+        "aliases": [],
+        "inputs": [
+            "Campaign ID with dates and sales report with ref",
+            "Reported units and revenue with currency",
+            "Known food cost with recipe or invoice source",
+            "Prior-period figures with ref where comparing"
+        ],
+        "outputs": [
+            "Units, revenue, and contribution with arithmetic shown",
+            "Prior-period comparison and owned unknowns"
+        ],
+        "tools": [
+            "cost_recipe",
+            "validate_kitchen_data"
+        ],
+        "example": {
+            "input": "Review Soup Week 2026-10-19 to 2026-10-25 in USD per sales report SR-31: 210 bowls, revenue 1470. Food cost 420 per invoices. Prior week per SR-30: 150 bowls, revenue 1050, food cost 300. Discount leakage unknown, owner finance. Soup labels v4 state celery verified_absent; gluten unknown pending mill letter.",
+            "output": "CAMPAIGN REVIEW - Soup Week - 2026-10-19 to 2026-10-25\nUnits 210; revenue USD 1470; food cost USD 420; contribution 1470-420=USD 1050 (host arithmetic).\nPrior: units 150; revenue 1050; contribution 1050-300=750.\nLift: units 210-150=+60; contribution 1050-750=+300.\nUnknowns: discount leakage, owner finance; refunds none evidenced.\nAllergens: soup celery verified_absent per v4; gluten unknown pending mill letter.\nStatus: draft for manager."
+        },
+        "blockedExample": {
+            "input": "Review the campaign. Sales report and food cost missing.",
+            "output": "CAMPAIGN BLOCKED\nSales unknown; food cost unknown.\nSupply the sales report with ref and the food cost with source. No review issued."
         }
     },
     {
@@ -826,6 +913,35 @@ export const WORKFLOW_CATALOG = [
         }
     },
     {
+        "id": "delivery-platform-net-margin",
+        "title": "Delivery platform net margin",
+        "zone": "Small Shop",
+        "summary": "Review a delivery order margin after commission, fees, and food cost.",
+        "aliases": [],
+        "inputs": [
+            "Order value and currency with order or till ref",
+            "Commission percent and fixed fees with schedule ref",
+            "Packaging cost with source",
+            "Food cost with recipe or invoice source"
+        ],
+        "outputs": [
+            "Net margin in integer cents and percent with arithmetic",
+            "Tax and currency exclusion note"
+        ],
+        "tools": [
+            "cost_recipe",
+            "validate_kitchen_data"
+        ],
+        "example": {
+            "input": "Order D-512 in USD on QuickEats schedule QE-9 (25 percent commission plus 30c fixed fee). Order value USD 24.00. Packaging 80c per invoice I-91. Food cost 700c per recipe sheet RS-8. Tax handling: excluded, not in QE-9. Bun label B-4 states wheat contains.",
+            "output": "DELIVERY MARGIN - QuickEats - D-512\nOrder value 2400c; commission 2400x25/100=600c; fixed fee 30c (host arithmetic).\nNet: 2400-600-30-80-700=990c.\nMargin: 990/2400=41.25 percent.\nTax/FX: excluded; no tax or conversion assumed.\nAllergens: bun wheat contains per B-4; other items per RS-8 labels.\nStatus: draft for shop manager; platform terms per QE-9 only."
+        },
+        "blockedExample": {
+            "input": "Review the delivery margin. Commission schedule and food cost missing.",
+            "output": "DELIVERY MARGIN BLOCKED\nCommission terms unknown; food cost unknown.\nSupply the platform schedule ref and the food cost with source. No margin issued."
+        }
+    },
+    {
         "id": "dietary-requirements-tracker",
         "title": "Dietary requirements tracker",
         "zone": "Events and Banqueting",
@@ -952,6 +1068,62 @@ export const WORKFLOW_CATALOG = [
         }
     },
     {
+        "id": "dough-temperature-trial-log",
+        "title": "Dough temperature trial log",
+        "zone": "Bakery",
+        "summary": "Log measured dough temperatures across trials for comparison.",
+        "aliases": [],
+        "inputs": [
+            "Trial IDs with dates and dough quantities mixed",
+            "Measured temperatures with units and thermometer ref",
+            "Method card ref the trial followed"
+        ],
+        "outputs": [
+            "Side-by-side trial temperature table",
+            "Trial-to-trial deltas with arithmetic shown"
+        ],
+        "tools": [
+            "convert_quantity",
+            "validate_kitchen_data"
+        ],
+        "example": {
+            "input": "Trials per method card MC-7, thermometer TH-1, flour 1000 g and water 650 g each trial. T-1 on 2026-10-20: flour 21 C, water 24 C, room 22 C, finished dough 24 C. T-2 on 2026-10-21: flour 20 C, water 28 C, room 22 C, finished dough 26 C. Flour label FL-1 states wheat contains.",
+            "output": "DOUGH TEMP LOG - T-1, T-2 per MC-7\nT-1 2026-10-20: flour 21 C; water 24 C; room 22 C; dough 24 C.\nT-2 2026-10-21: flour 20 C; water 28 C; room 22 C; dough 26 C.\nDeltas T-1 to T-2 (host arithmetic): water 28-24=+4 C; dough 26-24=+2 C; flour -1 C; room unchanged.\nNo target stated; comparison only, for baker review.\nAllergens: wheat contains per FL-1."
+        },
+        "blockedExample": {
+            "input": "Log the dough trials. Temperature readings and thermometer ref missing.",
+            "output": "TEMP LOG BLOCKED\nReadings unknown; no comparison can be made.\nSupply each trial's measured temperatures with units and the thermometer ref. No log issued."
+        }
+    },
+    {
+        "id": "draft-beer-yield-loss",
+        "title": "Draft beer yield loss",
+        "zone": "FOH and Guest Experience",
+        "summary": "Reconcile a keg against poured servings and measured waste.",
+        "aliases": [],
+        "inputs": [
+            "Keg ID with nominal volume and delivery ref",
+            "Poured count with glass size and till ref",
+            "Waste log with volumes, reasons, and refs"
+        ],
+        "outputs": [
+            "Yield percent with poured plus waste arithmetic",
+            "Unaccounted balance with owner"
+        ],
+        "tools": [
+            "calculate_usable_yield",
+            "convert_quantity"
+        ],
+        "example": {
+            "input": "Keg K-7 lager, nominal 50 L per delivery note DN-118. Poured 78 pints of 568 ml per till Z-70. Waste per log W-12: line clean 1.5 L, foam 0.8 L. Review owner: bar lead Cara. Keg label K-7 states barley contains.",
+            "output": "KEG YIELD - K-7 - lager\nPoured: 78x568 ml=44.304 L (host arithmetic).\nWaste: 1.5+0.8=2.3 L per W-12.\nAccounted: 44.304+2.3=46.604 L of nominal 50 L; yield 46.604/50=93.2 percent.\nUnaccounted: 50-46.604=3.396 L; owner Cara to review.\nAllergens: barley contains per K-7 label."
+        },
+        "blockedExample": {
+            "input": "Reconcile the keg. Pour count and waste log missing.",
+            "output": "KEG BLOCKED\nPours unknown; waste unknown.\nSupply the counted pours with glass size and the waste log with reasons. No yield issued."
+        }
+    },
+    {
         "id": "equipment-downtime-replan",
         "title": "Equipment downtime replan",
         "zone": "Professional Kitchen",
@@ -1010,6 +1182,35 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Log equipment. IDs and fault dates missing.",
             "output": "LOG BLOCKED\nEquipment IDs unknown; fault dates unknown.\nSupply both before logging. No entries invented."
+        }
+    },
+    {
+        "id": "event-application-readiness",
+        "title": "Event application readiness",
+        "zone": "Events and Banqueting",
+        "summary": "Check a vendor event application packet for readiness.",
+        "aliases": [],
+        "inputs": [
+            "Event ID, date, and application deadline with timezone",
+            "Organizer requirement list with pack or page ref",
+            "Held documents with IDs, expiry dates, and refs",
+            "Fee amount with currency and payment state"
+        ],
+        "outputs": [
+            "Per-line ready, missing, or expired table with owners",
+            "Readiness verdict with nothing submitted"
+        ],
+        "tools": [
+            "validate_kitchen_data",
+            "create_task"
+        ],
+        "example": {
+            "input": "Harbor Fest 2026-12-05, application deadline 2026-11-10 per organizer pack HP-26. Requires: liability certificate, food permit, menu, fee USD 150. Held: liability cert LC-9 valid to 2027-01-31; food permit FP-44 valid to 2026-12-31; menu M-12 dated 2026-10-15. Fee unpaid; payer Ben due 2026-11-08. Dessert nut state unknown, label TBC.",
+            "output": "APPLICATION READINESS - Harbor Fest - deadline 2026-11-10\nLiability certificate: ready, LC-9 valid to 2027-01-31.\nFood permit: ready, FP-44 valid to 2026-12-31.\nMenu: ready, M-12 dated 2026-10-15.\nFee: USD 150 unpaid; owner Ben due 2026-11-08.\nVerdict: not ready until the fee is paid; nothing submitted.\nAllergens: dessert nut state unknown, label TBC; other lines per M-12 labels."
+        },
+        "blockedExample": {
+            "input": "Check the application. Organizer requirement list missing.",
+            "output": "READINESS BLOCKED\nRequirements unknown; no line can be checked.\nSupply the organizer requirement list with its pack ref. No readiness issued."
         }
     },
     {
@@ -1235,6 +1436,35 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Record the handoff. Quantities and responsible names missing.",
             "output": "HANDOFF BLOCKED\nCounts unknown; counters unknown.\nSupply counted quantities with counter and verifier names. No handoff issued."
+        }
+    },
+    {
+        "id": "food-truck-event-go-no-go",
+        "title": "Food truck event go no-go",
+        "zone": "Food Truck",
+        "summary": "Decide GO or NO-GO for an event against explicit minimums.",
+        "aliases": [],
+        "inputs": [
+            "Event ID, date, and forecast covers with source",
+            "Average price, known costs, and fees with refs and currency",
+            "Operator minimum covers and minimum contribution",
+            "Constraints checked: power, water, staffing, access"
+        ],
+        "outputs": [
+            "Known-cost contribution with arithmetic shown",
+            "GO or NO-GO verdict with reasons and owned unknowns"
+        ],
+        "tools": [
+            "calculate_event_budget",
+            "validate_kitchen_data"
+        ],
+        "example": {
+            "input": "Event E-91 on 2026-11-07 in USD: forecast 150 covers per organizer email. Average price USD 12. Known costs: food 400, pitch fee 200 per organizer invoice, fuel 60. Operator minimums: 100 covers, USD 800 contribution. Constraints: power 2 circuits per truck spec TS-1 checked sufficient by Mara; staff Mara and Ben confirmed. Card fees unknown pending statement. Tortilla label TO-6 states wheat contains.",
+            "output": "EVENT GO-NO-GO - E-91 - 2026-11-07\nRevenue bound: 150x12=USD 1800 (host arithmetic).\nContribution: 1800-400-200-60=USD 1140 after listed known costs; an upper bound before unknown card fees, not profit.\nCovers 150 vs min 100: pass. Contribution 1140 vs min 800: pass.\nConstraints: power sufficient per Mara against TS-1; staff Mara and Ben confirmed.\nUnknowns: card fees pending statement, owner Ben.\nVerdict: GO - minimums met on forecast; card fees still unknown.\nAllergens: tortillas wheat contains per TO-6; other menu labels TBC."
+        },
+        "blockedExample": {
+            "input": "Decide the event. Cover forecast and operator minimums missing.",
+            "output": "GO-NO-GO BLOCKED\nForecast unknown; minimums unknown.\nSupply the forecast with source and the operator's minimum covers and contribution. No verdict issued."
         }
     },
     {
@@ -1473,6 +1703,34 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Generate checklist. Plan version missing.",
             "output": "HACCP BLOCKED\nVerified plan reference unknown; supply version and date.\nNo checklist issued. No limits invented."
+        }
+    },
+    {
+        "id": "home-cooking-timeline",
+        "title": "Home cooking timeline",
+        "zone": "Home Kitchen",
+        "summary": "Build a home cooking timeline backward from serving time.",
+        "aliases": [],
+        "inputs": [
+            "Serving date, serving time, and timezone where scheduling matters",
+            "Dishes with prep, cook, and rest minutes plus sources",
+            "Cooker capacity: burners, oven shelves, and dish assignments"
+        ],
+        "outputs": [
+            "Per-dish start times with backward arithmetic shown",
+            "Equipment clash check against stated capacity"
+        ],
+        "tools": [
+            "build_prep_plan",
+            "validate_prep_capacity"
+        ],
+        "example": {
+            "input": "Serve Sunday dinner 2026-11-01 at 18:30 for Mara, Ben, and Sam. Roast chicken card RC-12: prep 20 min, oven 75 min, rest 15 min. Rice card RC-4: prep 5 min, stovetop 18 min, rest 5 min. Salad card RC-9: prep 15 min, no cooking. Cooker: 1 oven shelf, 4 stovetop burners. Soy glaze label SG-2 states soy contains; chicken and rice labels not supplied.",
+            "output": "HOME TIMELINE - 2026-11-01 serve 18:30\nChicken: rest ends 18:30; oven out 18:15; oven in 17:00; prep starts 16:40 (20+75+15=110 min back from 18:30, host arithmetic).\nRice: rest ends 18:30; cook 18:07-18:25; prep starts 18:02 (5+18+5=28 min back, host arithmetic).\nSalad: prep 18:15-18:30, no cooking.\nEquipment: oven holds chicken 17:00-18:15 only; rice uses one burner 18:07-18:25; no clash on stated capacity.\nAllergens: soy glaze soy contains per SG-2; chicken, rice, and salad unknown, label evidence not supplied.\nStatus: draft for Mara to confirm; heat settings and doneness checks per RC-12 and RC-4, not set here."
+        },
+        "blockedExample": {
+            "input": "Build the dinner timeline. Serving time and dish durations missing.",
+            "output": "TIMELINE BLOCKED\nServing time unknown; dish durations unknown.\nSupply the serving time and each dish's prep, cook, and rest minutes with sources. No start times issued."
         }
     },
     {
@@ -1758,7 +2016,7 @@ export const WORKFLOW_CATALOG = [
         "id": "menu-margin-review",
         "title": "Menu margin review",
         "zone": "Menu and Product Development",
-        "summary": "Review ingredient gross margin against a confirmed net price and explicit target.",
+        "summary": "Review food-cost, ingredient gross margin, and markup against a confirmed net price and explicit target.",
         "aliases": [
             "margin-review",
             "margins",
@@ -1771,7 +2029,7 @@ export const WORKFLOW_CATALOG = [
             "Operator confirmed commercial target"
         ],
         "outputs": [
-            "Ingredient gross margin in cents and percent",
+            "Food-cost, margin, and markup figures separately labeled",
             "Target comparison with plain verdict"
         ],
         "tools": [
@@ -1781,11 +2039,11 @@ export const WORKFLOW_CATALOG = [
         ],
         "example": {
             "input": "Review tomato soup dinner variant for Austin Central, USD, timezone America/Chicago, 2026-03-10. Batch cost 1000c for 4 servings. Net price 1000c confirmed true per price sheet v7. Operator target ingredient gross margin 70 percent set 2026-03-01.",
-            "output": "MARGIN REVIEW - Tomato Soup Dinner - 2026-03-10\nLocale: Austin TX, USD, America/Chicago.\nCost per serving: 250c (1000c batch / 4 servings).\nNet price confirmed: 1000c, confirmed true, source price sheet v7.\nIngredient gross margin: 750c (75.0 percent). Math: 1000 minus 250 equals 750; 750 / 1000 equals 75 percent.\nTarget: 70 percent per operator 2026-03-01.\nVerdict: meets target by 5 points. Note: margin is ingredient gross only, not net profit. Labor, rent, tax excluded."
+            "output": "MARGIN REVIEW - Tomato Soup Dinner - 2026-03-10\nLocale: Austin TX, USD, America/Chicago.\nCost per serving: 250c (1000c batch / 4 servings).\nNet price confirmed: 1000c, confirmed true, source price sheet v7.\nIngredient gross margin: 750c (75.0 percent). Math: 1000 minus 250 equals 750; 750 / 1000 equals 75 percent.\nFood-cost: 250 / 1000 equals 25 percent. Markup: 750 / 250 equals 300 percent. Each figure separately labeled; no tax or currency conversion assumed.\nTarget: 70 percent per operator 2026-03-01.\nVerdict: meets target by 5 points. Note: margin is ingredient gross only, not net profit. Labor, rent, tax excluded."
         },
         "blockedExample": {
             "input": "Review tomato soup dinner variant. Known tomato cost 800c batch partial; onion unknown no purchase supplied. Net price 1000c confirmed false.",
-            "output": "MARGIN BLOCKED - Tomato Soup Dinner\nKnown cost: 800c batch partial; unknown: syn_onion no purchase supplied.\nPer serving cost withheld; margin withheld.\nNet price 1000c is unconfirmed; supply confirmed true price to compute margin.\nNo margin invented. No target assumed."
+            "output": "MARGIN BLOCKED - Tomato Soup Dinner\nKnown cost: 800c batch partial; unknown: syn_onion no purchase supplied.\nPer serving cost withheld; food-cost, margin, and markup withheld.\nNet price 1000c is unconfirmed; supply confirmed true price to compute margin.\nNo margin invented. No target assumed."
         }
     },
     {
@@ -1842,6 +2100,35 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Time the pickup. Pickup time and task durations missing.",
             "output": "PICKUP BLOCKED\nPickup unknown; durations unknown.\nSupply the pickup time and task durations with refs. No plan issued."
+        }
+    },
+    {
+        "id": "multilingual-service-brief",
+        "title": "Multilingual service brief",
+        "zone": "FOH and Guest Experience",
+        "summary": "Brief service in several languages from supplied translations.",
+        "aliases": [],
+        "inputs": [
+            "Base brief: date, covers, menu, 86s, allergens, VIPs, timings, sections",
+            "Translations with language, translator name, and date",
+            "Lines without translation for source-language carryover",
+            "Service date and pre-shift time"
+        ],
+        "outputs": [
+            "One brief per language with identical timings and sections",
+            "Untranslated lines marked unverified in source language"
+        ],
+        "tools": [
+            "get_workflow",
+            "create_task"
+        ],
+        "example": {
+            "input": "Brief dinner 2026-11-03 Austin Central, 60 covers, pre-shift 17:30. Base EN: menu soup and fish, 86 fish; allergens fish contains per matrix v5, soup celery verified_absent per v5; sections A Ana, B Ben. Spanish translation by Mara dated 2026-11-02: menu and allergen lines supplied. VIP note has no Spanish translation.",
+            "output": "SERVICE BRIEF EN - 2026-11-03 - 60 covers\nMenu: soup; fish 86. Allergens: fish contains per v5; soup celery verified_absent per v5.\nVIPs: table 4 anniversary, dessert candle per host note.\nSections: A Ana; B Ben. Pre-shift 17:30.\nSERVICE BRIEF ES - 2026-11-03 - 60 covers (translator Mara, 2026-11-02)\nMenu: sopa; pescado 86. Allergens: pescado contains per v5; sopa celery verified_absent per v5.\nVIPs: table 4 anniversary, dessert candle per host note (EN, translation unverified).\nSections: A Ana; B Ben. Pre-shift 17:30.\nStatus: drafts for FOH lead; untranslated VIP line stays EN."
+        },
+        "blockedExample": {
+            "input": "Brief service in two languages. Base brief and translations missing.",
+            "output": "BRIEF BLOCKED\nBase brief unknown; translations unknown.\nSupply the base brief with allergen versions and each translation with translator and date. No briefs issued."
         }
     },
     {
@@ -2174,6 +2461,35 @@ export const WORKFLOW_CATALOG = [
         }
     },
     {
+        "id": "product-recall-trace-drill",
+        "title": "Product recall trace drill",
+        "zone": "Kitchen Operations",
+        "summary": "Drill a lot trace from suspect stock to batches and outputs.",
+        "aliases": [],
+        "inputs": [
+            "Suspect lot ID with the notice or reason ref",
+            "Batch sheets linking lots to batches with refs",
+            "Output records: till, waste, and count refs",
+            "Drill clock start and end with participants"
+        ],
+        "outputs": [
+            "Batch-to-output reconciliation with arithmetic shown",
+            "Completeness and elapsed-time score with owned gaps"
+        ],
+        "tools": [
+            "validate_kitchen_data",
+            "lookup_recipe"
+        ],
+        "example": {
+            "input": "Drill D-3 on 2026-11-01, clock 09:00-09:35, participants Mara and Ben. Suspect flour lot FL-1-900 per supplier notice SN-77. Batches per sheets: B-201 rolls 40, B-202 rolls 40. Outputs: sold 62 per tills Z-60 and Z-61, waste 4 per W-14, display held 14 per count C-55. Customers walk-in only, no preorder list. Follow-up owner Ana. Lot label FL-1-900 states wheat contains.",
+            "output": "RECALL DRILL - FL-1-900 - elapsed 35 min\nBatches: B-201 40; B-202 40; made 80 total.\nOutputs: sold 62 + waste 4 + held 14 = 80; reconciles to made (host arithmetic).\nCustomers: walk-in only, no list held; fallback posted notice, owner Ana.\nGaps: none in batches or outputs; customer contact impossible by record.\nVerdict: pass with notice action open.\nAllergens: wheat contains per FL-1-900."
+        },
+        "blockedExample": {
+            "input": "Run the trace drill. Suspect lot ID and batch records missing.",
+            "output": "DRILL BLOCKED\nLot unknown; batch records unknown.\nSupply the suspect lot ID with its notice ref and the batch sheets. No trace issued."
+        }
+    },
+    {
         "id": "production-batch-record",
         "title": "Production batch record",
         "zone": "Professional Kitchen",
@@ -2199,6 +2515,34 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Record the batch. Planned portions and method version missing.",
             "output": "BATCH BLOCKED\nPlanned quantity unknown; method version unknown.\nSupply the prep plan portions and method card version. No record issued."
+        }
+    },
+    {
+        "id": "proofing-oven-calendar",
+        "title": "Proofing oven calendar",
+        "zone": "Bakery",
+        "summary": "Place proofing batches and oven loads on a dated calendar.",
+        "aliases": [],
+        "inputs": [
+            "Batch list with quantities and dates",
+            "Proof and bake durations with method card refs",
+            "Slot plan ID with proofer slots, oven slots, and load interval"
+        ],
+        "outputs": [
+            "Dated calendar with proof windows and oven loads",
+            "Proofer and oven load check against slot counts"
+        ],
+        "tools": [
+            "validate_prep_capacity",
+            "build_prep_plan"
+        ],
+        "example": {
+            "input": "Slot plan PC-3: proofer 4 trays, oven 2 slots, load interval 30 min. Monday 2026-11-02: B-1 rolls 40 and B-2 rolls 40, each proof 60 min and bake 20 min per method card MC-7. B-1 proof 08:00, B-2 proof 08:30. Flour label FL-1 states wheat contains.",
+            "output": "PROOFING CALENDAR - PC-3 - 2026-11-02\nB-1: proof 08:00-09:00; bake 09:00-09:20 slot A.\nB-2: proof 08:30-09:30; bake 09:30-09:50 slot A.\nLoad: proofer 2/4 trays during 08:30-09:00 overlap; oven 1/2 slots at any time; both within PC-3.\nWindows from MC-7 only; loading fits the stated 30 min interval per PC-3.\nAllergens: wheat contains per FL-1 for both batches."
+        },
+        "blockedExample": {
+            "input": "Build the proofing calendar. Batch durations and slot plan missing.",
+            "output": "CALENDAR BLOCKED\nDurations unknown; slot counts unknown.\nSupply the method card durations and the slot plan proofer and oven counts. No calendar issued."
         }
     },
     {
@@ -2366,6 +2710,34 @@ export const WORKFLOW_CATALOG = [
         "blockedExample": {
             "input": "Document recipe syn_unknown_soup. ID not found in records.",
             "output": "DOCUMENTATION BLOCKED\nUnknown recipe ID: syn_unknown_soup not found.\nNo ingredients or steps invented.\nAction: supply correct ID or create a confirmed record first."
+        }
+    },
+    {
+        "id": "recipe-equipment-adaptation",
+        "title": "Recipe equipment adaptation",
+        "zone": "Home Kitchen",
+        "summary": "Adapt recipe quantities to the equipment actually available.",
+        "aliases": [],
+        "inputs": [
+            "Recipe card ID with quantities, units, and servings",
+            "Available equipment with sizes and cook's batch count",
+            "Units for the rescaled quantities"
+        ],
+        "outputs": [
+            "Per-batch quantities with division shown",
+            "Undecided method items left to the cook"
+        ],
+        "tools": [
+            "scale_recipe",
+            "convert_quantity"
+        ],
+        "example": {
+            "input": "Adapt chicken rice card RC-33 (serves 4): chicken 800 g, rice 300 g, stock 600 ml, oil 30 ml. Available: one 20 cm skillet holding half the recipe per Mara's note, so 2 batches. Stock label ST-5 states celery contains; chicken, rice, and oil labels not supplied.",
+            "output": "EQUIPMENT ADAPTATION - RC-33 in 20 cm skillet\nBatches: 2; per batch (host arithmetic): chicken 800/2=400 g; rice 300/2=150 g; stock 600/2=300 ml; oil 30/2=15 ml.\nCheck: 400x2=800 g; 150x2=300 g; 300x2=600 ml; 15x2=30 ml; nothing added or lost.\nUndecided: heat setting and per-batch timing stay with the cook; RC-33 times were written for one full pan.\nAllergens: stock celery contains per ST-5; chicken, rice, and oil unknown, label evidence not supplied.\nStatus: draft for Mara to confirm."
+        },
+        "blockedExample": {
+            "input": "Adapt the recipe. Recipe quantities and equipment sizes missing.",
+            "output": "ADAPTATION BLOCKED\nRecipe quantities unknown; equipment sizes unknown.\nSupply the card quantities with units and the available vessel sizes. No batches issued."
         }
     },
     {
@@ -3327,6 +3699,7 @@ export const WORKFLOW_NAMES = [
     "agency-chef-onboarding-generator",
     "allergen-management-system",
     "apprenticeship-tracker",
+    "approved-diet-menu-screen",
     "bakers-percentage-formula",
     "bakery-batch-traceability",
     "bakery-display-sellthrough",
@@ -3334,7 +3707,9 @@ export const WORKFLOW_NAMES = [
     "bakery-preorder-consolidation",
     "banquet-event-order",
     "bar-cocktail-recipe-builder",
+    "beverage-batch-dilution",
     "burnout-stress-risk-assessment",
+    "campaign-sales-review",
     "canape-reception-planner",
     "capacity-aware-prep",
     "catering-quotation",
@@ -3350,12 +3725,16 @@ export const WORKFLOW_NAMES = [
     "daily-close-review",
     "data-reconciliation",
     "deli-display-replenishment",
+    "delivery-platform-net-margin",
     "dietary-requirements-tracker",
     "disciplinary-documentation-helper",
     "dish-development-brief",
     "dough-production-yield-plan",
+    "dough-temperature-trial-log",
+    "draft-beer-yield-loss",
     "equipment-downtime-replan",
     "equipment-maintenance-log",
+    "event-application-readiness",
     "event-catering-brief",
     "event-equipment-kit-list",
     "event-run-of-show",
@@ -3363,6 +3742,7 @@ export const WORKFLOW_NAMES = [
     "foh-service-brief",
     "food-safety-incident-report",
     "food-truck-commissary-handoff",
+    "food-truck-event-go-no-go",
     "food-truck-event-profitability",
     "food-truck-event-settlement",
     "food-truck-loadout",
@@ -3371,6 +3751,7 @@ export const WORKFLOW_NAMES = [
     "freezer-inventory-plan",
     "guest-feedback-analyser",
     "haccp-checklist-generator",
+    "home-cooking-timeline",
     "home-pantry-meal-plan",
     "household-grocery-budget",
     "household-meal-calendar",
@@ -3383,6 +3764,7 @@ export const WORKFLOW_NAMES = [
     "menu-margin-review",
     "mobile-service-contingency-plan",
     "multi-station-pickup-plan",
+    "multilingual-service-brief",
     "nutritional-information-calculator",
     "onboarding",
     "ordering-proposals",
@@ -3393,12 +3775,15 @@ export const WORKFLOW_NAMES = [
     "prep-planning",
     "price-increase-impact-calculator",
     "private-dining-setup-guide",
+    "product-recall-trace-drill",
     "production-batch-record",
+    "proofing-oven-calendar",
     "purchase-price-review",
     "recipe-compliance-checker",
     "recipe-costing",
     "recipe-dependency-impact",
     "recipe-documentation",
+    "recipe-equipment-adaptation",
     "recipe-scaling",
     "recipe-troubleshooting-log",
     "retail-markdown-review",

@@ -1,7 +1,7 @@
 ---
 name: preferment-flour-accounting
 description: "Use when accounting starter flour and water inside final dough targets."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [convert_quantity, validate_kitchen_data]
@@ -9,10 +9,10 @@ tools: [convert_quantity, validate_kitchen_data]
 
 # Preferment flour accounting (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Bakery use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Bakery use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Split a supplied starter into its flour and water parts and subtract each from the final dough targets, so the starter is counted exactly once. The starter composition must be stated on its card; it is never guessed from the total. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Split a supplied starter into its flour and water parts and subtract each from the final dough targets, so the starter is counted exactly once. The starter composition must be stated on its card; it is never guessed from the total. Only the card's declared flour and water split is used; moisture from milk or other ingredients is never inferred. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Starter card ID with total weight and composition

@@ -1,7 +1,7 @@
 ---
 name: home-pantry-meal-plan
 description: "Use when choosing home meals against counted pantry stock, diets, and a top-up budget."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, lookup_recipe, create_task]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, lookup_recipe, create_task]
 
 # Home pantry meal plan (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Home Kitchen use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Home Kitchen use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Pick a short run of home meals that the counted pantry can cover, respecting each member's declared diet and a stated top-up budget. Candidate recipes stay as named in the input; quantities are checked against the count sheet, never assumed. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Pick a short run of home meals that the counted pantry can cover, respecting each member's declared diet and a stated top-up budget. Candidate recipes stay as named in the input; quantities are checked against the count sheet, never assumed. Top-up prices need a dated source, and currency and units stay explicit, unresolved where unstated. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Pantry count sheet ID, date, and quantities with units

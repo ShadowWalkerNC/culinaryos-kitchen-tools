@@ -11,8 +11,14 @@ import {listWorkflows,workflowGuidance} from '../workflows/discovery.js';
 import {calculateUsableYield,reconcileStock,calculateEventBudget,validatePrepCapacity} from '../core/operations.js';
 import {getStarted} from '../workflows/getStarted.js';
 import {standardizeRecipeUnits} from '../core/standardize.js';
+import {calculateMenuMargins,calculateStaffingBudget,calculateBakeryFormula} from '../core/business.js';
+import {formatMenu} from '../core/menus.js';
+import {findKitchenHelp} from '../workflows/help.js';
 
 export const PUBLIC_TOOL_NAMES = [
+  'find_kitchen_help',
+  'format_menu',
+  'calculate_menu_margins','calculate_staffing_budget','calculate_bakery_formula',
   'get_started','standardize_recipe_units',
   'list_capabilities',
   'get_workflow',
@@ -51,6 +57,11 @@ export function validateKitchenData(recipes: Recipe[], purchases: Purchase[]): {
 }
 
 export const publicHandlers: Record<PublicToolName, (args: never) => unknown> = {
+  find_kitchen_help:findKitchenHelp as (args:never)=>unknown,
+  format_menu:formatMenu as (args:never)=>unknown,
+  calculate_menu_margins:calculateMenuMargins as (args:never)=>unknown,
+  calculate_staffing_budget:calculateStaffingBudget as (args:never)=>unknown,
+  calculate_bakery_formula:calculateBakeryFormula as (args:never)=>unknown,
   get_started:getStarted as (args:never)=>unknown,
   standardize_recipe_units:standardizeRecipeUnits as (args:never)=>unknown,
   list_capabilities: (() => listCapabilities()) as (args: never) => unknown,

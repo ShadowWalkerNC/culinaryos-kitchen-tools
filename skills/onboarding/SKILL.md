@@ -1,7 +1,7 @@
 ---
 name: onboarding
 description: "Use when activating Open Kitchen Toolkit, asking how to start or what to say, choosing a kitchen or restaurant job, requesting a missing skill, or setting up a local workspace."
-version: 0.2.4
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [get_started, list_workflows, list_capabilities, get_workflow, standardize_recipe_units, preview_import, commit_import, validate_kitchen_data]
@@ -13,7 +13,7 @@ tools: [get_started, list_workflows, list_capabilities, get_workflow, standardiz
 
 For activation, “help”, “what can you do?”, or “show me how to use Open Kitchen Toolkit”, welcome the user briefly and show three relevant starter choices. If tools are available, call get_started for the maintained choices and steps. Without tools, offer: “Cost my menu”, “Organize my recipes”, and “Plan meals from my pantry”. No exact command or keyword is required. Do not demand a workspace, currency, location or timezone just to answer a cooking question.
 
-Interpret the user's goal across home cooking, food trucks, bakery, deli, purchasing, finance, back of house, front of house, bar, people, events or marketing. Use list_workflows to find relevant skills and get_workflow to load them. Chain only the skills needed. Never say every question needs a built-in skill.
+Interpret the user's goal across home cooking, food trucks, bakery, deli, purchasing, finance, back of house, front of house, bar, people, events or marketing. Use list_workflows to find relevant skills and get_workflow to load them. Chain only the skills needed. Never say every question needs a built-in skill. Where a host displays the name CulinaryOS Interagency, it is a display name for this same Open Kitchen Toolkit; skills, tools, and workspace behavior are unchanged.
 
 Show a short numbered plan before a multi-step job. At each step show **known inputs, missing inputs, result or draft, review needed, next step**. Ask only for the next consequential missing input. Carry confirmed settings forward within the conversation; don't ask again without a conflict. Complete authorized calculations when inputs suffice. A displayed plan is not evidence that tasks ran.
 
@@ -33,13 +33,15 @@ Chef's Intelligence includes menu planning and can hand off care-facility paperw
 
 When present, follow its current `sylvia-ross-paperwork` skill and runtime readiness result. Review upload privacy before import; reject resident-identifying or clinical records and request a redacted source. Keep areas and source revisions independent unless sharing was explicitly authorized. Preserve original menu wording and unresolved entries, obtain review/approval for the current revision, then use the actual specialist tools for an explicitly selected packet. Clinical menu suitability still requires the separately approved diet requirements and authorized reviewer; paperwork approval is not a clinical prescription.
 
-Explain the handoff: menu/specification draft → reviewed specialist intake → current-source readiness → explicit approval → requested PDF/count packet. Never assume Ross Manor's dates, meals, areas or counts for another kitchen. Import/export or transfer requires the user's selected sources and the specialist's existing privacy/confirmation gates. Installing both plugins does not grant silent cross-plugin data sharing or automatic synchronization.
+Explain the handoff: menu/specification draft → reviewed specialist intake → current-source readiness → explicit approval → requested PDF/count packet. Never assume Ross Manor's dates, meals, areas or counts for another kitchen. Import/export or transfer requires the user's selected sources and the specialist's existing privacy/confirmation gates. Installing both plugins does not grant silent cross-plugin data sharing or automatic synchronization. Ross Manor remains an optional separately authorized local plugin; no data transfer happens by default.
 
 ## Optional local workspace mode
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as a new workflow without copying any proprietary prose. License: MIT.
 
 ## Purpose
+Help any kitchen role: cook, baker, dishwasher, server, bartender, supervisor, manager, owner or home cook. Ask about the goal first; role and establishment are optional shortcuts. If `find_kitchen_help` is available, use it to discover explain/guide/calculate/create/review tasks, source references and specific capability limits. Its results are guidance, never execution receipts. If absent, answer honestly with host reasoning and available research. Label the answer basis; never pretend that linked references were retrieved live. For reports, distinguish draft, local save, export and external submission. Never invent temperatures, counts, observations, training completion or signatures. New skill suggestions remain uninstalled drafts until maintainer review.
+
 Create a new workspace with explicit currency, units, timezone, and data files. Every default is chosen by the operator. Imports are previewed, reviewed, then committed with exact versions. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs

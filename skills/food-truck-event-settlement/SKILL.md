@@ -1,7 +1,7 @@
 ---
 name: food-truck-event-settlement
 description: "Use when settling a food truck event from actual sales, refunds, fees, and costs."
-version: 0.2.2
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [calculate_event_budget, validate_kitchen_data]
@@ -9,10 +9,10 @@ tools: [calculate_event_budget, validate_kitchen_data]
 
 # Food truck event settlement (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.2. Covers the Food Truck use case below without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the Food Truck use case below without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Settle an event from actual till sales less refunds, fees, and known costs, calling the result a contribution after known costs. Pending items such as card fees block the final profit figure; no profit is declared until they land. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Settle an event from actual till sales less refunds, fees, and known costs, calling the result a contribution after known costs. Pending items such as card fees block the final profit figure; no profit is declared until they land. Currency stays explicit on every line, and the contribution figure never becomes profit while items are pending. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Till sales with till ref and currency

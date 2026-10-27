@@ -1,7 +1,7 @@
 ---
 name: recipe-compliance-checker
 description: "Use when you need to check a recipe against labelling, allergen, and verified plan controls."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [validate_kitchen_data, lookup_recipe, get_workflow]
@@ -9,10 +9,10 @@ tools: [validate_kitchen_data, lookup_recipe, get_workflow]
 
 # Recipe compliance checker (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as recipe-compliance-checker without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as recipe-compliance-checker without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Verify a recipe meets labelling, allergen declaration, and local plan controls before service. Each check cites its source. Failures list exact remediation. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Verify a recipe meets labelling, allergen declaration, and local plan controls before service. Each check cites its source. Failures list exact remediation. For care-facility menus, clinical suitability needs the facility-approved spec and a named reviewer; this check never certifies it and uses no resident data. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Recipe record with ingredients and yields

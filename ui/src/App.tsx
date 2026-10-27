@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { api } from './api';
 import Workflows from './Workflows';
 import {KitchenSetup} from './KitchenSetup';
+import MenuStudio from './MenuStudio';
+import KitchenHelp from './KitchenHelp';
 import {KitchenSettings,WorkflowLibrary,ConnectedWork} from './KitchenWork';
 
 type Recipe = { id: string; name: string; currency: string; yieldQty: { amount: string; unit: string }; ingredients: Array<{ ingredientId: string; qty: { amount: string; unit: string } }>; version: number };
@@ -203,12 +205,13 @@ function Approvals(): React.ReactElement {
 
 export default function App(): React.ReactElement {
   const h = useHash();
-  const tab = h === '#/setup' ? 'setup' : h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
+  const tab = h === '#/menus' ? 'menus' : h === '#/setup' ? 'setup' : h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
   return (
     <>
-      <header className="top"><h1>Open Kitchen Toolkit</h1><a href="#/setup">Setup and connection check</a></header>
+      <header className="top"><h1>CulinaryOS Interagency</h1><a href="#/setup">Setup and connection check</a> · <a href="#/help">Help for every kitchen role</a></header>
       <nav className="tabs" aria-label="Views">
         <a href="#/recipes" aria-current={tab === 'recipes' ? 'page' : undefined}>Recipes</a>
+        <a href="#/menus" aria-current={tab === 'menus' ? 'page' : undefined}>Menus</a>
         <a href="#/imports" aria-current={tab === 'imports' ? 'page' : undefined}>Imports</a>
         <a href="#/today" aria-current={tab === 'today' ? 'page' : undefined}>Today</a>
         <a href="#/approvals" aria-current={tab === 'approvals' ? 'page' : undefined}>Approvals</a>
@@ -216,7 +219,7 @@ export default function App(): React.ReactElement {
         <a href="#/settings" aria-current={tab === 'settings' ? 'page' : undefined}>Settings</a>
       </nav>
       <main>
-        {tab === 'setup' ? <KitchenSetup/> : tab === 'settings' ? <KitchenSettings /> : tab === 'library' ? <WorkflowLibrary /> : tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
+        {h==='#/help'?<KitchenHelp/>:tab === 'menus' ? <MenuStudio/> : tab === 'setup' ? <KitchenSetup/> : tab === 'settings' ? <KitchenSettings /> : tab === 'library' ? <WorkflowLibrary /> : tab === 'recipes' ? <Recipes /> : tab === 'imports' ? <Imports /> : tab === 'today' ? <Today /> : <Approvals />}
       </main>
     </>
   );

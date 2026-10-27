@@ -1,6 +1,8 @@
-# Open Kitchen Toolkit
+# CulinaryOS Interagency
 
-**Installable public test release0.2.4:** [Install and test](docs/INSTALL.md). The repository now provides a Codex marketplace; the plugin connects directly to the hosted service, with no missing local server file. Optional [Ross Manor specialist handoff](docs/ROSS_MANOR_INTEGRATION.md) keeps its local records and approvals separate. This community release is separate from an OpenAI directory listing.
+**0.3.0-rc.1 release candidate:** 118 workflows, 24 journeys, 21 public tools and role-aware help across 14 task areas. Includes six reference records, 42 representative questions, operational-report boilerplates and four clean menu templates. [Purpose and use](docs/PRODUCT.md) · [Coverage map](docs/KITCHEN_COVERAGE.json). Open Kitchen Toolkit remains a discovery alias. This candidate is for testing; designed host/model scenarios are not executed-results evidence.
+
+**Previous public release0.2.4:** [Install and test](docs/INSTALL.md). The repository now provides a Codex marketplace; the plugin connects directly to the hosted service, with no missing local server file. Optional [Ross Manor specialist handoff](docs/ROSS_MANOR_INTEGRATION.md) keeps its local records and approvals separate. This community release is separate from an OpenAI directory listing.
 
 Version **0.2.3** adds a welcome guide with 12 step-by-step starting points, three plugin prompt suggestions, recipe unit standardization, and reviewed GitHub contribution intake. Activate the plugin and say **“Show me how to use Open Kitchen Toolkit.”** No special keyword is required for ordinary kitchen questions. [Starter prompts](docs/GETTING_STARTED.md) · [Unit conventions](docs/UNIT_CONVENTIONS.md) · [Contribute](CONTRIBUTING.md) · [Acceptance](docs/ACCEPTANCE_023.md).
 

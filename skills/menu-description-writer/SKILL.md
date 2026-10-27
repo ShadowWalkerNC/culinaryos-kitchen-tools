@@ -45,6 +45,18 @@ Check tools actually present via list_capabilities or list_workflows before acti
 ## Approval
 Manager approves copy. Legal claims stay human verified. Human judgment, HR actions, and signatures are never fabricated; blanks stay blank until a human signs.
 
+## Clean menu layouts and boilerplates
+Users can ask normally: "Format my approved menu using the restaurant template", "Make a clean food-truck price list", "Use the bakery template", or "Lay out this prix-fixe menu for printing". Never require a magic keyword.
+
+1. Establish whether dishes are confirmed or new suggestions. Present new suggestions for review before formatting them. Never silently add dishes, prices, provenance or dietary claims.
+2. Ask for the preset: restaurant (two columns), counter/cafe/food truck (one column), bakery price list (compact two columns) or prix fixe (course sections and explicit overall price).
+3. Collect menu title, section headings, confirmed item names, optional short descriptions, explicit prices and currency, paper size (Letter or A4), and display locale. Use short, literal wording, with no emojis, fabricated photographs, ornamental badges or unsupported superlatives.
+4. If `format_menu` is available, pass only this approved content to it. Monetary values use integer cents. Missing item prices use null and remain unresolved. Do not guess a currency from a location or language. An empty section can be a boilerplate, clearly marked as a draft.
+5. Show the returned preview and all publication blockers. Obtain human review of dishes, prices and claims before printing or exporting. Any edit invalidates the reviewed preview.
+6. In the local workspace use **Menus → Preview menu → review → Print / save PDF**. The browser's print dialog produces PDF. The formatter itself returns HTML and plain text; never claim it has saved, published or generated a PDF file.
+
+If `format_menu` is absent, return a restrained text layout and explain that live template rendering is unavailable in this client. Do not substitute invented tool execution. Keep ingredient/allergen verification separate from presentation: a clean layout does not certify safety or suitability.
+
 ## Allergen and safety notes
 Every allergen cell uses one of contains, may_contain, verified_absent, or unknown, each with its label source and version. Unknown never becomes verified_absent. Legal and safety controls come only from the verified local plan and sources cited on the run, never invented. When this workflow has no direct food impact, any food references still use these states.
 

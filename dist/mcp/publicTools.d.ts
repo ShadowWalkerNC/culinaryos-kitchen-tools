@@ -1,5 +1,5 @@
 import type { Purchase, Recipe } from '../core/types.js';
-export declare const PUBLIC_TOOL_NAMES: readonly ["get_started", "standardize_recipe_units", "list_capabilities", "get_workflow", "validate_kitchen_data", "scale_recipe", "convert_quantity", "cost_recipe", "compare_purchase_costs", "build_prep_plan", "build_order_proposal", "list_workflows", "calculate_usable_yield", "reconcile_stock", "calculate_event_budget", "validate_prep_capacity"];
+export declare const PUBLIC_TOOL_NAMES: readonly ["find_kitchen_help", "format_menu", "calculate_menu_margins", "calculate_staffing_budget", "calculate_bakery_formula", "get_started", "standardize_recipe_units", "list_capabilities", "get_workflow", "validate_kitchen_data", "scale_recipe", "convert_quantity", "cost_recipe", "compare_purchase_costs", "build_prep_plan", "build_order_proposal", "list_workflows", "calculate_usable_yield", "reconcile_stock", "calculate_event_budget", "validate_prep_capacity"];
 export type PublicToolName = (typeof PUBLIC_TOOL_NAMES)[number];
 export declare function listCapabilities(): {
     tools: string[];
@@ -7,6 +7,8 @@ export declare function listCapabilities(): {
     mode: string;
 };
 export declare function getWorkflow(name: string): {
+    pack: "bakery" | "food-truck" | "home" | "bar-foh" | "shops" | "operations" | "people" | "care" | undefined;
+    audience: string | undefined;
     instructions: string | undefined;
     profile: {
         country?: string | undefined;

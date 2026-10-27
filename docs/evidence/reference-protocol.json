@@ -1,10 +1,11 @@
 {
-  "version": "0.2.4",
+  "version": "0.3.0-rc.1",
   "host": "MCP SDK reference client; no generative model",
   "checks": [
-    "16 public tools; local operations absent",
+    "21 public tools; local operations absent",
+    "Role-aware discovery, reference records and clean-menu formatter execute through MCP",
     "Unknown workflow has machine-readable error flag",
-    "12 starter prompts, reported-step progression and partially blocked recipe conversion",
+    "24 starter prompts, reported-step progression and partially blocked recipe conversion",
     "No workspace, database or files created by public package"
   ],
   "workflowRetrieval": [
@@ -20,6 +21,11 @@
     },
     {
       "id": "apprenticeship-tracker",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "approved-diet-menu-screen",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -59,7 +65,17 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "beverage-batch-dilution",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "burnout-stress-risk-assessment",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "campaign-sales-review",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -139,6 +155,11 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "delivery-platform-net-margin",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "dietary-requirements-tracker",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
@@ -159,12 +180,27 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "dough-temperature-trial-log",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "draft-beer-yield-loss",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "equipment-downtime-replan",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
     {
       "id": "equipment-maintenance-log",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "event-application-readiness",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -200,6 +236,11 @@
     },
     {
       "id": "food-truck-commissary-handoff",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "food-truck-event-go-no-go",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -240,6 +281,11 @@
     },
     {
       "id": "haccp-checklist-generator",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "home-cooking-timeline",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -304,6 +350,11 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "multilingual-service-brief",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "nutritional-information-calculator",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
@@ -354,7 +405,17 @@
       "hasWorkedAndBlockedExamples": true
     },
     {
+      "id": "product-recall-trace-drill",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
       "id": "production-batch-record",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "proofing-oven-calendar",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -380,6 +441,11 @@
     },
     {
       "id": "recipe-documentation",
+      "status": "PASS",
+      "hasWorkedAndBlockedExamples": true
+    },
+    {
+      "id": "recipe-equipment-adaptation",
       "status": "PASS",
       "hasWorkedAndBlockedExamples": true
     },
@@ -535,6 +601,10 @@
     }
   ],
   "calculations": {
+    "menu": {
+      "publicationBlockers": [],
+      "humanReviewRequired": true
+    },
     "recipeUnits": {
       "recipeName": "Synthetic mixed-unit recipe",
       "complete": false,
@@ -647,5 +717,5 @@
   "limits": [
     "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
   ],
-  "checkedAt": "2026-10-27T13:22:18.119Z"
+  "checkedAt": "2026-10-27T19:27:44.158Z"
 }

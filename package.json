@@ -1,6 +1,6 @@
 {
   "name": "open-kitchen-toolkit",
-  "version": "0.2.4",
+  "version": "0.3.0-rc.1",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "node scripts/compile-workflows.mjs && tsc -p tsconfig.json && vite build --config ui/vite.config.js && node scripts/build-distribution.mjs",
+    "build": "node scripts/compile-workflows.mjs && tsc -p tsconfig.json && vite build --config ui/vite.config.js && node scripts/build-distribution.mjs && node scripts/build-help-catalog.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p ui/tsconfig.json",
     "test": "node --import tsx --test tests/*.test.ts",
     "dev": "tsx src/cli/cli.ts local-serve --dev",

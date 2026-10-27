@@ -24,6 +24,8 @@ import {loadEventDraft,saveEventDraft,previewEventDraft,createEventFromDraft} fr
 import {setupStatus,checkHostedConnection} from '../workflows/setup.js';
 import {ZodError} from 'zod';
 import {printableFlowDocument} from '../workflows/printDocument.js';
+import {formatMenu,MENU_TEMPLATES} from '../core/menus.js';
+import {findKitchenHelp} from '../workflows/help.js';
 
 const MIME: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 
@@ -167,6 +169,9 @@ async function handleApi(
     return JSON.parse(raw.toString('utf8')) as Record<string, never>;
   };
   const printMatch=/^\/api\/flow-document\/([^/]+)\/([^/]+)$/.exec(path);
+  if(req.method==='GET'&&path==='/api/menu/templates'){send(res,200,MENU_TEMPLATES);return;}
+  if(req.method==='POST'&&path==='/api/help'){send(res,200,findKitchenHelp(await readJson()));return;}
+  if(req.method==='POST'&&path==='/api/menu/preview'){send(res,200,formatMenu(await readJson()));return;}
   if(req.method==='GET'&&printMatch){send(res,200,printableFlowDocument(db,decodeURIComponent(printMatch[1]!),decodeURIComponent(printMatch[2]!)),'text/html; charset=utf-8');return;}
   if(req.method==='GET'&&path==='/api/profile'){send(res,200,getRestaurantProfile(db));return;}
   if(req.method==='GET'&&path==='/api/setup'){send(res,200,setupStatus(db));return;}

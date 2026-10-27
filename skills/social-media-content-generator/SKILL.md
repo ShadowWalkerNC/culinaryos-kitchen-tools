@@ -1,7 +1,7 @@
 ---
 name: social-media-content-generator
 description: "Use when you need to draft honest social posts from confirmed dishes and events."
-version: 0.2.0
+version: 0.3.0
 license: MIT
 data-version: v1
 tools: [get_workflow, create_task]
@@ -9,10 +9,10 @@ tools: [get_workflow, create_task]
 
 # Social media content generator (original MIT skill)
 
-> Original MIT work for Open Kitchen Toolkit 0.2.0. Covers the same public use case as social-media-content-generator without copying any proprietary prose. License: MIT.
+> Original MIT work for Open Kitchen Toolkit 0.3.0. Covers the same public use case as social-media-content-generator without copying any proprietary prose. License: MIT.
 
 ## Purpose
-Write truthful social captions from confirmed dishes and real photos. Rights and credits are explicit. No stock is passed as house food. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
+Write truthful social captions from confirmed dishes and real photos. Rights and credits are explicit. No stock is passed as house food. Every claim in a caption needs its source; unconfirmed dishes and prices stay out. Only settings material to this task are requested: site, currency, units, timezone, and commercial targets are explicit operator inputs where relevant, never fixed defaults, and never forced where irrelevant.
 
 ## Required inputs
 - Dishes or events with dates

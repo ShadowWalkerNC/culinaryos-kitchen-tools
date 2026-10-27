@@ -10,7 +10,13 @@ import { listWorkflows, workflowGuidance } from '../workflows/discovery.js';
 import { calculateUsableYield, reconcileStock, calculateEventBudget, validatePrepCapacity } from '../core/operations.js';
 import { getStarted } from '../workflows/getStarted.js';
 import { standardizeRecipeUnits } from '../core/standardize.js';
+import { calculateMenuMargins, calculateStaffingBudget, calculateBakeryFormula } from '../core/business.js';
+import { formatMenu } from '../core/menus.js';
+import { findKitchenHelp } from '../workflows/help.js';
 export const PUBLIC_TOOL_NAMES = [
+    'find_kitchen_help',
+    'format_menu',
+    'calculate_menu_margins', 'calculate_staffing_budget', 'calculate_bakery_formula',
     'get_started', 'standardize_recipe_units',
     'list_capabilities',
     'get_workflow',
@@ -46,6 +52,11 @@ export function validateKitchenData(recipes, purchases) {
     return { valid: issues.length === 0, issues, cycle };
 }
 export const publicHandlers = {
+    find_kitchen_help: findKitchenHelp,
+    format_menu: formatMenu,
+    calculate_menu_margins: calculateMenuMargins,
+    calculate_staffing_budget: calculateStaffingBudget,
+    calculate_bakery_formula: calculateBakeryFormula,
     get_started: getStarted,
     standardize_recipe_units: standardizeRecipeUnits,
     list_capabilities: (() => listCapabilities()),

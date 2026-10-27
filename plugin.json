@@ -1,17 +1,17 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kitchen-tools",
-  "version": "0.2.4",
+  "version": "0.3.0-rc.1",
   "license": "MIT",
   "homepage": "https://culinaryos-kitchen-tools-production.up.railway.app",
   "repository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools",
-  "description": "Free original kitchen workflows, transparent calculations and local review tasks.",
+  "description": "Free kitchen and restaurant guidance for every role, with transparent calculations, reports and clean menu templates.",
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Open Kitchen Toolkit",
-        "shortDescription": "Recipes, costs and prep",
-        "longDescription": "Free MIT kitchen workflows for your chosen AI. Public calculations are stateless; private records, approvals and enabled rules stay in your local workspace.",
+        "displayName": "CulinaryOS Interagency",
+        "shortDescription": "Kitchen help for every role",
+        "longDescription": "Free MIT workflows for cooks, bakers, dishwashers, service teams, managers, owners and home cooks. Explain, guide, calculate, create and review with explicit sources and capability limits. Open Kitchen Toolkit is a discovery alias. AI-provider requirements still apply.",
         "category": "Business & Operations",
         "capabilities": [],
         "defaultPrompt": [
