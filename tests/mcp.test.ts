@@ -37,6 +37,7 @@ describe('mcp public (in-memory protocol)', () => {
       const tools = await client.listTools();
       const names = tools.tools.map((t) => t.name).sort();
       assert.deepEqual(names, [...PUBLIC_TOOL_NAMES].sort());
+      for(const tool of tools.tools)assert.deepEqual(tool.annotations,{readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false});
       const out = await client.callTool({ name: 'scale_recipe', arguments: { recipe: RECIPE, targetYieldAmount: '4' } });
       const scaled = JSON.parse(textOf(out)) as { yieldQty: { amount: string } };
       assert.equal(scaled.yieldQty.amount, '4');

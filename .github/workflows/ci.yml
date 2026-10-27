@@ -22,4 +22,5 @@ jobs:
           test -f dist/mcp/stdio.js
           test -f dist/ui/index.html
           node scripts/smoke-package.mjs package-out/dist/mcp/stdio.js
+          node scripts/smoke-remote-package.mjs package-out --offline
           ! grep -ri "cheezies" dist skills fixtures || (echo "unexpected private-source reference" && exit 1)

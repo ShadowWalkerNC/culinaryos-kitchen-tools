@@ -1,7 +1,7 @@
 // Original MIT skill library catalog for Open Kitchen Toolkit 0.2.2.
 // 105 canonical workflows: original 73 plus 32 independently authored specialty workflows.
 // SKILL.md files are the prose source of truth; this array is the discovery contract.
-export const LIBRARY_VERSION = '0.2.3';
+export const LIBRARY_VERSION = '0.2.4';
 export const DATA_VERSION = 'v1';
 export const LICENSE = 'MIT';
 export const WORKFLOW_CATALOG = [

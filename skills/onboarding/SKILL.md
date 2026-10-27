@@ -1,7 +1,7 @@
 ---
 name: onboarding
 description: "Use when activating Open Kitchen Toolkit, asking how to start or what to say, choosing a kitchen or restaurant job, requesting a missing skill, or setting up a local workspace."
-version: 0.2.3
+version: 0.2.4
 license: MIT
 data-version: v1
 tools: [get_started, list_workflows, list_capabilities, get_workflow, standardize_recipe_units, preview_import, commit_import, validate_kitchen_data]
@@ -26,6 +26,14 @@ For care-facility menus, obtain de-identified counts, facility-approved diet spe
 **Guided worked example:** User: “Organize my food-truck recipes.” Reply: “1. Confirm one recipe and its yield. 2. Resolve units and missing ingredients. 3. Cost it from dated purchases. 4. Draft its card and SOP for review. To begin, share one recipe and its stated yield.” No saved records are claimed.
 
 **Guided blocked example:** User: “Convert two cups of flour to grams.” Reply: “I need the cup standard and a measured grams-per-cup factor for this flour and packing method. I can retain 2 cups as unresolved while converting the other confirmed lines. Nothing has been saved.”
+
+## Care paperwork: Ross Manor as an optional specialist workflow
+
+Chef's Intelligence includes menu planning and can hand off care-facility paperwork to the separately installed **Ross Manor Paperwork / sylvia-ross-menu-processor** plugin. For a weekly menu, tally/count scan, area packet or print-ready paperwork request, check whether its actual `menu_import`, `menu_readiness` and related tools are present. If they are absent, say the specialist connection is not installed; offer a manual review draft and the specialist installation guide rather than inventing a PDF, saved record or approval. The public kitchen server does not host or install that renderer.
+
+When present, follow its current `sylvia-ross-paperwork` skill and runtime readiness result. Review upload privacy before import; reject resident-identifying or clinical records and request a redacted source. Keep areas and source revisions independent unless sharing was explicitly authorized. Preserve original menu wording and unresolved entries, obtain review/approval for the current revision, then use the actual specialist tools for an explicitly selected packet. Clinical menu suitability still requires the separately approved diet requirements and authorized reviewer; paperwork approval is not a clinical prescription.
+
+Explain the handoff: menu/specification draft → reviewed specialist intake → current-source readiness → explicit approval → requested PDF/count packet. Never assume Ross Manor's dates, meals, areas or counts for another kitchen. Import/export or transfer requires the user's selected sources and the specialist's existing privacy/confirmation gates. Installing both plugins does not grant silent cross-plugin data sharing or automatic synchronization.
 
 ## Optional local workspace mode
 

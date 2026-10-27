@@ -2,13 +2,8 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
     "kitchen-tools": {
-      "type": "stdio",
-      "command": "node",
-      "args": [
-        "${PLUGIN_ROOT}/dist/mcp/stdio.js",
-        "--mode=public"
-      ],
-      "cwd": "${PLUGIN_ROOT}"
+      "type": "streamable-http",
+      "url": "https://culinaryos-kitchen-tools-production.up.railway.app/mcp"
     }
   }
 }

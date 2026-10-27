@@ -3,10 +3,11 @@ import {mkdtempSync,readdirSync,readFileSync,writeFileSync,mkdirSync} from 'node
 import {tmpdir} from 'node:os';import {resolve,join} from 'node:path';
 import {Client} from '@modelcontextprotocol/sdk/client/index.js';
 import {StdioClientTransport} from '@modelcontextprotocol/sdk/client/stdio.js';
+import {VERSION} from '../dist/version.js';
 const cwd=mkdtempSync(join(tmpdir(),'open-kitchen-public-'));
-const client=new Client({name:'release-reference-client',version:'0.2.3'});
+const client=new Client({name:'release-reference-client',version:VERSION});
 const transport=new StdioClientTransport({command:process.execPath,args:[resolve('dist/mcp/stdio.js'),'--mode=public'],cwd,stderr:'pipe'});
-const evidence={version:'0.2.3',host:'MCP SDK reference client; no generative model',checks:[],workflowRetrieval:[],calculations:{},limits:['Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark.']};
+const evidence={version:VERSION,host:'MCP SDK reference client; no generative model',checks:[],workflowRetrieval:[],calculations:{},limits:['Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark.']};
 const call=async(name,args={})=>{const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));return JSON.parse(r.content[0].text);};
 try{
  await client.connect(transport);const tools=(await client.listTools()).tools;assert.equal(tools.length,16);assert.ok(!tools.some(t=>t.name==='run_connected_flow'));evidence.checks.push('16 public tools; local operations absent');

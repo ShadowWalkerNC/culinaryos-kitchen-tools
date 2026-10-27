@@ -1,4 +1,4 @@
-export declare const LIBRARY_VERSION: "0.2.3";
+export declare const LIBRARY_VERSION: "0.2.4";
 export declare const DATA_VERSION: "v1";
 export declare const LICENSE: "MIT";
 export interface WorkflowDefinition {

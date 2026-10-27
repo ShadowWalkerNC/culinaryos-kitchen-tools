@@ -1,5 +1,7 @@
 # Open Kitchen Toolkit
 
+**Installable public test release0.2.4:** [Install and test](docs/INSTALL.md). The repository now provides a Codex marketplace; the plugin connects directly to the hosted service, with no missing local server file. Optional [Ross Manor specialist handoff](docs/ROSS_MANOR_INTEGRATION.md) keeps its local records and approvals separate. This community release is separate from an OpenAI directory listing.
+
 Version **0.2.3** adds a welcome guide with 12 step-by-step starting points, three plugin prompt suggestions, recipe unit standardization, and reviewed GitHub contribution intake. Activate the plugin and say **“Show me how to use Open Kitchen Toolkit.”** No special keyword is required for ordinary kitchen questions. [Starter prompts](docs/GETTING_STARTED.md) · [Unit conventions](docs/UNIT_CONVENTIONS.md) · [Contribute](CONTRIBUTING.md) · [Acceptance](docs/ACCEPTANCE_023.md).
 
 Version **0.2.2** provides **105 original skills**, adding 32 workflows for home kitchens, bakeries, food trucks, independent shops and professional kitchens. The library loads all pages and filters by section. Five focused manual playbooks are available in `docs/playbooks/` and from the public setup page. See [specialty expansion evidence](docs/ACCEPTANCE_022.md).

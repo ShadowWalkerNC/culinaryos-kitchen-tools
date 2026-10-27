@@ -110,7 +110,7 @@ function parseSkill(text: string, id: string): SkillMeta {
 
 describe('library catalog', () => {
   it('lists exactly 105 distinct workflows', () => {
-    assert.equal(LIBRARY_VERSION, '0.2.3');
+    assert.equal(LIBRARY_VERSION, '0.2.4');
     assert.equal(WORKFLOW_CATALOG.length, 105);
     const ids = WORKFLOW_CATALOG.map((w) => w.id);
     assert.equal(new Set(ids).size, 105);
@@ -203,7 +203,7 @@ describe('library skills', () => {
         meta.descriptionLine.startsWith('"') && meta.descriptionLine.endsWith('"'),
         `${w.id} description is quoted`,
       );
-      assert.equal(meta.version, ['onboarding','dietary-requirements-tracker','nutritional-information-calculator'].includes(w.id)?'0.2.3':ADDED32.includes(w.id)?'0.2.2':'0.2.0');
+      assert.equal(meta.version, w.id==='onboarding'?'0.2.4':['dietary-requirements-tracker','nutritional-information-calculator'].includes(w.id)?'0.2.3':ADDED32.includes(w.id)?'0.2.2':'0.2.0');
       assert.equal(meta.license, 'MIT');
       for (const s of sections) assert.ok(meta.body.includes(s), `${w.id} has ${s}`);
       assert.ok(meta.body.toLowerCase().includes('original mit'), `${w.id} marked original MIT`);

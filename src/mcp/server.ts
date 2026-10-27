@@ -20,6 +20,9 @@ import {workerStatus} from '../jobs/workspaceWorker.js';
 import {getStartedSchema} from '../workflows/getStarted.js';
 import {standardizeRecipeSchema} from '../core/standardize.js';
 
+// These tools only read their supplied arguments/catalog; no filesystem, DB, network or external writes.
+const PUBLIC_READ_ONLY={readOnlyHint:true,destructiveHint:false,idempotentHint:true,openWorldHint:false};
+
 export type McpMode = 'public' | 'local';
 
 function toShape<T extends z.ZodRawShape>(s: z.ZodObject<T>): T {
@@ -32,21 +35,21 @@ function textResult(value: unknown): { content: Array<{ type: 'text'; text: stri
 
 export function createMcpServer(mode: McpMode, ctx?: LocalContext): McpServer {
   const server = new McpServer({ name: mode === 'public' ? 'kitchen-tools-public' : 'kitchen-tools-local', version: VERSION });
-  server.tool('get_started','Show kitchen and restaurant starter prompts and a step-by-step guide. No special keywords required; no tasks executed.',getStartedSchema.shape,args=>textResult(publicHandlers.get_started(args as never)));
-  server.tool('standardize_recipe_units','Convert recipe lines into explicitly chosen units. Preserve originals and block ambiguous standards or missing ingredient density.',standardizeRecipeSchema.shape,args=>textResult(publicHandlers.standardize_recipe_units(args as never)));
+  server.tool('get_started','Show kitchen and restaurant starter prompts and a step-by-step guide. No special keywords required; no tasks executed.',getStartedSchema.shape, PUBLIC_READ_ONLY,args=>textResult(publicHandlers.get_started(args as never)));
+  server.tool('standardize_recipe_units','Convert recipe lines into explicitly chosen units. Preserve originals and block ambiguous standards or missing ingredient density.',standardizeRecipeSchema.shape, PUBLIC_READ_ONLY,args=>textResult(publicHandlers.standardize_recipe_units(args as never)));
   for(const [name,schema] of Object.entries({list_workflows:listWorkflowsSchema,calculate_usable_yield:usableYieldSchema,reconcile_stock:stockSchema,calculate_event_budget:budgetSchema,validate_prep_capacity:capacitySchema})){
-    server.tool(name,'Use this for original workflow discovery or deterministic kitchen operations; missing inputs stay unknown',schema.shape,(args:Record<string,unknown>)=>textResult(publicHandlers[name as keyof typeof publicHandlers](args as never)));
+    server.tool(name,'Use this for original workflow discovery or deterministic kitchen operations; missing inputs stay unknown',schema.shape, PUBLIC_READ_ONLY,(args:Record<string,unknown>)=>textResult(publicHandlers[name as keyof typeof publicHandlers](args as never)));
   }
 
-  server.tool('list_capabilities', 'List stateless public capabilities', toShape(listCapabilitiesSchema), () => textResult((publicHandlers.list_capabilities as (a: Record<string, never>) => unknown)({})));
-  server.tool('get_workflow', 'Get original workflow guidance', toShape(getWorkflowSchema), (args) => textResult((publicHandlers.get_workflow as (a: unknown) => unknown)({...args,...(mode==='local'&&ctx?{profile:{...getRestaurantProfile(ctx.db),...args.profile}}:{})})));
-  server.tool('validate_kitchen_data', 'Validate recipes and purchases', toShape(validateKitchenDataSchema), (args) => textResult((publicHandlers.validate_kitchen_data as (a: unknown) => unknown)(args)));
-  server.tool('scale_recipe', 'Scale a recipe to a target yield', toShape(scaleRecipeSchema), (args) => textResult((publicHandlers.scale_recipe as (a: unknown) => unknown)(args)));
-  server.tool('convert_quantity', 'Convert quantity with explicit factor', toShape(convertQuantitySchema), (args) => textResult((publicHandlers.convert_quantity as (a: unknown) => unknown)(args)));
-  server.tool('cost_recipe', 'Cost a recipe from explicit inputs', toShape(costRecipeSchema), (args) => textResult((publicHandlers.cost_recipe as (a: unknown) => unknown)(args)));
-  server.tool('compare_purchase_costs', 'Compare purchase options in same unit', toShape(comparePurchaseCostsSchema), (args) => textResult((publicHandlers.compare_purchase_costs as (a: unknown) => unknown)(args)));
-  server.tool('build_prep_plan', 'Build deterministic prep plan', toShape(buildPrepPlanSchema), (args) => textResult((publicHandlers.build_prep_plan as (a: unknown) => unknown)(args)));
-  server.tool('build_order_proposal', 'Build deterministic order proposal', toShape(buildOrderProposalSchema), (args) => textResult((publicHandlers.build_order_proposal as (a: unknown) => unknown)(args)));
+  server.tool('list_capabilities', 'List stateless public capabilities', toShape(listCapabilitiesSchema), PUBLIC_READ_ONLY, () => textResult((publicHandlers.list_capabilities as (a: Record<string, never>) => unknown)({})));
+  server.tool('get_workflow', 'Get original workflow guidance', toShape(getWorkflowSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.get_workflow as (a: unknown) => unknown)({...args,...(mode==='local'&&ctx?{profile:{...getRestaurantProfile(ctx.db),...args.profile}}:{})})));
+  server.tool('validate_kitchen_data', 'Validate recipes and purchases', toShape(validateKitchenDataSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.validate_kitchen_data as (a: unknown) => unknown)(args)));
+  server.tool('scale_recipe', 'Scale a recipe to a target yield', toShape(scaleRecipeSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.scale_recipe as (a: unknown) => unknown)(args)));
+  server.tool('convert_quantity', 'Convert quantity with explicit factor', toShape(convertQuantitySchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.convert_quantity as (a: unknown) => unknown)(args)));
+  server.tool('cost_recipe', 'Cost a recipe from explicit inputs', toShape(costRecipeSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.cost_recipe as (a: unknown) => unknown)(args)));
+  server.tool('compare_purchase_costs', 'Compare purchase options in same unit', toShape(comparePurchaseCostsSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.compare_purchase_costs as (a: unknown) => unknown)(args)));
+  server.tool('build_prep_plan', 'Build deterministic prep plan', toShape(buildPrepPlanSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.build_prep_plan as (a: unknown) => unknown)(args)));
+  server.tool('build_order_proposal', 'Build deterministic order proposal', toShape(buildOrderProposalSchema), PUBLIC_READ_ONLY, (args) => textResult((publicHandlers.build_order_proposal as (a: unknown) => unknown)(args)));
 
   if (mode === 'local') {
     if (!ctx) throw new Error('local mode requires context');

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.3",
+  "version": "0.2.4",
   "host": "MCP SDK reference client; no generative model",
   "checks": [
     "16 public tools; local operations absent",
@@ -647,5 +647,5 @@
   "limits": [
     "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
   ],
-  "checkedAt": "2026-10-27T13:01:15.280Z"
+  "checkedAt": "2026-10-27T13:22:18.119Z"
 }
