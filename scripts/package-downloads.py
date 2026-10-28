@@ -20,6 +20,7 @@ destination.mkdir(parents=True, exist_ok=True)
 server = json.loads((stage / 'mcp.json').read_text())['mcpServers']['kitchen-tools']
 assert server == {'type': 'streamable-http', 'url': 'https://culinaryos-kitchen-tools-production.up.railway.app/mcp'}
 remote_files = [stage / n for n in ['plugin.json', 'mcp.json', 'LICENSE', 'CONTRIBUTING.md', 'docs/INSTALL.md', 'docs/GETTING_STARTED.md', 'docs/ROSS_MANOR_INTEGRATION.md']]
+remote_files += [stage / '.codex-plugin/plugin.json', stage / 'assets/culinaryos-icon.svg']
 remote_files += [p for p in (stage / 'skills').rglob('*') if p.is_file()]
 remote_files += [stage / 'docs' / name for name in ['PRODUCT.md','OPERATIONAL_REPORTS.md','MENU_TEMPLATES.md','KITCHEN_COVERAGE.json']]
 remote_files += [stage / p.relative_to(brains) for p in brains.rglob('*') if p.is_file()]

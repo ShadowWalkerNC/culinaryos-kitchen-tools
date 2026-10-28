@@ -113,7 +113,7 @@ function parseSkill(text: string, id: string): SkillMeta {
 
 describe('library catalog', () => {
   it('lists exactly 118 distinct workflows', () => {
-    assert.equal(LIBRARY_VERSION, '0.3.0-rc.3');
+    assert.equal(LIBRARY_VERSION, '0.3.0-rc.4');
     assert.equal(WORKFLOW_CATALOG.length, 118);
     const ids = WORKFLOW_CATALOG.map((w) => w.id);
     assert.equal(new Set(ids).size, 118);

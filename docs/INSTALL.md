@@ -2,7 +2,7 @@
 
 ## Skills and templates: the quickest start
 
-**[Download the skills ZIP, version 0.3.0-rc.3](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.3/chef-intelligence-skills-0.3.0-rc.3.zip)**.
+**[Download the skills ZIP, version 0.3.0-rc.4](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/chef-intelligence-skills-0.3.0-rc.4.zip)**.
 
 Extract it and open `START_HERE.md`. Choose one skill or template, attach or paste it into your AI and describe the task. `INDEX.md` lists skills; `prompts/STARTERS.md` supplies 24 guided prompts. For a plain menu, follow `boilerplates/menus/README.md`: fill a supplied HTML layout, review it and print to PDF from your browser.
 
@@ -17,7 +17,7 @@ The [public setup page](https://culinaryos-kitchen-tools-production.up.railway.a
 These commands select the displayed candidate tag and preserve the existing `kitchen-tools` identity:
 
 ```sh
-codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref v0.3.0-rc.3
+codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref v0.3.0-rc.4
 codex plugin add kitchen-tools@open-kitchen-toolkit
 ```
 
@@ -41,7 +41,7 @@ Ask: **“Use the toolkit to convert 32 ounces to pounds.”** The known result 
 
 ## Optional: private local workspace
 
-Download the [full runtime ZIP](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.3/open-kitchen-toolkit-0.3.0-rc.3.zip), extract it and open the launcher for Windows, macOS or Linux in `launchers/`. Node 24+ is required. The launcher checks prerequisites and installs locked runtime dependencies when missing.
+Download the [full runtime ZIP](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/open-kitchen-toolkit-0.3.0-rc.4.zip), extract it and open the launcher for Windows, macOS or Linux in `launchers/`. Node 24+ is required. The launcher checks prerequisites and installs locked runtime dependencies when missing.
 
 Use `clients/local.json` only with your deliberately selected absolute toolkit/workspace paths. Keep private connections private. Enabled schedules run while the workspace is open; no background AI provider is added.
 

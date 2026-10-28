@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kitchen-tools",
-  "version": "0.3.0-rc.3",
+  "version": "0.3.0-rc.4",
   "license": "MIT",
   "homepage": "https://culinaryos-kitchen-tools-production.up.railway.app",
   "repository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools",
@@ -18,7 +18,9 @@
           "Show me how to use Open Kitchen Toolkit, one step at a time.",
           "Help me cost my menu and check it against my own margin targets.",
           "Help me organize my recipes and make their units consistent."
-        ]
+        ],
+        "logo": "./assets/culinaryos-icon.svg",
+        "composerIcon": "./assets/culinaryos-icon.svg"
       },
       "onboardingSkill": "./skills/onboarding/SKILL.md"
     }

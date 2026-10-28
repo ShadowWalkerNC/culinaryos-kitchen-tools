@@ -1,0 +1,22 @@
+{
+  "name": "kitchen-tools",
+  "version": "0.3.0-rc.4",
+  "description": "Chef Intelligence: portable kitchen skills and boilerplates, with optional tested calculation tools and CulinaryOS handoffs.",
+  "license": "MIT",
+  "interface": {
+    "displayName": "CulinaryOS Interagency",
+    "shortDescription": "Chef Intelligence for kitchens",
+    "longDescription": "The portable brains and boilerplates of CulinaryOS Interagency. Describe a task, load one relevant original skill and ask only for the next necessary input. Use any AI accepting text; optional MCP adds tested calculations and clean menus. CulinaryOS and Ross Manor remain separately authorized adapters. AI-provider requirements apply.",
+    "category": "Business & Operations",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Show me how to use Open Kitchen Toolkit, one step at a time.",
+      "Help me cost my menu and check it against my own margin targets.",
+      "Help me organize my recipes and make their units consistent."
+    ],
+    "logo": "./assets/culinaryos-icon.svg",
+    "composerIcon": "./assets/culinaryos-icon.svg"
+  },
+  "skills": "./skills",
+  "mcpServers": "./mcp.json"
+}

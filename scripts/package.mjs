@@ -10,7 +10,7 @@ if(existsSync(out)&&(lstatSync(out).isSymbolicLink()||!existsSync(join(out,'.pac
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
-const include = ['dist', 'src', 'tests', 'tsconfig.json', 'skills', 'fixtures', 'docs', 'clients', 'launchers', 'ui', 'scripts', 'plugin.json', 'mcp.json', 'package.json', 'package-lock.json', 'LICENSE', 'README.md', 'CONTRIBUTING.md', 'Dockerfile', 'railway.toml','.dockerignore','.gitignore','.github','.agents'];
+const include = ['dist', 'src', 'tests', 'tsconfig.json', 'skills', 'fixtures', 'docs', 'clients', 'launchers', 'ui', 'scripts', 'assets', '.codex-plugin', 'plugin.json', 'mcp.json', 'package.json', 'package-lock.json', 'LICENSE', 'README.md', 'CONTRIBUTING.md', 'Dockerfile', 'railway.toml','.dockerignore','.gitignore','.github','.agents'];
 for (const f of include) {
   const src = join(root, f);
   if (existsSync(src)) cpSync(src, join(out, f), { recursive: true });

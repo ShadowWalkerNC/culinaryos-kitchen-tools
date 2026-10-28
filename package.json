@@ -1,6 +1,6 @@
 {
   "name": "open-kitchen-toolkit",
-  "version": "0.3.0-rc.3",
+  "version": "0.3.0-rc.4",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -49,7 +49,9 @@
     "mcp.json",
     "LICENSE",
     "CONTRIBUTING.md",
-    "README.md"
+    "README.md",
+    "assets",
+    ".codex-plugin"
   ],
   "bin": {
     "kitchen-tools": "dist/cli/cli.js",
