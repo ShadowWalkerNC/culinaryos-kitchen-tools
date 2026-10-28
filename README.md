@@ -2,7 +2,7 @@
 
 **Start with the skills-only package:** original kitchen instructions and individually selectable boilerplates for any AI accepting text/files. No runtime or MCP connection is required to read and use them. Read [START_HERE](docs/START_HERE.md). Connected calculations and the local workspace are optional adapters.
 
-**0.3.0-rc.2:** shorter onboarding, three-choice quick discovery, actual workflow steps and a separate verified portable asset package. This remains a candidate; paired host-output trials are blocked by account usage limits.
+**0.3.0-rc.2:** shorter onboarding, three-choice quick discovery, actual workflow steps and a separate verified portable asset package. Both instruction-guided arms passed the semantic answer keys in 17 paired host scenarios. This is a bounded comparison in one AI host, not an AxomAI backend or cross-platform reliability certification.
 
 **0.3.0-rc.1 release candidate:** 118 workflows, 24 journeys, 21 public tools and role-aware help across 14 task areas. Includes six reference records, 42 representative questions, operational-report boilerplates and four clean menu templates. [Purpose and use](docs/PRODUCT.md) · [Coverage map](docs/KITCHEN_COVERAGE.json). Open Kitchen Toolkit remains a discovery alias. This candidate is for testing; designed host/model scenarios are not executed-results evidence.
 

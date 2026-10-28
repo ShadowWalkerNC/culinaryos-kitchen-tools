@@ -1,6 +1,6 @@
 {
-  "status": "BLOCKED_ACCOUNT_USAGE_LIMIT",
-  "executedPairs": 0,
+  "status": "EXECUTED",
+  "executedPairs": 17,
   "method": "Same-host instruction-following comparison; not a vendor inference endpoint",
   "cases": [
     {
@@ -107,5 +107,7 @@
     }
   ],
   "answerKeys": "Withheld outside distribution",
-  "vendorInstructions": "Private; not included"
+  "vendorInstructions": "Private; not included",
+  "results": "chef-paired-host-results-rc2.json",
+  "initialAttempt": "Both agents initially blocked by account usage limit; one retry after reset completed."
 }

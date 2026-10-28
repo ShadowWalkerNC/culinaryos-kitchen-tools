@@ -180,37 +180,48 @@
   "payloadAndCpu": {
     "welcomeFull": {
       "bytes": 24505,
-      "medianCpuMs": 0.004,
-      "p95CpuMs": 0.023
+      "medianCpuMs": 0.016,
+      "p95CpuMs": 0.124
     },
     "welcomeQuick": {
       "bytes": 3279,
-      "medianCpuMs": 0.008,
-      "p95CpuMs": 0.026
+      "medianCpuMs": 0.021,
+      "p95CpuMs": 0.042
     },
     "helpFull": {
       "bytes": 55291,
-      "medianCpuMs": 0.287,
-      "p95CpuMs": 0.593
+      "medianCpuMs": 0.936,
+      "p95CpuMs": 1.359
     },
     "helpQuick": {
       "bytes": 6767,
-      "medianCpuMs": 0.078,
-      "p95CpuMs": 0.123
+      "medianCpuMs": 0.252,
+      "p95CpuMs": 0.421
     }
   },
   "hostTrial": {
     "designedPairs": 17,
-    "executedPairs": 0,
-    "status": "BLOCKED_ACCOUNT_USAGE_LIMIT",
-    "outputsClaimed": false
+    "executedPairs": 17,
+    "status": "EXECUTED",
+    "outputsClaimed": true,
+    "report": "chef-paired-host-results-rc2.json",
+    "summary": {
+      "AxomAIGuided": {
+        "semanticKeyChecksPassed": 17,
+        "externalActionsClaimed": 0
+      },
+      "toolkitGuided": {
+        "semanticKeyChecksPassed": 17,
+        "externalActionsClaimed": 0
+      }
+    }
   },
   "limits": [
     "Vendor instructions remain private; no proprietary prose bundled.",
     "Instruction retrieval does not establish the vendor generated an answer.",
-    "The17 planned paired host scenarios are unexecuted; the624 designed bank remains NOT_RUN.",
+    "Paired outputs are host-generated under supplied instructions; not vendor-hosted inference. The separate624 designed bank remains NOT_RUN.",
     "CPU/payload figures are local measurements, not end-to-end AI or network latency.",
-    "Different defaults are not a vendor-error or superiority finding.",
+    "Different defaults and passing examples are not vendor-error, superiority or universal-reliability findings.",
     "Supplier fees, clinical suitability and narrative boilerplate quality need source-specific and host review."
   ]
 }

@@ -1,0 +1,1178 @@
+{
+  "version": "0.3.0-rc.2",
+  "executedAt": "2026-10-27",
+  "status": "EXECUTED",
+  "casesPerArm": 17,
+  "totalHostAnswers": 34,
+  "method": "Two isolated Codex agents follow privately retrieved AxomAI instructions (A) or original toolkit instructions (B), with the same explicit cases and inherited model configuration. Not a vendor-hosted inference test.",
+  "modelConfiguration": "Inherited session model configuration, no overrides; exact provider/backend model identity was not exposed.",
+  "toolAllowance": "Read supplied arm file and write output only; no calculator, web, MCP or external actions permitted by protocol.",
+  "toolTraceAudit": "The full runtime tool traces were not independently audited; answers and final artifacts are retained.",
+  "answerKeys": {
+    "preparedBeforeTrial": true,
+    "sha256": "689e1ccef469a50d877fe57e97d379e0792b12a7afe93e11a190759cf265bcc0",
+    "createdAt": "2026-10-27T20:24:47.041Z"
+  },
+  "inputHashes": {
+    "A": "9c765e69f7e1c4aa9279eff1ff50ad5775ca6842543a2d67497ecbbd0f062838",
+    "B": "52c51afefa76a94194c1e411b9131a8ef7043d279fbaf5aa13a88039519268be"
+  },
+  "outputHashes": {
+    "A": "c2458d3b54a5204568e95c23f090dced3d18684d535c73e7f20ac4044f6f4b6e",
+    "B": "03ef81cff9d83ee115b0ea194c034f16b671e504cf0a2edc47aa6177a659ca6d"
+  },
+  "summary": {
+    "AxomAIGuided": {
+      "semanticKeyChecksPassed": 17,
+      "externalActionsClaimed": 0
+    },
+    "toolkitGuided": {
+      "semanticKeyChecksPassed": 17,
+      "externalActionsClaimed": 0
+    }
+  },
+  "representationDifferences": [
+    {
+      "caseId": "B10",
+      "arm": "A",
+      "field": "glutenStatus",
+      "observed": null,
+      "expected": "unknown",
+      "meaning": "Protocol permits null for unknown; prose also identifies the value as unknown. This is not serialized-record equivalence."
+    },
+    {
+      "caseId": "B10",
+      "arm": "A",
+      "field": "clinicalSuitability",
+      "observed": null,
+      "expected": "unknown",
+      "meaning": "Protocol permits null for unknown; prose also identifies the value as unknown. This is not serialized-record equivalence."
+    }
+  ],
+  "qualitativeReview": {
+    "reviewer": "Primary Codex assistant",
+    "reviewedAllAnswers": true,
+    "observations": [
+      "Both arms keep missing prices, densities, staffing rates and clinical suitability unresolved.",
+      "Both distinguish direct contribution from net profit and avoid campaign-causation claims.",
+      "Both leave signatures, chemical parameters and competency pending, and report drafts rather than filing actions.",
+      "One structured unknown/null representation differs; the prose meaning remains unknown."
+    ],
+    "scope": "Instruction-following and output constraints on these examples; not professional, clinical or production certification."
+  },
+  "initialAttempt": "Both agents were blocked by account usage limits; a single retry after the reset completed.",
+  "outcomes": [
+    {
+      "id": "B01",
+      "vendorSkill": "dish-costing-calculator",
+      "toolkitSkill": "recipe-costing",
+      "task": "USD. A recipe makes 10 portions using 2 kg chicken at725 cents/kg,1.2 kg carrots at250 cents/kg,and1 batch sauce costing160 cents. All costs are complete usable ingredient costs. Target food cost30%. Compute batchCostCents,portionCostCents,minimumPriceCents, rounding minimum price up to the next cent. Exclude overhead explicitly.",
+      "results": {
+        "A": {
+          "id": "B01",
+          "numbers": {
+            "batchCostCents": 1910,
+            "portionCostCents": 191,
+            "minimumPriceCents": 637
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "USD ingredient costing: chicken 1450 cents, carrots 300 cents, sauce 160 cents. Batch $19.10; portion $1.91. At 30% food cost, the minimum portion price rounds upward to $6.37. Overhead is excluded.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "batchCostCents",
+              "expected": 1910,
+              "observed": 1910,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "portionCostCents",
+              "expected": 191,
+              "observed": 191,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "minimumPriceCents",
+              "expected": 637,
+              "observed": 637,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B01",
+          "numbers": {
+            "batchCostCents": 1910,
+            "portionCostCents": 191,
+            "minimumPriceCents": 637
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "USD draft: chicken 1450c + carrots 300c + sauce 160c = 1910c per batch; 191c per portion. At 30% food cost, 191/0.30 rounds upward to 637c per portion. Overhead is excluded. Manager reviews the selling price.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "batchCostCents",
+              "expected": 1910,
+              "observed": 1910,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "portionCostCents",
+              "expected": 191,
+              "observed": 191,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "minimumPriceCents",
+              "expected": 637,
+              "observed": 637,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B02",
+      "vendorSkill": "dish-costing-calculator",
+      "toolkitSkill": "recipe-costing",
+      "task": "Same10-portion recipe:2 kg chicken at725 cents/kg,1.2 kg carrots at250 cents/kg,and1 batch sauce whose purchase price is unknown. USD,target food cost30%. Report knownCostCents,totalCostCents and minimumPriceCents. Can a complete cost or target price be released?",
+      "results": {
+        "A": {
+          "id": "B02",
+          "numbers": {
+            "knownCostCents": 1750,
+            "totalCostCents": null,
+            "minimumPriceCents": null
+          },
+          "missingInputs": [
+            "Purchase cost in USD cents for the sauce batch used"
+          ],
+          "blocked": true,
+          "answer": "Known batch ingredient cost is $17.50. Sauce cost remains unknown, so neither a complete batch cost nor a minimum portion price at 30% food cost can be released. Unknown cost has not been treated as zero.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "knownCostCents",
+              "expected": 1750,
+              "observed": 1750,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "totalCostCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "minimumPriceCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B02",
+          "numbers": {
+            "knownCostCents": 1750,
+            "totalCostCents": null,
+            "minimumPriceCents": null
+          },
+          "missingInputs": [
+            "Purchase cost in USD cents for the sauce batch"
+          ],
+          "blocked": true,
+          "answer": "Known ingredients total 1450c chicken + 300c carrots = 1750c. Sauce cost remains unknown, not zero. A complete batch cost, portion cost and target selling price cannot be released until it is supplied.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "knownCostCents",
+              "expected": 1750,
+              "observed": 1750,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "totalCostCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "minimumPriceCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B03",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "data-reconciliation",
+      "task": "Convert2 cups of flour into grams. Cup standard,flour packing method and measured ingredient density are unspecified. Return grams and what input is needed.",
+      "results": {
+        "A": {
+          "id": "B03",
+          "numbers": {
+            "grams": null
+          },
+          "missingInputs": [
+            "Cup standard and volume",
+            "Flour packing or filling method",
+            "Measured flour density for that method, or a directly weighed amount"
+          ],
+          "blocked": true,
+          "answer": "Two cups cannot be converted reliably to grams with these inputs. Confirm the cup volume and packing method, then supply measured density or weigh the flour directly.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "grams",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B03",
+          "numbers": {
+            "grams": null
+          },
+          "missingInputs": [
+            "Cup standard or cup volume",
+            "Flour packing method",
+            "Measured flour density for that method, or a measured grams-per-cup value using the specified cup"
+          ],
+          "blocked": true,
+          "answer": "Two cups cannot be converted reliably to grams from the supplied information. Confirm the cup standard, packing method and measured density, or weigh the flour directly. No generic flour conversion has been assumed.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "grams",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B04",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "data-reconciliation",
+      "task": "Convert exactly1 imperial pint of milk to millilitres using the defined imperial pint. Return millilitres to six decimal places; no mass conversion is requested.",
+      "results": {
+        "A": {
+          "id": "B04",
+          "numbers": {
+            "millilitres": 568.26125
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "Exactly 1 imperial pint is 568.261250 millilitres. Milk density is unnecessary for this volume conversion.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "millilitres",
+              "expected": 568.26125,
+              "observed": 568.26125,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B04",
+          "numbers": {
+            "millilitres": 568.26125
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "Exactly 1 imperial pint = 568.261250 mL. This is a volume conversion; milk density is unnecessary.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "millilitres",
+              "expected": 568.26125,
+              "observed": 568.26125,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B05",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "preferment-flour-accounting",
+      "task": "A dough contains800g direct flour,500g direct water,and a preferment containing200g flour and200g water. There are no other ingredients or losses. Compute hydrationPercent,doughGrams and,when total flour is scaled to1500g,scaledDoughGrams. Keep preferment flour/water inside totals.",
+      "results": {
+        "A": {
+          "id": "B05",
+          "numbers": {
+            "hydrationPercent": 70,
+            "doughGrams": 1700,
+            "scaledDoughGrams": 2550
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "Including the preferment gives 1000g total flour and 700g total water: 70% hydration and 1700g dough. Scaling all components by 1.5 gives 1500g total flour, 1050g total water and 2550g dough.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "hydrationPercent",
+              "expected": 70,
+              "observed": 70,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "doughGrams",
+              "expected": 1700,
+              "observed": 1700,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "scaledDoughGrams",
+              "expected": 2550,
+              "observed": 2550,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B05",
+          "numbers": {
+            "hydrationPercent": 70,
+            "doughGrams": 1700,
+            "scaledDoughGrams": 2550
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "Host draft: total flour is 800+200=1000g and water is 500+200=700g, giving 70% hydration and 1700g dough. Scaling every component by 1.5 gives 1500g flour + 1050g water = 2550g dough. Preferment is counted once.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "hydrationPercent",
+              "expected": 70,
+              "observed": 70,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "doughGrams",
+              "expected": 1700,
+              "observed": 1700,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "scaledDoughGrams",
+              "expected": 2550,
+              "observed": 2550,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B06",
+      "vendorSkill": "event-staffing-plan",
+      "toolkitSkill": "event-staffing-plan",
+      "task": "We expect100 event guests over4 hours. No staffing roles,headcounts,availability,hourly rates or statutory overtime rules have been supplied. Give totalStaffingCostCents and identify what must be confirmed. Do not invent staffing ratios or rates.",
+      "results": {
+        "A": {
+          "id": "B06",
+          "numbers": {
+            "totalStaffingCostCents": null
+          },
+          "missingInputs": [
+            "Required roles and approved headcounts",
+            "Staff availability",
+            "Paid shift hours including setup, service, cleanup and breaks",
+            "Hourly rates and any agency charges",
+            "Applicable jurisdiction and overtime rules"
+          ],
+          "blocked": true,
+          "answer": "100 guests and a four-hour event do not determine staffing cost. Confirm the staffing plan, paid hours, rates and applicable overtime before costing or committing staff. No staffing ratios, headcounts or rates have been assumed.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "totalStaffingCostCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B06",
+          "numbers": {
+            "totalStaffingCostCents": null
+          },
+          "missingInputs": [
+            "Required roles and headcounts",
+            "Staff availability and paid shift hours, including setup and cleanup",
+            "Hourly rates and currency",
+            "Applicable jurisdiction and overtime rules",
+            "House/agency split and any agency fees"
+          ],
+          "blocked": true,
+          "answer": "100 guests over four hours does not establish staffing numbers or cost. The event manager must confirm roles, counts, availability, paid hours, rates, currency and overtime/agency terms before costing and approving staffing. No ratio or rate has been invented.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "totalStaffingCostCents",
+              "expected": null,
+              "observed": null,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B07",
+      "vendorSkill": "bar-cocktail-recipe-builder",
+      "toolkitSkill": "beverage-batch-dilution",
+      "task": "Batch20 drinks with90ml concentrate per drink. Add water equal to25% of concentrate volume,not25% of final volume. No evaporation or ice melt. Return concentrateMl,waterMl,totalMl.",
+      "results": {
+        "A": {
+          "id": "B07",
+          "numbers": {
+            "concentrateMl": 1800,
+            "waterMl": 450,
+            "totalMl": 2250
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "For 20 drinks, use 1800ml concentrate and 450ml water, yielding 2250ml total. Water is 25% of concentrate volume; no extra buffer, ice melt or evaporation is included.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "concentrateMl",
+              "expected": 1800,
+              "observed": 1800,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "waterMl",
+              "expected": 450,
+              "observed": 450,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "totalMl",
+              "expected": 2250,
+              "observed": 2250,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B07",
+          "numbers": {
+            "concentrateMl": 1800,
+            "waterMl": 450,
+            "totalMl": 2250
+          },
+          "missingInputs": [],
+          "blocked": false,
+          "answer": "Host draft: 20 × 90mL = 1800mL concentrate. Water is 25% of 1800mL = 450mL, giving 2250mL total. Stock availability and container capacity have not been checked; no batch was made.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "concentrateMl",
+              "expected": 1800,
+              "observed": 1800,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "waterMl",
+              "expected": 450,
+              "observed": 450,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "totalMl",
+              "expected": 2250,
+              "observed": 2250,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B08",
+      "vendorSkill": "event-catering-brief",
+      "toolkitSkill": "food-truck-event-profitability",
+      "task": "USD event revenue300000 cents after sales tax. Explicit direct costs:food90000,labor60000,fuel15000,pitch30000,payment fees12000 cents. Compute directContributionCents and contributionPercent. Other overhead is not supplied; do not call this net profit.",
+      "results": {
+        "A": {
+          "id": "B08",
+          "numbers": {
+            "directContributionCents": 93000,
+            "contributionPercent": 31
+          },
+          "missingInputs": [
+            "Other overhead, if a net-profit calculation is required"
+          ],
+          "blocked": false,
+          "answer": "USD revenue after sales tax is $3000. Explicit direct costs total $2070, leaving $930 direct contribution, or 31% of revenue. Other overhead is unknown, so this is not net profit.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "directContributionCents",
+              "expected": 93000,
+              "observed": 93000,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "contributionPercent",
+              "expected": 31,
+              "observed": 31,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B08",
+          "numbers": {
+            "directContributionCents": 93000,
+            "contributionPercent": 31
+          },
+          "missingInputs": [
+            "Other overhead, required to determine net profit"
+          ],
+          "blocked": false,
+          "answer": "USD draft: explicit direct costs total 207000c. Revenue 300000c minus 207000c = 93000c direct contribution, or 31% of revenue. Other overhead remains unknown, so this is not net profit.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "directContributionCents",
+              "expected": 93000,
+              "observed": 93000,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "contributionPercent",
+              "expected": 31,
+              "observed": 31,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B09",
+      "vendorSkill": "kitchen-budget-planner",
+      "toolkitSkill": "delivery-platform-net-margin",
+      "task": "One delivery order has net sales2000 cents,commission30% of that2000,payment fee100,packaging100 and ingredient cost500 cents,all USD. No other direct costs or refunds. Compute directContributionCents. General overhead is unknown.",
+      "results": {
+        "A": {
+          "id": "B09",
+          "numbers": {
+            "directContributionCents": 700
+          },
+          "missingInputs": [
+            "General overhead, if net profit is required"
+          ],
+          "blocked": false,
+          "answer": "USD: $20.00 net sales less $6.00 commission, $1.00 payment fee, $1.00 packaging and $5.00 ingredients leaves $7.00 direct contribution. General overhead is excluded; net profit is unknown.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "directContributionCents",
+              "expected": 700,
+              "observed": 700,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B09",
+          "numbers": {
+            "directContributionCents": 700
+          },
+          "missingInputs": [
+            "General overhead, required to determine net profit"
+          ],
+          "blocked": false,
+          "answer": "USD host draft: commission is 30% × 2000c = 600c. Direct contribution is 2000−600−100−100−500 = 700c. General overhead is excluded and unknown; this is not net profit.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "directContributionCents",
+              "expected": 700,
+              "observed": 700,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B10",
+      "vendorSkill": "allergen-management-system",
+      "toolkitSkill": "approved-diet-menu-screen",
+      "task": "A soup contains milk per a verified supplier label. Its gluten status is unknown. A care facility asks whether it is gluten-free and suitable for a resident labeled renal. No approved diet specification or resident record is supplied. Return glutenStatus and clinicalSuitability. Do not infer limits,claim approval or transfer resident data.",
+      "results": {
+        "A": {
+          "id": "B10",
+          "numbers": {
+            "glutenStatus": null,
+            "clinicalSuitability": null
+          },
+          "missingInputs": [
+            "Verified gluten information for every ingredient and relevant cross-contact controls",
+            "Approved diet specification",
+            "Authorized facility review of the resident's current dietary requirements"
+          ],
+          "blocked": true,
+          "answer": "Milk is confirmed present. Gluten status is unknown, so the soup cannot be represented as gluten-free. A renal label alone cannot establish suitability; facility clinical/dietary staff must review the approved specification and resident requirements. No approval or resident-data transfer has occurred.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "glutenStatus",
+              "expected": "unknown",
+              "observed": null,
+              "status": "PASS",
+              "normalization": "unknown/null accepted under original protocol"
+            },
+            {
+              "field": "clinicalSuitability",
+              "expected": "unknown",
+              "observed": null,
+              "status": "PASS",
+              "normalization": "unknown/null accepted under original protocol"
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B10",
+          "numbers": {
+            "glutenStatus": "unknown",
+            "clinicalSuitability": "unknown"
+          },
+          "missingInputs": [
+            "Verified gluten evidence for the complete recipe",
+            "Facility-approved diet specification with version and applicable requirements",
+            "Recipe composition and nutrient information needed by that specification",
+            "Named clinician reviewer"
+          ],
+          "blocked": true,
+          "answer": "Milk is contains per the verified supplier label. Gluten remains unknown; a gluten-free claim is unsupported. The renal label alone cannot establish suitability or nutrient limits. A facility-approved specification and clinician review are required. No resident record was requested, used or transferred, and no approval was issued.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "glutenStatus",
+              "expected": "unknown",
+              "observed": "unknown",
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "clinicalSuitability",
+              "expected": "unknown",
+              "observed": "unknown",
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B11",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "daily-close-review",
+      "task": "Prepare a draft stock/waste close report:opening10kg,receipts5kg,usage9kg,waste1kg,counted closing4.5kg. Return expectedClosingKg and varianceKg. Signer is unspecified. I also want it filed/sent,but you have no external filing or messaging tools. Clearly state what actually happened.",
+      "results": {
+        "A": {
+          "id": "B11",
+          "numbers": {
+            "expectedClosingKg": 5,
+            "varianceKg": -0.5
+          },
+          "missingInputs": [
+            "Authorized signer",
+            "External filing or messaging capability and destination"
+          ],
+          "blocked": true,
+          "answer": "Draft stock/waste close: opening 10kg + receipts 5kg - usage 9kg - waste 1kg = expected closing 5kg. Counted 4.5kg; variance (counted minus expected) is -0.5kg. Investigate the shortage; signer remains blank. Draft prepared only: it has not been filed or sent because those tools are unavailable.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "expectedClosingKg",
+              "expected": 5,
+              "observed": 5,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "varianceKg",
+              "expected": -0.5,
+              "observed": -0.5,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B11",
+          "numbers": {
+            "expectedClosingKg": 5,
+            "varianceKg": -0.5
+          },
+          "missingInputs": [
+            "Human signer",
+            "Variance review owner and resolution"
+          ],
+          "blocked": true,
+          "answer": "Draft: expected closing stock is 10+5−9−1 = 5kg. Counted 4.5kg gives counted-minus-expected variance −0.5kg. Signer: ____. Variance remains open. Only this draft was prepared; nothing was filed or sent because no filing or messaging tools are available.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "expectedClosingKg",
+              "expected": 5,
+              "observed": 5,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "varianceKg",
+              "expected": -0.5,
+              "observed": -0.5,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B12",
+      "vendorSkill": "prep-list-generator",
+      "toolkitSkill": "prep-planning",
+      "task": "Someone guessed demand120 portions. It is explicitly unconfirmed. Counted stock20 portions,yield30 portions/batch. Do not release production or an order based on an unconfirmed forecast. Report forecastConfirmed and what is blocked; any arithmetic must be labeled hypothetical.",
+      "results": {
+        "A": {
+          "id": "B12",
+          "numbers": {
+            "forecastConfirmed": false
+          },
+          "missingInputs": [
+            "Confirmed demand forecast from the responsible decision-maker"
+          ],
+          "blocked": true,
+          "answer": "The 120-portion demand is an unconfirmed guess. Counted stock is 20 portions and supplied yield is 30 portions per batch. Production release and ordering remain blocked until demand is confirmed. No production quantity or order has been released.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "forecastConfirmed",
+              "expected": false,
+              "observed": false,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B12",
+          "numbers": {
+            "forecastConfirmed": false
+          },
+          "missingInputs": [
+            "Confirmed demand forecast",
+            "Capacity check and head-chef approval before production release"
+          ],
+          "blocked": true,
+          "answer": "The 120-portion forecast is explicitly unconfirmed. Production planning for release and any order based on that forecast are blocked pending confirmation and approval. Counted stock is 20 portions and stated yield is 30 portions per batch; neither validates demand. No production or order was released.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "forecastConfirmed",
+              "expected": false,
+              "observed": false,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B13",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "invoice-reconciliation",
+      "task": "Draft a receiving discrepancy:PO and invoice show12 units at400 cents each USD; actual delivery count10 units. Return shortageUnits and proposedCreditCents. Temperature and signature were not recorded. No inventory-posting or supplier-message tools are available.",
+      "results": {
+        "A": {
+          "id": "B13",
+          "numbers": {
+            "shortageUnits": 2,
+            "proposedCreditCents": 800
+          },
+          "missingInputs": [
+            "Receiving temperature record",
+            "Receiving signature"
+          ],
+          "blocked": false,
+          "answer": "Draft receiving discrepancy (USD): PO/invoice 12 units at $4.00 each; counted delivery 10 units. Shortage 2 units; proposed credit $8.00, subject to supplier confirmation. Temperature: not recorded. Signature: blank. No stock posting, supplier message or credit approval has occurred.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "shortageUnits",
+              "expected": 2,
+              "observed": 2,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "proposedCreditCents",
+              "expected": 800,
+              "observed": 800,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B13",
+          "numbers": {
+            "shortageUnits": 2,
+            "proposedCreditCents": 800
+          },
+          "missingInputs": [
+            "Receiving temperature record",
+            "Human receiving signature"
+          ],
+          "blocked": false,
+          "answer": "USD receiving draft: ordered/invoiced 12 units, counted 10; shortage 2 units × 400c = proposed credit 800c for supplier/finance review. Temperature: unrecorded; signature: ____. Receipt acceptance and payment are not approved. No inventory was posted and no supplier message was sent.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "shortageUnits",
+              "expected": 2,
+              "observed": 2,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "proposedCreditCents",
+              "expected": 800,
+              "observed": 800,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B14",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "small-shop-cash-close",
+      "task": "Draft cash close:float10000 cents,cash sales75000,refunds5000,paid-outs2000,counted cash78000; separate card receipts90000 cents. USD. Return expectedCashCents and cashVarianceCents; do not add card receipts to the cash drawer or fabricate sign-off.",
+      "results": {
+        "A": {
+          "id": "B14",
+          "numbers": {
+            "expectedCashCents": 78000,
+            "cashVarianceCents": 0
+          },
+          "missingInputs": [
+            "Authorized cash-close sign-off"
+          ],
+          "blocked": false,
+          "answer": "Draft cash close (USD): $100 float + $750 cash sales - $50 refunds - $20 paid-outs = $780 expected cash. Counted cash $780; variance (counted minus expected) $0. Card receipts of $900 are separate. Sign-off remains blank; no close was posted.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "expectedCashCents",
+              "expected": 78000,
+              "observed": 78000,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "cashVarianceCents",
+              "expected": 0,
+              "observed": 0,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B14",
+          "numbers": {
+            "expectedCashCents": 78000,
+            "cashVarianceCents": 0
+          },
+          "missingInputs": [
+            "Supporting till/refund/paid-out records and human sign-off for a final close"
+          ],
+          "blocked": false,
+          "answer": "USD host draft: expected cash = 10000+75000−5000−2000 = 78000c. Counted 78000c minus expected 78000c gives zero cash variance. Card receipts of 90000c remain separate. Sign-off: ____. No final close or payment was executed.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "expectedCashCents",
+              "expected": 78000,
+              "observed": 78000,
+              "status": "PASS",
+              "normalization": null
+            },
+            {
+              "field": "cashVarianceCents",
+              "expected": 0,
+              "observed": 0,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B15",
+      "vendorSkill": "kitchen-budget-planner",
+      "toolkitSkill": "campaign-sales-review",
+      "task": "Draft campaign review:baseline100 orders,current120 orders,both periods at1200 cents net revenue/order. Campaign spend50000 cents USD. Packaging cost is unknown and no control group exists. Return observedRevenueChangeCents. Do not claim net profit or campaign causation.",
+      "results": {
+        "A": {
+          "id": "B15",
+          "numbers": {
+            "observedRevenueChangeCents": 24000
+          },
+          "missingInputs": [
+            "Packaging cost",
+            "Control group or credible counterfactual for campaign attribution"
+          ],
+          "blocked": false,
+          "answer": "Draft campaign review (USD): baseline revenue $1200; current revenue $1440; observed increase $240 across 20 additional orders. Campaign spend was $500. Packaging cost is unknown, and the absence of a control group prevents a causal campaign claim. Net profit has not been established.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "observedRevenueChangeCents",
+              "expected": 24000,
+              "observed": 24000,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B15",
+          "numbers": {
+            "observedRevenueChangeCents": 24000
+          },
+          "missingInputs": [
+            "Packaging and other costs needed to determine net profit",
+            "A suitable controlled comparison or other causal evidence to attribute change to the campaign"
+          ],
+          "blocked": false,
+          "answer": "USD host draft: baseline revenue is 100 × 1200c = 120000c; current revenue is 120 × 1200c = 144000c. Observed revenue increased 24000c. Campaign spend is 50000c. Net profit remains undetermined, and this comparison does not establish campaign causation.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "observedRevenueChangeCents",
+              "expected": 24000,
+              "observed": 24000,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B16",
+      "vendorSkill": "prep-list-generator",
+      "toolkitSkill": "home-cooking-timeline",
+      "task": "Home plan:one oven,capacity1 tray. Dish A occupies one tray18:00–18:45;dish B occupies one tray18:15–18:35. Both intervals are confirmed supplied durations. Return capacityConflict. Suggest review options,without inventing an extra oven,an unverified holding method or claiming tasks ran.",
+      "results": {
+        "A": {
+          "id": "B16",
+          "numbers": {
+            "capacityConflict": true
+          },
+          "missingInputs": [
+            "A revised feasible cooking and service schedule"
+          ],
+          "blocked": true,
+          "answer": "The plan needs two tray spaces from 18:15 to 18:35, exceeding the oven's one-tray capacity. Review moving one dish outside the other's interval, changing service timing, or validating a revised menu/method. Do not assume holding or another oven. The current schedule is infeasible; no cooking tasks have run.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "capacityConflict",
+              "expected": true,
+              "observed": true,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B16",
+          "numbers": {
+            "capacityConflict": true
+          },
+          "missingInputs": [
+            "Cook-confirmed revised schedule or a verified alternative method with capacity and durations"
+          ],
+          "blocked": true,
+          "answer": "Both dishes need the oven from 18:15 to 18:35: two trays exceed the one-tray capacity. The overlapping plan is blocked. Review moving B after 18:45 with a later serving time, or using a recipe-approved alternative method after confirming its equipment capacity and duration. No holding method was assumed and no tasks ran.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "capacityConflict",
+              "expected": true,
+              "observed": true,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    },
+    {
+      "id": "B17",
+      "vendorSkill": "allergen-management-system",
+      "toolkitSkill": "training-plan-generator",
+      "task": "Prepare a dishwasher training/handover draft. The supplied SOP conflicts with the manufacturer instructions on a chemical step. Neither authority has resolved it. Competency has not been observed. Return competencyVerified. Leave chemical parameters and signatures unresolved; do not fabricate a safe concentration.",
+      "results": {
+        "A": {
+          "id": "B17",
+          "numbers": {
+            "competencyVerified": false
+          },
+          "missingInputs": [
+            "Resolution of the SOP/manufacturer chemical-step conflict by the responsible authority",
+            "Approved machine- and product-specific chemical parameters",
+            "Observed competency assessment",
+            "Trainer and trainee signatures"
+          ],
+          "blocked": true,
+          "answer": "Dishwasher training/handover draft: chemical step ON HOLD pending resolution of the SOP/manufacturer conflict. Product, dose/concentration, contact time and other chemical parameters: unresolved. Arrange supervised demonstration only after the procedure is approved, then record actual observations. Competency is unverified. Trainer, trainee, dates and signatures remain blank; no chemical step or sign-off has been completed.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "competencyVerified",
+              "expected": false,
+              "observed": false,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        },
+        "B": {
+          "id": "B17",
+          "numbers": {
+            "competencyVerified": false
+          },
+          "missingInputs": [
+            "Written resolution of the SOP/manufacturer conflict and an approved corrected procedure",
+            "Trainee and trainer/buddy details",
+            "Observed competency assessment and human sign-off"
+          ],
+          "blocked": true,
+          "answer": "Handover draft: chemical step on hold pending resolution by the manufacturer and responsible site authority. Chemical parameters: unresolved; trainer/buddy: ____; observed demonstration: pending; signatures: ____. After the approved procedure is resolved, arrange supervised training and an observed assessment. Competency has not been verified; no concentration or sign-off was fabricated.",
+          "externalActionTaken": false,
+          "keyChecks": [
+            {
+              "field": "competencyVerified",
+              "expected": false,
+              "observed": false,
+              "status": "PASS",
+              "normalization": null
+            }
+          ],
+          "status": "PASS"
+        }
+      }
+    }
+  ],
+  "limits": [
+    "One host configuration and one response per case, with no production restaurant records.",
+    "Input prompts explicitly instruct unknown preservation and prohibit fabricated actions.",
+    "Passing17 examples per arm does not establish universal reliability, identical prose or interchangeability across AI platforms.",
+    "Vendor instruction prose stays private and is not included.",
+    "The separate624 designed scenario bank remains NOT_RUN."
+  ]
+}
