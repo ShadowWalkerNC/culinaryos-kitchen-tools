@@ -1,0 +1,13 @@
+{
+  "version": "0.3.0-rc.3",
+  "status": "PASS",
+  "checks": [
+    "Phone: direct versioned skills download first; three starter choices with remaining21 collapsed",
+    "Phone: real prompt clipboard copy and minimum48px button height",
+    "All24 journeys remain available; care-specific review boundary retained",
+    "Candidate installation copies displayed version; previous stable is explicitly labeled",
+    "Denied clipboard access selects the correct field and offers manual copy",
+    "Phone390px and desktop1440px layouts have no page overflow"
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,61 @@
+// Owned Chrome interaction checks for the public first-use page; synthetic inputs only.
+import assert from 'node:assert/strict';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {join} from 'node:path';
+import {startPublicServer} from '../dist/server/publicHttp.js';
+import {VERSION} from '../dist/version.js';
+
+const output=process.env.KITCHEN_BROWSER_OUTPUT;
+if(!output)throw Error('Choose an evidence output directory');
+mkdirSync(output,{recursive:true});
+const {chromium}=await import(process.env.KITCHEN_PLAYWRIGHT_MODULE??'playwright-core');
+const server=startPublicServer({port:32008,host:'127.0.0.1'});
+assert.equal(await server.ready,true);
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const result={version:VERSION,status:'FAIL',checks:[],pageErrors:[]};let page;
+try{
+ const context=await browser.newContext({viewport:{width:390,height:844},permissions:['clipboard-read','clipboard-write']});
+ page=await context.newPage();page.setDefaultTimeout(7000);page.on('pageerror',error=>result.pageErrors.push(error.message));
+ await page.goto('http://127.0.0.1:32008/');
+ const download=page.getByRole('link',{name:'Download skills and boilerplates only',exact:true});
+ assert.ok((await download.getAttribute('href')).endsWith(`/v${VERSION}/chef-intelligence-skills-${VERSION}.zip`));
+ const primary=page.getByRole('link',{name:'Download skills ZIP',exact:true});
+ assert.equal(await primary.getAttribute('href'),await download.getAttribute('href'));
+ assert.ok((await primary.boundingBox()).height>=48);
+ assert.ok(await page.evaluate(()=>Boolean(document.querySelector('#skills').compareDocumentPosition(document.querySelector('#start'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+ assert.equal(await page.locator('#quick-starts > details').count(),3);
+ assert.equal(await page.locator('#more-starts details').count(),21);
+ assert.equal(await page.locator('#more-starts summary').first().isVisible(),true);
+ assert.equal(await page.locator('#more-starts details').first().isVisible(),false);
+ result.checks.push('Phone: direct versioned skills download first; three starter choices with remaining21 collapsed');
+ await page.locator('[data-starter="menu-cost"] > summary').click();
+ await page.locator('[data-copy="prompt-menu-cost"]').click();
+ assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),await page.locator('#prompt-menu-cost').inputValue());
+ assert.ok((await page.locator('[data-copy="prompt-menu-cost"]').boundingBox()).height>=48);
+ result.checks.push('Phone: real prompt clipboard copy and minimum48px button height');
+ await page.locator('#more-starts > summary').click();
+ await page.locator('[data-starter="care-menu"] > summary').click();
+ assert.match(await page.locator('#prompt-care-menu').inputValue(),/Do not infer renal/);
+ result.checks.push('All24 journeys remain available; care-specific review boundary retained');
+ await page.locator('#install details').first().locator('summary').click();
+ const install=await page.locator('#codex-install').inputValue();
+ assert.ok(install.includes('--ref v'+VERSION));assert.ok(!install.includes('codex/initial-release'));
+ await page.locator('[data-copy="codex-install"]').click();
+ assert.equal((await page.evaluate(()=>navigator.clipboard.readText())).replaceAll('\r\n','\n'),install.replaceAll('\r\n','\n'));
+ result.checks.push('Candidate installation copies displayed version; previous stable is explicitly labeled');
+ await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{value:{writeText:()=>Promise.reject(new Error('Synthetic refusal'))},configurable:true}));
+ await page.locator('[data-copy="codex-install"]').click();
+ assert.match(await page.locator('#copy-status').textContent(),/Select and copy/);
+ assert.equal(await page.evaluate(()=>document.activeElement.id),'codex-install');
+ result.checks.push('Denied clipboard access selects the correct field and offers manual copy');
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.screenshot({path:join(output,'interaction-phone.png'),fullPage:true});
+ await page.goto('http://127.0.0.1:32008/');
+ await page.screenshot({path:join(output,'phone.png')});
+ await page.setViewportSize({width:1440,height:1000});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.screenshot({path:join(output,'desktop.png')});
+ result.checks.push('Phone390px and desktop1440px layouts have no page overflow');
+ assert.deepEqual(result.pageErrors,[]);result.status='PASS';
+}catch(error){result.error=error.stack;process.exitCode=1;if(page)await page.screenshot({path:join(output,'failure.png')}).catch(()=>{});}
+finally{await browser.close();await server.close();writeFileSync(join(output,'results.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));}

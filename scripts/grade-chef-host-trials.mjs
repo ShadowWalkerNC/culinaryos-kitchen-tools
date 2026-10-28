@@ -1,6 +1,7 @@
 // Grade previously generated host answers against keys withheld from both trial agents.
 // Requires explicit private input; publishes original prompts/answers and hashes, never vendor instructions.
 import{readFileSync,writeFileSync,statSync}from'node:fs';import{join}from'node:path';import{createHash}from'node:crypto';import assert from'node:assert/strict';import{VERSION}from'../dist/version.js';
+if(VERSION!=='0.3.0-rc.2')throw Error('Historical rc.2 protocol: check out tag v0.3.0-rc.2 to reproduce. Do not relabel retained outputs as new-version executions.');
 const dir=process.argv[2];if(!dir)throw Error('Supply the private trial directory');const read=p=>readFileSync(join(dir,p),'utf8'),hash=p=>createHash('sha256').update(read(p)).digest('hex');
 const keys=JSON.parse(read('WITHHELD_KEYS_DO_NOT_READ.json')),map=JSON.parse(read('trial-map.json')),arms={A:JSON.parse(read('arm-A-output.json')),B:JSON.parse(read('arm-B-output.json'))};
 assert.equal(map.length,17);const representationDifferences=[];

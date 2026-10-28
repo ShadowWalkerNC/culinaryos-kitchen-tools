@@ -4,6 +4,7 @@ import{WORKFLOW_CATALOG}from'../dist/workflows/catalog.js';import{getStarted}fro
 import{VERSION}from'../dist/version.js';
 import{publicHandlers}from'../dist/mcp/publicTools.js';import{convertQuantity}from'../dist/core/conversion.js';import{calculateMenuMargins,calculateBakeryFormula,calculateStaffingBudget}from'../dist/core/business.js';import{reconcileStock,calculateEventBudget,validatePrepCapacity}from'../dist/core/operations.js';
 const costRecipe=input=>publicHandlers.cost_recipe(input);
+if(VERSION!=='0.3.0-rc.2')throw Error('Historical rc.2 protocol: check out tag v0.3.0-rc.2 to reproduce. Record new comparisons under a new version and protocol.');
 const privateDir=process.argv[2];if(!privateDir)throw Error('Supply a private comparison directory; no authenticated connection or vendor snapshots are bundled.');
 const ids=JSON.parse(readFileSync(join(privateDir,'vendor-catalog-ids.json'),'utf8')),coverage=WORKFLOW_CATALOG.flatMap(w=>w.coverageId?[w.coverageId]:[]);assert.deepEqual([...ids].sort(),coverage.sort());
 const contracts=['dish-costing-calculator','recipe-bible-generator','event-staffing-plan','bar-cocktail-recipe-builder','event-catering-brief','kitchen-budget-planner','allergen-management-system','end-of-service-report','prep-list-generator'].map(id=>{const text=JSON.parse(readFileSync(join(privateDir,'vendor',id+'.json'),'utf8')).result;return{id,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')};});

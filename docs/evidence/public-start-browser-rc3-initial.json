@@ -1,0 +1,11 @@
+{
+  "version": "0.3.0-rc.3",
+  "status": "FAIL",
+  "checks": [
+    "Phone: direct versioned skills download first; three starter choices with remaining21 collapsed",
+    "Phone: real prompt clipboard copy and minimum48px button height",
+    "All24 journeys remain available; care-specific review boundary retained"
+  ],
+  "pageErrors": [],
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref v0.3.0-rc.3\\r\\n' +\n- 'codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref v0.3.0-rc.3\\n' +\n    'codex plugin add kitchen-tools@open-kitchen-toolkit'\n\n    at file:///C:/Users/white/Documents/ChatGPT/Axomai.ai/kitchen-tools/scripts/test-public-start-browser.mjs:41:9"
+}

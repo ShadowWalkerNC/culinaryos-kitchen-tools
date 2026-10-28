@@ -1,1 +1,1 @@
-{"version":3,"file":"startPage.d.ts","sourceRoot":"","sources":["../../src/server/startPage.ts"],"names":[],"mappings":"AAEA,wBAAgB,YAAY,IAAG,MAAM,CAGpC;AACD,eAAO,MAAM,cAAc,4fAA0f,CAAC"}
+{"version":3,"file":"startPage.d.ts","sourceRoot":"","sources":["../../src/server/startPage.ts"],"names":[],"mappings":"AAOA,wBAAgB,YAAY,IAAG,MAAM,CAKpC;AAED,eAAO,MAAM,cAAc,4fAA0f,CAAC"}

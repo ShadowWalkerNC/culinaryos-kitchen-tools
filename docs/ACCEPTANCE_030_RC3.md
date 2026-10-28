@@ -1,0 +1,13 @@
+# Chef Intelligence — 0.3.0-rc.3 polish acceptance
+
+This candidate changes first-use presentation and packaging. It preserves kitchen-tools, all118 workflow IDs, the21 public tools, calculations, private-workspace behavior and the existing personal plugin identity/audience. No new operational integration or clinical instruction is introduced.
+
+Changes: skills-only download first; three initial public-page journeys with21 more available on request; shorter copyable task prompts; current counts; clear candidate-versus-stable installation; task-to-file quick start; plain-language HTML-menu-to-PDF instructions; versioned release-evidence links.
+
+Executed local checks:175 software tests/31 suites passed, typecheck/build passed,624 designed-case consistency passed, reference MCP retrieval/discovery/calculation/private-boundary checks passed. Six owned Chrome checks passed on390px phone and1440px desktop: direct versioned download, three-plus21 choices, real clipboard copy/48px button height, retained care boundary, candidate/stable installation and denied-clipboard fallback. See [browser results](evidence/public-start-browser-rc3.json). The initial Windows clipboard assertion expected LF but the clipboard returned CRLF; command content was intact. The assertion now normalizes line endings; [initial failure](evidence/public-start-browser-rc3-initial.json) is retained.
+
+The release publication receipt separately records package structure/hash/link verification, deployment and actual downloaded package smoke tests. A check is executed evidence only when its result is recorded.
+
+The118 skill instruction texts are byte-for-byte unchanged from the actual anonymously downloaded0.3.0-rc.2 package. Its archive hash and individual skill hashes are retained in evidence/skill-content-baseline-rc2.json. The portable builder carries prior comparison reports only when every skill hash still matches; otherwise it leaves prior host evidence out. The17 paired scenarios remain explicitly0.3.0-rc.2 results, not new0.3.0-rc.3 model executions. They compare two instruction-guided arms in the same host, not AxomAI-hosted inference, and do not establish universal reliability or superiority.
+
+Remaining limits:624 separate designed model cases remain NOT_RUN; fresh native-client model execution across every named platform is unverified; live CulinaryOS API/sign-in integration is deferred; Ross Manor requires its own privacy/source review and authorization. Public GitHub downloads do not imply an OpenAI directory listing. Referenced documents keep their own licenses. No proprietary vendor instructions, restaurant records or credentials belong in distribution.

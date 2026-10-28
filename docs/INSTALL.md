@@ -1,38 +1,50 @@
 # Use Chef Intelligence — CulinaryOS Interagency
 
-## Recommended: skills and boilerplates only
+## Skills and templates: the quickest start
 
-Download `chef-intelligence-skills-0.3.0-rc.2.zip` from the [candidate release](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/tag/v0.3.0-rc.2). Read START_HERE.md, then the relevant skill. Paste it into your AI or use its supported file/project-instruction feature. No runtime, MCP or new toolkit account is required. Provider accounts and charges still apply; there is no universal ZIP-install interface.
+**[Download the skills ZIP, version 0.3.0-rc.3](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.3/chef-intelligence-skills-0.3.0-rc.3.zip)**.
 
-Optional connected adapters follow below. The stable Git marketplace commands remain on the previous stable source. To opt into this candidate use the same marketplace name with `--ref codex/chef-intelligence-package`; verify the actual installed version and reopen the host.
+Extract it and open `START_HERE.md`. Choose one skill or template, attach or paste it into your AI and describe the task. `INDEX.md` lists skills; `prompts/STARTERS.md` supplies 24 guided prompts. For a plain menu, follow `boilerplates/menus/README.md`: fill a supplied HTML layout, review it and print to PDF from your browser.
 
-The public GitHub marketplace below is a directly installable community release. It is separate from an OpenAI-reviewed public directory listing. No toolkit account or model key is needed; your AI client's account requirements apply.
+This route requires no Node installation, MCP connection or extra toolkit account. Use your client's supported file or project-instruction features. It is a reference package, not one universal installer. AI-provider accounts, permissions and charges still apply.
 
-## Codex CLI and desktop
+## Optional: connected tools
 
-With Codex installed, run these two commands:
+The [public setup page](https://culinaryos-kitchen-tools-production.up.railway.app/#connect) provides the no-authentication MCP endpoint and client configurations. Merge the relevant fragment into existing settings; keep unrelated connections intact. The public service is stateless and cannot read private workspaces.
+
+### Codex candidate: new installation
+
+These commands select the displayed candidate tag and preserve the existing `kitchen-tools` identity:
 
 ```sh
-codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref codex/initial-release
+codex plugin marketplace add ShadowWalkerNC/culinaryos-kitchen-tools --ref v0.3.0-rc.3
 codex plugin add kitchen-tools@open-kitchen-toolkit
 ```
 
-Restart the desktop app or start a new Codex session after installation so it can load the newly enabled plugin. Check `codex plugin list --marketplace open-kitchen-toolkit --json`: the toolkit should say `installed: true` and `enabled: true`. A cached package directory alone does not establish installation.
+Start a fresh Codex session afterward. Check `codex plugin list --marketplace open-kitchen-toolkit --json`; verify the actual version, `installed: true` and `enabled: true`. A cached folder alone is not installation evidence. CLI commands were checked against the available Codex help; fresh installation/model execution remains subject to the [compatibility evidence](COMPATIBILITY.md).
 
-In a fresh chat, select Open Kitchen Toolkit and say: **“Show me how to use Open Kitchen Toolkit.”** Then try: **“Use the toolkit to convert32 ounces to pounds.”** The known result is2 lb. If tools are unavailable or permissions are denied, report the host's actual status rather than claiming the calculation executed. Normal kitchen questions require no special keywords.
+### Existing Codex installation
 
-The plugin's `mcp.json` connects to the hosted public service. It does not require an absent `dist/` folder or a local dependency installation. The full source/runtime download remains available for optional local private workflows; use `clients/local.json` with explicitly selected paths for those. Do not publish a private local workspace connection.
+Inspect `codex plugin marketplace list --json` and the installed version first. `codex plugin marketplace upgrade open-kitchen-toolkit` refreshes the marketplace's **configured ref**; it does not switch an installation pinned to 0.2.4 onto the new candidate. To select another ref, use the marketplace source controls supported by your Codex version, then add/update the same plugin and verify its version. Check `codex plugin marketplace add --help` and `upgrade --help` before changing an existing source. Do not hand-edit caches or remove unrelated plugins.
 
-## ChatGPT website/mobile
+The previous stable release can be selected deliberately with `--ref v0.2.4`. It does not contain the newer candidate files. GitHub community downloads are separate from an OpenAI-reviewed directory listing.
 
-The existing personal plugin is saved under its original identity. Open its personal installation page while signed into the owning account: https://chatgpt.com/plugins/plugins_6ade6883fbe48191b7d6651289203e6d . Its actual availability depends on that account and surface; private account storage is not public-directory approval or proof of installation.
+### ChatGPT and other clients
 
-If your account offers custom remote MCP connections, use the hosted URL from the public setup page with no authentication. ChatGPT Work/workspace marketplace import and consumer website/mobile support differ. Do not assume the Codex CLI installation changes website or mobile installation state. A globally discoverable OpenAI directory release requires publisher verification, listing materials, portal checks/review and publication after approval.
+The existing personal plugin is updated in its owning account; private storage does not establish installation or public availability on every ChatGPT surface. If your account supports custom MCP connections, use the public URL with no authentication. Codex installation does not install a plugin on ChatGPT website/mobile.
 
-## Other AI clients
+Claude, Cursor, Gemini CLI and other supported MCP clients have separate connection routes on the setup page. Gemini CLI and the Gemini consumer website are distinct products. Clients without verified MCP support can use the skills ZIP as manual guidance. See [compatibility and remaining installation gates](COMPATIBILITY.md).
 
-Use the public setup page and `clients/` configurations for supported Claude, Cursor, Gemini CLI and other MCP clients. The Gemini consumer website is distinct from Gemini CLI. Clients without verified MCP support can use the downloadable Markdown playbook as manual guidance, without claiming live tools.
+### Check the connection
 
-## Ross Manor specialist
+Ask: **“Use the toolkit to convert 32 ounces to pounds.”** The known result is **2 lb**. Then ask for the `recipe-costing` workflow. A successful tool result establishes those calls; a model's unsupported claim does not. Respect the host's approval controls.
 
-For care-facility menus, use the separately installed Ross Manor Paperwork plugin alongside the toolkit. See [integration boundaries and test prompt](ROSS_MANOR_INTEGRATION.md). The public kitchen connection does not expose its local renderer or facility records.
+## Optional: private local workspace
+
+Download the [full runtime ZIP](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.3/open-kitchen-toolkit-0.3.0-rc.3.zip), extract it and open the launcher for Windows, macOS or Linux in `launchers/`. Node 24+ is required. The launcher checks prerequisites and installs locked runtime dependencies when missing.
+
+Use `clients/local.json` only with your deliberately selected absolute toolkit/workspace paths. Keep private connections private. Enabled schedules run while the workspace is open; no background AI provider is added.
+
+## CulinaryOS and Ross Manor
+
+CulinaryOS uses separately selected tenant-bound export files in this release. Live API/sign-in synchronization remains deferred. Ross Manor Paperwork remains a separately authorized specialist; see [privacy and handoff boundaries](ROSS_MANOR_INTEGRATION.md). Installation does not authorize record sharing.

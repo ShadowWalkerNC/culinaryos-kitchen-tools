@@ -1,15 +1,25 @@
-# Chef Intelligence — part of CulinaryOS Interagency
+# Chef Intelligence — CulinaryOS Interagency
 
-Describe the task normally: “Cost this recipe”, “Help me fix this sauce”, “Make a clean menu” or “Help me write a closing report”. You do not need special keywords or a new toolkit account.
+Ask normally: “Cost this recipe”, “Help me fix this sauce” or “Make a clean menu.” No special keywords or new toolkit account are needed.
 
-1. Start with one task and the information you already have.
-2. Use one relevant skill or boilerplate. Ask only for the next necessary input.
-3. Get an answer, calculation or draft; review important facts and export only through tools actually available.
+1. Give your AI this page and one relevant skill or template.
+2. Describe the task and provide the records you have. Ask only for the next necessary input.
+3. Review the answer, calculation or draft. Save or export through tools actually available.
 
-**Any AI that accepts text or files:** read this page and INDEX.md, then open or paste the relevant skill. The skills-only package needs no runtime, login or MCP connection. It is a reference package, not a universal one-click installer.
+**Choose a starting file inside the extracted skills ZIP:**
 
-**Optional connected tools:** add the existing kitchen-tools MCP connection for deterministic calculations and clean menu rendering. Choose an explicit private local workspace only when you want imports, saved records, review tasks or enabled schedules.
+| Your task | File |
+|---|---|
+| Cost a recipe | `skills/recipe-costing/SKILL.md` |
+| Troubleshoot cooking | `skills/recipe-troubleshooting-log/SKILL.md` |
+| Make a clean menu | `boilerplates/menus/README.md` and one HTML layout |
 
-**One ecosystem:** Chef Intelligence supplies original kitchen skills and boilerplates. CulinaryOS provides separately authorized operational data/actions; the current adapter is file-based, not live sign-in synchronization. Ross Manor supplies separately authorized specialist paperwork. Pass source versions, unresolved items and review ownership; never share private records merely because another plugin is installed.
+For other tasks, open `INDEX.md`; ready-to-use prompts are in `prompts/STARTERS.md`. Blank reports are in `boilerplates/reports/`. Reading the source repository instead? Browse its [skill files](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/tree/codex/chef-intelligence-polish/skills); INDEX.md is generated inside the download.
 
-AI-provider accounts and charges still apply. Output quality varies by host/model and inputs. A structure-checked template, tested calculator and executed host trial are different evidence; consult verification/VERIFICATION.json. Unknown prices, measurements, allergen states and clinical requirements remain unresolved.
+Paste the selected text or attach files using your client's supported features. The skills ZIP is a reference package, not a universal installer. It needs no runtime or MCP connection. Your AI provider's accounts, permissions and charges still apply.
+
+**Optional tools:** the connected kitchen-tools plugin provides deterministic calculators and clean menu rendering. The separate local workspace supplies private imports, records, review tasks and enabled schedules. Manual files alone do not run those tools.
+
+**One ecosystem:** CulinaryOS currently uses selected, tenant-bound export files; live API synchronization is deferred. Ross Manor supplies separately authorized specialist paperwork. Handoffs carry source versions, unresolved items and review ownership. Installation never grants permission to share private records.
+
+Unknown prices, measurements, allergens and approved clinical requirements stay unknown. Never invent observations, signatures or a completed action. Outputs depend on the AI host and inputs. See verification/VERIFICATION.json for the difference between checked assets, calculator tests and bounded host trials.
