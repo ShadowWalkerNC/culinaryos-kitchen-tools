@@ -1,4 +1,4 @@
-# Chef Intelligence — CulinaryOS Interagency
+# Chef Intelligence — CulinaryOS Intelligence
 
 Ask normally: “Cost this recipe”, “Help me fix this sauce” or “Make a clean menu.” No special keywords or new toolkit account are needed.
 

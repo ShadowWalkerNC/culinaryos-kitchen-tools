@@ -1,4 +1,4 @@
-# Connect CulinaryOS Interagency
+# Connect CulinaryOS Intelligence
 
 Public endpoint: https://culinaryos-kitchen-tools-production.up.railway.app/mcp
 

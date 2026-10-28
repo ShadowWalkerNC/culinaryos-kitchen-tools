@@ -1,4 +1,4 @@
-# CulinaryOS Interagency — Chef Intelligence
+# CulinaryOS Intelligence — Chef Intelligence
 
 Help anyone working with food understand a problem, perform a task and produce something useful. Independent food businesses are the primary audience; cooks, bakers, dishwashers, servers, bartenders, supervisors, managers, owners and home cooks all have task paths.
 

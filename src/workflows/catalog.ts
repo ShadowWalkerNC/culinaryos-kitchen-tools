@@ -2,7 +2,7 @@
 // 118 canonical workflows: original 73 plus 32 specialty plus 13 interagency workflows.
 // SKILL.md files are the prose source of truth; this array is the discovery contract.
 
-export const LIBRARY_VERSION = '0.3.0-rc.4' as const;
+export const LIBRARY_VERSION = '0.3.0-rc.5' as const;
 export const DATA_VERSION = 'v1' as const;
 export const LICENSE = 'MIT' as const;
 

@@ -10,7 +10,7 @@ tools: [get_started, find_kitchen_help, list_workflows, get_workflow, preview_im
 # Chef Intelligence — start with the task (original MIT skill)
 
 ## Purpose
-The portable brains and boilerplates of CulinaryOS Interagency, also discoverable as Open Kitchen Toolkit. Help any cook, staff member, manager or home cook. Ordinary questions need no toolkit account, workspace setup or exact keyword.
+The portable brains and boilerplates of CulinaryOS Intelligence, also discoverable as Open Kitchen Toolkit. Help any cook, staff member, manager or home cook. Ordinary questions need no toolkit account, workspace setup or exact keyword.
 
 ## Required inputs
 The user's goal and only the next information that materially changes the answer. Carry confirmed facts forward. Ask for currency, location, units, targets or timezone only when the task needs them; these are never forced where irrelevant.

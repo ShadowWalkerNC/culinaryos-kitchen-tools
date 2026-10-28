@@ -1,9 +1,9 @@
-// CulinaryOS Interagency 0.3 journey packs: display grouping over the workflow catalog.
-// Public brand is CulinaryOS Interagency; Open Kitchen Toolkit is a recognized alias.
+// CulinaryOS Intelligence 0.3 journey packs: display grouping over the workflow catalog.
+// Public brand is CulinaryOS Intelligence; Open Kitchen Toolkit is a recognized alias.
 // Core 32 IDs per pack are fixed by the Interagency 0.3 library plan; every other
 // existing workflow is assigned to exactly one audience-sensible pack, no duplicates.
 
-export const BRAND = 'CulinaryOS Interagency' as const;
+export const BRAND = 'CulinaryOS Intelligence' as const;
 export const BRAND_ALIAS = 'Open Kitchen Toolkit' as const;
 
 export const PACK_IDS = [

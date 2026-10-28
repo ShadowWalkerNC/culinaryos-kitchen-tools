@@ -1,8 +1,8 @@
-# CulinaryOS Interagency — Chef Intelligence
+# CulinaryOS Intelligence — Chef Intelligence
 
 Practical kitchen skills and clean templates for cooks, restaurant teams and home cooks. Ask an ordinary question, work through one task and leave with an answer, calculation or usable draft.
 
-**[Download the skills and templates](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/chef-intelligence-skills-0.3.0-rc.4.zip)** · [Public setup](https://culinaryos-kitchen-tools-production.up.railway.app) · [Installation guide](docs/INSTALL.md)
+**[Download the skills and templates](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.5/chef-intelligence-skills-0.3.0-rc.5.zip)** · [Public setup](https://culinaryos-kitchen-tools-production.up.railway.app) · [Installation guide](docs/INSTALL.md)
 
 ## Start in a minute
 
@@ -16,9 +16,9 @@ No special keywords, toolkit account, subscription or MCP connection are require
 
 | Package | Use it for | Requirements |
 |---|---|---|
-| [Skills and templates](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/chef-intelligence-skills-0.3.0-rc.4.zip) | 118 original skills, 24 guided journeys, seven blank reports and four plain menu layouts | An AI that accepts text or files |
-| [Connected plugin](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/kitchen-tools-remote-plugin-0.3.0-rc.4.zip) | 21 public discovery, calculation and menu tools | A supported MCP client; see [compatibility evidence](docs/COMPATIBILITY.md) |
-| [Local workspace](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.4/open-kitchen-toolkit-0.3.0-rc.4.zip) | Private imports, linked drafts, approvals, tasks and enabled schedules | Node 24+ and the supplied Windows, macOS or Linux launcher |
+| [Skills and templates](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.5/chef-intelligence-skills-0.3.0-rc.5.zip) | 118 original skills, 24 guided journeys, seven blank reports and four plain menu layouts | An AI that accepts text or files |
+| [Connected plugin](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.5/kitchen-tools-remote-plugin-0.3.0-rc.5.zip) | 21 public discovery, calculation and menu tools | A supported MCP client; see [compatibility evidence](docs/COMPATIBILITY.md) |
+| [Local workspace](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/download/v0.3.0-rc.5/open-kitchen-toolkit-0.3.0-rc.5.zip) | Private imports, linked drafts, approvals, tasks and enabled schedules | Node 24+ and the supplied Windows, macOS or Linux launcher |
 
 Skills cover cooking, baking, menus, purchasing, inventory, costing, service, bar, people, events, marketing and care-kitchen screening against supplied approved requirements. [Purpose and coverage](docs/PRODUCT.md) · [Starter prompts](docs/GETTING_STARTED.md) · [Reference coverage](docs/KITCHEN_COVERAGE.json).
 
@@ -44,7 +44,7 @@ Missing prices, measurements, allergen states and facility requirements stay unr
 
 ## Release evidence and development
 
-Version **0.3.0-rc.4** fixes the missing library and composer icon using the existing CulinaryOS brand asset. It is a release candidate. [Current acceptance](docs/ACCEPTANCE_030_RC4.md) records executed checks and limits. The [0.3.0-rc.2 comparison](docs/evidence/chef-paired-host-results-rc2.json) retains 17 paired host scenarios using AxomAI instructions versus original toolkit instructions; it is prior-version evidence, not an AxomAI-hosted inference or universal-reliability certification. The separate 624-case designed bank remains NOT_RUN.
+Version **0.3.0-rc.5** adopts the CulinaryOS Intelligence name across the plugin and current interfaces. It is a release candidate. [Current acceptance](docs/ACCEPTANCE_030_RC5.md) records executed checks and limits. The [0.3.0-rc.2 comparison](docs/evidence/chef-paired-host-results-rc2.json) retains 17 paired host scenarios using AxomAI instructions versus original toolkit instructions; it is prior-version evidence, not an AxomAI-hosted inference or universal-reliability certification. The separate 624-case designed bank remains NOT_RUN.
 
 ```sh
 npm ci

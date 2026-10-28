@@ -208,7 +208,7 @@ export default function App(): React.ReactElement {
   const tab = h === '#/menus' ? 'menus' : h === '#/setup' ? 'setup' : h === '#/settings' ? 'settings' : h === '#/library' ? 'library' : h === '#/imports' ? 'imports' : h === '#/today' ? 'today' : h === '#/approvals' ? 'approvals' : 'recipes';
   return (
     <>
-      <header className="top"><h1>CulinaryOS Interagency</h1><a href="#/setup">Setup and connection check</a> · <a href="#/help">Help for every kitchen role</a></header>
+      <header className="top"><h1>CulinaryOS Intelligence</h1><a href="#/setup">Setup and connection check</a> · <a href="#/help">Help for every kitchen role</a></header>
       <nav className="tabs" aria-label="Views">
         <a href="#/recipes" aria-current={tab === 'recipes' ? 'page' : undefined}>Recipes</a>
         <a href="#/menus" aria-current={tab === 'menus' ? 'page' : undefined}>Menus</a>
