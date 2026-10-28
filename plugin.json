@@ -1,17 +1,17 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kitchen-tools",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "license": "MIT",
   "homepage": "https://culinaryos-kitchen-tools-production.up.railway.app",
   "repository": "https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools",
-  "description": "Free kitchen and restaurant guidance for every role, with transparent calculations, reports and clean menu templates.",
+  "description": "Chef Intelligence: portable kitchen skills and boilerplates, with optional tested calculation tools and CulinaryOS handoffs.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "CulinaryOS Interagency",
-        "shortDescription": "Kitchen help for every role",
-        "longDescription": "Free MIT workflows for cooks, bakers, dishwashers, service teams, managers, owners and home cooks. Explain, guide, calculate, create and review with explicit sources and capability limits. Open Kitchen Toolkit is a discovery alias. AI-provider requirements still apply.",
+        "shortDescription": "Chef Intelligence for kitchens",
+        "longDescription": "The portable brains and boilerplates of CulinaryOS Interagency. Describe a task, load one relevant original skill and ask only for the next necessary input. Use any AI accepting text; optional MCP adds tested calculations and clean menus. CulinaryOS and Ross Manor remain separately authorized adapters. AI-provider requirements apply.",
         "category": "Business & Operations",
         "capabilities": [],
         "defaultPrompt": [

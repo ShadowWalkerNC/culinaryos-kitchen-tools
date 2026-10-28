@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "Four boilerplates supply headings without invented dishes",
+    "Confirmed preview unlocks print",
+    "Fixed layout produces a printable PDF",
+    "Changed or missing prices invalidate reviewed output and block print",
+    "Phone has no horizontal page overflow",
+    "Emoji input rejected with visible validation"
+  ],
+  "errors": [],
+  "status": "PASS"
+}

@@ -1,0 +1,216 @@
+{
+  "version": "0.3.0-rc.2",
+  "checkedDate": "2026-10-27",
+  "method": "Fresh live AxomAI catalog/instruction retrieval compared with original toolkit contracts, plus independently keyed deterministic tool cases. Not a vendor inference run.",
+  "engineHashes": {
+    "dist/mcp/publicTools.js": "4ba791be035c607b269a9f83c878a75f17fd4c571180e4b11d8a5f9096445390",
+    "dist/core/business.js": "e6d305840b49dfa76dff8d2d041e5d8abedb9fdf5fa3e5d4a1597cbfbeff6952",
+    "dist/core/operations.js": "f5982c20f81a978fa4bdf4795de974469c5f953f9219d9cfa2be61668f119570",
+    "dist/core/conversion.js": "28b7668c050c5b9d4d9fee6763673870a7a8f94fb50d9eb2cef9d88377d5c883",
+    "dist/core/costing.js": "1f7cbc13e914866a5285e03f5b17ed250db808468b0374de89a470399cec83c0"
+  },
+  "vendorCatalogUseCases": 61,
+  "matchedBaselineUseCases": 61,
+  "additionalToolkitWorkflows": 57,
+  "privateContractSnapshots": [
+    {
+      "id": "dish-costing-calculator",
+      "bytes": 13782,
+      "sha256": "754ef59fec4c08f63e6aba1d3edbad88a86c0f956bb9fab3d2590f7157448b90"
+    },
+    {
+      "id": "recipe-bible-generator",
+      "bytes": 15036,
+      "sha256": "834db439a1d637160245983cb0e9eb804455ee6fb57f771d8d8922deb7f7b415"
+    },
+    {
+      "id": "event-staffing-plan",
+      "bytes": 7971,
+      "sha256": "7e12cf1e1a3c11cb1977d63dd055a3914d9449290949b7e432ea6faadf1725d3"
+    },
+    {
+      "id": "bar-cocktail-recipe-builder",
+      "bytes": 10197,
+      "sha256": "1060d262fe71340082afaf920454bc17a88a08bf5d2bb925f01a73fbe3a2dad7"
+    },
+    {
+      "id": "event-catering-brief",
+      "bytes": 7626,
+      "sha256": "12334ce8e62a88d1eef90379ed7da7b8011152f2d0ebbe41b1fac362e22f6f51"
+    },
+    {
+      "id": "kitchen-budget-planner",
+      "bytes": 10393,
+      "sha256": "052776262ef956ba25142ebca69fcfcac4f3b5ba10745316c240085453ddcfff"
+    },
+    {
+      "id": "allergen-management-system",
+      "bytes": 11158,
+      "sha256": "a445a4e9207b54c5329f753a3d6e46f204124f396fb70c0f8367db0647be8ff9"
+    },
+    {
+      "id": "end-of-service-report",
+      "bytes": 6881,
+      "sha256": "1797680d41d282da21dd5bad046a6caf44fd24945d51d50994f0c158a862291c"
+    },
+    {
+      "id": "prep-list-generator",
+      "bytes": 7337,
+      "sha256": "d98e87c5ea212790963082858da98cf2604c7675d2d19264cf1b23b09f4c791e"
+    }
+  ],
+  "executedDeterministicChecks": [
+    {
+      "name": "Complete recipe and explicit30 percent target",
+      "status": "PASS",
+      "observed": {
+        "batchCostCents": 1910,
+        "portionCostCents": 191,
+        "minimumNetPriceCents": 637
+      }
+    },
+    {
+      "name": "Missing price preserves partial cost and blocks full costing",
+      "status": "PASS",
+      "observed": {
+        "knownCostCents": 1750,
+        "completePortionCostAvailable": false
+      }
+    },
+    {
+      "name": "Ambiguous cups cannot become grams without ingredient factor",
+      "status": "PASS",
+      "observed": {
+        "blocked": true
+      }
+    },
+    {
+      "name": "Explicit imperial pint conversion",
+      "status": "PASS",
+      "observed": {
+        "amount": "568.26125",
+        "unit": "ml",
+        "basis": "defined dimensional conversion"
+      }
+    },
+    {
+      "name": "Preferment accounting and scaling",
+      "status": "PASS",
+      "observed": {
+        "hydrationPercent": "70",
+        "doughGrams": "1700",
+        "scaledDoughGrams": 2550
+      }
+    },
+    {
+      "name": "Missing staffing inputs cannot produce a budget",
+      "status": "PASS",
+      "observed": {
+        "unprovidedRolesRejected": true,
+        "missingRateTotal": null
+      }
+    },
+    {
+      "name": "Event direct contribution is not net profit",
+      "status": "PASS",
+      "observed": {
+        "directContributionCents": 93000,
+        "basis": "contribution against supplied costs, not verified net profit"
+      }
+    },
+    {
+      "name": "Delivery contribution from explicit supplied costs",
+      "status": "PASS",
+      "observed": {
+        "contributionCents": 700,
+        "note": "Host/harness supplied fee arithmetic; margin tool does not independently reconcile platform contracts."
+      }
+    },
+    {
+      "name": "Measured stock variance",
+      "status": "PASS",
+      "observed": {
+        "id": "stock",
+        "unit": "kg",
+        "status": "complete",
+        "expectedClosing": "5",
+        "countedClosing": "4.5",
+        "variance": "-0.5",
+        "unknown": []
+      }
+    },
+    {
+      "name": "Missing observed waste stays unknown",
+      "status": "PASS",
+      "observed": {
+        "complete": false,
+        "varianceAvailable": false
+      }
+    },
+    {
+      "name": "One oven overlap is detected",
+      "status": "PASS",
+      "observed": {
+        "feasible": false,
+        "conflicts": [
+          {
+            "resourceId": "oven",
+            "start": "2026-10-27T22:15:00.000Z",
+            "end": "2026-10-27T22:35:00.000Z",
+            "taskIds": [
+              "A",
+              "B"
+            ],
+            "reason": "simultaneous demand exceeds supplied capacity"
+          }
+        ],
+        "checkedTasks": 2,
+        "basis": "supplied intervals and capacity; no extra equipment, staff, time or permissions inferred"
+      }
+    }
+  ],
+  "policyIllustration": {
+    "portionCostCents": 191,
+    "sampledVendorDefaultFoodCostPercent": 28,
+    "requestedToolkitFoodCostPercent": 30,
+    "minimumAt28PercentCents": 683,
+    "minimumAtRequested30PercentCents": 637,
+    "notVendorModelOutput": true
+  },
+  "payloadAndCpu": {
+    "welcomeFull": {
+      "bytes": 24505,
+      "medianCpuMs": 0.004,
+      "p95CpuMs": 0.023
+    },
+    "welcomeQuick": {
+      "bytes": 3279,
+      "medianCpuMs": 0.008,
+      "p95CpuMs": 0.026
+    },
+    "helpFull": {
+      "bytes": 55291,
+      "medianCpuMs": 0.287,
+      "p95CpuMs": 0.593
+    },
+    "helpQuick": {
+      "bytes": 6767,
+      "medianCpuMs": 0.078,
+      "p95CpuMs": 0.123
+    }
+  },
+  "hostTrial": {
+    "designedPairs": 17,
+    "executedPairs": 0,
+    "status": "BLOCKED_ACCOUNT_USAGE_LIMIT",
+    "outputsClaimed": false
+  },
+  "limits": [
+    "Vendor instructions remain private; no proprietary prose bundled.",
+    "Instruction retrieval does not establish the vendor generated an answer.",
+    "The17 planned paired host scenarios are unexecuted; the624 designed bank remains NOT_RUN.",
+    "CPU/payload figures are local measurements, not end-to-end AI or network latency.",
+    "Different defaults are not a vendor-error or superiority finding.",
+    "Supplier fees, clinical suitability and narrative boilerplate quality need source-specific and host review."
+  ]
+}

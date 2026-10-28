@@ -16,6 +16,10 @@ export interface StarterSuggestion {
     matchedTokens: string[];
 }
 export declare const getStartedSchema: z.ZodObject<{
+    view: z.ZodDefault<z.ZodEnum<{
+        quick: "quick";
+        full: "full";
+    }>>;
     starterId: z.ZodOptional<z.ZodString>;
     completedSteps: z.ZodDefault<z.ZodArray<z.ZodNumber>>;
     goal: z.ZodOptional<z.ZodString>;

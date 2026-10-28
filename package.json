@@ -1,6 +1,6 @@
 {
   "name": "open-kitchen-toolkit",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "private": false,
   "license": "MIT",
   "type": "module",
@@ -19,7 +19,7 @@
     "mcp:public": "node dist/mcp/stdio.js --mode=public",
     "mcp:local": "node dist/mcp/stdio.js --mode=local",
     "cli": "node dist/cli/cli.js",
-    "package": "npm run build && node scripts/package.mjs",
+    "package": "npm run build && node scripts/package.mjs && node scripts/build-brains-package.mjs && node scripts/verify-brains-package.mjs",
     "check:scenarios": "node scripts/build-scenarios.mjs --check",
     "test:release": "node scripts/release-acceptance.mjs"
   },

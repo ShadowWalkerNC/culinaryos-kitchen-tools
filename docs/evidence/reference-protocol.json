@@ -1,10 +1,11 @@
 {
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0-rc.2",
   "host": "MCP SDK reference client; no generative model",
   "checks": [
     "21 public tools; local operations absent",
     "Role-aware discovery, reference records and clean-menu formatter execute through MCP",
     "Unknown workflow has machine-readable error flag",
+    "Compact welcome/help preserve full discovery and bound initial payload",
     "24 starter prompts, reported-step progression and partially blocked recipe conversion",
     "No workspace, database or files created by public package"
   ],
@@ -717,5 +718,5 @@
   "limits": [
     "Protocol and deterministic calculations, not native ChatGPT/Claude/Gemini/Cursor installation or an AI output-quality benchmark."
   ],
-  "checkedAt": "2026-10-27T19:27:44.158Z"
+  "checkedAt": "2026-10-28T00:11:39.468Z"
 }

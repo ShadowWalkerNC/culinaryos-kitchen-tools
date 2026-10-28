@@ -80,6 +80,11 @@ type Area = {
 };
 export declare const HELP_AREAS: Area[];
 export declare const helpSchema: z.ZodObject<{
+    view: z.ZodDefault<z.ZodEnum<{
+        quick: "quick";
+        full: "full";
+    }>>;
+    limit: z.ZodDefault<z.ZodNumber>;
     goal: z.ZodOptional<z.ZodString>;
     role: z.ZodOptional<z.ZodEnum<{
         cook: "cook";
@@ -128,8 +133,9 @@ export declare function findKitchenHelp(input?: unknown): {
     actions: readonly ["explain", "guide", "calculate", "create", "review"];
     matching: string;
     areas: {
+        questions: string[];
         status: CoverageState;
-        workflows: {
+        workflows: ({
             roles: ("cook" | "baker" | "dishwasher" | "server" | "bartender" | "supervisor" | "manager" | "owner" | "home-cook")[];
             establishments: ("bakery" | "food-truck" | "home" | "restaurant" | "cafe" | "catering" | "bar" | "institution")[];
             areas: string[];
@@ -139,7 +145,11 @@ export declare function findKitchenHelp(input?: unknown): {
             execution: string;
             id: string;
             available: boolean;
-        }[];
+        } | {
+            status: CoverageState;
+            id: string;
+            available: boolean;
+        })[];
         references: ({
             readonly id: "bc-kitchen";
             readonly title: "Basic Kitchen and Food Service Management";
@@ -212,7 +222,6 @@ export declare function findKitchenHelp(input?: unknown): {
         title: string;
         roles: readonly Role[];
         establishments: readonly Establishment[];
-        questions: string[];
         workflowIds: string[];
         outputs: string[];
         calculators: string[];

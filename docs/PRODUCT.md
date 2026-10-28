@@ -1,8 +1,12 @@
-# CulinaryOS Interagency
+# CulinaryOS Interagency — Chef Intelligence
 
 Help anyone working with food understand a problem, perform a task and produce something useful. Independent food businesses are the primary audience; cooks, bakers, dishwashers, servers, bartenders, supervisors, managers, owners and home cooks all have task paths.
 
 ## Start with the job
+
+Use [START_HERE.md](START_HERE.md). Answer simple questions directly. Discover at most three relevant choices with view quick when needed, then load one skill. Do not require workspace setup or a profile questionnaire for ordinary cooking questions. Prefer concise results and the next consequential missing input.
+
+Chef Intelligence is the portable brains/boilerplate layer. MCP calculations, a private local workspace, CulinaryOS operations and Ross Manor are optional adapters with separate permissions.
 
 Choose **Help for every kitchen role** in the local workspace, or ask the AI to call `find_kitchen_help` with your ordinary-language goal. Optional filters are role, establishment and action: explain, guide, calculate, create or review. The directory supplies representative questions, original workflow links, useful outputs, reference metadata and specific limitations. Word matching is deliberately transparent; it is not semantic search, calibrated confidence or proof that the task has been executed.
 

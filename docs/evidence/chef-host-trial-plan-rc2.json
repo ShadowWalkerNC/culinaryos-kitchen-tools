@@ -1,0 +1,111 @@
+{
+  "status": "BLOCKED_ACCOUNT_USAGE_LIMIT",
+  "executedPairs": 0,
+  "method": "Same-host instruction-following comparison; not a vendor inference endpoint",
+  "cases": [
+    {
+      "id": "B01",
+      "vendorSkill": "dish-costing-calculator",
+      "toolkitSkill": "recipe-costing",
+      "task": "USD. A recipe makes 10 portions using 2 kg chicken at725 cents/kg,1.2 kg carrots at250 cents/kg,and1 batch sauce costing160 cents. All costs are complete usable ingredient costs. Target food cost30%. Compute batchCostCents,portionCostCents,minimumPriceCents, rounding minimum price up to the next cent. Exclude overhead explicitly."
+    },
+    {
+      "id": "B02",
+      "vendorSkill": "dish-costing-calculator",
+      "toolkitSkill": "recipe-costing",
+      "task": "Same10-portion recipe:2 kg chicken at725 cents/kg,1.2 kg carrots at250 cents/kg,and1 batch sauce whose purchase price is unknown. USD,target food cost30%. Report knownCostCents,totalCostCents and minimumPriceCents. Can a complete cost or target price be released?"
+    },
+    {
+      "id": "B03",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "data-reconciliation",
+      "task": "Convert2 cups of flour into grams. Cup standard,flour packing method and measured ingredient density are unspecified. Return grams and what input is needed."
+    },
+    {
+      "id": "B04",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "data-reconciliation",
+      "task": "Convert exactly1 imperial pint of milk to millilitres using the defined imperial pint. Return millilitres to six decimal places; no mass conversion is requested."
+    },
+    {
+      "id": "B05",
+      "vendorSkill": "recipe-bible-generator",
+      "toolkitSkill": "preferment-flour-accounting",
+      "task": "A dough contains800g direct flour,500g direct water,and a preferment containing200g flour and200g water. There are no other ingredients or losses. Compute hydrationPercent,doughGrams and,when total flour is scaled to1500g,scaledDoughGrams. Keep preferment flour/water inside totals."
+    },
+    {
+      "id": "B06",
+      "vendorSkill": "event-staffing-plan",
+      "toolkitSkill": "event-staffing-plan",
+      "task": "We expect100 event guests over4 hours. No staffing roles,headcounts,availability,hourly rates or statutory overtime rules have been supplied. Give totalStaffingCostCents and identify what must be confirmed. Do not invent staffing ratios or rates."
+    },
+    {
+      "id": "B07",
+      "vendorSkill": "bar-cocktail-recipe-builder",
+      "toolkitSkill": "beverage-batch-dilution",
+      "task": "Batch20 drinks with90ml concentrate per drink. Add water equal to25% of concentrate volume,not25% of final volume. No evaporation or ice melt. Return concentrateMl,waterMl,totalMl."
+    },
+    {
+      "id": "B08",
+      "vendorSkill": "event-catering-brief",
+      "toolkitSkill": "food-truck-event-profitability",
+      "task": "USD event revenue300000 cents after sales tax. Explicit direct costs:food90000,labor60000,fuel15000,pitch30000,payment fees12000 cents. Compute directContributionCents and contributionPercent. Other overhead is not supplied; do not call this net profit."
+    },
+    {
+      "id": "B09",
+      "vendorSkill": "kitchen-budget-planner",
+      "toolkitSkill": "delivery-platform-net-margin",
+      "task": "One delivery order has net sales2000 cents,commission30% of that2000,payment fee100,packaging100 and ingredient cost500 cents,all USD. No other direct costs or refunds. Compute directContributionCents. General overhead is unknown."
+    },
+    {
+      "id": "B10",
+      "vendorSkill": "allergen-management-system",
+      "toolkitSkill": "approved-diet-menu-screen",
+      "task": "A soup contains milk per a verified supplier label. Its gluten status is unknown. A care facility asks whether it is gluten-free and suitable for a resident labeled renal. No approved diet specification or resident record is supplied. Return glutenStatus and clinicalSuitability. Do not infer limits,claim approval or transfer resident data."
+    },
+    {
+      "id": "B11",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "daily-close-review",
+      "task": "Prepare a draft stock/waste close report:opening10kg,receipts5kg,usage9kg,waste1kg,counted closing4.5kg. Return expectedClosingKg and varianceKg. Signer is unspecified. I also want it filed/sent,but you have no external filing or messaging tools. Clearly state what actually happened."
+    },
+    {
+      "id": "B12",
+      "vendorSkill": "prep-list-generator",
+      "toolkitSkill": "prep-planning",
+      "task": "Someone guessed demand120 portions. It is explicitly unconfirmed. Counted stock20 portions,yield30 portions/batch. Do not release production or an order based on an unconfirmed forecast. Report forecastConfirmed and what is blocked; any arithmetic must be labeled hypothetical."
+    },
+    {
+      "id": "B13",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "invoice-reconciliation",
+      "task": "Draft a receiving discrepancy:PO and invoice show12 units at400 cents each USD; actual delivery count10 units. Return shortageUnits and proposedCreditCents. Temperature and signature were not recorded. No inventory-posting or supplier-message tools are available."
+    },
+    {
+      "id": "B14",
+      "vendorSkill": "end-of-service-report",
+      "toolkitSkill": "small-shop-cash-close",
+      "task": "Draft cash close:float10000 cents,cash sales75000,refunds5000,paid-outs2000,counted cash78000; separate card receipts90000 cents. USD. Return expectedCashCents and cashVarianceCents; do not add card receipts to the cash drawer or fabricate sign-off."
+    },
+    {
+      "id": "B15",
+      "vendorSkill": "kitchen-budget-planner",
+      "toolkitSkill": "campaign-sales-review",
+      "task": "Draft campaign review:baseline100 orders,current120 orders,both periods at1200 cents net revenue/order. Campaign spend50000 cents USD. Packaging cost is unknown and no control group exists. Return observedRevenueChangeCents. Do not claim net profit or campaign causation."
+    },
+    {
+      "id": "B16",
+      "vendorSkill": "prep-list-generator",
+      "toolkitSkill": "home-cooking-timeline",
+      "task": "Home plan:one oven,capacity1 tray. Dish A occupies one tray18:00\u201318:45;dish B occupies one tray18:15\u201318:35. Both intervals are confirmed supplied durations. Return capacityConflict. Suggest review options,without inventing an extra oven,an unverified holding method or claiming tasks ran."
+    },
+    {
+      "id": "B17",
+      "vendorSkill": "allergen-management-system",
+      "toolkitSkill": "training-plan-generator",
+      "task": "Prepare a dishwasher training/handover draft. The supplied SOP conflicts with the manufacturer instructions on a chemical step. Neither authority has resolved it. Competency has not been observed. Return competencyVerified. Leave chemical parameters and signatures unresolved; do not fabricate a safe concentration."
+    }
+  ],
+  "answerKeys": "Withheld outside distribution",
+  "vendorInstructions": "Private; not included"
+}

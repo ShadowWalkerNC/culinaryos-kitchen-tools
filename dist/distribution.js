@@ -14,5 +14,5 @@ export function clientConfigurations(endpoint) {
     };
 }
 export function cursorInstallLink(endpoint) { return 'cursor://anysphere.cursor-deeplink/mcp/install?name=kitchen-tools&config=' + encodeURIComponent(Buffer.from(JSON.stringify({ 'kitchen-tools': { url: endpoint } })).toString('base64')); }
-export function playbook(zone) { return `# Open Kitchen Toolkit ${VERSION}\n\nOriginal MIT workflow playbook. Manual use supplies guidance only: no live calculation, saving or scheduling connection is implied. Your AI account and policies apply. Unknown inputs stay unknown.\n\n` + WORKFLOW_CATALOG.filter(w => !zone || w.zone === zone).map(w => `## ${w.title}\n\n${WORKFLOW_TEXT[w.id] ?? ''}`).join('\n\n'); }
+export function playbook(zone) { return `# CulinaryOS Interagency — Chef Intelligence ${VERSION}\n\nOriginal MIT workflow playbook. Manual use supplies guidance only: no live calculation, saving or scheduling connection is implied. Your AI account and policies apply. Unknown inputs stay unknown.\n\n` + WORKFLOW_CATALOG.filter(w => !zone || w.zone === zone).map(w => `## ${w.title}\n\n${WORKFLOW_TEXT[w.id] ?? ''}`).join('\n\n'); }
 //# sourceMappingURL=distribution.js.map

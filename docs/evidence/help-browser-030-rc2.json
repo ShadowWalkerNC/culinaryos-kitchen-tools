@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Quick three-choice entry and explicit full-library browsing",
+    "All nine roles return useful task areas",
+    "Dishwasher path produces a prompt with explicit execution boundaries",
+    "Phone view has no page overflow",
+    "Unknown questions receive honest general-AI fallback"
+  ],
+  "errors": [],
+  "status": "PASS"
+}

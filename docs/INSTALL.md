@@ -1,4 +1,10 @@
-# Install and test Open Kitchen Toolkit
+# Use Chef Intelligence — CulinaryOS Interagency
+
+## Recommended: skills and boilerplates only
+
+Download `chef-intelligence-skills-0.3.0-rc.2.zip` from the [candidate release](https://github.com/ShadowWalkerNC/culinaryos-kitchen-tools/releases/tag/v0.3.0-rc.2). Read START_HERE.md, then the relevant skill. Paste it into your AI or use its supported file/project-instruction feature. No runtime, MCP or new toolkit account is required. Provider accounts and charges still apply; there is no universal ZIP-install interface.
+
+Optional connected adapters follow below. The stable Git marketplace commands remain on the previous stable source. To opt into this candidate use the same marketplace name with `--ref codex/chef-intelligence-package`; verify the actual installed version and reopen the host.
 
 The public GitHub marketplace below is a directly installable community release. It is separate from an OpenAI-reviewed public directory listing. No toolkit account or model key is needed; your AI client's account requirements apply.
 

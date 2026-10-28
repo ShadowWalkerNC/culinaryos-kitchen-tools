@@ -92,6 +92,7 @@ export declare function workflowGuidance(input: unknown): {
         foodCostTargetPercent?: number | undefined;
     };
     unresolvedSettings: string[];
+    settingsPolicy: string;
     steps: string[];
     approvals: string;
     connection: string;

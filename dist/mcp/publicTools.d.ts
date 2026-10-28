@@ -19,6 +19,7 @@ export declare function getWorkflow(name: string): {
         foodCostTargetPercent?: number | undefined;
     };
     unresolvedSettings: string[];
+    settingsPolicy: string;
     steps: string[];
     approvals: string;
     connection: string;
