@@ -77,11 +77,11 @@ describe('interagency journeys: legacy contracts preserved', () => {
     assert.throws(() => getStarted({starterId: 'invented'}), /UNKNOWN_STARTER/);
     assert.throws(() => getStarted({completedSteps: [1]}), /Choose a starter/);
   });
-  it('brands CulinaryOS Interagency while recognizing the Open Kitchen Toolkit alias', () => {
+  it('brands CulinaryOS Intelligence while recognizing the Open Kitchen Toolkit alias', () => {
     const guide = getStarted();
-    assert.match(guide.introduction, /CulinaryOS Interagency/);
+    assert.match(guide.introduction, /CulinaryOS Intelligence/);
     assert.match(guide.introduction, /Open Kitchen Toolkit/);
-    assert.match(guide.boundaries.join(' '), /CulinaryOS Interagency/);
+    assert.match(guide.boundaries.join(' '), /CulinaryOS Intelligence/);
     assert.match(guide.boundaries.join(' '), /resident records/);
   });
 });
